@@ -29,4 +29,12 @@
 
 #include <CoreFoundation/CoreFoundation.h>
 
-
+CFRange CFRangeMake( CFIndex location, CFIndex length )
+{
+    CFRange range;
+    
+    range.location = location;
+    range.length   = length;
+    
+    return range;
+}

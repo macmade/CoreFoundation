@@ -52,6 +52,32 @@
 
 CF_EXTERN_C_BEGIN
 
+#if defined( TARGET_OS_WIN32 ) && TARGET_OS_WIN32
+
+/*!
+ * @define      CF_EXPORT
+ * @abstract    Definition for exported symbols
+ */
+#if defined( CF_BUILDING_CF ) && defined( __cplusplus )
+#define CF_EXPORT   extern "C" __declspec( dllexport )
+#elif defined(CF_BUILDING_CF) && !defined( __cplusplus )
+#define CF_EXPORT   extern __declspec( dllexport )
+#elif defined( __cplusplus )
+#define CF_EXPORT   extern "C" __declspec( dllimport )
+#else
+#define CF_EXPORT   extern __declspec( dllimport )
+#endif
+
+#else
+
+/*!
+ * @define      CF_EXPORT
+ * @abstract    Definition for exported symbols
+ */
+#define CF_EXPORT   extern
+
+#endif
+
 /*!
  * @typedef     CFTypeID
  * @abstract    A type for unique, constant integer values that identify
@@ -136,6 +162,8 @@ typedef struct
     CFIndex length;
 }
 CFRange;
+
+CF_EXPORT CFRange CFRangeMake( CFIndex location, CFIndex length );
 
 CF_EXTERN_C_END
 
