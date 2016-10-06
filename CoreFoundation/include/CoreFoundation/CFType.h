@@ -30,6 +30,12 @@
 #ifndef CORE_FOUNDATION_CF_TYPE_H
 #define CORE_FOUNDATION_CF_TYPE_H
 
+#include <CoreFoundation/CFBase.h>
 
+CF_EXTERN_C_BEGIN
+
+
+
+CF_EXTERN_C_END
 
 #endif /* CORE_FOUNDATION_CF_TYPE_H */
