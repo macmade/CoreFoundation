@@ -214,6 +214,8 @@
 		053292601DA6513D00E46312 /* CFXMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFXMLParser.h; sourceTree = "<group>"; };
 		053292611DA6513D00E46312 /* CFXMLTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFXMLTree.h; sourceTree = "<group>"; };
 		053292621DA6513D00E46312 /* CoreFoundation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreFoundation.h; sourceTree = "<group>"; };
+		053292971DA6B50D00E46312 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+		053292991DA6B61800E46312 /* CoreFoundation.doxygen */ = {isa = PBXFileReference; lastKnownFileType = text; path = CoreFoundation.doxygen; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -230,6 +232,8 @@
 		053291AE1DA64C4B00E46312 = {
 			isa = PBXGroup;
 			children = (
+				053292971DA6B50D00E46312 /* Makefile */,
+				053292981DA6B61800E46312 /* Documentation */,
 				053291BA1DA64C4B00E46312 /* CoreFoundation */,
 				053291B91DA64C4B00E46312 /* Products */,
 			);
@@ -374,6 +378,14 @@
 				053292621DA6513D00E46312 /* CoreFoundation.h */,
 			);
 			path = CoreFoundation;
+			sourceTree = "<group>";
+		};
+		053292981DA6B61800E46312 /* Documentation */ = {
+			isa = PBXGroup;
+			children = (
+				053292991DA6B61800E46312 /* CoreFoundation.doxygen */,
+			);
+			path = Documentation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
