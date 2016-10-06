@@ -33,7 +33,6 @@
 #include <CoreFoundation/CFAllocator.h>
 #include <CoreFoundation/CFArray.h>
 #include <CoreFoundation/CFAttributedString.h>
-#include <CoreFoundation/CFAvailability.h>
 #include <CoreFoundation/CFBag.h>
 #include <CoreFoundation/CFBase.h>
 #include <CoreFoundation/CFBinaryHeap.h>

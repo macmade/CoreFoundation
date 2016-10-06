@@ -60,7 +60,6 @@
 		053292631DA6513D00E46312 /* CFAllocator.h in Headers */ = {isa = PBXBuildFile; fileRef = 0532922F1DA6513D00E46312 /* CFAllocator.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		053292641DA6513D00E46312 /* CFArray.h in Headers */ = {isa = PBXBuildFile; fileRef = 053292301DA6513D00E46312 /* CFArray.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		053292651DA6513D00E46312 /* CFAttributedString.h in Headers */ = {isa = PBXBuildFile; fileRef = 053292311DA6513D00E46312 /* CFAttributedString.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		053292661DA6513D00E46312 /* CFAvailability.h in Headers */ = {isa = PBXBuildFile; fileRef = 053292321DA6513D00E46312 /* CFAvailability.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		053292671DA6513D00E46312 /* CFBag.h in Headers */ = {isa = PBXBuildFile; fileRef = 053292331DA6513D00E46312 /* CFBag.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		053292681DA6513D00E46312 /* CFBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 053292341DA6513D00E46312 /* CFBase.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		053292691DA6513D00E46312 /* CFBinaryHeap.h in Headers */ = {isa = PBXBuildFile; fileRef = 053292351DA6513D00E46312 /* CFBinaryHeap.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -167,7 +166,6 @@
 		0532922F1DA6513D00E46312 /* CFAllocator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFAllocator.h; sourceTree = "<group>"; };
 		053292301DA6513D00E46312 /* CFArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFArray.h; sourceTree = "<group>"; };
 		053292311DA6513D00E46312 /* CFAttributedString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFAttributedString.h; sourceTree = "<group>"; };
-		053292321DA6513D00E46312 /* CFAvailability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFAvailability.h; sourceTree = "<group>"; };
 		053292331DA6513D00E46312 /* CFBag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFBag.h; sourceTree = "<group>"; };
 		053292341DA6513D00E46312 /* CFBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFBase.h; sourceTree = "<group>"; };
 		053292351DA6513D00E46312 /* CFBinaryHeap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFBinaryHeap.h; sourceTree = "<group>"; };
@@ -326,7 +324,6 @@
 				0532922F1DA6513D00E46312 /* CFAllocator.h */,
 				053292301DA6513D00E46312 /* CFArray.h */,
 				053292311DA6513D00E46312 /* CFAttributedString.h */,
-				053292321DA6513D00E46312 /* CFAvailability.h */,
 				053292331DA6513D00E46312 /* CFBag.h */,
 				053292341DA6513D00E46312 /* CFBase.h */,
 				053292351DA6513D00E46312 /* CFBinaryHeap.h */,
@@ -413,7 +410,6 @@
 				053292881DA6513D00E46312 /* CFStream.h in Headers */,
 				053292901DA6513D00E46312 /* CFUtilities.h in Headers */,
 				053292861DA6513D00E46312 /* CFSet.h in Headers */,
-				053292661DA6513D00E46312 /* CFAvailability.h in Headers */,
 				053292891DA6513D00E46312 /* CFString.h in Headers */,
 				0532926F1DA6513D00E46312 /* CFCharacterSet.h in Headers */,
 				053292781DA6513D00E46312 /* CFMessagePort.h in Headers */,
