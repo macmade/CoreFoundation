@@ -4,12 +4,12 @@
 
 declare -r MAJOR=$(echo "$DISTRIB_RELEASE" | perl -e "s/([0-9]+).*/\1/" -pi)
 
-if [ $MAJOR -lt 14 ]; then
-    
-    echo "Ubuntu 14 or greater is required"
-    exit 1
-
-fi
+#if [ $MAJOR -lt 14 ]; then
+#    
+#    echo "Ubuntu 14 or greater is required"
+#    exit 1
+#
+#fi
 
 sudo apt-get update
 
