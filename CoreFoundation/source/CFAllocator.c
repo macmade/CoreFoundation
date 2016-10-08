@@ -28,5 +28,75 @@
  */
 
 #include <CoreFoundation/CoreFoundation.h>
+#include <CoreFoundation/__private/CFRuntime.h>
+#include <stdlib.h>
 
+typedef struct
+{
+    CFRuntimeBase       _base;
+    CFAllocatorContext  _context;
+}
+CFAllocator;
 
+CFTypeID CFAllocatorGetTypeID( void )
+{
+    return 0;
+}
+
+CFAllocatorRef CFAllocatorCreate( CFAllocatorRef allocator, CFAllocatorContext * context )
+{
+    ( void )allocator;
+    ( void )context;
+    
+    return NULL;
+}
+
+void * CFAllocatorAllocate( CFAllocatorRef allocator, CFIndex size, CFOptionFlags hint )
+{
+    ( void )allocator;
+    ( void )size;
+    ( void )hint;
+    
+    return NULL;
+}
+
+void CFAllocatorDeallocate( CFAllocatorRef allocator, void * ptr )
+{
+    ( void )allocator;
+    ( void )ptr;
+}
+
+CFIndex CFAllocatorGetPreferredSizeForSize( CFAllocatorRef allocator, CFIndex size, CFOptionFlags hint )
+{
+    ( void )allocator;
+    ( void )size;
+    ( void )hint;
+    
+    return 0;
+}
+
+void * CFAllocatorReallocate( CFAllocatorRef allocator, void * ptr, CFIndex newsize, CFOptionFlags hint )
+{
+    ( void )allocator;
+    ( void )ptr;
+    ( void )newsize;
+    ( void )hint;
+    
+    return NULL;
+}
+
+CFAllocatorRef CFAllocatorGetDefault( void )
+{
+    return NULL;
+}
+
+void CFAllocatorSetDefault( CFAllocatorRef allocator )
+{
+    ( void )allocator;
+}
+
+void CFAllocatorGetContext( CFAllocatorRef allocator, CFAllocatorContext * context )
+{
+    ( void )allocator;
+    ( void )context;
+}

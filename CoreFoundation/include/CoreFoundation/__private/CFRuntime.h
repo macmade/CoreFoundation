@@ -39,7 +39,6 @@ CF_EXTERN_C_BEGIN
  * @typedef     CFRuntimeBase
  * @abstract    Base for all CoreFoundation classes
  * @field       isa     ID of the object's class
- * @field       rc      Object's retain count
  * @discussion  This structure shall be used as first member of all
  *              CoreFoundation classes.
  *              It is reserved for internal use and should never be accessed
@@ -49,8 +48,6 @@ CF_EXTERN_C_BEGIN
 typedef struct
 {
     CFTypeID isa;
-    uint64_t rc;
-    
 }
 CFRuntimeBase;
 

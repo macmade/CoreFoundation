@@ -34,7 +34,7 @@
 
 CF_EXTERN_C_BEGIN
 
-
+typedef const struct CFString * CFStringRef;
 
 CF_EXTERN_C_END
 
