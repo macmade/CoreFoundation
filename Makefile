@@ -44,8 +44,8 @@ CC                  := clang
 LIBS                := -lpthread
 FLAGS_OPTIM         := Os
 FLAGS_WARN          := -Werror -Wall
-FLAGS_STD           := c++11
-FLAGS_OTHER         := -stdlib=libc++ -fno-strict-aliasing
+FLAGS_STD           := c99
+FLAGS_OTHER         := -fno-strict-aliasing
 XCODE_PROJECT       := CoreFoundation.xcodeproj
 XCODE_TEST_SCHEME   := CoreFoundation
 

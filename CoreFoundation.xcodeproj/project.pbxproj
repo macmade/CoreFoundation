@@ -108,6 +108,7 @@
 		053292941DA6513D00E46312 /* CFXMLParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 053292601DA6513D00E46312 /* CFXMLParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		053292951DA6513D00E46312 /* CFXMLTree.h in Headers */ = {isa = PBXBuildFile; fileRef = 053292611DA6513D00E46312 /* CFXMLTree.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		053292961DA6513D00E46312 /* CoreFoundation.h in Headers */ = {isa = PBXBuildFile; fileRef = 053292621DA6513D00E46312 /* CoreFoundation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0532929B1DA7BB3C00E46312 /* CoreFoundation.h in Headers */ = {isa = PBXBuildFile; fileRef = 0532929A1DA7BB3C00E46312 /* CoreFoundation.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -216,6 +217,7 @@
 		053292621DA6513D00E46312 /* CoreFoundation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreFoundation.h; sourceTree = "<group>"; };
 		053292971DA6B50D00E46312 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		053292991DA6B61800E46312 /* CoreFoundation.doxygen */ = {isa = PBXFileReference; lastKnownFileType = text; path = CoreFoundation.doxygen; sourceTree = "<group>"; };
+		0532929A1DA7BB3C00E46312 /* CoreFoundation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreFoundation.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -260,6 +262,7 @@
 		053291C31DA64C8500E46312 /* include */ = {
 			isa = PBXGroup;
 			children = (
+				0532929A1DA7BB3C00E46312 /* CoreFoundation.h */,
 				053291CA1DA64CCE00E46312 /* CoreFoundation */,
 			);
 			path = include;
@@ -409,6 +412,7 @@
 				053292631DA6513D00E46312 /* CFAllocator.h in Headers */,
 				0532926E1DA6513D00E46312 /* CFCalendar.h in Headers */,
 				0532927A1DA6513D00E46312 /* CFNull.h in Headers */,
+				0532929B1DA7BB3C00E46312 /* CoreFoundation.h in Headers */,
 				053292961DA6513D00E46312 /* CoreFoundation.h in Headers */,
 				053292951DA6513D00E46312 /* CFXMLTree.h in Headers */,
 				0532928A1DA6513D00E46312 /* CFStringTokenizer.h in Headers */,
