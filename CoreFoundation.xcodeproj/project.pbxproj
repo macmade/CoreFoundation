@@ -109,11 +109,8 @@
 		053292951DA6513D00E46312 /* CFXMLTree.h in Headers */ = {isa = PBXBuildFile; fileRef = 053292611DA6513D00E46312 /* CFXMLTree.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		053292961DA6513D00E46312 /* CoreFoundation.h in Headers */ = {isa = PBXBuildFile; fileRef = 053292621DA6513D00E46312 /* CoreFoundation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0532929B1DA7BB3C00E46312 /* CoreFoundation.h in Headers */ = {isa = PBXBuildFile; fileRef = 0532929A1DA7BB3C00E46312 /* CoreFoundation.h */; };
-		053292A51DA8FA3E00E46312 /* travis-linux-after.sh in Resources */ = {isa = PBXBuildFile; fileRef = 0532929E1DA8FA3E00E46312 /* travis-linux-after.sh */; };
-		053292A61DA8FA3E00E46312 /* travis-linux-before.sh in Resources */ = {isa = PBXBuildFile; fileRef = 0532929F1DA8FA3E00E46312 /* travis-linux-before.sh */; };
-		053292A71DA8FA3E00E46312 /* travis-osx-after.sh in Resources */ = {isa = PBXBuildFile; fileRef = 053292A01DA8FA3E00E46312 /* travis-osx-after.sh */; };
-		053292A81DA8FA3E00E46312 /* travis-osx-before.sh in Resources */ = {isa = PBXBuildFile; fileRef = 053292A11DA8FA3E00E46312 /* travis-osx-before.sh */; };
-		053292BE1DA8FEAB00E46312 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 053292BD1DA8FEAB00E46312 /* README.md */; };
+		053292C51DA900B700E46312 /* __private in Resources */ = {isa = PBXBuildFile; fileRef = 053292C41DA900B700E46312 /* __private */; };
+		053292C61DA900C100E46312 /* __private in Headers */ = {isa = PBXBuildFile; fileRef = 053292C41DA900B700E46312 /* __private */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -228,6 +225,7 @@
 		053292A01DA8FA3E00E46312 /* travis-osx-after.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = "travis-osx-after.sh"; sourceTree = "<group>"; };
 		053292A11DA8FA3E00E46312 /* travis-osx-before.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = "travis-osx-before.sh"; sourceTree = "<group>"; };
 		053292BD1DA8FEAB00E46312 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		053292C41DA900B700E46312 /* __private */ = {isa = PBXFileReference; lastKnownFileType = folder; path = __private; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -340,6 +338,7 @@
 		053291CA1DA64CCE00E46312 /* CoreFoundation */ = {
 			isa = PBXGroup;
 			children = (
+				053292C41DA900B700E46312 /* __private */,
 				0532922F1DA6513D00E46312 /* CFAllocator.h */,
 				053292301DA6513D00E46312 /* CFArray.h */,
 				053292311DA6513D00E46312 /* CFAttributedString.h */,
@@ -421,6 +420,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				053292C61DA900C100E46312 /* __private in Headers */,
 				053292681DA6513D00E46312 /* CFBase.h in Headers */,
 				053292771DA6513D00E46312 /* CFMachPort.h in Headers */,
 				053292941DA6513D00E46312 /* CFXMLParser.h in Headers */,
@@ -535,10 +535,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				053292A61DA8FA3E00E46312 /* travis-linux-before.sh in Resources */,
-				053292A51DA8FA3E00E46312 /* travis-linux-after.sh in Resources */,
-				053292A71DA8FA3E00E46312 /* travis-osx-after.sh in Resources */,
-				053292A81DA8FA3E00E46312 /* travis-osx-before.sh in Resources */,
+				053292C51DA900B700E46312 /* __private in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -594,7 +591,6 @@
 				053292141DA6513700E46312 /* CFNumber.c in Sources */,
 				0532921F1DA6513700E46312 /* CFSet.c in Sources */,
 				053292081DA6513700E46312 /* CFCharacterSet.c in Sources */,
-				053292BE1DA8FEAB00E46312 /* README.md in Sources */,
 				0532922C1DA6513700E46312 /* CFXMLNode.c in Sources */,
 				053292201DA6513700E46312 /* CFSocket.c in Sources */,
 				0532921A1DA6513700E46312 /* CFReadStream.c in Sources */,
@@ -839,6 +835,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
+				HEADER_SEARCH_PATHS = CoreFoundation/include;
 				INFOPLIST_FILE = CoreFoundation/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
@@ -859,6 +856,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
+				HEADER_SEARCH_PATHS = CoreFoundation/include;
 				INFOPLIST_FILE = CoreFoundation/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
