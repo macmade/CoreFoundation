@@ -111,6 +111,7 @@
 		0532929B1DA7BB3C00E46312 /* CoreFoundation.h in Headers */ = {isa = PBXBuildFile; fileRef = 0532929A1DA7BB3C00E46312 /* CoreFoundation.h */; };
 		053292C51DA900B700E46312 /* __private in Resources */ = {isa = PBXBuildFile; fileRef = 053292C41DA900B700E46312 /* __private */; };
 		053292C61DA900C100E46312 /* __private in Headers */ = {isa = PBXBuildFile; fileRef = 053292C41DA900B700E46312 /* __private */; settings = {ATTRIBUTES = (Public, ); }; };
+		053292CC1DA91B1900E46312 /* CFRuntime.c in Sources */ = {isa = PBXBuildFile; fileRef = 053292CB1DA91B1900E46312 /* CFRuntime.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -226,6 +227,7 @@
 		053292A11DA8FA3E00E46312 /* travis-osx-before.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = "travis-osx-before.sh"; sourceTree = "<group>"; };
 		053292BD1DA8FEAB00E46312 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		053292C41DA900B700E46312 /* __private */ = {isa = PBXFileReference; lastKnownFileType = folder; path = __private; sourceTree = "<group>"; };
+		053292CB1DA91B1900E46312 /* CFRuntime.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CFRuntime.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -281,6 +283,7 @@
 		053291C41DA64C8500E46312 /* source */ = {
 			isa = PBXGroup;
 			children = (
+				053292CA1DA91B1900E46312 /* __private */,
 				053291CB1DA6513700E46312 /* CFAllocator.c */,
 				053291CC1DA6513700E46312 /* CFArray.c */,
 				053291CD1DA6513700E46312 /* CFAttributedString.c */,
@@ -411,6 +414,14 @@
 				053292A11DA8FA3E00E46312 /* travis-osx-before.sh */,
 			);
 			path = Scripts;
+			sourceTree = "<group>";
+		};
+		053292CA1DA91B1900E46312 /* __private */ = {
+			isa = PBXGroup;
+			children = (
+				053292CB1DA91B1900E46312 /* CFRuntime.c */,
+			);
+			path = __private;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -579,6 +590,7 @@
 				053292241DA6513700E46312 /* CFTimeZone.c in Sources */,
 				0532922B1DA6513700E46312 /* CFWriteStream.c in Sources */,
 				053292011DA6513700E46312 /* CFBase.c in Sources */,
+				053292CC1DA91B1900E46312 /* CFRuntime.c in Sources */,
 				053292251DA6513700E46312 /* CFTree.c in Sources */,
 				053292191DA6513700E46312 /* CFPropertyList.c in Sources */,
 				053292231DA6513700E46312 /* CFStringTokenizer.c in Sources */,

@@ -38,8 +38,6 @@ typedef struct
 }
 CFAllocator;
 
-static CFTypeID CFAllocatorTypeID = 0;
-
 static const void * CFAllocatorDefaultRetainCallBack( const void * info );
 static void         CFAllocatorDefaultReleaseCallBack( const void * info );
 static CFStringRef  CFAllocatorDefaultCopyDescriptionCallBack( const void * info );
@@ -48,17 +46,32 @@ static void       * CFAllocatorDefaultReallocateCallBack( void * ptr, CFIndex ne
 static void         CFAllocatorDefaultDeallocateCallBack( void * ptr, void * info );
 static CFIndex      CFAllocatorDefaultPreferredSizeCallBack( CFIndex size, CFOptionFlags hint, void * info );
 
+static CFTypeID CFAllocatorTypeID = 0;
+
+static CFRuntimeClass CFAllocatorClass =
+{
+    "CFAllocator",
+    sizeof( CFAllocator ),
+    NULL,
+    NULL,
+};
+
+static CFAllocator CFAllocatorDefault;
+
 static void init( void ) __attribute__( ( constructor ) );
 static void init( void )
 {
-    ( void )CFAllocatorTypeID;
-    ( void )CFAllocatorDefaultRetainCallBack;
-    ( void )CFAllocatorDefaultReleaseCallBack;
-    ( void )CFAllocatorDefaultCopyDescriptionCallBack;
-    ( void )CFAllocatorDefaultAllocateCallBack;
-    ( void )CFAllocatorDefaultReallocateCallBack;
-    ( void )CFAllocatorDefaultDeallocateCallBack;
-    ( void )CFAllocatorDefaultPreferredSizeCallBack;
+    CFAllocatorTypeID = _CFRuntimeRegisterClass( &CFAllocatorClass );
+    
+    _CFRuntimeInitStaticInstance( &CFAllocatorDefault, CFAllocatorTypeID );
+    
+    CFAllocatorDefault._context.allocate        = CFAllocatorDefaultAllocateCallBack;
+    CFAllocatorDefault._context.copyDescription = CFAllocatorDefaultCopyDescriptionCallBack;
+    CFAllocatorDefault._context.deallocate      = CFAllocatorDefaultDeallocateCallBack;
+    CFAllocatorDefault._context.preferredSize   = CFAllocatorDefaultPreferredSizeCallBack;
+    CFAllocatorDefault._context.reallocate      = CFAllocatorDefaultReallocateCallBack;
+    CFAllocatorDefault._context.release         = CFAllocatorDefaultReleaseCallBack;
+    CFAllocatorDefault._context.retain          = CFAllocatorDefaultRetainCallBack;
 }
 
 CFTypeID CFAllocatorGetTypeID( void )

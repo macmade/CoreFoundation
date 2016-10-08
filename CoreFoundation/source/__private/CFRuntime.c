@@ -23,48 +23,26 @@
  ******************************************************************************/
 
 /*!
- * @header      CFAllocator.h
+ * @file        CFRuntime.c
  * @copyright   (c) 2016, Jean-David Gadina - www.xs-labs.com
  */
 
-#ifndef CORE_FOUNDATION_CF___PRIVATE_RUNTIME_H
-#define CORE_FOUNDATION_CF___PRIVATE_RUNTIME_H
-
-#include <CoreFoundation/CFBase.h>
-#include <stdint.h>
+#include <CoreFoundation/__private/CFRuntime.h>
 #include <stdlib.h>
 
-CF_EXTERN_C_BEGIN
-
-/*!
- * @typedef     CFRuntimeBase
- * @abstract    Base for all CoreFoundation classes
- * @field       isa     ID of the object's class
- * @discussion  This structure shall be used as first member of all
- *              CoreFoundation classes.
- *              It is reserved for internal use and should never be accessed
- *              directly. Fields may be added or removed at any time. Binary
- *              compatibility is not guaranteed.
- */
-typedef struct
+CFTypeID _CFRuntimeRegisterClass( const CFRuntimeClass * cls )
 {
-    CFTypeID isa;
-}
-CFRuntimeBase;
-
-typedef struct
-{
-    const char * name;
-    size_t       size;
+    ( void )cls;
     
-    void ( * constructor )( void * obj );
-    void ( * destructor )( void * obj );
+    return 0;
 }
-CFRuntimeClass;
 
-CF_EXPORT CFTypeID _CFRuntimeRegisterClass( const CFRuntimeClass * cls );
-CF_EXPORT void _CFRuntimeInitStaticInstance( void * memory, CFTypeID typeID );
-
-CF_EXTERN_C_END
-
-#endif /* CORE_FOUNDATION_CF___PRIVATE_RUNTIME_H */
+void _CFRuntimeInitStaticInstance( void * memory, CFTypeID type )
+{
+    if( memory == NULL )
+    {
+        return;
+    }
+    
+    ( void )type;
+}

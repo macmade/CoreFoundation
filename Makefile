@@ -49,7 +49,8 @@ FLAGS_OTHER         := -fno-strict-aliasing
 XCODE_PROJECT       := CoreFoundation.xcodeproj
 XCODE_TEST_SCHEME   := CoreFoundation
 
-FILES_C             := $(call GET_C_FILES, $(DIR_SRC))
+FILES_C             := $(call GET_C_FILES, $(DIR_SRC))              \
+                       $(call GET_C_FILES, $(DIR_SRC)__private/)
 FILES_C_EXCLUDE     := 
 
 FILES               := $(filter-out $(FILES_C_EXCLUDE),$(FILES_C))
