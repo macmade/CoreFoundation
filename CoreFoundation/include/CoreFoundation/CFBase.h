@@ -163,6 +163,12 @@ typedef struct
 }
 CFRange;
 
+/*!
+ * @abstract    Declares and initializes a CFRange structure.
+ * @param       location    The starting location of the range.
+ * @param       length      The length of the range.
+ * @result      An initialized structure of type CFRange.
+ */
 CF_EXPORT CFRange CFRangeMake( CFIndex location, CFIndex length );
 
 CF_EXTERN_C_END
