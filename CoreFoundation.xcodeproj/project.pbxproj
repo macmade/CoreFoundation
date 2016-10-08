@@ -113,6 +113,7 @@
 		053292A61DA8FA3E00E46312 /* travis-linux-before.sh in Resources */ = {isa = PBXBuildFile; fileRef = 0532929F1DA8FA3E00E46312 /* travis-linux-before.sh */; };
 		053292A71DA8FA3E00E46312 /* travis-osx-after.sh in Resources */ = {isa = PBXBuildFile; fileRef = 053292A01DA8FA3E00E46312 /* travis-osx-after.sh */; };
 		053292A81DA8FA3E00E46312 /* travis-osx-before.sh in Resources */ = {isa = PBXBuildFile; fileRef = 053292A11DA8FA3E00E46312 /* travis-osx-before.sh */; };
+		053292BE1DA8FEAB00E46312 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 053292BD1DA8FEAB00E46312 /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -226,6 +227,7 @@
 		0532929F1DA8FA3E00E46312 /* travis-linux-before.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = "travis-linux-before.sh"; sourceTree = "<group>"; };
 		053292A01DA8FA3E00E46312 /* travis-osx-after.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = "travis-osx-after.sh"; sourceTree = "<group>"; };
 		053292A11DA8FA3E00E46312 /* travis-osx-before.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = "travis-osx-before.sh"; sourceTree = "<group>"; };
+		053292BD1DA8FEAB00E46312 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -242,6 +244,7 @@
 		053291AE1DA64C4B00E46312 = {
 			isa = PBXGroup;
 			children = (
+				053292BD1DA8FEAB00E46312 /* README.md */,
 				053292971DA6B50D00E46312 /* Makefile */,
 				053292981DA6B61800E46312 /* Documentation */,
 				0532929C1DA8FA3E00E46312 /* Scripts */,
@@ -591,6 +594,7 @@
 				053292141DA6513700E46312 /* CFNumber.c in Sources */,
 				0532921F1DA6513700E46312 /* CFSet.c in Sources */,
 				053292081DA6513700E46312 /* CFCharacterSet.c in Sources */,
+				053292BE1DA8FEAB00E46312 /* README.md in Sources */,
 				0532922C1DA6513700E46312 /* CFXMLNode.c in Sources */,
 				053292201DA6513700E46312 /* CFSocket.c in Sources */,
 				0532921A1DA6513700E46312 /* CFReadStream.c in Sources */,

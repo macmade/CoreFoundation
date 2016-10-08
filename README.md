@@ -13,6 +13,8 @@ About
 
 Custom implementation of Apple's CoreFoundation framework intended to be used in the [XEOS operating system](http://www.xs-labs.com/en/projects/xeos/) as a base for its Objective-C library.
 
+Actually, the project targets macOS, Linux and Windows.
+
 License
 -------
 
