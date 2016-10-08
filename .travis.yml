@@ -1,0 +1,12 @@
+language: cpp
+compiler: clang
+script: make
+before_install:
+- if [ "$TRAVIS_OS_NAME" == "osx" ];   then bash Scripts/travis-osx-before.sh;   fi
+- if [ "$TRAVIS_OS_NAME" == "linux" ]; then bash Scripts/travis-linux-before.sh; fi
+after_success:
+- if [ "$TRAVIS_OS_NAME" == "osx" ];   then bash Scripts/travis-osx-after.sh;   fi
+- if [ "$TRAVIS_OS_NAME" == "linux" ]; then bash Scripts/travis-linux-after.sh; fi
+os:
+  - osx
+  - linux

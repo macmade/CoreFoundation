@@ -109,6 +109,10 @@
 		053292951DA6513D00E46312 /* CFXMLTree.h in Headers */ = {isa = PBXBuildFile; fileRef = 053292611DA6513D00E46312 /* CFXMLTree.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		053292961DA6513D00E46312 /* CoreFoundation.h in Headers */ = {isa = PBXBuildFile; fileRef = 053292621DA6513D00E46312 /* CoreFoundation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0532929B1DA7BB3C00E46312 /* CoreFoundation.h in Headers */ = {isa = PBXBuildFile; fileRef = 0532929A1DA7BB3C00E46312 /* CoreFoundation.h */; };
+		053292A51DA8FA3E00E46312 /* travis-linux-after.sh in Resources */ = {isa = PBXBuildFile; fileRef = 0532929E1DA8FA3E00E46312 /* travis-linux-after.sh */; };
+		053292A61DA8FA3E00E46312 /* travis-linux-before.sh in Resources */ = {isa = PBXBuildFile; fileRef = 0532929F1DA8FA3E00E46312 /* travis-linux-before.sh */; };
+		053292A71DA8FA3E00E46312 /* travis-osx-after.sh in Resources */ = {isa = PBXBuildFile; fileRef = 053292A01DA8FA3E00E46312 /* travis-osx-after.sh */; };
+		053292A81DA8FA3E00E46312 /* travis-osx-before.sh in Resources */ = {isa = PBXBuildFile; fileRef = 053292A11DA8FA3E00E46312 /* travis-osx-before.sh */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -218,6 +222,10 @@
 		053292971DA6B50D00E46312 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		053292991DA6B61800E46312 /* CoreFoundation.doxygen */ = {isa = PBXFileReference; lastKnownFileType = text; path = CoreFoundation.doxygen; sourceTree = "<group>"; };
 		0532929A1DA7BB3C00E46312 /* CoreFoundation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreFoundation.h; sourceTree = "<group>"; };
+		0532929E1DA8FA3E00E46312 /* travis-linux-after.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = "travis-linux-after.sh"; sourceTree = "<group>"; };
+		0532929F1DA8FA3E00E46312 /* travis-linux-before.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = "travis-linux-before.sh"; sourceTree = "<group>"; };
+		053292A01DA8FA3E00E46312 /* travis-osx-after.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = "travis-osx-after.sh"; sourceTree = "<group>"; };
+		053292A11DA8FA3E00E46312 /* travis-osx-before.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = "travis-osx-before.sh"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -236,6 +244,7 @@
 			children = (
 				053292971DA6B50D00E46312 /* Makefile */,
 				053292981DA6B61800E46312 /* Documentation */,
+				0532929C1DA8FA3E00E46312 /* Scripts */,
 				053291BA1DA64C4B00E46312 /* CoreFoundation */,
 				053291B91DA64C4B00E46312 /* Products */,
 			);
@@ -391,6 +400,17 @@
 			path = Documentation;
 			sourceTree = "<group>";
 		};
+		0532929C1DA8FA3E00E46312 /* Scripts */ = {
+			isa = PBXGroup;
+			children = (
+				0532929E1DA8FA3E00E46312 /* travis-linux-after.sh */,
+				0532929F1DA8FA3E00E46312 /* travis-linux-before.sh */,
+				053292A01DA8FA3E00E46312 /* travis-osx-after.sh */,
+				053292A11DA8FA3E00E46312 /* travis-osx-before.sh */,
+			);
+			path = Scripts;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -512,6 +532,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				053292A61DA8FA3E00E46312 /* travis-linux-before.sh in Resources */,
+				053292A51DA8FA3E00E46312 /* travis-linux-after.sh in Resources */,
+				053292A71DA8FA3E00E46312 /* travis-osx-after.sh in Resources */,
+				053292A81DA8FA3E00E46312 /* travis-osx-before.sh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
