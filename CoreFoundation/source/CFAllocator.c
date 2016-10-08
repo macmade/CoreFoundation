@@ -38,9 +38,32 @@ typedef struct
 }
 CFAllocator;
 
+static CFTypeID CFAllocatorTypeID = 0;
+
+static const void * CFAllocatorDefaultRetainCallBack( const void * info );
+static void         CFAllocatorDefaultReleaseCallBack( const void * info );
+static CFStringRef  CFAllocatorDefaultCopyDescriptionCallBack( const void * info );
+static void       * CFAllocatorDefaultAllocateCallBack( CFIndex allocSize, CFOptionFlags hint, void * info );
+static void       * CFAllocatorDefaultReallocateCallBack( void * ptr, CFIndex newsize, CFOptionFlags hint, void * info );
+static void         CFAllocatorDefaultDeallocateCallBack( void * ptr, void * info );
+static CFIndex      CFAllocatorDefaultPreferredSizeCallBack( CFIndex size, CFOptionFlags hint, void * info );
+
+static void init( void ) __attribute__( ( constructor ) );
+static void init( void )
+{
+    ( void )CFAllocatorTypeID;
+    ( void )CFAllocatorDefaultRetainCallBack;
+    ( void )CFAllocatorDefaultReleaseCallBack;
+    ( void )CFAllocatorDefaultCopyDescriptionCallBack;
+    ( void )CFAllocatorDefaultAllocateCallBack;
+    ( void )CFAllocatorDefaultReallocateCallBack;
+    ( void )CFAllocatorDefaultDeallocateCallBack;
+    ( void )CFAllocatorDefaultPreferredSizeCallBack;
+}
+
 CFTypeID CFAllocatorGetTypeID( void )
 {
-    return 0;
+    return CFAllocatorTypeID;
 }
 
 CFAllocatorRef CFAllocatorCreate( CFAllocatorRef allocator, CFAllocatorContext * context )
@@ -99,4 +122,57 @@ void CFAllocatorGetContext( CFAllocatorRef allocator, CFAllocatorContext * conte
 {
     ( void )allocator;
     ( void )context;
+}
+
+static const void * CFAllocatorDefaultRetainCallBack( const void * info )
+{
+    ( void )info;
+    
+    return NULL;
+}
+
+static void CFAllocatorDefaultReleaseCallBack( const void * info )
+{
+    ( void )info;
+}
+
+static CFStringRef CFAllocatorDefaultCopyDescriptionCallBack( const void * info )
+{
+    ( void )info;
+    
+    return NULL;
+}
+
+static void * CFAllocatorDefaultAllocateCallBack( CFIndex allocSize, CFOptionFlags hint, void * info )
+{
+    ( void )allocSize;
+    ( void )hint;
+    ( void )info;
+    
+    return NULL;
+}
+
+static void * CFAllocatorDefaultReallocateCallBack( void * ptr, CFIndex newsize, CFOptionFlags hint, void * info )
+{
+    ( void )ptr;
+    ( void )newsize;
+    ( void )hint;
+    ( void )info;
+    
+    return NULL;
+}
+
+static void CFAllocatorDefaultDeallocateCallBack( void * ptr, void * info )
+{
+    ( void )ptr;
+    ( void )info;
+}
+
+static CFIndex CFAllocatorDefaultPreferredSizeCallBack( CFIndex size, CFOptionFlags hint, void * info )
+{
+    ( void )size;
+    ( void )hint;
+    ( void )info;
+    
+    return 0;
 }
