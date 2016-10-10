@@ -114,6 +114,8 @@
 		053292CC1DA91B1900E46312 /* CFRuntime.c in Sources */ = {isa = PBXBuildFile; fileRef = 053292CB1DA91B1900E46312 /* CFRuntime.c */; };
 		05D151D11DAC278300841529 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 05D151D01DAC278300841529 /* main.c */; };
 		05D151D51DAC27CE00841529 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 053291B81DA64C4B00E46312 /* CoreFoundation.framework */; };
+		05D151D81DAC2A4100841529 /* CFAtomic.c in Sources */ = {isa = PBXBuildFile; fileRef = 05D151D61DAC2A4100841529 /* CFAtomic.c */; };
+		05D151D91DAC2A4100841529 /* CFThreading.c in Sources */ = {isa = PBXBuildFile; fileRef = 05D151D71DAC2A4100841529 /* CFThreading.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -244,6 +246,8 @@
 		053292CB1DA91B1900E46312 /* CFRuntime.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CFRuntime.c; sourceTree = "<group>"; };
 		05D151CE1DAC278300841529 /* Test */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Test; sourceTree = BUILT_PRODUCTS_DIR; };
 		05D151D01DAC278300841529 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		05D151D61DAC2A4100841529 /* CFAtomic.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CFAtomic.c; sourceTree = "<group>"; };
+		05D151D71DAC2A4100841529 /* CFThreading.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CFThreading.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -445,7 +449,9 @@
 		053292CA1DA91B1900E46312 /* __private */ = {
 			isa = PBXGroup;
 			children = (
+				05D151D61DAC2A4100841529 /* CFAtomic.c */,
 				053292CB1DA91B1900E46312 /* CFRuntime.c */,
+				05D151D71DAC2A4100841529 /* CFThreading.c */,
 			);
 			path = __private;
 			sourceTree = "<group>";
@@ -614,6 +620,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				053292271DA6513700E46312 /* CFURL.c in Sources */,
+				05D151D81DAC2A4100841529 /* CFAtomic.c in Sources */,
 				053292101DA6513700E46312 /* CFMachPort.c in Sources */,
 				053292091DA6513700E46312 /* CFData.c in Sources */,
 				0532921E1DA6513700E46312 /* CFRunLoopTimer.c in Sources */,
@@ -644,6 +651,7 @@
 				053292001DA6513700E46312 /* CFBag.c in Sources */,
 				0532921B1DA6513700E46312 /* CFRunLoop.c in Sources */,
 				053292241DA6513700E46312 /* CFTimeZone.c in Sources */,
+				05D151D91DAC2A4100841529 /* CFThreading.c in Sources */,
 				0532922B1DA6513700E46312 /* CFWriteStream.c in Sources */,
 				053292011DA6513700E46312 /* CFBase.c in Sources */,
 				053292CC1DA91B1900E46312 /* CFRuntime.c in Sources */,

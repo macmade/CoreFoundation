@@ -23,7 +23,7 @@
  ******************************************************************************/
 
 /*!
- * @header      CFAllocator.h
+ * @header      CFRuntime.h
  * @copyright   (c) 2016, Jean-David Gadina - www.xs-labs.com
  */
 
@@ -53,6 +53,14 @@ typedef struct
 }
 CFRuntimeBase;
 
+/*!
+ * @typedef     CFRuntimeClass
+ * @abstract    Definition of a CoreFoundation class
+ * @field       name            The name of the class
+ * @field       size            The size of the class instances
+ * @field       constructor     The class constructor (may be NULL)
+ * @field       destructor      The class destructor (may be NULL)
+ */
 typedef struct
 {
     const char * name;
@@ -63,7 +71,20 @@ typedef struct
 }
 CFRuntimeClass;
 
+/*!
+ * @function    CFRuntimeRegisterClass
+ * @abstract    Registers a new CoreFoundation class.
+ * @param       cls     The class to register
+ * @result      The ID of the registered class
+ */
 CF_EXPORT CFTypeID CFRuntimeRegisterClass( const CFRuntimeClass * cls );
+
+/*!
+ * @function    CFRuntimeInitStaticInstance
+ * @abstract    Initializes a static instance of a CoreFoundation class.
+ * @param       memory      The static class instance
+ * @param       typeID      The ID of the class
+ */
 CF_EXPORT void CFRuntimeInitStaticInstance( void * memory, CFTypeID typeID );
 
 CF_EXTERN_C_END

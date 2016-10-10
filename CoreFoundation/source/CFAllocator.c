@@ -29,8 +29,8 @@
 
 #include <CoreFoundation/CoreFoundation.h>
 #include <CoreFoundation/__private/CFRuntime.h>
+#include <CoreFoundation/__private/CFThreading.h>
 #include <stdlib.h>
-#include <pthread.h>
 #include <string.h>
 
 struct CFAllocator
@@ -84,12 +84,12 @@ const CFAllocatorRef kCFAllocatorMallocZone     = ( const CFAllocatorRef )( &CFA
 const CFAllocatorRef kCFAllocatorNull           = ( const CFAllocatorRef )( &CFAllocatorNull );
 const CFAllocatorRef kCFAllocatorUseContext     = ( const CFAllocatorRef )( -1 );
 
-static pthread_key_t CFAllocatorDefaultKey; 
+static CFThreadingKey CFAllocatorDefaultKey; 
 
 static void init( void ) __attribute__( ( constructor ) );
 static void init( void )
 {
-    pthread_key_create( &CFAllocatorDefaultKey, NULL );
+    CFThreadingKeyCreate( &CFAllocatorDefaultKey );
     
     CFAllocatorTypeID = CFRuntimeRegisterClass( &CFAllocatorClass );
     
@@ -206,7 +206,7 @@ CFAllocatorRef CFAllocatorGetDefault( void )
 {
     CFAllocatorRef current;
     
-    current = pthread_getspecific( CFAllocatorDefaultKey );
+    current = CFThreadingGetSpecific( CFAllocatorDefaultKey );
     
     return ( current == NULL ) ? kCFAllocatorSystemDefault : current;
 }
@@ -215,7 +215,7 @@ void CFAllocatorSetDefault( CFAllocatorRef allocator )
 {
     CFAllocatorRef current;
     
-    current = pthread_getspecific( CFAllocatorDefaultKey );
+    current = CFThreadingGetSpecific( CFAllocatorDefaultKey );
     
     if( current )
     {
@@ -227,7 +227,7 @@ void CFAllocatorSetDefault( CFAllocatorRef allocator )
         CFRetain( allocator );
     }
     
-    pthread_setspecific( CFAllocatorDefaultKey, allocator );
+    CFThreadingSetSpecific( CFAllocatorDefaultKey, allocator );
 }
 
 void CFAllocatorGetContext( CFAllocatorRef allocator, CFAllocatorContext * context )
