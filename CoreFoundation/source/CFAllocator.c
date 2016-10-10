@@ -91,12 +91,12 @@ static void init( void )
 {
     pthread_key_create( &CFAllocatorDefaultKey, NULL );
     
-    CFAllocatorTypeID = _CFRuntimeRegisterClass( &CFAllocatorClass );
+    CFAllocatorTypeID = CFRuntimeRegisterClass( &CFAllocatorClass );
     
-    _CFRuntimeInitStaticInstance( &CFAllocatorSystemDefault, CFAllocatorTypeID );
-    _CFRuntimeInitStaticInstance( &CFAllocatorMalloc,        CFAllocatorTypeID );
-    _CFRuntimeInitStaticInstance( &CFAllocatorMallocZone,    CFAllocatorTypeID );
-    _CFRuntimeInitStaticInstance( &CFAllocatorNull,          CFAllocatorTypeID );
+    CFRuntimeInitStaticInstance( &CFAllocatorSystemDefault, CFAllocatorTypeID );
+    CFRuntimeInitStaticInstance( &CFAllocatorMalloc,        CFAllocatorTypeID );
+    CFRuntimeInitStaticInstance( &CFAllocatorMallocZone,    CFAllocatorTypeID );
+    CFRuntimeInitStaticInstance( &CFAllocatorNull,          CFAllocatorTypeID );
     
     CFAllocatorSystemDefault._context.allocate        = CFAllocatorSystemDefaultAllocateCallBack;
     CFAllocatorSystemDefault._context.deallocate      = CFAllocatorSystemDefaultDeallocateCallBack;

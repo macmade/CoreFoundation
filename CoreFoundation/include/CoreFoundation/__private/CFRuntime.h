@@ -63,8 +63,8 @@ typedef struct
 }
 CFRuntimeClass;
 
-CF_EXPORT CFTypeID _CFRuntimeRegisterClass( const CFRuntimeClass * cls );
-CF_EXPORT void _CFRuntimeInitStaticInstance( void * memory, CFTypeID typeID );
+CF_EXPORT CFTypeID CFRuntimeRegisterClass( const CFRuntimeClass * cls );
+CF_EXPORT void CFRuntimeInitStaticInstance( void * memory, CFTypeID typeID );
 
 CF_EXTERN_C_END
 

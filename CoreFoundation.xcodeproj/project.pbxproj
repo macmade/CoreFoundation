@@ -112,7 +112,21 @@
 		053292C51DA900B700E46312 /* __private in Resources */ = {isa = PBXBuildFile; fileRef = 053292C41DA900B700E46312 /* __private */; };
 		053292C61DA900C100E46312 /* __private in Headers */ = {isa = PBXBuildFile; fileRef = 053292C41DA900B700E46312 /* __private */; settings = {ATTRIBUTES = (Public, ); }; };
 		053292CC1DA91B1900E46312 /* CFRuntime.c in Sources */ = {isa = PBXBuildFile; fileRef = 053292CB1DA91B1900E46312 /* CFRuntime.c */; };
+		05D151D11DAC278300841529 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 05D151D01DAC278300841529 /* main.c */; };
+		05D151D51DAC27CE00841529 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 053291B81DA64C4B00E46312 /* CoreFoundation.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		05D151CC1DAC278300841529 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		053291B81DA64C4B00E46312 /* CoreFoundation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CoreFoundation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -228,6 +242,8 @@
 		053292BD1DA8FEAB00E46312 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		053292C41DA900B700E46312 /* __private */ = {isa = PBXFileReference; lastKnownFileType = folder; path = __private; sourceTree = "<group>"; };
 		053292CB1DA91B1900E46312 /* CFRuntime.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CFRuntime.c; sourceTree = "<group>"; };
+		05D151CE1DAC278300841529 /* Test */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Test; sourceTree = BUILT_PRODUCTS_DIR; };
+		05D151D01DAC278300841529 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -235,6 +251,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		05D151CB1DAC278300841529 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				05D151D51DAC27CE00841529 /* CoreFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -249,6 +273,7 @@
 				053292981DA6B61800E46312 /* Documentation */,
 				0532929C1DA8FA3E00E46312 /* Scripts */,
 				053291BA1DA64C4B00E46312 /* CoreFoundation */,
+				05D151CF1DAC278300841529 /* Test */,
 				053291B91DA64C4B00E46312 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -257,6 +282,7 @@
 			isa = PBXGroup;
 			children = (
 				053291B81DA64C4B00E46312 /* CoreFoundation.framework */,
+				05D151CE1DAC278300841529 /* Test */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -424,6 +450,14 @@
 			path = __private;
 			sourceTree = "<group>";
 		};
+		05D151CF1DAC278300841529 /* Test */ = {
+			isa = PBXGroup;
+			children = (
+				05D151D01DAC278300841529 /* main.c */,
+			);
+			path = Test;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -508,6 +542,23 @@
 			productReference = 053291B81DA64C4B00E46312 /* CoreFoundation.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		05D151CD1DAC278300841529 /* Test */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 05D151D41DAC278300841529 /* Build configuration list for PBXNativeTarget "Test" */;
+			buildPhases = (
+				05D151CA1DAC278300841529 /* Sources */,
+				05D151CB1DAC278300841529 /* Frameworks */,
+				05D151CC1DAC278300841529 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Test;
+			productName = Test;
+			productReference = 05D151CE1DAC278300841529 /* Test */;
+			productType = "com.apple.product-type.tool";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -520,6 +571,10 @@
 					053291B71DA64C4B00E46312 = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = 326Y53CJMD;
+						ProvisioningStyle = Automatic;
+					};
+					05D151CD1DAC278300841529 = {
+						CreatedOnToolsVersion = 8.0;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -537,6 +592,7 @@
 			projectRoot = "";
 			targets = (
 				053291B71DA64C4B00E46312 /* CoreFoundation */,
+				05D151CD1DAC278300841529 /* Test */,
 			);
 		};
 /* End PBXProject section */
@@ -608,6 +664,14 @@
 				0532921A1DA6513700E46312 /* CFReadStream.c in Sources */,
 				0532922E1DA6513700E46312 /* CFXMLTree.c in Sources */,
 				0532920D1DA6513700E46312 /* CFError.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		05D151CA1DAC278300841529 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				05D151D11DAC278300841529 /* main.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -878,6 +942,20 @@
 			};
 			name = Release;
 		};
+		05D151D21DAC278300841529 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		05D151D31DAC278300841529 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -898,6 +976,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		05D151D41DAC278300841529 /* Build configuration list for PBXNativeTarget "Test" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				05D151D21DAC278300841529 /* Debug */,
+				05D151D31DAC278300841529 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};

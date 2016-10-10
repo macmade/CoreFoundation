@@ -23,29 +23,13 @@
  ******************************************************************************/
 
 /*!
- * @file        CFRuntime.c
+ * @file        main.c
  * @copyright   (c) 2016, Jean-David Gadina - www.xs-labs.com
  */
 
-#include <CoreFoundation/__private/CFRuntime.h>
-#include <stdlib.h>
+#include <CoreFoundation/CoreFoundation.h>
 
-CFTypeID CFRuntimeRegisterClass( const CFRuntimeClass * cls )
+int main( void )
 {
-    if( cls == NULL )
-    {
-        return 0;
-    }
-    
     return 0;
-}
-
-void CFRuntimeInitStaticInstance( void * memory, CFTypeID type )
-{
-    if( memory == NULL )
-    {
-        return;
-    }
-    
-    ( void )type;
 }
