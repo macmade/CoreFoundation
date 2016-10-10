@@ -52,8 +52,6 @@ void * CFThreadingGetSpecific( CFThreadingKey key )
 {
     #ifdef _WIN32
     
-    ( void )key;
-    
     return TlsGetValue( key );
     
     #else
