@@ -15,6 +15,8 @@ Custom implementation of Apple's CoreFoundation framework intended to be used in
 
 Actually, the project targets macOS, Linux and Windows.
 
+Note that this implementation is NOT binary compatible with Apple's own implementation.
+
 License
 -------
 
