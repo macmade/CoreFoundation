@@ -52,6 +52,55 @@ typedef const struct CFAllocator * CFAllocatorRef;
 #include <CoreFoundation/CFString.h>
 
 /*!
+ * @constant    kCFAllocatorDefault
+ * @abstract    This is a synonym for NULL.
+ */
+CF_EXPORT const CFAllocatorRef kCFAllocatorDefault;
+
+/*!
+ * @constant    kCFAllocatorSystemDefault
+ * @abstract    Default system allocator.
+ * @discussion  You rarely need to use this.
+ */
+CF_EXPORT const CFAllocatorRef kCFAllocatorSystemDefault;
+
+/*!
+ * @constant    kCFAllocatorMalloc
+ * @abstract    This allocator uses malloc(), realloc(), and free().
+ * @discussion  Typically you should not use this allocator, use
+ *              kCFAllocatorDefault instead. This allocator is useful as the
+ *              bytesDeallocator in CFData or contentsDeallocator in CFString
+ *              where the memory was obtained as a result of malloc type
+ *              functions.
+ */
+CF_EXPORT const CFAllocatorRef kCFAllocatorMalloc;
+
+/*!
+ * @constant    kCFAllocatorMallocZone
+ * @abstract    This allocator explicitly uses the default malloc zone, returned
+ *              by malloc_default_zone().
+ * @discussion  You should only use this when an object is safe to be allocated
+ *              in non-scanned memory.
+ */
+CF_EXPORT const CFAllocatorRef kCFAllocatorMallocZone;
+
+/*!
+ * @constant    kCFAllocatorNull
+ * @abstract    This allocator does nothing — it allocates no memory.
+ * @discussion  This allocator is useful as the bytesDeallocator in CFData or
+ *              contentsDeallocator in CFString where the memory should not be
+ *              freed.
+ */
+CF_EXPORT const CFAllocatorRef kCFAllocatorNull;
+
+/*!
+ * @constant    kCFAllocatorUseContext
+ * @abstract    Special allocator argument to CFAllocatorCreate — it uses the
+ *              functions given in the context to allocate the allocator.
+ */
+CF_EXPORT const CFAllocatorRef kCFAllocatorUseContext;
+
+/*!
  * @typedef     CFAllocatorRetainCallBack
  * @abstract    A prototype for a function callback that retains the given data.
  * @param       info    The data to be retained.
@@ -380,7 +429,7 @@ CF_EXPORT CFIndex CFAllocatorGetPreferredSizeForSize( CFAllocatorRef allocator, 
  *              parameters, this function can also allocate memory afresh or
  *              deallocate a given block of memory. The following summarizes the
  *              semantic combinations:
- *                  - If the ptr parameter is non- NULL and the newsize parameter
+ *                  - If the ptr parameter is non-NULL and the newsize parameter
  *                    is greater than 0, the behavior is to reallocate.
  *                  - If the ptr parameter is NULL and the newsize parameter is
  *                    greater than 0, the behavior is to allocate.

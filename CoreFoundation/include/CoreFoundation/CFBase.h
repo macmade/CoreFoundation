@@ -143,6 +143,44 @@ typedef unsigned long CFHashCode;
 #endif
 
 /*!
+ * @typedef     CFTypeRef
+ * @abstract    An untyped "generic" reference to any Core Foundation object.
+ * @discussion  The CFTypeRef type is the base type defined in Core Foundation.
+ *              It is used as the type and return value in several polymorphic
+ *              functions. It is a generic object reference that acts as a
+ *              placeholder for other true Core Foundation objects.
+ */
+typedef const void * CFTypeRef;
+
+/*!
+ * @function    CFRetain
+ * @abstract    Retains a Core Foundation object.
+ * @param       obj     A CFType object to retain. This value must not be NULL.
+ * @result      The input value, obj.
+ * @discussion  You should retain a Core Foundation object when you receive it
+ *              from elsewhere (that is, you did not create or copy it) and you
+ *              want it to persist. If you retain a Core Foundation object you
+ *              are responsible for releasing it.
+ *              If obj is NULL, this will cause a runtime error and your
+ *              application will crash.
+ */
+CF_EXPORT CFTypeRef CFRetain( CFTypeRef obj );
+
+/*!
+ * @function    CFRelease
+ * @abstract    Releases a Core Foundation object.
+ * @param       obj     A CFType object to release. This value must not be NULL.
+ * @discussion  If the retain count of cf becomes zero the memory allocated to
+ *              the object is deallocated and the object is destroyed. If you
+ *              create, copy, or explicitly retain (see the CFRetain function)
+ *              a Core Foundation object, you are responsible for releasing it
+ *              when you no longer need it.
+ *              If obj is NULL, this will cause a runtime error and your
+ *              application will crash.
+ */
+CF_EXPORT void CFRelease( CFTypeRef obj );
+
+/*!
  * @typedef     CFRange
  * @abstract    A structure representing a range of sequential items in a
  *              container, such as characters in a buffer or elements in a
@@ -164,6 +202,7 @@ typedef struct
 CFRange;
 
 /*!
+ * @function    CFRangeMake
  * @abstract    Declares and initializes a CFRange structure.
  * @param       location    The starting location of the range.
  * @param       length      The length of the range.

@@ -49,6 +49,7 @@ CF_EXTERN_C_BEGIN
 typedef struct
 {
     CFTypeID isa;
+    uint64_t rc;
 }
 CFRuntimeBase;
 

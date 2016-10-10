@@ -28,6 +28,17 @@
  */
 
 #include <CoreFoundation/CoreFoundation.h>
+#include <stdlib.h>
+
+CFTypeRef CFRetain( CFTypeRef obj )
+{
+    return obj;
+}
+
+void CFRelease( CFTypeRef obj )
+{
+    ( void )obj;
+}
 
 CFRange CFRangeMake( CFIndex location, CFIndex length )
 {
