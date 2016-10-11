@@ -28,6 +28,8 @@
  */
 
 #include <CoreFoundation/__private/CFRuntime.h>
+#include <CoreFoundation/__private/CFAtomic.h>
+#include <stdio.h>
 #include <stdlib.h>
 
 CFTypeID CFRuntimeRegisterClass( const CFRuntimeClass * cls )
@@ -48,4 +50,14 @@ void CFRuntimeInitStaticInstance( void * memory, CFTypeID type )
     }
     
     ( void )type;
+}
+
+void CFAbortWithError( const char * error )
+{
+    if( error != NULL )
+    {
+        fprintf( stderr, "%s\n", error );
+    }
+    
+    abort();
 }

@@ -87,6 +87,13 @@ CF_EXPORT CFTypeID CFRuntimeRegisterClass( const CFRuntimeClass * cls );
  */
 CF_EXPORT void CFRuntimeInitStaticInstance( void * memory, CFTypeID typeID );
 
+/*!
+ * @function    CFAbortWithError
+ * @abstract    Prints an error message and aborts the program's execution.
+ * @param       error       The error message
+ */
+CF_EXPORT void CFAbortWithError( const char * error );
+
 CF_EXTERN_C_END
 
 #endif /* CORE_FOUNDATION_CF___PRIVATE_RUNTIME_H */

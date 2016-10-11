@@ -28,6 +28,7 @@
  */
 
 #include <CoreFoundation/__private/CFAtomic.h>
+#include <CoreFoundation/__private/CFRuntime.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -48,8 +49,7 @@ CFIndex CFAtomicIncrement( volatile CFIndex * value )
         return CFAtomicIncrement64( ( volatile int64_t * )value );
     }
     
-    fprintf( stderr, "Invalid size for CFIndex - Unknown platform\n" );
-    abort();
+    CFAbortWithError( "Invalid size for CFIndex - Unknown platform\n" );
     
     return 0;
 }
@@ -107,8 +107,7 @@ CFIndex CFAtomicDecrement( volatile CFIndex * value )
         return CFAtomicDecrement64( ( volatile int64_t * )value );
     }
     
-    fprintf( stderr, "Invalid size for CFIndex - Unknown platform\n" );
-    abort();
+    CFAbortWithError( "Invalid size for CFIndex - Unknown platform\n" );
     
     return 0;
 }
