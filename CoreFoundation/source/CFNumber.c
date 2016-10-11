@@ -28,5 +28,90 @@
  */
 
 #include <CoreFoundation/CoreFoundation.h>
+#include <CoreFoundation/__private/CFRuntime.h>
+#include <stdlib.h>
 
+struct CFNumber
+{
+    CFRuntimeBase _base;
+};
 
+static CFTypeID CFNumberTypeID      = 0;
+static CFRuntimeClass CFNumberClass =
+{
+    "CFNumber",
+    sizeof( struct CFNumber ),
+    NULL,
+    NULL
+};
+
+static struct CFNumber CFNumberNaN;
+static struct CFNumber CFNumberNegativeInfinity;
+static struct CFNumber CFNumberPositiveInfinity;
+
+const CFNumberRef kCFNumberNaN              = ( const CFNumberRef )( &CFNumberNaN );
+const CFNumberRef kCFNumberNegativeInfinity = ( const CFNumberRef )( &CFNumberNegativeInfinity );
+const CFNumberRef kCFNumberPositiveInfinity = ( const CFNumberRef )( &CFNumberPositiveInfinity );
+
+static void init( void ) __attribute__( ( constructor ) );
+static void init( void )
+{
+    CFNumberTypeID = CFRuntimeRegisterClass( &CFNumberClass );
+    
+    CFRuntimeInitStaticInstance( &CFNumberNaN,              CFNumberTypeID );
+    CFRuntimeInitStaticInstance( &CFNumberNegativeInfinity, CFNumberTypeID );
+    CFRuntimeInitStaticInstance( &CFNumberPositiveInfinity, CFNumberTypeID );
+}
+
+CFTypeID CFNumberGetTypeID( void )
+{
+    return 0;
+}
+
+CFNumberRef CFNumberCreate( CFAllocatorRef allocator, CFNumberType type, const void * valuePtr )
+{
+    ( void )allocator;
+    ( void )type;
+    ( void )valuePtr;
+    
+    return NULL;
+}
+
+CFIndex CFNumberGetByteSize( CFNumberRef number )
+{
+    ( void )number;
+    
+    return 0;
+}
+
+CFNumberType CFNumberGetType( CFNumberRef number )
+{
+    ( void )number;
+    
+    return kCFNumberSInt8Type;
+}
+
+Boolean CFNumberGetValue( CFNumberRef number, CFNumberType type, void * valuePtr )
+{
+    ( void )number;
+    ( void )type;
+    ( void )valuePtr;
+    
+    return false;
+}
+
+Boolean CFNumberIsFloatType( CFNumberRef number )
+{
+    ( void )number;
+    
+    return false;
+}
+
+CFComparisonResult CFNumberCompare( CFNumberRef number, CFNumberRef otherNumber, void * context )
+{
+    ( void )number;
+    ( void )otherNumber;
+    ( void )context;
+    
+    return kCFCompareEqualTo;
+}
