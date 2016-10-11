@@ -30,11 +30,12 @@
 #ifndef CORE_FOUNDATION_MAC_TYPES_H
 #define CORE_FOUNDATION_MAC_TYPES_H
 
-#include <CoreFoundation/CFBase.h>
 #include <stdbool.h>
 #include <stdint.h>
 
-CF_EXTERN_C_BEGIN
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 typedef bool        Boolean;
 typedef int8_t      SInt8;
@@ -48,6 +49,8 @@ typedef uint64_t    UInt64;
 typedef float       Float32;
 typedef double      Float64;
 
-CF_EXTERN_C_END
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* CORE_FOUNDATION_MAC_TYPES_H */
