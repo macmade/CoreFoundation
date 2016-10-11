@@ -36,7 +36,7 @@ CF_EXTERN_C_BEGIN
 
 /*!
  * @typedef     CFAllocatorRef
- * @abstract    Type for CFAllocator objects.
+ * @abstract    A reference to a CFAllocator object.
  * @discussion  CFAllocator is an opaque type that allocates and deallocates
  *              memory for you. You never have to allocate, reallocate, or
  *              deallocate memory directly for Core Foundation objects—and
