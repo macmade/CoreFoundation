@@ -79,27 +79,6 @@ CF_EXTERN_C_BEGIN
 #endif
 
 /*!
- * @typedef     CFTypeID
- * @abstract    A type for unique, constant integer values that identify
- *              particular Core Foundation opaque types.
- * @discussion  Defines a type identifier in Core Foundation. A type ID is an
- *              integer that identifies the opaque type to which a Core
- *              Foundation object “belongs.” You use type IDs in various
- *              contexts, such as when you are operating on heterogeneous
- *              collections. Core Foundation provides programmatic interfaces
- *              for obtaining and evaluating type IDs.
- *              Because the value for a type ID can change from release to
- *              release, your code should not rely on stored or hard-coded type
- *              IDs nor should it hard-code any observed properties of a type ID
- *              (such as, for example, it being a small integer).
- */
-#ifdef __LLP64__
-typedef unsigned long long CFTypeID;
-#else
-typedef unsigned long CFTypeID;
-#endif
-
-/*!
  * @typedef     CFIndex
  * @abstract    An integer type used throughout Core Foundation in several
  *              programmatic roles: as an array index and for count, size, and
@@ -133,26 +112,6 @@ typedef unsigned long CFOptionFlags;
 #endif
 
 /*!
- * @typedef     CFHashCode
- * @abstract    A type for hash codes returned by the CFHash function.
- */
-#ifdef __LLP64__
-typedef unsigned long long CFHashCode;
-#else
-typedef unsigned long CFHashCode;
-#endif
-
-/*!
- * @typedef     CFTypeRef
- * @abstract    An untyped "generic" reference to any Core Foundation object.
- * @discussion  The CFTypeRef type is the base type defined in Core Foundation.
- *              It is used as the type and return value in several polymorphic
- *              functions. It is a generic object reference that acts as a
- *              placeholder for other true Core Foundation objects.
- */
-typedef const void * CFTypeRef;
-
-/*!
  * @typedef     CFComparisonResult
  * @abstract    Constants returned by comparison functions, indicating whether
  *              a value is equal to, less than, or greater than another value.
@@ -173,34 +132,6 @@ typedef enum
     kCFCompareGreaterThan   = 1
 }
 CFComparisonResult;
-
-/*!
- * @function    CFRetain
- * @abstract    Retains a Core Foundation object.
- * @param       obj     A CFType object to retain. This value must not be NULL.
- * @result      The input value, obj.
- * @discussion  You should retain a Core Foundation object when you receive it
- *              from elsewhere (that is, you did not create or copy it) and you
- *              want it to persist. If you retain a Core Foundation object you
- *              are responsible for releasing it.
- *              If obj is NULL, this will cause a runtime error and your
- *              application will crash.
- */
-CF_EXPORT CFTypeRef CFRetain( CFTypeRef obj );
-
-/*!
- * @function    CFRelease
- * @abstract    Releases a Core Foundation object.
- * @param       obj     A CFType object to release. This value must not be NULL.
- * @discussion  If the retain count of cf becomes zero the memory allocated to
- *              the object is deallocated and the object is destroyed. If you
- *              create, copy, or explicitly retain (see the CFRetain function)
- *              a Core Foundation object, you are responsible for releasing it
- *              when you no longer need it.
- *              If obj is NULL, this will cause a runtime error and your
- *              application will crash.
- */
-CF_EXPORT void CFRelease( CFTypeRef obj );
 
 /*!
  * @typedef     CFRange

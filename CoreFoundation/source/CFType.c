@@ -28,5 +28,126 @@
  */
 
 #include <CoreFoundation/CoreFoundation.h>
+#include <CoreFoundation/__private/CFRuntime.h>
+#include <CoreFoundation/__private/CFAtomic.h>
+#include <stdlib.h>
 
+CFAllocatorRef CFGetAllocator( CFTypeRef obj )
+{
+    CFRuntimeBase * base;
+    
+    if( obj == NULL )
+    {
+        return NULL;
+    }
+    
+    base = ( CFRuntimeBase * )obj;
+    
+    return base->allocator;
+}
 
+CFIndex CFGetRetainCount( CFTypeRef obj )
+{
+    CFRuntimeBase * base;
+    
+    if( obj == NULL )
+    {
+        return 0;
+    }
+    
+    base = ( CFRuntimeBase * )obj;
+    
+    return base->rc;
+}
+
+CFTypeRef CFMakeCollectable( CFTypeRef obj )
+{
+    /* No GC support... */
+    return obj;
+}
+
+CFTypeRef CFRetain( CFTypeRef obj )
+{
+    CFRuntimeBase * base;
+    
+    if( obj == NULL )
+    {
+        return NULL;
+    }
+    
+    base = ( CFRuntimeBase * )obj;
+    
+    if( base->rc == -1 )
+    {
+        return obj;
+    }
+    
+    CFAtomicIncrement( &( base->rc ) );
+    
+    return obj;
+}
+
+void CFRelease( CFTypeRef obj )
+{
+    CFRuntimeBase * base;
+    
+    if( obj == NULL )
+    {
+        return;
+    }
+    
+    base = ( CFRuntimeBase * )obj;
+    
+    if( base->rc == -1 )
+    {
+        return;
+    }
+    
+    if( CFAtomicDecrement( &( base->rc ) ) == 0 )
+    {
+        CFRuntimeDeleteInstance( obj );
+    }
+}
+
+Boolean CFEqual( CFTypeRef obj1, CFTypeRef obj2 )
+{
+    if( obj1 == obj2 )
+    {
+        return true;
+    }
+    
+    return false;
+}
+
+CFHashCode CFHash( CFTypeRef obj )
+{
+    ( void )obj;
+    
+    return 0;
+}
+
+CFStringRef CFCopyDescription( CFTypeRef obj )
+{
+    ( void )obj;
+    
+    return NULL;
+}
+
+CFStringRef CFCopyTypeIDDescription( CFTypeID typeID )
+{
+    ( void )typeID;
+    
+    return NULL;
+}
+
+CFTypeID CFGetTypeID( CFTypeRef obj )
+{
+    ( void )obj;
+    
+    return 0;
+}
+
+void CFShow( CFTypeRef obj )
+{
+    ( void )obj;
+}

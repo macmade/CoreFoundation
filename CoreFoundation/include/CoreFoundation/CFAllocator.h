@@ -48,8 +48,12 @@ CF_EXTERN_C_BEGIN
  */
 typedef const struct CFAllocator * CFAllocatorRef;
 
-/* CFAllocatorRef needs to be defined prior to including CFString.h */
+/*
+ * CFAllocatorRef needs to be defined prior to including CFString.h
+ * and CFType.h
+ */
 #include <CoreFoundation/CFString.h>
+#include <CoreFoundation/CFType.h>
 
 /*!
  * @constant    kCFAllocatorDefault

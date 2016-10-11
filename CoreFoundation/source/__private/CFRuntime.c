@@ -180,6 +180,7 @@ void CFRuntimeDeleteInstance( CFTypeRef obj )
 {
     struct CFRuntimeClassList * list;
     CFRuntimeBase             * base;
+    CFAllocatorRef              allocator;
     
     if( obj == NULL )
     {
@@ -203,10 +204,12 @@ void CFRuntimeDeleteInstance( CFTypeRef obj )
             list->cls.destructor( obj );
         }
         
-        if( base->allocator )
+        allocator = CFGetAllocator( obj );
+        
+        if( allocator )
         {
-            CFAllocatorDeallocate( base->allocator, ( void * )obj );
-            CFRelease( base->allocator );
+            CFAllocatorDeallocate( allocator, ( void * )obj );
+            CFRelease( allocator );
         }
         
         break;
