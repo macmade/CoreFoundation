@@ -30,6 +30,7 @@
 #ifndef CORE_FOUNDATION_H
 #define CORE_FOUNDATION_H
 
+#include <CoreFoundation/MacTypes.h>
 #include <CoreFoundation/CFAllocator.h>
 #include <CoreFoundation/CFArray.h>
 #include <CoreFoundation/CFAttributedString.h>
