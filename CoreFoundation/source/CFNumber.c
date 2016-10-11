@@ -50,6 +50,9 @@ static CFRuntimeClass CFNumberClass =
     "CFNumber",
     sizeof( struct CFNumber ),
     NULL,
+    NULL,
+    NULL,
+    NULL,
     NULL
 };
 

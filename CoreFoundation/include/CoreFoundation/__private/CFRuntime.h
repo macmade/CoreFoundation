@@ -68,8 +68,11 @@ typedef struct
     const char * name;
     size_t       size;
     
-    void ( * constructor )( CFTypeRef obj );
-    void ( * destructor )( CFTypeRef obj );
+    void        ( * constructor     )( CFTypeRef obj );
+    void        ( * destructor      )( CFTypeRef obj );
+    CFHashCode  ( * hash            )( CFTypeRef obj );
+    CFStringRef ( * equals          )( CFTypeRef obj );
+    CFStringRef ( * copyDescription )( CFTypeRef obj );
 }
 CFRuntimeClass;
 

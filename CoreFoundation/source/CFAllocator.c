@@ -57,6 +57,9 @@ static CFRuntimeClass CFAllocatorClass =
     sizeof( struct CFAllocator ),
     NULL,
     ( void ( * )( CFTypeRef ) )CFAllocatorDestruct,
+    NULL,
+    NULL,
+    NULL
 };
 
 static struct CFAllocator CFAllocatorSystemDefault;
