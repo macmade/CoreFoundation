@@ -153,6 +153,28 @@ typedef unsigned long CFHashCode;
 typedef const void * CFTypeRef;
 
 /*!
+ * @typedef     CFComparisonResult
+ * @abstract    Constants returned by comparison functions, indicating whether
+ *              a value is equal to, less than, or greater than another value.
+ * @constant    kCFCompareLessThan      Returned by a comparison function if the
+ *                                      first value is less than the second
+ *                                      value.
+ * @constant    kCFCompareEqualTo       Returned by a comparison function if the
+ *                                      first value is equal to the second
+ *                                      value.
+ * @constant    kCFCompareGreaterThan   Returned by a comparison function if the
+ *                                      first value is greater than the second
+ *                                      value.
+ */
+typedef enum
+{
+    kCFCompareLessThan      = -1L,
+    kCFCompareEqualTo       = 0,
+    kCFCompareGreaterThan   = 1
+}
+CFComparisonResult;
+
+/*!
  * @function    CFRetain
  * @abstract    Retains a Core Foundation object.
  * @param       obj     A CFType object to retain. This value must not be NULL.
