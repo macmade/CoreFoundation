@@ -108,7 +108,6 @@
 		053292941DA6513D00E46312 /* CFXMLParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 053292601DA6513D00E46312 /* CFXMLParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		053292951DA6513D00E46312 /* CFXMLTree.h in Headers */ = {isa = PBXBuildFile; fileRef = 053292611DA6513D00E46312 /* CFXMLTree.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		053292961DA6513D00E46312 /* CoreFoundation.h in Headers */ = {isa = PBXBuildFile; fileRef = 053292621DA6513D00E46312 /* CoreFoundation.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0532929B1DA7BB3C00E46312 /* CoreFoundation.h in Headers */ = {isa = PBXBuildFile; fileRef = 0532929A1DA7BB3C00E46312 /* CoreFoundation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		053292C51DA900B700E46312 /* __private in Resources */ = {isa = PBXBuildFile; fileRef = 053292C41DA900B700E46312 /* __private */; };
 		053292C61DA900C100E46312 /* __private in Headers */ = {isa = PBXBuildFile; fileRef = 053292C41DA900B700E46312 /* __private */; settings = {ATTRIBUTES = (Public, ); }; };
 		053292CC1DA91B1900E46312 /* CFRuntime.c in Sources */ = {isa = PBXBuildFile; fileRef = 053292CB1DA91B1900E46312 /* CFRuntime.c */; };
@@ -526,7 +525,6 @@
 				053292851DA6513D00E46312 /* CFRunLoopTimer.h in Headers */,
 				053292731DA6513D00E46312 /* CFDictionary.h in Headers */,
 				058C88361DAD73D500D92556 /* MacTypes.h in Headers */,
-				0532929B1DA7BB3C00E46312 /* CoreFoundation.h in Headers */,
 				053292931DA6513D00E46312 /* CFXMLNode.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
