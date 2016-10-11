@@ -28,16 +28,51 @@
  */
 
 #include <CoreFoundation/CoreFoundation.h>
+#include <CoreFoundation/__private/CFRuntime.h>
+#include <CoreFoundation/__private/CFAtomic.h>
 #include <stdlib.h>
 
 CFTypeRef CFRetain( CFTypeRef obj )
 {
+    CFRuntimeBase * base;
+    
+    if( obj == NULL )
+    {
+        return NULL;
+    }
+    
+    base = ( CFRuntimeBase * )obj;
+    
+    if( base->rc == -1 )
+    {
+        return obj;
+    }
+    
+    CFAtomicIncrement( &( base->rc ) );
+    
     return obj;
 }
 
 void CFRelease( CFTypeRef obj )
 {
-    ( void )obj;
+    CFRuntimeBase * base;
+    
+    if( obj == NULL )
+    {
+        return;
+    }
+    
+    base = ( CFRuntimeBase * )obj;
+    
+    if( base->rc == -1 )
+    {
+        return;
+    }
+    
+    if( CFAtomicDecrement( &( base->rc ) ) == 0 )
+    {
+        CFRuntimeDeleteInstance( obj );
+    }
 }
 
 CFRange CFRangeMake( CFIndex location, CFIndex length )
