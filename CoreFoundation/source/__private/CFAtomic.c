@@ -31,9 +31,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#ifdef _WIN32
+#if defined( _WIN32 )
 #include <Winnt.h>
-#else
+#elif defined( __APPLE__ )
 #include <libkern/OSAtomic.h>
 #endif
 
@@ -56,19 +56,43 @@ CFIndex CFAtomicIncrement( volatile CFIndex * value )
 
 int32_t CFAtomicIncrement32( volatile int32_t * value )
 {
-    #ifdef _WIN32
+    #if defined( _WIN32 )
+    
     return InterlockedIncrement( reinterpret_cast< volatile LONG * >( value  ) );
-    #else
+    
+    #elif defined( __APPLE__ )
+    
     return OSAtomicIncrement32( value );
+    
+    #elif defined( __has_builtin ) && __has_builtin( __sync_add_and_fetch )
+    
+    return __sync_add_and_fetch( value, 1 );
+    
+    #else
+    
+    #error "CFAtomicIncrement32 is not implemented for the current platform"
+    
     #endif
 }
 
 int64_t CFAtomicIncrement64( volatile int64_t * value )
 {
-    #ifdef _WIN32
+    #if defined( _WIN32 )
+    
     return InterlockedIncrement64( reinterpret_cast< volatile LONGLONG * >( value ) );
-    #else
+    
+    #elif defined( __APPLE__ )
+    
     return OSAtomicIncrement64( value );
+    
+    #elif defined( __has_builtin ) && __has_builtin( __sync_add_and_fetch )
+    
+    return __sync_add_and_fetch( value, 1 );
+    
+    #else
+    
+    #error "CFAtomicIncrement64 is not implemented for the current platform"
+    
     #endif
 }
 
@@ -91,19 +115,43 @@ CFIndex CFAtomicDecrement( volatile CFIndex * value )
 
 int32_t CFAtomicDecrement32( volatile int32_t * value )
 {
-    #ifdef _WIN32
+    #if defined( _WIN32 )
+    
     return InterlockedDecrement( reinterpret_cast< volatile LONG * >( value ) );
-    #else
+    
+    #elif defined( __APPLE__ )
+    
     return OSAtomicDecrement32( value );
+    
+    #elif defined( __has_builtin ) && __has_builtin( __sync_add_and_fetch )
+    
+    return __sync_add_and_fetch( value, -1 );
+    
+    #else
+    
+    #error "CFAtomicDecrement32 is not implemented for the current platform"
+    
     #endif
 }
 
 int64_t CFAtomicDecrement64( volatile int64_t * value )
 {
-    #ifdef _WIN32
+    #if defined( _WIN32 )
+    
     return InterlockedDecrement64( reinterpret_cast< volatile LONGLONG * >( value ) );
-    #else
+    
+    #elif defined( __APPLE__ )
+    
     return OSAtomicDecrement64( value );
+    
+    #elif defined( __has_builtin ) && __has_builtin( __sync_add_and_fetch )
+    
+    return __sync_add_and_fetch( value, -1 );
+    
+    #else
+    
+    #error "CFAtomicDecrement64 is not implemented for the current platform"
+    
     #endif
 }
 
@@ -126,27 +174,63 @@ bool CFAtomicCompareAndSwap( CFIndex oldValue, CFIndex newValue, volatile CFInde
 
 bool CFAtomicCompareAndSwap32( int32_t oldValue, int32_t newValue, volatile int32_t * value )
 {
-    #ifdef _WIN32
+    #if defined( _WIN32 )
+    
     return ( InterlockedCompareExchange( reinterpret_cast< volatile LONG * >( value ), newValue, oldValue ) == oldValue ) ? true : false;
-    #else
+    
+    #elif defined( __APPLE__ )
+    
     return ( OSAtomicCompareAndSwap32( oldValue, newValue, value ) ) ? true : false;
+    
+    #elif defined( __has_builtin ) && __has_builtin( __sync_bool_compare_and_swap )
+    
+    return __sync_bool_compare_and_swap( value, oldValue, newValue );
+    
+    #else
+    
+    #error "CFAtomicCompareAndSwap32 is not implemented for the current platform"
+    
     #endif
 }
 
 bool CFAtomicCompareAndSwap64( int64_t oldValue, int64_t newValue, volatile int64_t * value )
 {
-    #ifdef _WIN32
+    #if defined( _WIN32 )
+    
     return ( InterlockedCompareExchange64( reinterpret_cast< volatile LONGLONG * >( value ), newValue, oldValue ) == oldValue ) ? true : false;
-    #else
+    
+    #elif defined( __APPLE__ )
+    
     return ( OSAtomicCompareAndSwap64( oldValue, newValue, value ) ) ? true : false;
+    
+    #elif defined( __has_builtin ) && __has_builtin( __sync_bool_compare_and_swap )
+    
+    return __sync_bool_compare_and_swap( value, oldValue, newValue );
+    
+    #else
+    
+    #error "CFAtomicCompareAndSwap64 is not implemented for the current platform"
+    
     #endif
 }
 
 bool CFAtomicCompareAndSwapPointer( void * oldValue, void * newValue, void * volatile * value )
 {
-    #ifdef _WIN32
+    #if defined( _WIN32 )
+    
     return ( InterlockedCompareExchangePointer( value, newValue, oldValue ) == oldValue ) ? true : false;
-    #else
+    
+    #elif defined( __APPLE__ )
+    
     return ( OSAtomicCompareAndSwapPtr( oldValue, newValue, value ) ) ? true : false;
+    
+    #elif defined( __has_builtin ) && __has_builtin( __sync_bool_compare_and_swap )
+    
+    return __sync_bool_compare_and_swap( value, oldValue, newValue );
+    
+    #else
+    
+    #error "CFAtomicCompareAndSwapPointer is not implemented for the current platform"
+    
     #endif
 }
