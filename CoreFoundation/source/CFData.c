@@ -28,5 +28,99 @@
  */
 
 #include <CoreFoundation/CoreFoundation.h>
+#include <CoreFoundation/__private/CFRuntime.h>
 
+struct CFData
+{
+    CFRuntimeBase _base;
+};
 
+static CFStringRef CFDataCopyDescription( CFDataRef Data );
+
+static CFTypeID CFDataTypeID      = 0;
+static CFRuntimeClass CFDataClass =
+{
+    "CFData",
+    sizeof( struct CFData ),
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    ( CFStringRef ( * )( CFTypeRef ) )CFDataCopyDescription
+};
+
+static void init( void ) __attribute__( ( constructor ) );
+static void init( void )
+{
+    CFDataTypeID = CFRuntimeRegisterClass( &CFDataClass );
+}
+
+static CFStringRef CFDataCopyDescription( CFDataRef data )
+{
+    ( void )data;
+    
+    return NULL;
+}
+
+CFTypeID CFDataGetTypeID( void )
+{
+    return CFDataTypeID;
+}
+
+CFDataRef CFDataCreate( CFAllocatorRef allocator, const UInt8 * bytes, CFIndex length )
+{
+    ( void )allocator;
+    ( void )bytes;
+    ( void )length;
+    
+    return NULL;
+}
+
+CFDataRef CFDataCreateCopy( CFAllocatorRef allocator, CFDataRef theData )
+{
+    ( void )allocator;
+    ( void )theData;
+    
+    return NULL;
+}
+
+CFDataRef CFDataCreateWithBytesNoCopy( CFAllocatorRef allocator, const UInt8 * bytes, CFIndex length, CFAllocatorRef bytesDeallocator )
+{
+    ( void )allocator;
+    ( void )bytes;
+    ( void )length;
+    ( void )bytesDeallocator;
+    
+    return NULL;
+}
+
+const UInt8 * CFDataGetBytePtr( CFDataRef theData )
+{
+    ( void )theData;
+    
+    return NULL;
+}
+
+void CFDataGetBytes( CFDataRef theData, CFRange range, UInt8 * buffer )
+{
+    ( void )theData;
+    ( void )range;
+    ( void )buffer;
+}
+
+CFIndex CFDataGetLength( CFDataRef theData )
+{
+    ( void )theData;
+    
+    return 0;
+}
+
+CFRange CFDataFind( CFDataRef theData, CFDataRef dataToFind, CFRange searchRange, CFDataSearchFlags compareOptions )
+{
+    ( void )theData;
+    ( void )dataToFind;
+    ( void )searchRange;
+    ( void )compareOptions;
+    
+    return CFRangeMake( 0, 0 );
+}
