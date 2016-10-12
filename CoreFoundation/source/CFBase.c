@@ -29,6 +29,8 @@
 
 #include <CoreFoundation/CoreFoundation.h>
 
+const CFIndex kCFNotFound = -1;
+
 CFRange CFRangeMake( CFIndex location, CFIndex length )
 {
     CFRange range;

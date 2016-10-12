@@ -134,6 +134,13 @@ typedef enum
 CFComparisonResult;
 
 /*!
+ * @constant    kCFNotFound
+ * @abstract    A constant that indicates that a search operation did not
+ *              succeed in locating the target value.
+ */
+CF_EXPORT const CFIndex kCFNotFound;
+
+/*!
  * @typedef     CFRange
  * @abstract    A structure representing a range of sequential items in a
  *              container, such as characters in a buffer or elements in a
