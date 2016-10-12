@@ -119,11 +119,18 @@ CF_EXPORT void CFRuntimeInitStaticInstance( void * memory, CFTypeID typeID );
 CF_EXPORT void CFRuntimeDeleteInstance( CFTypeRef obj );
 
 /*!
- * @function    CFAbortWithError
+ * @function    CFRuntimeAbortWithError
  * @abstract    Prints an error message and aborts the program's execution.
  * @param       error       The error message
  */
-CF_EXPORT void CFAbortWithError( const char * error );
+CF_EXPORT void CFRuntimeAbortWithError( const char * error );
+
+/*!
+ * @function    CFRuntimeAbortWithOutOfMemoryError
+ * @abstract    Prints an out of memory error message and aborts the program's
+ *              execution.
+ */
+CF_EXPORT void CFRuntimeAbortWithOutOfMemoryError( void );
 
 CF_EXTERN_C_END
 

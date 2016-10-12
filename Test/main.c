@@ -28,8 +28,49 @@
  */
 
 #include <CoreFoundation/CoreFoundation.h>
+#include <stdio.h>
+#include <string.h>
 
 int main( void )
 {
+    {
+        CFAllocatorRef     a;
+        CFAllocatorContext ctx;
+        
+        memset( &ctx, 0, sizeof( CFAllocatorContext ) );
+        printf( "kCFAllocatorSystemDefault: %p (ID: %li / RC: %li)\n", ( void * )kCFAllocatorSystemDefault, ( long )CFGetTypeID( kCFAllocatorSystemDefault ), ( long )CFGetRetainCount( kCFAllocatorSystemDefault ) );
+        
+        a = CFAllocatorCreate( NULL, &ctx );
+        
+        printf( "Custom allocator:          %p (ID: %li / RC: %li)\n", ( void * )a, ( long )CFGetTypeID( a ), ( long )CFGetRetainCount( a ) );
+        printf( "Custom allocator:          %p (ID: %li / RC: %li)\n", ( void * )a, ( long )CFGetTypeID( a ), ( long )CFGetRetainCount( a ) );
+        CFRetain( a );
+        printf( "Custom allocator:          %p (ID: %li / RC: %li)\n", ( void * )a, ( long )CFGetTypeID( a ), ( long )CFGetRetainCount( a ) );
+        CFRelease( a );
+        printf( "Custom allocator:          %p (ID: %li / RC: %li)\n", ( void * )a, ( long )CFGetTypeID( a ), ( long )CFGetRetainCount( a ) );
+        CFRelease( a );
+    }
+    
+    printf( "--------------------------------------------------------------------------------\n" );
+    
+    {
+        CFStringRef s1;
+        CFStringRef s2;
+        
+        s1 = CFStringCreateWithCString( NULL, "hello, %s", kCFStringEncodingUTF8 );
+        s2 = CFStringCreateWithFormat( NULL, NULL, s1, "universe" );
+            
+        printf( "%p - %s\n", ( void * )s1, CFStringGetCStringPtr( s1, kCFStringEncodingUTF8 ) );
+        printf( "%p - %s\n", ( void * )s2, CFStringGetCStringPtr( s2, kCFStringEncodingUTF8 ) );
+        
+        CFShow( s1 );
+        CFShow( s2 );
+        
+        CFRelease( s1 );
+        CFRelease( s2 );
+    }
+    
+    printf( "--------------------------------------------------------------------------------\n" );
+    
     return 0;
 }

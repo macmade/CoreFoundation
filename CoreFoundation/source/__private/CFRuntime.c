@@ -58,7 +58,7 @@ CFTypeID CFRuntimeRegisterClass( const CFRuntimeClass * cls )
     
     if( new == NULL )
     {
-        CFAbortWithError( "Out of memory" );
+        CFRuntimeAbortWithOutOfMemoryError();
         
         return 0;
     }
@@ -216,7 +216,7 @@ void CFRuntimeDeleteInstance( CFTypeRef obj )
     }
 }
 
-void CFAbortWithError( const char * error )
+void CFRuntimeAbortWithError( const char * error )
 {
     if( error != NULL )
     {
@@ -224,4 +224,9 @@ void CFAbortWithError( const char * error )
     }
     
     abort();
+}
+
+void CFRuntimeAbortWithOutOfMemoryError( void )
+{
+    CFRuntimeAbortWithError( "Out of memory" );
 }

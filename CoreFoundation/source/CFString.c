@@ -29,11 +29,19 @@
 
 #include <CoreFoundation/CoreFoundation.h>
 #include <CoreFoundation/__private/CFRuntime.h>
+#include <string.h>
+#include <stdio.h>
 
 struct CFString
 {
     CFRuntimeBase    _base;
+    const char     * _cStr;
+    CFIndex          _length;
+    CFStringEncoding _encoding;
+    CFAllocatorRef   _deallocator;
 };
+
+static void CFStringDestruct( CFStringRef str );
 
 static CFTypeID CFStringTypeID      = 0;
 static CFRuntimeClass CFStringClass =
@@ -41,7 +49,7 @@ static CFRuntimeClass CFStringClass =
     "CFString",
     sizeof( struct CFString ),
     NULL,
-    NULL,
+    ( void ( * )( CFTypeRef ) )CFStringDestruct,
     NULL,
     NULL,
     NULL
@@ -56,6 +64,11 @@ static void init( void )
 CFTypeID CFStringGetTypeID( void )
 {
     return CFStringTypeID;
+}
+
+static void CFStringDestruct( CFStringRef str )
+{
+    CFAllocatorDeallocate( str->_deallocator, ( void * )( str->_cStr ) );
 }
 
 CFArrayRef CFStringCreateArrayBySeparatingStrings( CFAllocatorRef alloc, CFStringRef theString, CFStringRef separatorString )
@@ -78,10 +91,7 @@ CFStringRef CFStringCreateByCombiningStrings( CFAllocatorRef alloc, CFArrayRef t
 
 CFStringRef CFStringCreateCopy( CFAllocatorRef alloc, CFStringRef theString )
 {
-    ( void )alloc;
-    ( void )theString;
-    
-    return NULL;
+    return CFStringCreateWithCString( alloc, theString->_cStr, theString->_encoding );
 }
 
 CFStringRef CFStringCreateFromExternalRepresentation( CFAllocatorRef alloc, CFDataRef data, CFStringEncoding encoding )
@@ -137,40 +147,124 @@ CFStringRef CFStringCreateWithCharactersNoCopy( CFAllocatorRef alloc, const UniC
 
 CFStringRef CFStringCreateWithCString( CFAllocatorRef alloc, const char * cStr, CFStringEncoding encoding )
 {
-    ( void )alloc;
-    ( void )cStr;
-    ( void )encoding;
+    struct CFString * o;
+    char            * buf;
     
-    return NULL;
+    if( cStr == NULL )
+    {
+        return NULL;
+    }
+    
+    o = ( struct CFString * )CFRuntimeCreateInstance( alloc, CFStringTypeID );
+    
+    if( o )
+    {
+        o->_length   = ( CFIndex )strlen( cStr );
+        o->_encoding = encoding;
+        buf          = CFAllocatorAllocate( NULL, o->_length + 1, 0 );
+        
+        memcpy( buf, cStr, o->_length + 1 );
+        
+        o->_cStr = buf;
+    }
+    
+    return ( CFStringRef )o;
 }
 
 CFStringRef CFStringCreateWithCStringNoCopy( CFAllocatorRef alloc, const char * cStr, CFStringEncoding encoding, CFAllocatorRef contentsDeallocator )
 {
-    ( void )alloc;
-    ( void )cStr;
-    ( void )encoding;
-    ( void )contentsDeallocator;
+    struct CFString * o;
     
-    return NULL;
+    if( cStr == NULL )
+    {
+        return NULL;
+    }
+    
+    o = ( struct CFString * )CFRuntimeCreateInstance( alloc, CFStringTypeID );
+    
+    if( o )
+    {
+        o->_cStr        = cStr;
+        o->_encoding    = encoding;
+        o->_length      = ( CFIndex )strlen( cStr );
+        o->_deallocator = contentsDeallocator;
+    }
+    
+    return ( CFStringRef )o;
 }
 
 CFStringRef CFStringCreateWithFormat( CFAllocatorRef alloc, CFDictionaryRef formatOptions, CFStringRef format, ... )
 {
-    ( void )alloc;
-    ( void )formatOptions;
-    ( void )format;
+    va_list     ap;
+    CFStringRef o;
     
-    return NULL;
+    va_start( ap, format );
+    
+    o = CFStringCreateWithFormatAndArguments( alloc, formatOptions, format, ap );
+    
+    va_end( ap );
+    
+    return o;
 }
 
 CFStringRef CFStringCreateWithFormatAndArguments( CFAllocatorRef alloc, CFDictionaryRef formatOptions, CFStringRef format, va_list arguments )
 {
-    ( void )alloc;
-    ( void )formatOptions;
-    ( void )format;
-    ( void )arguments;
+    char  * fmt;
+    char  * str;
+    va_list ap;
+    int     length;
     
-    return NULL;
+    ( void )formatOptions;
+    
+    if( format == NULL || CFStringGetLength( format ) == 0 )
+    {
+        return NULL;
+    }
+    
+    fmt = CFAllocatorAllocate( alloc, CFStringGetLength( format ) + 1, 0 );
+    
+    if( fmt == NULL )
+    {
+        CFRuntimeAbortWithOutOfMemoryError();
+        
+        return NULL;
+    }
+    
+    if( CFStringGetCString( format, fmt, CFStringGetLength( format ) + 1, kCFStringEncodingUTF8 ) == false )
+    {
+        CFAllocatorDeallocate( alloc, fmt );
+        
+        return NULL;
+    }
+    
+    va_copy( ap, arguments );
+    
+    length = vsnprintf( NULL, 0, fmt, arguments );
+    
+    if( length <= 0 )
+    {
+        va_end( ap );
+        CFAllocatorDeallocate( alloc, fmt );
+        
+        return NULL;
+    }
+    
+    str = CFAllocatorAllocate( alloc, length + 1, 0 );
+    
+    if( str == NULL )
+    {
+        va_end( ap );
+        CFAllocatorDeallocate( alloc, fmt );
+        CFRuntimeAbortWithOutOfMemoryError();
+        
+        return NULL;
+    }
+    
+    vsnprintf( str, length + 1, fmt, ap );
+    va_end( ap );
+    CFAllocatorDeallocate( alloc, fmt );
+    
+    return CFStringCreateWithCStringNoCopy( alloc, str, kCFStringEncodingUTF8, alloc );
 }
 
 CFStringRef CFStringCreateWithPascalString( CFAllocatorRef alloc, ConstStr255Param pStr, CFStringEncoding encoding )
@@ -366,27 +460,44 @@ UniChar CFStringGetCharacterFromInlineBuffer( CFStringInlineBuffer * buf, CFInde
 
 Boolean CFStringGetCString( CFStringRef theString, char * buffer, CFIndex bufferSize, CFStringEncoding encoding )
 {
-    ( void )theString;
-    ( void )buffer;
-    ( void )bufferSize;
-    ( void )encoding;
+    if( theString == NULL || buffer == NULL || bufferSize == 0 )
+    {
+        return false;
+    }
     
-    return false;
+    if( bufferSize < theString->_length + 1 )
+    {
+        return false;
+    }
+    
+    if( theString->_encoding != encoding )
+    {
+        return false;
+    }
+    
+    memcpy( buffer, theString->_cStr, theString->_length + 1 );
+    
+    return true;
 }
 
 const char * CFStringGetCStringPtr( CFStringRef theString, CFStringEncoding encoding )
 {
-    ( void )theString;
-    ( void )encoding;
+    if( theString == NULL || theString->_encoding != encoding )
+    {
+        return NULL;
+    }
     
-    return NULL;
+    return theString->_cStr;
 }
 
 CFIndex CFStringGetLength( CFStringRef theString )
 {
-    ( void )theString;
+    if( theString == NULL )
+    {
+        return 0;
+    }
     
-    return 0;
+    return theString->_length;
 }
 
 Boolean CFStringGetPascalString( CFStringRef theString, StringPtr buffer, CFIndex bufferSize, CFStringEncoding encoding )
