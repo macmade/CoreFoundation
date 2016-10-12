@@ -31,6 +31,7 @@
 #include <CoreFoundation/__private/CFRuntime.h>
 #include <CoreFoundation/__private/CFAtomic.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 CFAllocatorRef CFGetAllocator( CFTypeRef obj )
 {
@@ -128,7 +129,10 @@ CFHashCode CFHash( CFTypeRef obj )
 
 CFStringRef CFCopyDescription( CFTypeRef obj )
 {
-    ( void )obj;
+    if( obj == NULL )
+    {
+        return CFStringCreateWithCString( NULL, "(null)", kCFStringEncodingUTF8 );
+    }
     
     return NULL;
 }
@@ -156,5 +160,34 @@ CFTypeID CFGetTypeID( CFTypeRef obj )
 
 void CFShow( CFTypeRef obj )
 {
-    ( void )obj;
+    CFStringRef description;
+    char      * buf;
+    
+    description = CFCopyDescription( obj );
+    
+    if( description == NULL || CFStringGetLength( description ) == 0 )
+    {
+        return;
+    }
+    
+    buf = CFAllocatorAllocate( NULL, CFStringGetLength( description ) + 1, 0 );
+    
+    if( buf == NULL )
+    {
+        CFRelease( description );
+        CFRuntimeAbortWithOutOfMemoryError();
+        
+        return;
+    }
+    
+    if( CFStringGetCString( description, buf, CFStringGetLength( description ) + 1, kCFStringEncodingUTF8 ) == false )
+    {
+        CFRelease( description );
+        
+        return;
+    }
+    
+    fprintf( stderr, "%s\n", buf );
+    CFAllocatorDeallocate( NULL, buf );
+    CFRelease( description );
 }

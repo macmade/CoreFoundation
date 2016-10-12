@@ -63,6 +63,8 @@ int main( void )
         printf( "%p - %s\n", ( void * )s1, CFStringGetCStringPtr( s1, kCFStringEncodingUTF8 ) );
         printf( "%p - %s\n", ( void * )s2, CFStringGetCStringPtr( s2, kCFStringEncodingUTF8 ) );
         
+        CFShow( NULL );
+        CFShow( kCFAllocatorSystemDefault );
         CFShow( s1 );
         CFShow( s2 );
         
