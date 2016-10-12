@@ -34,6 +34,7 @@
 #include <CoreFoundation/CFAllocator.h>
 #include <stdint.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 CF_EXTERN_C_BEGIN
 
@@ -56,6 +57,47 @@ typedef struct
 CFRuntimeBase;
 
 /*!
+ * @typedef     CFRuntimeConstructorCallback
+ * @abstract    Constructor callback for CoreFoundation classes.
+ * @param       obj     The CoreFoundation object to construct
+ * @discussion  Note that memory is always zero-initialized.
+ */
+typedef void ( * CFRuntimeConstructorCallback )( CFTypeRef obj );
+
+/*!
+ * @typedef     CFRuntimeDestructorCallback
+ * @abstract    Destructor callback for CoreFoundation classes.
+ * @param       obj     The CoreFoundation object to destruct
+ */
+typedef void ( * CFRuntimeDestructorCallback )( CFTypeRef obj );
+
+/*!
+ * @typedef     CFRuntimeHashCallback
+ * @abstract    Hash callback for CoreFoundation classes.
+ * @param       obj     The CoreFoundation object to hash
+ * @result      The hash code for the object.
+ */
+typedef CFHashCode ( * CFRuntimeHashCallback )( CFTypeRef obj );
+
+/*!
+ * @typedef     CFRuntimeEqualsCallback
+ * @abstract    Equality callback for CoreFoundation classes.
+ * @param       obj1    The first object to compare
+ * @param       obj2    The second object to compare
+ * @result      true if obj1 and obj1 are of the same type and considered equal,
+ *              otherwise false.
+ */
+typedef bool ( * CFRuntimeEqualsCallback )( CFTypeRef obj1, CFTypeRef obj2 );
+
+/*!
+ * @typedef     CFRuntimeCopyDescriptionCallback
+ * @abstract    Copy description callback for CoreFoundation classes.
+ * @param       obj     The CoreFoundation object for which to get a description
+ * @result      The object's description. Ownership follows the Create Rule..
+ */
+typedef CFStringRef ( * CFRuntimeCopyDescriptionCallback )( CFTypeRef obj );
+
+/*!
  * @typedef     CFRuntimeClass
  * @abstract    Definition of a CoreFoundation class
  * @field       name            The name of the class
@@ -68,11 +110,11 @@ typedef struct
     const char * name;
     size_t       size;
     
-    void        ( * constructor     )( CFTypeRef obj );
-    void        ( * destructor      )( CFTypeRef obj );
-    CFHashCode  ( * hash            )( CFTypeRef obj );
-    CFStringRef ( * equals          )( CFTypeRef obj );
-    CFStringRef ( * copyDescription )( CFTypeRef obj );
+    CFRuntimeConstructorCallback        constructor;
+    CFRuntimeDestructorCallback         destructor;
+    CFRuntimeHashCallback               hash;
+    CFRuntimeEqualsCallback             equals;
+    CFRuntimeCopyDescriptionCallback    copyDescription;
 }
 CFRuntimeClass;
 
@@ -85,6 +127,14 @@ CFRuntimeClass;
 CF_EXPORT CFTypeID CFRuntimeRegisterClass( const CFRuntimeClass * cls );
 
 /*!
+ * @function    CFRuntimeGetTypeIDName
+ * @abstract    Gets the name of a CoreFoundation type ID.
+ * @param       typeID      The type ID of the class
+ * @result      The name for the type ID or NULL if the type ID is unknown.
+ */
+CF_EXPORT const char * CFRuntimeGetTypeIDName( CFTypeID typeID );
+
+/*!
  * @function    CFRuntimeCreateInstance
  * @abstract    Creates a new instance of a CoreFoundation class.
  * @param       allocator   The allocator to use
@@ -95,8 +145,36 @@ CF_EXPORT CFTypeRef CFRuntimeCreateInstance( CFAllocatorRef allocator, CFTypeID 
 
 /*!
  * @function    CFRuntimeGetInstanceSize
+ * @abstract    Gets the instance size of a CoreFoundation type
+ * @param       typeID      The type ID of the class
+ * @result      The instance size of the CoreFoundation type.
  */
 CF_EXPORT CFIndex CFRuntimeGetInstanceSize( CFTypeID typeID );
+
+/*!
+ * @function    CFRuntimeGetHashCallback
+ * @abstract    Gets the hash callback of a CoreFoundation type.
+ * @param       typeID      The type ID of the class
+ * @result      The hash callback of the CoreFoundation type. May be NULL.
+ */
+CF_EXPORT CFRuntimeHashCallback CFRuntimeGetHashCallback( CFTypeID typeID );
+
+/*!
+ * @function    CFRuntimeGetEqualsCallback
+ * @abstract    Gets the equals callback of a CoreFoundation type.
+ * @param       typeID      The type ID of the class
+ * @result      The equals callback of the CoreFoundation type. May be NULL.
+ */
+CF_EXPORT CFRuntimeEqualsCallback CFRuntimeGetEqualsCallback( CFTypeID typeID );
+
+/*!
+ * @function    CFRuntimeGetHashCallback
+ * @abstract    Gets the copy description callback of a CoreFoundation type.
+ * @param       typeID      The type ID of the class
+ * @result      The copy description callback of the CoreFoundation type.
+ *              May be NULL.
+ */
+CF_EXPORT CFRuntimeCopyDescriptionCallback CFRuntimeGetCopyDescriptionCallback( CFTypeID typeID );
 
 /*!
  * @function    CFRuntimeInitInstance

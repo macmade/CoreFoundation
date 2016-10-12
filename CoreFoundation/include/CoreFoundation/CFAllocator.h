@@ -337,7 +337,7 @@ CF_EXPORT CFTypeID CFAllocatorGetTypeID( void );
  *                          pointers to callbacks used for allocating,
  *                          reallocating, and deallocating memory.
  * @result      The new allocator object, or NULL if there was a problem
- *              allocating memory. Ownership follows The Create Rule.
+ *              allocating memory. Ownership follows the Create Rule..
  * @discussion  You use this function to create custom allocators which you can
  *              then pass into various Core Foundation object-creation
  *              functions. You must implement a function callback that allocates

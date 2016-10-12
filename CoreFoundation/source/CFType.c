@@ -32,6 +32,7 @@
 #include <CoreFoundation/__private/CFAtomic.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
 CFAllocatorRef CFGetAllocator( CFTypeRef obj )
 {
@@ -129,19 +130,102 @@ CFHashCode CFHash( CFTypeRef obj )
 
 CFStringRef CFCopyDescription( CFTypeRef obj )
 {
+    CFTypeID                         typeID;
+    CFStringRef                      type;
+    CFStringRef                      description;
+    CFRuntimeCopyDescriptionCallback copyDescription;
+    char                           * buf1;
+    char                           * buf2;
+    CFTypeRef                        ret;
+    
     if( obj == NULL )
     {
         return CFStringCreateWithCString( NULL, "(null)", kCFStringEncodingUTF8 );
     }
     
-    return NULL;
+    typeID          = CFGetTypeID( obj );
+    type            = CFCopyTypeIDDescription( typeID );
+    copyDescription = CFRuntimeGetCopyDescriptionCallback( typeID );
+    
+    if( type == NULL )
+    {
+        return NULL;
+    }
+    
+    buf1 = CFAllocatorAllocate( NULL, CFStringGetLength( type ) + 1, 0 );
+    
+    if
+    (
+           buf1 == NULL
+        || CFStringGetCString( type, buf1, CFStringGetLength( type ) + 1, kCFStringEncodingUTF8 ) == false
+        || strlen( buf1 ) == 0
+    )
+    {
+        CFRelease( type );
+        CFRuntimeAbortWithOutOfMemoryError();
+        
+        return NULL;
+    }
+    
+    if( copyDescription == NULL )
+    {
+        description = NULL;
+        buf2        = NULL;
+    }
+    else
+    {
+        description = copyDescription( obj );
+        buf2        = NULL;
+        
+        if( description )
+        {
+            buf2 = CFAllocatorAllocate( NULL, CFStringGetLength( description ) + 1, 0 );
+            
+            if( buf2 )
+            {
+                memset( buf2, 0, CFStringGetLength( description ) + 1 );
+                CFStringGetCString( description, buf2, CFStringGetLength( description ) + 1, kCFStringEncodingUTF8 );
+            }
+        }
+    }
+    
+    if( buf2 && strlen( buf2 ) )
+    {
+        ret = CFStringCreateWithFormat( NULL, NULL, CFStringCreateWithCStringNoCopy( NULL, "<%s 0x%lx [0x%lx]> %s", kCFStringEncodingUTF8, kCFAllocatorNull ), buf1, obj, CFGetAllocator( obj ), buf2 );
+    }
+    else
+    {
+        ret = CFStringCreateWithFormat( NULL, NULL, CFStringCreateWithCStringNoCopy( NULL, "<%s 0x%lx [0x%lx]>", kCFStringEncodingUTF8, kCFAllocatorNull ), buf1, obj, CFGetAllocator( obj ) );
+    }
+    
+    if( buf2 )
+    {
+        CFAllocatorDeallocate( NULL, buf2 );
+    }
+    
+    if( description )
+    {
+        CFRelease( description );
+    }
+    
+    CFAllocatorDeallocate( NULL, buf1 );
+    CFRelease( type );
+    
+    return ret;
 }
 
 CFStringRef CFCopyTypeIDDescription( CFTypeID typeID )
 {
-    ( void )typeID;
+    const char * name;
     
-    return NULL;
+    name = CFRuntimeGetTypeIDName( typeID );
+    
+    if( name == NULL )
+    {
+        return NULL;
+    }
+    
+    return CFStringCreateWithCStringNoCopy( NULL, name, kCFStringEncodingUTF8, kCFAllocatorNull );
 }
 
 CFTypeID CFGetTypeID( CFTypeRef obj )

@@ -87,6 +87,27 @@ CFTypeID CFRuntimeRegisterClass( const CFRuntimeClass * cls )
     return 0;
 }
 
+const char * CFRuntimeGetTypeIDName( CFTypeID typeID )
+{
+    struct CFRuntimeClassList * list;
+    
+    list = CFRuntimeClasses;
+    
+    while( list )
+    {
+        if( list->typeID != typeID )
+        {
+            list = list->next;
+            
+            continue;
+        }
+        
+        return list->cls.name;
+    }
+    
+    return NULL;
+}
+
 CFTypeRef CFRuntimeCreateInstance( CFAllocatorRef allocator, CFTypeID typeID )
 {
     void * obj;
@@ -122,6 +143,69 @@ CFIndex CFRuntimeGetInstanceSize( CFTypeID typeID )
     }
     
     return 0;
+}
+
+CFRuntimeHashCallback CFRuntimeGetHashCallback( CFTypeID typeID )
+{
+    struct CFRuntimeClassList * list;
+    
+    list = CFRuntimeClasses;
+    
+    while( list )
+    {
+        if( list->typeID != typeID )
+        {
+            list = list->next;
+            
+            continue;
+        }
+        
+        return list->cls.hash;
+    }
+    
+    return NULL;
+}
+
+CFRuntimeEqualsCallback CFRuntimeGetEqualsCallback( CFTypeID typeID )
+{
+    struct CFRuntimeClassList * list;
+    
+    list = CFRuntimeClasses;
+    
+    while( list )
+    {
+        if( list->typeID != typeID )
+        {
+            list = list->next;
+            
+            continue;
+        }
+        
+        return list->cls.equals;
+    }
+    
+    return NULL;
+}
+
+CFRuntimeCopyDescriptionCallback CFRuntimeGetCopyDescriptionCallback( CFTypeID typeID )
+{
+    struct CFRuntimeClassList * list;
+    
+    list = CFRuntimeClasses;
+    
+    while( list )
+    {
+        if( list->typeID != typeID )
+        {
+            list = list->next;
+            
+            continue;
+        }
+        
+        return list->cls.copyDescription;
+    }
+    
+    return NULL;
 }
 
 void CFRuntimeInitInstance( void * memory, CFTypeID typeID, CFAllocatorRef allocator )

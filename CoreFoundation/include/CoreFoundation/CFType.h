@@ -181,7 +181,7 @@ CF_EXPORT CFHashCode CFHash( CFTypeRef obj );
  * @param       obj     The CFType object (a generic reference of type
  *                      CFTypeRef) from which to derive a description.
  * @result      A string that contains a description of obj. Ownership follows
- *              The Create Rule.
+ *              the Create Rule..
  * @discussion  The nature of the description differs by object. For example,
  *              a description of a CFArray object would include descriptions of
  *              each of the elements in the collection.
