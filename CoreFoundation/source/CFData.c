@@ -29,12 +29,20 @@
 
 #include <CoreFoundation/CoreFoundation.h>
 #include <CoreFoundation/__private/CFRuntime.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
+#include <stdbool.h>
 
 struct CFData
 {
-    CFRuntimeBase _base;
+    CFRuntimeBase   _base;
+    const UInt8   * _bytes;
+    CFIndex         _length;
+    CFAllocatorRef  _deallocator;
 };
 
+static void CFDataDestruct( CFDataRef data );
 static CFStringRef CFDataCopyDescription( CFDataRef Data );
 
 static CFTypeID CFDataTypeID      = 0;
@@ -43,7 +51,7 @@ static CFRuntimeClass CFDataClass =
     "CFData",
     sizeof( struct CFData ),
     NULL,
-    NULL,
+    ( void ( * )( CFTypeRef ) )CFDataDestruct,
     NULL,
     NULL,
     ( CFStringRef ( * )( CFTypeRef ) )CFDataCopyDescription
@@ -55,11 +63,69 @@ static void init( void )
     CFDataTypeID = CFRuntimeRegisterClass( &CFDataClass );
 }
 
+static void CFDataDestruct( CFDataRef data )
+{
+    if( data->_bytes )
+    {
+        CFAllocatorDeallocate( data->_deallocator, ( void * )( data->_bytes ) );
+    }
+    
+    if( data->_deallocator )
+    {
+        CFRelease( data->_deallocator );
+    }
+}
+
 static CFStringRef CFDataCopyDescription( CFDataRef data )
 {
-    ( void )data;
+    CFIndex i;
+    char    buf[ 41 ];
+    UInt8   b;
+    bool    partial;
     
-    return NULL;
+    if( data->_bytes == NULL || data->_length == 0 )
+    {
+        return NULL;
+    }
+    
+    memset( buf, 0, sizeof( buf ) );
+    
+    partial = false;
+    
+    for( i = 0; i < data->_length; i++ )
+    {
+        if( i == ( sizeof( buf ) - 1 ) / 2 )
+        {
+            partial = true;
+            
+            break;
+        }
+        
+        b = *( data->_bytes + i );
+        
+        sprintf( buf + ( i * 2 ), "%02x", ( unsigned int )b );
+    }
+    
+    if( partial )
+    {
+        return CFStringCreateWithFormat
+        (
+            NULL,
+            NULL,
+            CFStringCreateWithCString( NULL, "{ length = %li, bytes = 0x%s ... }", kCFStringEncodingUTF8 ),
+            ( long )( data->_length ),
+            buf
+        );
+    }
+    
+    return CFStringCreateWithFormat
+    (
+        NULL,
+        NULL,
+        CFStringCreateWithCString( NULL, "{ length = %li, bytes = 0x%s }", kCFStringEncodingUTF8 ),
+        ( long )( data->_length ),
+        buf
+    );
 }
 
 CFTypeID CFDataGetTypeID( void )
@@ -69,50 +135,95 @@ CFTypeID CFDataGetTypeID( void )
 
 CFDataRef CFDataCreate( CFAllocatorRef allocator, const UInt8 * bytes, CFIndex length )
 {
-    ( void )allocator;
-    ( void )bytes;
-    ( void )length;
+    struct CFData * o;
+    UInt8         * buf;
     
-    return NULL;
+    if( bytes == NULL || length == 0 )
+    {
+        return NULL;
+    }
+    
+    o = ( struct CFData * )CFRuntimeCreateInstance( allocator, CFDataTypeID );
+    
+    if( o )
+    {
+        buf = CFAllocatorAllocate( allocator, length, 0 );
+        
+        if( buf == NULL )
+        {
+            CFRelease( o );
+            CFRuntimeAbortWithOutOfMemoryError();
+            
+            return NULL;
+        }
+        
+        memcpy( buf, bytes, length );
+        
+        o->_bytes       = buf;
+        o->_length      = length;
+        o->_deallocator = ( allocator ) ? CFRetain( allocator ) : NULL;
+    }
+    
+    return o;
 }
 
 CFDataRef CFDataCreateCopy( CFAllocatorRef allocator, CFDataRef theData )
 {
-    ( void )allocator;
-    ( void )theData;
+    if( theData == NULL )
+    {
+        return NULL;
+    }
     
-    return NULL;
+    return CFDataCreate( allocator, theData->_bytes, theData->_length );
 }
 
 CFDataRef CFDataCreateWithBytesNoCopy( CFAllocatorRef allocator, const UInt8 * bytes, CFIndex length, CFAllocatorRef bytesDeallocator )
 {
-    ( void )allocator;
-    ( void )bytes;
-    ( void )length;
-    ( void )bytesDeallocator;
+    struct CFData * o;
     
-    return NULL;
+    if( bytes == NULL || length == 0 )
+    {
+        return NULL;
+    }
+    
+    o = ( struct CFData * )CFRuntimeCreateInstance( allocator, CFDataTypeID );
+    
+    if( o )
+    {
+        o->_bytes       = bytes;
+        o->_length      = length;
+        o->_deallocator = ( bytesDeallocator ) ? CFRetain( bytesDeallocator ) : NULL;
+    }
+    
+    return o;
 }
 
 const UInt8 * CFDataGetBytePtr( CFDataRef theData )
 {
-    ( void )theData;
+    if( theData == NULL )
+    {
+        return NULL;
+    }
     
-    return NULL;
+    return theData->_bytes;
 }
 
 void CFDataGetBytes( CFDataRef theData, CFRange range, UInt8 * buffer )
 {
-    ( void )theData;
-    ( void )range;
-    ( void )buffer;
+    if( theData == NULL || buffer == NULL || range.length == 0 )
+    {
+        return;
+    }
 }
 
 CFIndex CFDataGetLength( CFDataRef theData )
 {
-    ( void )theData;
+    if( theData == NULL )
+    {
+        return 0;
+    }
     
-    return 0;
+    return theData->_length;
 }
 
 CFRange CFDataFind( CFDataRef theData, CFDataRef dataToFind, CFRange searchRange, CFDataSearchFlags compareOptions )
@@ -122,5 +233,5 @@ CFRange CFDataFind( CFDataRef theData, CFDataRef dataToFind, CFRange searchRange
     ( void )searchRange;
     ( void )compareOptions;
     
-    return CFRangeMake( 0, 0 );
+    return CFRangeMake( kCFNotFound, 0 );
 }

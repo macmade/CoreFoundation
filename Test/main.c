@@ -90,5 +90,36 @@ int main( void )
     
     printf( "--------------------------------------------------------------------------------\n" );
     
+    {
+        unsigned int i;
+        UInt8        buf[ 256 ];
+        CFDataRef    d1;
+        CFDataRef    d2;
+        CFDataRef    d3;
+        CFDataRef    d4;
+        
+        for( i = 0; i < sizeof( buf ); i++ )
+        {
+            buf[ i ] = ( UInt8 )i;
+        }
+        
+        d1 = CFDataCreate( NULL, buf, sizeof( buf ) );
+        d2 = CFDataCreateWithBytesNoCopy( NULL, buf, sizeof( buf ), kCFAllocatorNull );
+        d3 = CFDataCreateCopy( NULL, d1 );
+        d4 = CFDataCreateCopy( NULL, d2 );
+        
+        CFShow( d1 );
+        CFShow( d2 );
+        CFShow( d3 );
+        CFShow( d4 );
+        
+        CFRelease( d1 );
+        CFRelease( d2 );
+        CFRelease( d3 );
+        CFRelease( d4 );
+    }
+    
+    printf( "--------------------------------------------------------------------------------\n" );
+    
     return 0;
 }
