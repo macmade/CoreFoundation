@@ -117,8 +117,6 @@ static void CFAllocatorDestruct( CFAllocatorRef allocator )
 
 static CFStringRef CFAllocatorCopyDescription( CFAllocatorRef allocator )
 {
-    ( void )allocator;
-    
     return CFStringCreateWithFormat
     (
         NULL,

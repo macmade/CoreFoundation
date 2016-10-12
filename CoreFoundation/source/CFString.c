@@ -42,6 +42,7 @@ struct CFString
 };
 
 static void CFStringDestruct( CFStringRef str );
+static CFStringRef CFStringCopyDescription( CFStringRef str );
 
 static CFTypeID CFStringTypeID      = 0;
 static CFRuntimeClass CFStringClass =
@@ -52,7 +53,7 @@ static CFRuntimeClass CFStringClass =
     ( void ( * )( CFTypeRef ) )CFStringDestruct,
     NULL,
     NULL,
-    NULL
+    ( CFStringRef ( * )( CFTypeRef ) )CFStringCopyDescription,
 };
 
 static void init( void ) __attribute__( ( constructor ) );
@@ -61,14 +62,25 @@ static void init( void )
     CFStringTypeID = CFRuntimeRegisterClass( &CFStringClass );
 }
 
-CFTypeID CFStringGetTypeID( void )
-{
-    return CFStringTypeID;
-}
-
 static void CFStringDestruct( CFStringRef str )
 {
     CFAllocatorDeallocate( str->_deallocator, ( void * )( str->_cStr ) );
+}
+
+static CFStringRef CFStringCopyDescription( CFStringRef str )
+{
+    return CFStringCreateWithFormat
+    (
+        NULL,
+        NULL,
+        CFStringCreateWithCStringNoCopy( NULL, "%s", kCFStringEncodingUTF8, kCFAllocatorNull ),
+        ( str->_cStr ) ? str->_cStr : "(null)"
+    );
+}
+
+CFTypeID CFStringGetTypeID( void )
+{
+    return CFStringTypeID;
 }
 
 CFArrayRef CFStringCreateArrayBySeparatingStrings( CFAllocatorRef alloc, CFStringRef theString, CFStringRef separatorString )
