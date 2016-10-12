@@ -28,5 +28,58 @@
  */
 
 #include <CoreFoundation/CoreFoundation.h>
+#include <CoreFoundation/__private/CFRuntime.h>
 
+struct CFBoolean
+{
+    CFRuntimeBase _base;
+};
 
+static CFStringRef CFBooleanCopyDescription( CFBooleanRef boolean );
+
+static CFTypeID CFBooleanTypeID      = 0;
+static CFRuntimeClass CFBooleanClass =
+{
+    "CFBoolean",
+    sizeof( struct CFBoolean ),
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    ( CFStringRef ( * )( CFTypeRef ) )CFBooleanCopyDescription
+};
+
+static struct CFBoolean CFBooleanTrue;
+static struct CFBoolean CFBooleanFalse;
+
+const CFBooleanRef kCFBooleanTrue  = ( const CFBooleanRef )( &CFBooleanTrue );
+const CFBooleanRef kCFBooleanFalse = ( const CFBooleanRef )( &CFBooleanFalse );
+
+static void init( void ) __attribute__( ( constructor ) );
+static void init( void )
+{
+    CFBooleanTypeID = CFRuntimeRegisterClass( &CFBooleanClass );
+    
+    CFRuntimeInitStaticInstance( &CFBooleanTrue, CFBooleanTypeID );
+    CFRuntimeInitStaticInstance( &CFBooleanFalse, CFBooleanTypeID );
+}
+
+static CFStringRef CFBooleanCopyDescription( CFBooleanRef boolean )
+{
+    if( boolean == kCFBooleanTrue )
+    {
+        return CFStringCreateWithCStringNoCopy( NULL, "true", kCFStringEncodingUTF8, kCFAllocatorNull );
+    }
+    
+    return CFStringCreateWithCStringNoCopy( NULL, "false", kCFStringEncodingUTF8, kCFAllocatorNull );
+}
+
+CFTypeID CFBooleanGetTypeID( void )
+{
+    return CFBooleanTypeID;
+}
+
+Boolean CFBooleanGetValue( CFBooleanRef boolean )
+{
+    return ( boolean == kCFBooleanTrue ) ? true : false;
+}

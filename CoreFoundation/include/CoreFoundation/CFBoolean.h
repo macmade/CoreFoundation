@@ -33,10 +33,47 @@
 #define CORE_FOUNDATION_CF_BOOLEAN_H
 
 #include <CoreFoundation/CFBase.h>
+#include <CoreFoundation/CFType.h>
+#include <CoreFoundation/MacTypes.h>
 
 CF_EXTERN_C_BEGIN
 
+/*!
+ * @typedef     CFBooleanRef
+ * @abstract    A reference to a CFBoolean object.
+ * @discussion  CFBoolean objects are used to wrap boolean values for use in
+ *              Core Foundation property lists and collection types.
+ */
+typedef const struct CFBoolean * CFBooleanRef;
 
+/*!
+ * @constant    kCFBooleanTrue
+ * @abstract    Boolean true value.
+ */
+CF_EXPORT const CFBooleanRef kCFBooleanTrue;
+
+/*!
+ * @constant    kCFBooleanFalse
+ * @abstract    Boolean false value.
+ */
+CF_EXPORT const CFBooleanRef kCFBooleanFalse;
+
+/*!
+ * @function    CFBooleanGetTypeID
+ * @abstract    Returns the Core Foundation type identifier for the CFBoolean
+ *              opaque type.
+ * @result      The Core Foundation type identifier for CFBoolean opaque type.
+ */
+CF_EXPORT CFTypeID CFBooleanGetTypeID( void );
+
+/*!
+ * @function    CFBooleanGetValue
+ * @abstract    Returns the value of a CFBoolean object as a standard C type
+ *              Boolean.
+ * @param       boolean     The boolean to examine.
+ * @result      The value of boolean.
+ */
+CF_EXPORT Boolean CFBooleanGetValue( CFBooleanRef boolean );
 
 CF_EXTERN_C_END
 

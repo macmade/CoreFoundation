@@ -80,5 +80,15 @@ int main( void )
     
     printf( "--------------------------------------------------------------------------------\n" );
     
+    {
+        CFShow( kCFBooleanTrue );
+        CFShow( kCFBooleanFalse );
+        
+        printf( "kCFBooleanTrue:  %i\n", CFBooleanGetValue( kCFBooleanTrue ) );
+        printf( "kCFBooleanFalse: %i\n", CFBooleanGetValue( kCFBooleanFalse ) );
+    }
+    
+    printf( "--------------------------------------------------------------------------------\n" );
+    
     return 0;
 }
