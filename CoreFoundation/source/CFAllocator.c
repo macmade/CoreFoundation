@@ -48,7 +48,8 @@ static void  * CFAllocatorNullReallocateCallBack( void * ptr, CFIndex newsize, C
 static void    CFAllocatorNullDeallocateCallBack( void * ptr, void * info );
 static CFIndex CFAllocatorNullPreferredSizeCallBack( CFIndex size, CFOptionFlags hint, void * info );
 
-static void CFAllocatorDestruct( CFAllocatorRef allocator );
+static void        CFAllocatorDestruct( CFAllocatorRef allocator );
+static CFStringRef CFAllocatorCopyDescription( CFAllocatorRef allocator );
 
 static CFTypeID CFAllocatorTypeID      = 0;
 static CFRuntimeClass CFAllocatorClass =
@@ -59,7 +60,7 @@ static CFRuntimeClass CFAllocatorClass =
     ( void ( * )( CFTypeRef ) )CFAllocatorDestruct,
     NULL,
     NULL,
-    NULL
+    ( CFStringRef ( * )( CFTypeRef ) )CFAllocatorCopyDescription,
 };
 
 static struct CFAllocator CFAllocatorSystemDefault;
@@ -106,6 +107,27 @@ static void init( void )
     CFAllocatorNull._context.reallocate     = CFAllocatorNullReallocateCallBack;
 }
 
+static void CFAllocatorDestruct( CFAllocatorRef allocator )
+{
+    if( allocator->_context.release )
+    {
+        allocator->_context.release( allocator->_context.info );
+    }
+}
+
+static CFStringRef CFAllocatorCopyDescription( CFAllocatorRef allocator )
+{
+    ( void )allocator;
+    
+    return CFStringCreateWithFormat
+    (
+        NULL,
+        NULL,
+        CFStringCreateWithCStringNoCopy( NULL, "{ info = 0x%lu }", kCFStringEncodingUTF8, kCFAllocatorNull ),
+        allocator->_context.info
+    );
+}
+
 CFTypeID CFAllocatorGetTypeID( void )
 {
     return CFAllocatorTypeID;
@@ -142,14 +164,6 @@ CFAllocatorRef CFAllocatorCreate( CFAllocatorRef allocator, CFAllocatorContext *
     }
     
     return o;
-}
-
-static void CFAllocatorDestruct( CFAllocatorRef allocator )
-{
-    if( allocator->_context.release )
-    {
-        allocator->_context.release( allocator->_context.info );
-    }
 }
 
 void * CFAllocatorAllocate( CFAllocatorRef allocator, CFIndex size, CFOptionFlags hint )

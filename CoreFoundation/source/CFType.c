@@ -191,11 +191,11 @@ CFStringRef CFCopyDescription( CFTypeRef obj )
     
     if( buf2 && strlen( buf2 ) )
     {
-        ret = CFStringCreateWithFormat( NULL, NULL, CFStringCreateWithCStringNoCopy( NULL, "<%s 0x%lx [0x%lx]> %s", kCFStringEncodingUTF8, kCFAllocatorNull ), buf1, obj, CFGetAllocator( obj ), buf2 );
+        ret = CFStringCreateWithFormat( NULL, NULL, CFStringCreateWithCStringNoCopy( NULL, "<%s 0x%lx [ 0x%lx ]> %s", kCFStringEncodingUTF8, kCFAllocatorNull ), buf1, obj, CFGetAllocator( obj ), buf2 );
     }
     else
     {
-        ret = CFStringCreateWithFormat( NULL, NULL, CFStringCreateWithCStringNoCopy( NULL, "<%s 0x%lx [0x%lx]>", kCFStringEncodingUTF8, kCFAllocatorNull ), buf1, obj, CFGetAllocator( obj ) );
+        ret = CFStringCreateWithFormat( NULL, NULL, CFStringCreateWithCStringNoCopy( NULL, "<%s 0x%lx [ 0x%lx ]>", kCFStringEncodingUTF8, kCFAllocatorNull ), buf1, obj, CFGetAllocator( obj ) );
     }
     
     if( buf2 )
