@@ -159,8 +159,8 @@ CF_EXPORT CFTypeID CFNumberGetTypeID( void );
  * @param       valuePtr    A pointer to the value for the returned number
  *                          object.
  * @result      A new number with the value specified by valuePtr. Ownership
- *              follows the The Create Rule.
- * @discussion  The theType parameter is not necessarily preserved when creating
+ *              follows The Create Rule.
+ * @discussion  The type parameter is not necessarily preserved when creating
  *              a new CFNumber object. The CFNumber object will be created using
  *              whatever internal storage type the creation function deems
  *              appropriate. Use the function CFNumberGetType to find out what

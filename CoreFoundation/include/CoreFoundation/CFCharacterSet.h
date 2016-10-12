@@ -34,7 +34,7 @@
 
 CF_EXTERN_C_BEGIN
 
-
+typedef const struct CFCharacterSet * CFCharacterSetRef;
 
 CF_EXTERN_C_END
 

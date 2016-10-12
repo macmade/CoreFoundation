@@ -37,17 +37,24 @@
 extern "C" {
 #endif
 
-typedef bool        Boolean;
-typedef int8_t      SInt8;
-typedef uint8_t     UInt8;
-typedef int16_t     SInt16;
-typedef uint16_t    UInt16;
-typedef int32_t     SInt32;
-typedef uint32_t    UInt32;
-typedef int64_t     SInt64;
-typedef uint64_t    UInt64;
-typedef float       Float32;
-typedef double      Float64;
+typedef bool                    Boolean;
+typedef int8_t                  SInt8;
+typedef uint8_t                 UInt8;
+typedef int16_t                 SInt16;
+typedef uint16_t                UInt16;
+typedef int32_t                 SInt32;
+typedef uint32_t                UInt32;
+typedef int64_t                 SInt64;
+typedef uint64_t                UInt64;
+typedef float                   Float32;
+typedef double                  Float64;
+typedef UInt8                   UTF8Char;
+typedef UInt16                  UTF16Char;
+typedef UInt32                  UTF32Char;
+typedef UInt16                  UniChar;
+typedef const unsigned char   * ConstStr255Param;
+typedef unsigned char         * StringPtr;
+typedef const unsigned char   * ConstStringPtr;
 
 #ifdef __cplusplus
 }

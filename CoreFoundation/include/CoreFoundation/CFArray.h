@@ -34,7 +34,7 @@
 
 CF_EXTERN_C_BEGIN
 
-
+typedef const struct CFArray * CFArrayRef;
 
 CF_EXTERN_C_END
 

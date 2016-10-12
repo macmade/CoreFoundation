@@ -34,7 +34,7 @@
 
 CF_EXTERN_C_BEGIN
 
-
+typedef const struct CFLocale * CFLocaleRef;
 
 CF_EXTERN_C_END
 
