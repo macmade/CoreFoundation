@@ -62,7 +62,10 @@ int32_t CFAtomicIncrement32( volatile int32_t * value )
     
     #elif defined( __APPLE__ )
     
+    #pragma clang diagnostic push
+    #pragma clang diagnostic ignored "-Wdeprecated-declarations"
     return OSAtomicIncrement32( value );
+    #pragma clang diagnostic pop
     
     #elif defined( __has_builtin ) && __has_builtin( __sync_add_and_fetch )
     
@@ -83,7 +86,10 @@ int64_t CFAtomicIncrement64( volatile int64_t * value )
     
     #elif defined( __APPLE__ )
     
+    #pragma clang diagnostic push
+    #pragma clang diagnostic ignored "-Wdeprecated-declarations"
     return OSAtomicIncrement64( value );
+    #pragma clang diagnostic pop
     
     #elif defined( __has_builtin ) && __has_builtin( __sync_add_and_fetch )
     
@@ -120,7 +126,10 @@ int32_t CFAtomicDecrement32( volatile int32_t * value )
     
     #elif defined( __APPLE__ )
     
+    #pragma clang diagnostic push
+    #pragma clang diagnostic ignored "-Wdeprecated-declarations"
     return OSAtomicDecrement32( value );
+    #pragma clang diagnostic pop
     
     #elif defined( __has_builtin ) && __has_builtin( __sync_add_and_fetch )
     
@@ -141,7 +150,10 @@ int64_t CFAtomicDecrement64( volatile int64_t * value )
     
     #elif defined( __APPLE__ )
     
+    #pragma clang diagnostic push
+    #pragma clang diagnostic ignored "-Wdeprecated-declarations"
     return OSAtomicDecrement64( value );
+    #pragma clang diagnostic pop
     
     #elif defined( __has_builtin ) && __has_builtin( __sync_add_and_fetch )
     
@@ -179,7 +191,10 @@ bool CFAtomicCompareAndSwap32( int32_t oldValue, int32_t newValue, volatile int3
     
     #elif defined( __APPLE__ )
     
+    #pragma clang diagnostic push
+    #pragma clang diagnostic ignored "-Wdeprecated-declarations"
     return ( OSAtomicCompareAndSwap32( oldValue, newValue, value ) ) ? true : false;
+    #pragma clang diagnostic pop
     
     #elif defined( __has_builtin ) && __has_builtin( __sync_bool_compare_and_swap )
     
@@ -200,7 +215,10 @@ bool CFAtomicCompareAndSwap64( int64_t oldValue, int64_t newValue, volatile int6
     
     #elif defined( __APPLE__ )
     
+    #pragma clang diagnostic push
+    #pragma clang diagnostic ignored "-Wdeprecated-declarations"
     return ( OSAtomicCompareAndSwap64( oldValue, newValue, value ) ) ? true : false;
+    #pragma clang diagnostic pop
     
     #elif defined( __has_builtin ) && __has_builtin( __sync_bool_compare_and_swap )
     
@@ -221,7 +239,10 @@ bool CFAtomicCompareAndSwapPointer( void * oldValue, void * newValue, void * vol
     
     #elif defined( __APPLE__ )
     
+    #pragma clang diagnostic push
+    #pragma clang diagnostic ignored "-Wdeprecated-declarations"
     return ( OSAtomicCompareAndSwapPtr( oldValue, newValue, value ) ) ? true : false;
+    #pragma clang diagnostic pop
     
     #elif defined( __has_builtin ) && __has_builtin( __sync_bool_compare_and_swap )
     
