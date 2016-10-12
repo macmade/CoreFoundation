@@ -25,6 +25,8 @@
 /*!
  * @header      CFBoolean.h
  * @copyright   (c) 2016, Jean-David Gadina - www.xs-labs.com
+ * @discussion  CFBoolean objects are used to wrap boolean values for use in
+ *              Core Foundation property lists and collection types.
  */
 
 #ifndef CORE_FOUNDATION_CF_BOOLEAN_H

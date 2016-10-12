@@ -25,7 +25,7 @@
 /*!
  * @header      CFNull.h
  * @copyright   (c) 2016, Jean-David Gadina - www.xs-labs.com
- * @abstract    The CFNull opaque type defines a unique object used to represent
+ * @discussion  The CFNull opaque type defines a unique object used to represent
  *              null values in collection objects (which don’t allow NULL
  *              values). CFNull objects are neither created nor destroyed.
  *              Instead, a single CFNull constant object—kCFNull—is defined and
