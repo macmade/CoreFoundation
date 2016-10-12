@@ -60,7 +60,7 @@ static CFRuntimeClass CFAllocatorClass =
     ( void ( * )( CFTypeRef ) )CFAllocatorDestruct,
     NULL,
     NULL,
-    ( CFStringRef ( * )( CFTypeRef ) )CFAllocatorCopyDescription,
+    ( CFStringRef ( * )( CFTypeRef ) )CFAllocatorCopyDescription
 };
 
 static struct CFAllocator CFAllocatorSystemDefault;

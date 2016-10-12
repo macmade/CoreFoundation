@@ -53,7 +53,7 @@ static CFRuntimeClass CFStringClass =
     ( void ( * )( CFTypeRef ) )CFStringDestruct,
     NULL,
     NULL,
-    ( CFStringRef ( * )( CFTypeRef ) )CFStringCopyDescription,
+    ( CFStringRef ( * )( CFTypeRef ) )CFStringCopyDescription
 };
 
 static void init( void ) __attribute__( ( constructor ) );
