@@ -64,7 +64,15 @@ static void init( void )
 
 static void CFStringDestruct( CFStringRef str )
 {
-    CFAllocatorDeallocate( str->_deallocator, ( void * )( str->_cStr ) );
+    if( str->_cStr )
+    {
+        CFAllocatorDeallocate( str->_deallocator, ( void * )( str->_cStr ) );
+    }
+    
+    if( str->_deallocator )
+    {
+        CFRelease( str->_deallocator );
+    }
 }
 
 static CFStringRef CFStringCopyDescription( CFStringRef str )
@@ -171,9 +179,18 @@ CFStringRef CFStringCreateWithCString( CFAllocatorRef alloc, const char * cStr, 
     
     if( o )
     {
-        o->_length   = ( CFIndex )strlen( cStr );
-        o->_encoding = encoding;
-        buf          = CFAllocatorAllocate( NULL, o->_length + 1, 0 );
+        o->_deallocator = ( alloc ) ? CFRetain( alloc ) : NULL;
+        o->_length      = ( CFIndex )strlen( cStr );
+        o->_encoding    = encoding;
+        buf             = CFAllocatorAllocate( alloc, o->_length + 1, 0 );
+        
+        if( buf == NULL )
+        {
+            CFRelease( o );
+            CFRuntimeAbortWithOutOfMemoryError();
+            
+            return NULL;
+        }
         
         memcpy( buf, cStr, o->_length + 1 );
         
@@ -199,7 +216,7 @@ CFStringRef CFStringCreateWithCStringNoCopy( CFAllocatorRef alloc, const char * 
         o->_cStr        = cStr;
         o->_encoding    = encoding;
         o->_length      = ( CFIndex )strlen( cStr );
-        o->_deallocator = contentsDeallocator;
+        o->_deallocator = ( contentsDeallocator ) ? CFRetain( contentsDeallocator ) : NULL;
     }
     
     return ( CFStringRef )o;
