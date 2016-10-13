@@ -72,7 +72,6 @@
 #include <CoreFoundation/CFCharacterSet.h>
 #include <CoreFoundation/CFData.h>
 #include <CoreFoundation/CFArray.h>
-#include <CoreFoundation/CFDictionary.h>
 #include <CoreFoundation/CFLocale.h>
 #include <stdarg.h>
 
@@ -108,6 +107,8 @@ typedef const struct CFString * CFStringRef;
  *              objects.
  */
 typedef struct CFString * CFMutableStringRef;
+
+#include <CoreFoundation/CFDictionary.h>
 
 /*!
  * @define      CFSTR
