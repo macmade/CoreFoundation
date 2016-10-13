@@ -54,6 +54,7 @@
 #define CORE_FOUNDATION_CF_DATA_H
 
 #include <CoreFoundation/CFBase.h>
+#include <CoreFoundation/CFType.h>
 
 CF_EXTERN_C_BEGIN
 

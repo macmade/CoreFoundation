@@ -95,6 +95,21 @@ CF_EXTERN_C_BEGIN
 typedef const struct CFString * CFStringRef;
 
 /*!
+ * @typedef     CFMutableStringRef
+ * @abstract    A reference to a CFMutableString object.
+ * @discussion  The type refers to a CFMutableString object, which
+ *              "encapsulates" a Unicode string along with its length; the
+ *              object has the attribute of being mutable, which means that its
+ *              character contents can be modified. CFString is an opaque type
+ *              that defines the characteristics and behavior of CFString
+ *              objects, both immutable and mutable.
+ *              CFMutableString derives from CFString. Therefore, you can pass
+ *              CFMutableString objects into functions accepting CFString
+ *              objects.
+ */
+typedef struct CFString * CFMutableStringRef;
+
+/*!
  * @define      CFSTR
  * @abstract    Creates an immutable string from a constant compile-time string.
  * @param       _s_     A constant C string (that is, text enclosed in
