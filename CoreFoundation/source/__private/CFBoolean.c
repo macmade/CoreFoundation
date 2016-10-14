@@ -27,25 +27,32 @@
  * @copyright   (c) 2016, Jean-David Gadina - www.xs-labs.com
  */
 
-#include <CoreFoundation/CoreFoundation.h>
 #include <CoreFoundation/__private/CFBoolean.h>
-#include <CoreFoundation/__private/CFRuntime.h>
 
-static void init( void ) __attribute__( ( constructor ) );
-static void init( void )
+CFTypeID       CFBooleanTypeID = 0;
+CFRuntimeClass CFBooleanClass  =
 {
-    CFBooleanTypeID = CFRuntimeRegisterClass( &CFBooleanClass );
+    "CFBoolean",
+    sizeof( struct CFBoolean ),
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    ( CFStringRef ( * )( CFTypeRef ) )CFBooleanCopyDescription
+};
+
+struct CFBoolean CFBooleanTrue;
+struct CFBoolean CFBooleanFalse;
+
+const CFBooleanRef kCFBooleanTrue  = ( const CFBooleanRef )( &CFBooleanTrue );
+const CFBooleanRef kCFBooleanFalse = ( const CFBooleanRef )( &CFBooleanFalse );
+
+CFStringRef CFBooleanCopyDescription( CFBooleanRef boolean )
+{
+    if( boolean == kCFBooleanTrue )
+    {
+        return CFStringCreateWithCStringNoCopy( NULL, "true", kCFStringEncodingUTF8, kCFAllocatorNull );
+    }
     
-    CFRuntimeInitStaticInstance( &CFBooleanTrue, CFBooleanTypeID );
-    CFRuntimeInitStaticInstance( &CFBooleanFalse, CFBooleanTypeID );
-}
-
-CFTypeID CFBooleanGetTypeID( void )
-{
-    return CFBooleanTypeID;
-}
-
-Boolean CFBooleanGetValue( CFBooleanRef boolean )
-{
-    return ( boolean == kCFBooleanTrue ) ? true : false;
+    return CFStringCreateWithCStringNoCopy( NULL, "false", kCFStringEncodingUTF8, kCFAllocatorNull );
 }

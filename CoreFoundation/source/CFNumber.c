@@ -28,41 +28,11 @@
  */
 
 #include <CoreFoundation/CoreFoundation.h>
+#include <CoreFoundation/__private/CFNumber.h>
 #include <CoreFoundation/__private/CFRuntime.h>
 #include <stdlib.h>
 #include <stdbool.h>
 #include <math.h>
-
-struct CFNumber
-{
-    CFRuntimeBase _base;
-    bool          _isFloat;
-    Float64       _doubleValue;
-    SInt64        _integerValue;
-    bool          _nan;
-    bool          _pinf;
-    bool          _ninf;
-};
-
-static CFTypeID CFNumberTypeID      = 0;
-static CFRuntimeClass CFNumberClass =
-{
-    "CFNumber",
-    sizeof( struct CFNumber ),
-    NULL,
-    NULL,
-    NULL,
-    NULL,
-    NULL
-};
-
-static struct CFNumber CFNumberNaN;
-static struct CFNumber CFNumberNegativeInfinity;
-static struct CFNumber CFNumberPositiveInfinity;
-
-const CFNumberRef kCFNumberNaN              = ( const CFNumberRef )( &CFNumberNaN );
-const CFNumberRef kCFNumberNegativeInfinity = ( const CFNumberRef )( &CFNumberNegativeInfinity );
-const CFNumberRef kCFNumberPositiveInfinity = ( const CFNumberRef )( &CFNumberPositiveInfinity );
 
 static void init( void ) __attribute__( ( constructor ) );
 static void init( void )

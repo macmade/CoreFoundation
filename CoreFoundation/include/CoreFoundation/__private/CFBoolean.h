@@ -23,29 +23,31 @@
  ******************************************************************************/
 
 /*!
- * @file        CFBoolean.c
+ * @header      CFBoolean.h
  * @copyright   (c) 2016, Jean-David Gadina - www.xs-labs.com
  */
 
+#ifndef CORE_FOUNDATION___PRIVATE_CF_BOOLEAN_H
+#define CORE_FOUNDATION___PRIVATE_CF_BOOLEAN_H
+
 #include <CoreFoundation/CoreFoundation.h>
-#include <CoreFoundation/__private/CFBoolean.h>
 #include <CoreFoundation/__private/CFRuntime.h>
 
-static void init( void ) __attribute__( ( constructor ) );
-static void init( void )
-{
-    CFBooleanTypeID = CFRuntimeRegisterClass( &CFBooleanClass );
-    
-    CFRuntimeInitStaticInstance( &CFBooleanTrue, CFBooleanTypeID );
-    CFRuntimeInitStaticInstance( &CFBooleanFalse, CFBooleanTypeID );
-}
+CF_EXTERN_C_BEGIN
 
-CFTypeID CFBooleanGetTypeID( void )
+struct CFBoolean
 {
-    return CFBooleanTypeID;
-}
+    CFRuntimeBase _base;
+};
 
-Boolean CFBooleanGetValue( CFBooleanRef boolean )
-{
-    return ( boolean == kCFBooleanTrue ) ? true : false;
-}
+CF_EXPORT CFStringRef CFBooleanCopyDescription( CFBooleanRef boolean );
+
+CF_EXPORT CFTypeID       CFBooleanTypeID;
+CF_EXPORT CFRuntimeClass CFBooleanClass;
+
+CF_EXPORT struct CFBoolean CFBooleanTrue;
+CF_EXPORT struct CFBoolean CFBooleanFalse;
+
+CF_EXTERN_C_END
+
+#endif /* CORE_FOUNDATION___PRIVATE_CF_BOOLEAN_H */

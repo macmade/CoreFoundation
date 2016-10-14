@@ -28,62 +28,15 @@
  */
 
 #include <CoreFoundation/CoreFoundation.h>
+#include <CoreFoundation/__private/CFString.h>
 #include <CoreFoundation/__private/CFRuntime.h>
 #include <string.h>
 #include <stdio.h>
-
-struct CFString
-{
-    CFRuntimeBase    _base;
-    const char     * _cStr;
-    CFIndex          _length;
-    CFStringEncoding _encoding;
-    CFAllocatorRef   _deallocator;
-};
-
-static void CFStringDestruct( CFStringRef str );
-static CFStringRef CFStringCopyDescription( CFStringRef str );
-
-static CFTypeID CFStringTypeID      = 0;
-static CFRuntimeClass CFStringClass =
-{
-    "CFString",
-    sizeof( struct CFString ),
-    NULL,
-    ( void ( * )( CFTypeRef ) )CFStringDestruct,
-    NULL,
-    NULL,
-    ( CFStringRef ( * )( CFTypeRef ) )CFStringCopyDescription
-};
 
 static void init( void ) __attribute__( ( constructor ) );
 static void init( void )
 {
     CFStringTypeID = CFRuntimeRegisterClass( &CFStringClass );
-}
-
-static void CFStringDestruct( CFStringRef str )
-{
-    if( str->_cStr )
-    {
-        CFAllocatorDeallocate( str->_deallocator, ( void * )( str->_cStr ) );
-    }
-    
-    if( str->_deallocator )
-    {
-        CFRelease( str->_deallocator );
-    }
-}
-
-static CFStringRef CFStringCopyDescription( CFStringRef str )
-{
-    return CFStringCreateWithFormat
-    (
-        NULL,
-        NULL,
-        CFStringCreateWithCStringNoCopy( NULL, "%s", kCFStringEncodingUTF8, kCFAllocatorNull ),
-        ( str->_cStr ) ? str->_cStr : "(null)"
-    );
 }
 
 CFTypeID CFStringGetTypeID( void )

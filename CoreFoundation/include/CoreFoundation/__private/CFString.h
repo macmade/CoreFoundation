@@ -23,29 +23,33 @@
  ******************************************************************************/
 
 /*!
- * @file        CFBoolean.c
+ * @header      CFString.h
  * @copyright   (c) 2016, Jean-David Gadina - www.xs-labs.com
  */
 
+#ifndef CORE_FOUNDATION___PRIVATE_CF_STRING_H
+#define CORE_FOUNDATION___PRIVATE_CF_STRING_H
+
 #include <CoreFoundation/CoreFoundation.h>
-#include <CoreFoundation/__private/CFBoolean.h>
 #include <CoreFoundation/__private/CFRuntime.h>
 
-static void init( void ) __attribute__( ( constructor ) );
-static void init( void )
-{
-    CFBooleanTypeID = CFRuntimeRegisterClass( &CFBooleanClass );
-    
-    CFRuntimeInitStaticInstance( &CFBooleanTrue, CFBooleanTypeID );
-    CFRuntimeInitStaticInstance( &CFBooleanFalse, CFBooleanTypeID );
-}
+CF_EXTERN_C_BEGIN
 
-CFTypeID CFBooleanGetTypeID( void )
+struct CFString
 {
-    return CFBooleanTypeID;
-}
+    CFRuntimeBase    _base;
+    const char     * _cStr;
+    CFIndex          _length;
+    CFStringEncoding _encoding;
+    CFAllocatorRef   _deallocator;
+};
 
-Boolean CFBooleanGetValue( CFBooleanRef boolean )
-{
-    return ( boolean == kCFBooleanTrue ) ? true : false;
-}
+CF_EXPORT void        CFStringDestruct( CFStringRef str );
+CF_EXPORT CFStringRef CFStringCopyDescription( CFStringRef str );
+
+CF_EXPORT CFTypeID       CFStringTypeID;
+CF_EXPORT CFRuntimeClass CFStringClass;
+
+CF_EXTERN_C_END
+
+#endif /* CORE_FOUNDATION___PRIVATE_CF_STRING_H */

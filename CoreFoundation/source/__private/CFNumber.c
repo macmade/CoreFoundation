@@ -23,29 +23,28 @@
  ******************************************************************************/
 
 /*!
- * @file        CFBoolean.c
+ * @file        CFNumber.c
  * @copyright   (c) 2016, Jean-David Gadina - www.xs-labs.com
  */
 
-#include <CoreFoundation/CoreFoundation.h>
-#include <CoreFoundation/__private/CFBoolean.h>
-#include <CoreFoundation/__private/CFRuntime.h>
+#include <CoreFoundation/__private/CFNumber.h>
 
-static void init( void ) __attribute__( ( constructor ) );
-static void init( void )
+CFTypeID        CFNumberTypeID = 0;
+CFRuntimeClass CFNumberClass   =
 {
-    CFBooleanTypeID = CFRuntimeRegisterClass( &CFBooleanClass );
-    
-    CFRuntimeInitStaticInstance( &CFBooleanTrue, CFBooleanTypeID );
-    CFRuntimeInitStaticInstance( &CFBooleanFalse, CFBooleanTypeID );
-}
+    "CFNumber",
+    sizeof( struct CFNumber ),
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL
+};
 
-CFTypeID CFBooleanGetTypeID( void )
-{
-    return CFBooleanTypeID;
-}
+struct CFNumber CFNumberNaN;
+struct CFNumber CFNumberNegativeInfinity;
+struct CFNumber CFNumberPositiveInfinity;
 
-Boolean CFBooleanGetValue( CFBooleanRef boolean )
-{
-    return ( boolean == kCFBooleanTrue ) ? true : false;
-}
+const CFNumberRef kCFNumberNaN              = ( const CFNumberRef )( &CFNumberNaN );
+const CFNumberRef kCFNumberNegativeInfinity = ( const CFNumberRef )( &CFNumberNegativeInfinity );
+const CFNumberRef kCFNumberPositiveInfinity = ( const CFNumberRef )( &CFNumberPositiveInfinity );

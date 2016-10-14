@@ -28,104 +28,17 @@
  */
 
 #include <CoreFoundation/CoreFoundation.h>
+#include <CoreFoundation/__private/CFData.h>
 #include <CoreFoundation/__private/CFRuntime.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
 #include <stdbool.h>
 
-struct CFData
-{
-    CFRuntimeBase   _base;
-    const UInt8   * _bytes;
-    CFIndex         _length;
-    CFAllocatorRef  _deallocator;
-};
-
-static void CFDataDestruct( CFDataRef data );
-static CFStringRef CFDataCopyDescription( CFDataRef Data );
-
-static CFTypeID CFDataTypeID      = 0;
-static CFRuntimeClass CFDataClass =
-{
-    "CFData",
-    sizeof( struct CFData ),
-    NULL,
-    ( void ( * )( CFTypeRef ) )CFDataDestruct,
-    NULL,
-    NULL,
-    ( CFStringRef ( * )( CFTypeRef ) )CFDataCopyDescription
-};
-
 static void init( void ) __attribute__( ( constructor ) );
 static void init( void )
 {
     CFDataTypeID = CFRuntimeRegisterClass( &CFDataClass );
-}
-
-static void CFDataDestruct( CFDataRef data )
-{
-    if( data->_bytes )
-    {
-        CFAllocatorDeallocate( data->_deallocator, ( void * )( data->_bytes ) );
-    }
-    
-    if( data->_deallocator )
-    {
-        CFRelease( data->_deallocator );
-    }
-}
-
-static CFStringRef CFDataCopyDescription( CFDataRef data )
-{
-    CFIndex i;
-    char    buf[ 41 ];
-    UInt8   b;
-    bool    partial;
-    
-    if( data->_bytes == NULL || data->_length == 0 )
-    {
-        return NULL;
-    }
-    
-    memset( buf, 0, sizeof( buf ) );
-    
-    partial = false;
-    
-    for( i = 0; i < data->_length; i++ )
-    {
-        if( i == ( sizeof( buf ) - 1 ) / 2 )
-        {
-            partial = true;
-            
-            break;
-        }
-        
-        b = *( data->_bytes + i );
-        
-        sprintf( buf + ( i * 2 ), "%02x", ( unsigned int )b );
-    }
-    
-    if( partial )
-    {
-        return CFStringCreateWithFormat
-        (
-            NULL,
-            NULL,
-            CFStringCreateWithCString( NULL, "{ length = %li, bytes = 0x%s ... }", kCFStringEncodingUTF8 ),
-            ( long )( data->_length ),
-            buf
-        );
-    }
-    
-    return CFStringCreateWithFormat
-    (
-        NULL,
-        NULL,
-        CFStringCreateWithCString( NULL, "{ length = %li, bytes = 0x%s }", kCFStringEncodingUTF8 ),
-        ( long )( data->_length ),
-        buf
-    );
 }
 
 CFTypeID CFDataGetTypeID( void )

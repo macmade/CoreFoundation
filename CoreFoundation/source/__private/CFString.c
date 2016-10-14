@@ -23,29 +23,44 @@
  ******************************************************************************/
 
 /*!
- * @file        CFBoolean.c
+ * @file        CFString.c
  * @copyright   (c) 2016, Jean-David Gadina - www.xs-labs.com
  */
 
-#include <CoreFoundation/CoreFoundation.h>
-#include <CoreFoundation/__private/CFBoolean.h>
-#include <CoreFoundation/__private/CFRuntime.h>
+#include <CoreFoundation/__private/CFString.h>
 
-static void init( void ) __attribute__( ( constructor ) );
-static void init( void )
+CFTypeID       CFStringTypeID = 0;
+CFRuntimeClass CFStringClass  =
 {
-    CFBooleanTypeID = CFRuntimeRegisterClass( &CFBooleanClass );
+    "CFString",
+    sizeof( struct CFString ),
+    NULL,
+    ( void ( * )( CFTypeRef ) )CFStringDestruct,
+    NULL,
+    NULL,
+    ( CFStringRef ( * )( CFTypeRef ) )CFStringCopyDescription
+};
+
+void CFStringDestruct( CFStringRef str )
+{
+    if( str->_cStr )
+    {
+        CFAllocatorDeallocate( str->_deallocator, ( void * )( str->_cStr ) );
+    }
     
-    CFRuntimeInitStaticInstance( &CFBooleanTrue, CFBooleanTypeID );
-    CFRuntimeInitStaticInstance( &CFBooleanFalse, CFBooleanTypeID );
+    if( str->_deallocator )
+    {
+        CFRelease( str->_deallocator );
+    }
 }
 
-CFTypeID CFBooleanGetTypeID( void )
+CFStringRef CFStringCopyDescription( CFStringRef str )
 {
-    return CFBooleanTypeID;
-}
-
-Boolean CFBooleanGetValue( CFBooleanRef boolean )
-{
-    return ( boolean == kCFBooleanTrue ) ? true : false;
+    return CFStringCreateWithFormat
+    (
+        NULL,
+        NULL,
+        CFStringCreateWithCStringNoCopy( NULL, "%s", kCFStringEncodingUTF8, kCFAllocatorNull ),
+        ( str->_cStr ) ? str->_cStr : "(null)"
+    );
 }

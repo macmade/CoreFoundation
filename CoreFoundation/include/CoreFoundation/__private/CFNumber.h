@@ -23,29 +23,36 @@
  ******************************************************************************/
 
 /*!
- * @file        CFBoolean.c
+ * @header      CFNumber.h
  * @copyright   (c) 2016, Jean-David Gadina - www.xs-labs.com
  */
 
+#ifndef CORE_FOUNDATION___PRIVATE_CF_NUMBER_H
+#define CORE_FOUNDATION___PRIVATE_CF_NUMBER_H
+
 #include <CoreFoundation/CoreFoundation.h>
-#include <CoreFoundation/__private/CFBoolean.h>
 #include <CoreFoundation/__private/CFRuntime.h>
 
-static void init( void ) __attribute__( ( constructor ) );
-static void init( void )
-{
-    CFBooleanTypeID = CFRuntimeRegisterClass( &CFBooleanClass );
-    
-    CFRuntimeInitStaticInstance( &CFBooleanTrue, CFBooleanTypeID );
-    CFRuntimeInitStaticInstance( &CFBooleanFalse, CFBooleanTypeID );
-}
+CF_EXTERN_C_BEGIN
 
-CFTypeID CFBooleanGetTypeID( void )
+struct CFNumber
 {
-    return CFBooleanTypeID;
-}
+    CFRuntimeBase _base;
+    bool          _isFloat;
+    Float64       _doubleValue;
+    SInt64        _integerValue;
+    bool          _nan;
+    bool          _pinf;
+    bool          _ninf;
+};
 
-Boolean CFBooleanGetValue( CFBooleanRef boolean )
-{
-    return ( boolean == kCFBooleanTrue ) ? true : false;
-}
+CF_EXPORT CFTypeID       CFNumberTypeID;
+CF_EXPORT CFRuntimeClass CFNumberClass;
+
+CF_EXPORT struct CFNumber CFNumberNaN;
+CF_EXPORT struct CFNumber CFNumberNegativeInfinity;
+CF_EXPORT struct CFNumber CFNumberPositiveInfinity;
+
+CF_EXTERN_C_END
+
+#endif /* CORE_FOUNDATION___PRIVATE_CF_NUMBER_H */

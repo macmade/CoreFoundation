@@ -28,28 +28,8 @@
  */
 
 #include <CoreFoundation/CoreFoundation.h>
+#include <CoreFoundation/__private/CFNull.h>
 #include <CoreFoundation/__private/CFRuntime.h>
-
-struct CFNull
-{
-    CFRuntimeBase _base;
-};
-
-static CFTypeID CFNullTypeID      = 0;
-static CFRuntimeClass CFNullClass =
-{
-    "CFNull",
-    sizeof( struct CFNull ),
-    NULL,
-    NULL,
-    NULL,
-    NULL,
-    NULL
-};
-
-static struct CFNull CFNullInstance;
-
-const CFNullRef kCFNull = ( const CFNullRef )( &CFNullInstance );
 
 static void init( void ) __attribute__( ( constructor ) );
 static void init( void )

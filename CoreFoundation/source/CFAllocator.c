@@ -28,54 +28,11 @@
  */
 
 #include <CoreFoundation/CoreFoundation.h>
+#include <CoreFoundation/__private/CFAllocator.h>
 #include <CoreFoundation/__private/CFRuntime.h>
 #include <CoreFoundation/__private/CFThreading.h>
 #include <stdlib.h>
 #include <string.h>
-
-struct CFAllocator
-{
-    CFRuntimeBase       _base;
-    CFAllocatorContext  _context;
-};
-
-static void  * CFAllocatorSystemDefaultAllocateCallBack( CFIndex allocSize, CFOptionFlags hint, void * info );
-static void  * CFAllocatorSystemDefaultReallocateCallBack( void * ptr, CFIndex newsize, CFOptionFlags hint, void * info );
-static void    CFAllocatorSystemDefaultDeallocateCallBack( void * ptr, void * info );
-
-static void  * CFAllocatorNullAllocateCallBack( CFIndex allocSize, CFOptionFlags hint, void * info );
-static void  * CFAllocatorNullReallocateCallBack( void * ptr, CFIndex newsize, CFOptionFlags hint, void * info );
-static void    CFAllocatorNullDeallocateCallBack( void * ptr, void * info );
-static CFIndex CFAllocatorNullPreferredSizeCallBack( CFIndex size, CFOptionFlags hint, void * info );
-
-static void        CFAllocatorDestruct( CFAllocatorRef allocator );
-static CFStringRef CFAllocatorCopyDescription( CFAllocatorRef allocator );
-
-static CFTypeID CFAllocatorTypeID      = 0;
-static CFRuntimeClass CFAllocatorClass =
-{
-    "CFAllocator",
-    sizeof( struct CFAllocator ),
-    NULL,
-    ( void ( * )( CFTypeRef ) )CFAllocatorDestruct,
-    NULL,
-    NULL,
-    ( CFStringRef ( * )( CFTypeRef ) )CFAllocatorCopyDescription
-};
-
-static struct CFAllocator CFAllocatorSystemDefault;
-static struct CFAllocator CFAllocatorMalloc;
-static struct CFAllocator CFAllocatorMallocZone;
-static struct CFAllocator CFAllocatorNull;
-
-const CFAllocatorRef kCFAllocatorDefault        = NULL;
-const CFAllocatorRef kCFAllocatorSystemDefault  = ( const CFAllocatorRef )( &CFAllocatorSystemDefault );
-const CFAllocatorRef kCFAllocatorMalloc         = ( const CFAllocatorRef )( &CFAllocatorMalloc );
-const CFAllocatorRef kCFAllocatorMallocZone     = ( const CFAllocatorRef )( &CFAllocatorMallocZone );
-const CFAllocatorRef kCFAllocatorNull           = ( const CFAllocatorRef )( &CFAllocatorNull );
-const CFAllocatorRef kCFAllocatorUseContext     = ( const CFAllocatorRef )( -1 );
-
-static CFThreadingKey CFAllocatorDefaultKey; 
 
 static void init( void ) __attribute__( ( constructor ) );
 static void init( void )
@@ -105,25 +62,6 @@ static void init( void )
     CFAllocatorNull._context.deallocate     = CFAllocatorNullDeallocateCallBack;
     CFAllocatorNull._context.preferredSize  = CFAllocatorNullPreferredSizeCallBack;
     CFAllocatorNull._context.reallocate     = CFAllocatorNullReallocateCallBack;
-}
-
-static void CFAllocatorDestruct( CFAllocatorRef allocator )
-{
-    if( allocator->_context.release )
-    {
-        allocator->_context.release( allocator->_context.info );
-    }
-}
-
-static CFStringRef CFAllocatorCopyDescription( CFAllocatorRef allocator )
-{
-    return CFStringCreateWithFormat
-    (
-        NULL,
-        NULL,
-        CFStringCreateWithCStringNoCopy( NULL, "{ info = 0x%lu }", kCFStringEncodingUTF8, kCFAllocatorNull ),
-        allocator->_context.info
-    );
 }
 
 CFTypeID CFAllocatorGetTypeID( void )
@@ -275,66 +213,4 @@ void CFAllocatorGetContext( CFAllocatorRef allocator, CFAllocatorContext * conte
     {
         *( context ) = allocator->_context;
     }
-}
-
-static void * CFAllocatorSystemDefaultAllocateCallBack( CFIndex allocSize, CFOptionFlags hint, void * info )
-{
-    ( void )hint;
-    ( void )info;
-    
-    if( allocSize <= 0 )
-    {
-        return NULL;
-    }
-    
-    return calloc( ( size_t )allocSize, 1 );
-}
-
-static void * CFAllocatorSystemDefaultReallocateCallBack( void * ptr, CFIndex newsize, CFOptionFlags hint, void * info )
-{
-    ( void )hint;
-    ( void )info;
-    
-    return realloc( ptr, ( size_t )newsize );
-}
-
-static void CFAllocatorSystemDefaultDeallocateCallBack( void * ptr, void * info )
-{
-    ( void )info;
-    
-    free( ptr );
-}
-
-static void * CFAllocatorNullAllocateCallBack( CFIndex allocSize, CFOptionFlags hint, void * info )
-{
-    ( void )allocSize;
-    ( void )hint;
-    ( void )info;
-    
-    return NULL;
-}
-
-static void * CFAllocatorNullReallocateCallBack( void * ptr, CFIndex newsize, CFOptionFlags hint, void * info )
-{
-    ( void )ptr;
-    ( void )newsize;
-    ( void )hint;
-    ( void )info;
-    
-    return NULL;
-}
-
-static void CFAllocatorNullDeallocateCallBack( void * ptr, void * info )
-{
-    ( void )ptr;
-    ( void )info;
-}
-
-static CFIndex CFAllocatorNullPreferredSizeCallBack( CFIndex size, CFOptionFlags hint, void * info )
-{
-    ( void )size;
-    ( void )hint;
-    ( void )info;
-    
-    return 0;
 }

@@ -23,29 +23,24 @@
  ******************************************************************************/
 
 /*!
- * @file        CFBoolean.c
+ * @file        CFNull.c
  * @copyright   (c) 2016, Jean-David Gadina - www.xs-labs.com
  */
 
-#include <CoreFoundation/CoreFoundation.h>
-#include <CoreFoundation/__private/CFBoolean.h>
-#include <CoreFoundation/__private/CFRuntime.h>
+#include <CoreFoundation/__private/CFNull.h>
 
-static void init( void ) __attribute__( ( constructor ) );
-static void init( void )
+CFTypeID       CFNullTypeID = 0;
+CFRuntimeClass CFNullClass  =
 {
-    CFBooleanTypeID = CFRuntimeRegisterClass( &CFBooleanClass );
-    
-    CFRuntimeInitStaticInstance( &CFBooleanTrue, CFBooleanTypeID );
-    CFRuntimeInitStaticInstance( &CFBooleanFalse, CFBooleanTypeID );
-}
+    "CFNull",
+    sizeof( struct CFNull ),
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL
+};
 
-CFTypeID CFBooleanGetTypeID( void )
-{
-    return CFBooleanTypeID;
-}
+struct CFNull CFNullInstance;
 
-Boolean CFBooleanGetValue( CFBooleanRef boolean )
-{
-    return ( boolean == kCFBooleanTrue ) ? true : false;
-}
+const CFNullRef kCFNull = ( const CFNullRef )( &CFNullInstance );
