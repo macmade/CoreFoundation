@@ -38,8 +38,8 @@ CFRuntimeClass CFDataClass  =
     sizeof( struct CFData ),
     NULL,
     ( void ( * )( CFTypeRef ) )CFDataDestruct,
-    NULL,
-    NULL,
+    ( CFHashCode ( * )( CFTypeRef ) )CFDataHash,
+    ( bool ( * )( CFTypeRef, CFTypeRef ) )CFDataEquals,
     ( CFStringRef ( * )( CFTypeRef ) )CFDataCopyDescription
 };
 
@@ -54,6 +54,48 @@ void CFDataDestruct( CFDataRef data )
     {
         CFRelease( data->_deallocator );
     }
+}
+
+CFHashCode CFDataHash( CFDataRef data )
+{
+    CFIndex               i;
+    CFHashCode            h;
+    const unsigned char * cp;
+    
+    if( data->_bytes == NULL )
+    {
+        return ( CFHashCode )data;
+    }
+    
+    h  = 0;
+    cp = data->_bytes;
+    
+    for( i = 0; i < data->_length; i++ )
+    {
+        h = h * 31 + *( cp++ );
+    }
+    
+    return h;
+}
+
+bool CFDataEquals( CFDataRef d1, CFDataRef d2 )
+{
+    if( d1->_bytes == NULL || d2->_bytes == NULL )
+    {
+        return false;
+    }
+    
+    if( d1->_bytes == d2->_bytes )
+    {
+        return true;
+    }
+    
+    if( d1->_length != d2->_length )
+    {
+        return false;
+    }
+    
+    return memcmp( d1->_bytes, d2->_bytes, ( size_t )( d1->_length ) ) == 0;
 }
 
 CFStringRef CFDataCopyDescription( CFDataRef data )

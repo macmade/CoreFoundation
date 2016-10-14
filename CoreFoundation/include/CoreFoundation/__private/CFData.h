@@ -45,6 +45,8 @@ struct CFData
 };
 
 CF_EXPORT void        CFDataDestruct( CFDataRef data );
+CF_EXPORT CFHashCode  CFDataHash( CFDataRef data );
+CF_EXPORT bool        CFDataEquals( CFDataRef d1, CFDataRef d2 );
 CF_EXPORT CFStringRef CFDataCopyDescription( CFDataRef Data );
 
 CF_EXPORT CFTypeID       CFDataTypeID;
