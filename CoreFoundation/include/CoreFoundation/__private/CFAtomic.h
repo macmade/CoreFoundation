@@ -27,8 +27,8 @@
  * @copyright   (c) 2016, Jean-David Gadina - www.xs-labs.com
  */
 
-#ifndef CORE_FOUNDATION_CF___PRIVATE_ATOMIC_H
-#define CORE_FOUNDATION_CF___PRIVATE_ATOMIC_H
+#ifndef CORE_FOUNDATION___PRIVATE_CF_ATOMIC_H
+#define CORE_FOUNDATION___PRIVATE_CF_ATOMIC_H
 
 #include <CoreFoundation/CFBase.h>
 #include <stdint.h>
@@ -51,4 +51,4 @@ bool CFAtomicCompareAndSwapPointer( void * oldValue, void * newValue, void * vol
 
 CF_EXTERN_C_END
 
-#endif /* CORE_FOUNDATION_CF___PRIVATE_ATOMIC_H */
+#endif /* CORE_FOUNDATION___PRIVATE_CF_ATOMIC_H */

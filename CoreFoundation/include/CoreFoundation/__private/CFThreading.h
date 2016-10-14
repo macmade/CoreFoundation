@@ -27,8 +27,8 @@
  * @copyright   (c) 2016, Jean-David Gadina - www.xs-labs.com
  */
 
-#ifndef CORE_FOUNDATION_CF___PRIVATE_THREADING_H
-#define CORE_FOUNDATION_CF___PRIVATE_THREADING_H
+#ifndef CORE_FOUNDATION___PRIVATE_CF_THREADING_H
+#define CORE_FOUNDATION___PRIVATE_CF_THREADING_H
 
 #include <CoreFoundation/CFBase.h>
 #include <stdbool.h>
@@ -55,4 +55,4 @@ CF_EXPORT bool   CFThreadingSetSpecific( CFThreadingKey key, const void * value 
 
 CF_EXTERN_C_END
 
-#endif /* CORE_FOUNDATION_CF___PRIVATE_THREADING_H */
+#endif /* CORE_FOUNDATION___PRIVATE_CF_THREADING_H */

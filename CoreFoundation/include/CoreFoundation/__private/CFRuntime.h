@@ -27,8 +27,8 @@
  * @copyright   (c) 2016, Jean-David Gadina - www.xs-labs.com
  */
 
-#ifndef CORE_FOUNDATION_CF___PRIVATE_RUNTIME_H
-#define CORE_FOUNDATION_CF___PRIVATE_RUNTIME_H
+#ifndef CORE_FOUNDATION___PRIVATE_CF_RUNTIME_H
+#define CORE_FOUNDATION___PRIVATE_CF_RUNTIME_H
 
 #include <CoreFoundation/CFBase.h>
 #include <CoreFoundation/CFAllocator.h>
@@ -212,4 +212,4 @@ CF_EXPORT void CFRuntimeAbortWithOutOfMemoryError( void );
 
 CF_EXTERN_C_END
 
-#endif /* CORE_FOUNDATION_CF___PRIVATE_RUNTIME_H */
+#endif /* CORE_FOUNDATION___PRIVATE_CF_RUNTIME_H */
