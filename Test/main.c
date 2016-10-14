@@ -56,20 +56,42 @@ int main( void )
     {
         CFStringRef s1;
         CFStringRef s2;
+        CFStringRef s3;
         
         s1 = CFStringCreateWithCString( NULL, "hello, %s", kCFStringEncodingUTF8 );
         s2 = CFStringCreateWithFormat( NULL, NULL, s1, "universe" );
+        s3 = CFStringCreateCopy( NULL, s2 );
             
         fprintf( stderr,  "%p - %s\n", ( void * )s1, CFStringGetCStringPtr( s1, kCFStringEncodingUTF8 ) );
         fprintf( stderr,  "%p - %s\n", ( void * )s2, CFStringGetCStringPtr( s2, kCFStringEncodingUTF8 ) );
+        fprintf( stderr,  "%p - %s\n", ( void * )s3, CFStringGetCStringPtr( s3, kCFStringEncodingUTF8 ) );
         
         CFShow( NULL );
         CFShow( kCFAllocatorSystemDefault );
         CFShow( s1 );
         CFShow( s2 );
+        CFShow( s3 );
+        
+        fprintf
+        (
+            stderr,
+            "%s == %s : %i\n",
+            CFStringGetCStringPtr( s1, kCFStringEncodingUTF8 ),
+            CFStringGetCStringPtr( s2, kCFStringEncodingUTF8 ),
+            CFEqual( s1, s2 )
+        );
+        fprintf
+        (
+            stderr,
+            "%s == %s : %i\n",
+            CFStringGetCStringPtr( s2, kCFStringEncodingUTF8 ),
+            CFStringGetCStringPtr( s3, kCFStringEncodingUTF8 ),
+            CFEqual( s2, s3 )
+        );
         
         CFRelease( s1 );
         CFRelease( s2 );
+        CFRelease( s3 );
     }
     
     fprintf( stderr,  "--------------------------------------------------------------------------------\n" );
@@ -112,6 +134,11 @@ int main( void )
         CFShow( d2 );
         CFShow( d3 );
         CFShow( d4 );
+        
+        buf[ 42 ] = 0;
+        
+        fprintf( stderr, "Equals: %i\n", CFEqual( d1, d2 ) );
+        fprintf( stderr, "Equals: %i\n", CFEqual( d1, d3 ) );
         
         CFRelease( d1 );
         CFRelease( d2 );
@@ -177,6 +204,7 @@ int main( void )
         CFStringRef            s3;
         CFMutableDictionaryRef d1;
         CFMutableDictionaryRef d2;
+        CFDictionaryRef        d3;
         
         s1 = CFStringCreateWithCString( NULL, "foo", kCFStringEncodingUTF8 );
         s2 = CFStringCreateWithCString( NULL, "bar", kCFStringEncodingUTF8 );
@@ -198,11 +226,16 @@ int main( void )
         CFShow( d2 );
         fprintf( stderr, "Equals: %i\n", CFEqual( d1, d2 ) );
         
+        d3 = CFDictionaryCreateCopy( NULL, d2 );
+        
+        CFShow( d3 );
+        
         CFRelease( s1 );
         CFRelease( s2 );
         CFRelease( s3 );
         CFRelease( d1 );
         CFRelease( d2 );
+        CFRelease( d3 );
     }
     
     fprintf( stderr,  "--------------------------------------------------------------------------------\n" );
