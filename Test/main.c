@@ -160,6 +160,26 @@ int main( void )
         CFShow( CFDictionaryGetValue( d2, k2[ 0 ] ) );
         CFShow( CFDictionaryGetValue( d2, k2[ 1 ] ) );
         
+        {
+            CFMutableDictionaryRef md1;
+            CFMutableDictionaryRef md2;
+            
+            md1 = CFDictionaryCreateMutable( NULL, 0, NULL, NULL );
+            md2 = CFDictionaryCreateMutableCopy( NULL, 0, d2 );
+            
+            CFShow( md1 );
+            CFShow( md2 );
+            
+            CFDictionaryAddValue( md1, "foobar", "hello, world" );
+            CFDictionaryRemoveAllValues( md2 );
+            
+            CFShow( md1 );
+            CFShow( md2 );
+            
+            CFRelease( md1 );
+            CFRelease( md2 );
+        }
+        
         CFRelease( d1 );
         CFRelease( d2 );
     }

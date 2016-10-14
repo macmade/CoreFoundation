@@ -36,7 +36,7 @@
  *              The optional "user info" dictionary may provide additional
  *              information that might be useful for the interpretation and
  *              reporting of the error, including a human-readable description
- *              for the error. The “user info” dictionary sometimes includes
+ *              for the error. The "user info" dictionary sometimes includes
  *              another CFError object that represents an error in a subsystem
  *              underlying the error represented by the containing CFError
  *              object. This underlying error object may provide more specific

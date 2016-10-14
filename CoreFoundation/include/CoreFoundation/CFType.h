@@ -41,7 +41,7 @@ CF_EXTERN_C_BEGIN
  *              particular Core Foundation opaque types.
  * @discussion  Defines a type identifier in Core Foundation. A type ID is an
  *              integer that identifies the opaque type to which a Core
- *              Foundation object “belongs.” You use type IDs in various
+ *              Foundation object "belongs." You use type IDs in various
  *              contexts, such as when you are operating on heterogeneous
  *              collections. Core Foundation provides programmatic interfaces
  *              for obtaining and evaluating type IDs.
@@ -87,7 +87,7 @@ typedef const void * CFTypeRef;
  *              want to ensure that the block of memory allocated for the object
  *              is from the same allocator used for another object. One way to
  *              do this is to reuse the allocator assigned to an existing Core
- *              Foundation object when you call a “creation” function.
+ *              Foundation object when you call a "creation" function.
  */
 CF_EXPORT CFAllocatorRef CFGetAllocator( CFTypeRef obj );
 

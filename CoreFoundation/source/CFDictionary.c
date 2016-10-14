@@ -47,6 +47,7 @@ CFDictionaryRef CFDictionaryCreate( CFAllocatorRef allocator, const void ** keys
 {
     struct CFDictionary * o;
     CFIndex               i;
+    CFIndex               capacity;
     
     o = ( struct CFDictionary * )CFRuntimeCreateInstance( allocator, CFDictionaryTypeID );
     
@@ -55,7 +56,8 @@ CFDictionaryRef CFDictionaryCreate( CFAllocatorRef allocator, const void ** keys
         return NULL;
     }
     
-    o->_items = CFAllocatorAllocate( allocator, ( numValues ) ? numValues * ( CFIndex )sizeof( struct CFDictionaryItem * ) : sizeof( struct CFDictionaryItem * ), 0 );
+    capacity  = ( numValues > 0 ) ? numValues : 1;
+    o->_items = CFAllocatorAllocate( allocator, capacity * ( CFIndex )sizeof( struct CFDictionaryItem * ), 0 );
     
     if( o->_items == NULL )
     {
@@ -64,7 +66,7 @@ CFDictionaryRef CFDictionaryCreate( CFAllocatorRef allocator, const void ** keys
         return NULL;
     }
     
-    o->_size = numValues;
+    o->_size = capacity;
     
     if( keyCallBacks )
     {

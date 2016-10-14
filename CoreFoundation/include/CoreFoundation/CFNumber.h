@@ -51,7 +51,7 @@ CF_EXTERN_C_BEGIN
  *              numbers (such as 0 and 1) are uniqued. You should not expect
  *              that allocating multiple CFNumber instances will necessarily
  *              result in distinct objects.
- *              CFNumber is “toll-free bridged” with its Cocoa Foundation
+ *              CFNumber is "toll-free bridged" with its Cocoa Foundation
  *              counterpart, NSNumber. This means that the Core Foundation type
  *              is interchangeable in function or method calls with the bridged
  *              Foundation object. Therefore, in a method where you see an

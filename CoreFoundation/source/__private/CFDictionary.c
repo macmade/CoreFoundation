@@ -311,6 +311,19 @@ void CFDictionarySwap( CFDictionaryRef d1, CFDictionaryRef d2 )
     *( p2 ) = tmp;
 }
 
+CF_EXPORT void CFDictionaryAssertMutable( CFDictionaryRef d )
+{
+    if( d == NULL )
+    {
+        return;
+    }
+    
+    if( d->_mutable == false )
+    {
+        CFRuntimeAbortWithError( "<CFDictionary 0x%lu> is not mutable", ( unsigned long )d );
+    }
+}
+
 const CFDictionaryKeyCallBacks kCFCopyStringDictionaryKeyCallBacks =
 {
     0,

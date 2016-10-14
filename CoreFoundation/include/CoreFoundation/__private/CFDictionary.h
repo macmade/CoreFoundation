@@ -65,9 +65,11 @@ CF_EXPORT struct CFDictionaryItem * CFDictionaryGetItem( CFDictionaryRef d, cons
 CF_EXPORT bool                      CFDictionaryInsert( struct CFDictionary * d, const void * key, const void * value, bool expandIfNeeded );
 CF_EXPORT void                      CFDictionaryResize( CFDictionaryRef d, CFIndex size );
 CF_EXPORT void                      CFDictionarySwap( CFDictionaryRef d1, CFDictionaryRef d2 );
+CF_EXPORT void                      CFDictionaryAssertMutable( CFDictionaryRef d );
 
-#define CF_DICTIONARY_MAX_LOAD_FACTOR   ( 1 )
-#define CF_DICTIONARY_GROWTH_FACTOR     ( 2 )
+#define CF_DICTIONARY_MAX_LOAD_FACTOR   (  1 )
+#define CF_DICTIONARY_GROWTH_FACTOR     (  2 )
+#define CF_DICTIONARY_DEFAULT_CAPACITY  ( 32 )
 
 CF_EXTERN_C_END
 

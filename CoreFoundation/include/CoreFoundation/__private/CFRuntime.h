@@ -201,7 +201,7 @@ CF_EXPORT void CFRuntimeDeleteInstance( CFTypeRef obj );
  * @abstract    Prints an error message and aborts the program's execution.
  * @param       error       The error message
  */
-CF_EXPORT void CFRuntimeAbortWithError( const char * error );
+CF_EXPORT void CFRuntimeAbortWithError( const char * error, ... );
 
 /*!
  * @function    CFRuntimeAbortWithOutOfMemoryError

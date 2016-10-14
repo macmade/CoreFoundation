@@ -300,11 +300,23 @@ void CFRuntimeDeleteInstance( CFTypeRef obj )
     }
 }
 
-void CFRuntimeAbortWithError( const char * error )
+void CFRuntimeAbortWithError( const char * error, ... )
 {
+    va_list ap;
+    
     if( error != NULL )
     {
-        fprintf( stderr, "%s\n", error );
+        va_start( ap, error );
+        
+        fprintf( stderr, "CFRuntime error: " );
+        vfprintf( stderr, error, ap );
+        fprintf( stderr, "\n" );
+        
+        va_end( ap );
+    }
+    else
+    {
+        fprintf( stderr, "CFRuntime error\n" );
     }
     
     abort();
@@ -312,5 +324,5 @@ void CFRuntimeAbortWithError( const char * error )
 
 void CFRuntimeAbortWithOutOfMemoryError( void )
 {
-    CFRuntimeAbortWithError( "CFRuntime error: out of memory" );
+    CFRuntimeAbortWithError( "out of memory" );
 }

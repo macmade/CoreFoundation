@@ -49,7 +49,7 @@ CFIndex CFAtomicIncrement( volatile CFIndex * value )
         return CFAtomicIncrement64( ( volatile int64_t * )value );
     }
     
-    CFRuntimeAbortWithError( "Invalid size for CFIndex - Unknown platform\n" );
+    CFRuntimeAbortWithError( "Invalid size for CFIndex - Unknown platform" );
     
     return 0;
 }
@@ -113,7 +113,7 @@ CFIndex CFAtomicDecrement( volatile CFIndex * value )
         return CFAtomicDecrement64( ( volatile int64_t * )value );
     }
     
-    CFRuntimeAbortWithError( "Invalid size for CFIndex - Unknown platform\n" );
+    CFRuntimeAbortWithError( "Invalid size for CFIndex - Unknown platform" );
     
     return 0;
 }
