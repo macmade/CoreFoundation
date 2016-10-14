@@ -141,6 +141,32 @@ CFComparisonResult;
 CF_EXPORT const CFIndex kCFNotFound;
 
 /*!
+ * @typedef     CFComparisonResult
+ * @abstract    Callback function that compares two values. You provide a
+ *              pointer to this callback in certain Core Foundation sorting
+ *              functions.
+ * @param       val1        The first value to compare.
+ * @param       val2        The second value to compare.
+ * @param       context     An untyped pointer to the context of the evaluation.
+ *                          The meaning of this value and its use are defined by
+ *                          each comparator function. This value is usually
+ *                          passed to a sort function, such as
+ *                          CFArraySortValues, which then passes it, unchanged,
+ *                          to the comparator function.
+ * @result      A CFComparisonResult value that indicates whether the val1 is
+ *              equal to, less than, or greater than val2. See
+ *              CFComparisonResult for a list of possible values.
+ * @discussion  If you need to sort the elements in a collection using special
+ *              criteria, you can implement a comparator function with the
+ *              signature defined by this prototype. You pass a pointer to this
+ *              function in one of the “sort” functions, such as CFArray's
+ *              CFArraySortValues.
+ *              You can also pass pointers to standard Core Foundation
+ *              comparator functions such as CFStringCompare and CFDateCompare.
+ */
+typedef CFComparisonResult ( * CFComparatorFunction )( const void * val1, const void * val2, void * context );
+
+/*!
  * @typedef     CFRange
  * @abstract    A structure representing a range of sequential items in a
  *              container, such as characters in a buffer or elements in a
@@ -169,6 +195,17 @@ CFRange;
  * @result      An initialized structure of type CFRange.
  */
 CF_EXPORT CFRange CFRangeMake( CFIndex location, CFIndex length );
+
+/*!
+ * @constant    kCFCoreFoundationVersionNumber
+ * @discussion  The current version of the Core Foundation framework. Compare
+ *              this value to the values in Framework Version Numbers. Although
+ *              this variable was added to the CFBase.h header file in OS X
+ *              v10.1, it was available and can be used in OS X v10.0.
+ */
+CF_EXPORT double kCFCoreFoundationVersionNumber;
+
+
 
 CF_EXTERN_C_END
 
