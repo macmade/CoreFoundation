@@ -113,9 +113,28 @@ void CFRelease( CFTypeRef obj )
 
 Boolean CFEqual( CFTypeRef obj1, CFTypeRef obj2 )
 {
+    CFRuntimeEqualsCallback f;
+    
+    if( obj1 == NULL || obj2 == NULL )
+    {
+        return false;
+    }
+    
     if( obj1 == obj2 )
     {
         return true;
+    }
+    
+    if( CFGetTypeID( obj1 ) != CFGetTypeID( obj2 ) )
+    {
+        return false;
+    }
+    
+    f = CFRuntimeGetEqualsCallback( CFGetTypeID( obj1 ) );
+    
+    if( f )
+    {
+        return f( obj1, obj2 );
     }
     
     return false;
@@ -123,9 +142,21 @@ Boolean CFEqual( CFTypeRef obj1, CFTypeRef obj2 )
 
 CFHashCode CFHash( CFTypeRef obj )
 {
-    ( void )obj;
+    CFRuntimeHashCallback f;
     
-    return 0;
+    if( obj == NULL )
+    {
+        return 0;
+    }
+    
+    f = CFRuntimeGetHashCallback( CFGetTypeID( obj ) );
+    
+    if( f )
+    {
+        return f( obj );
+    }
+    
+    return ( CFHashCode )obj;
 }
 
 CFStringRef CFCopyDescription( CFTypeRef obj )
