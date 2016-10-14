@@ -38,20 +38,20 @@ int main( void )
         CFAllocatorContext ctx;
         
         memset( &ctx, 0, sizeof( CFAllocatorContext ) );
-        printf( "kCFAllocatorSystemDefault: %p (ID: %li / RC: %li)\n", ( void * )kCFAllocatorSystemDefault, ( long )CFGetTypeID( kCFAllocatorSystemDefault ), ( long )CFGetRetainCount( kCFAllocatorSystemDefault ) );
+        fprintf( stderr,  "kCFAllocatorSystemDefault: %p (ID: %li / RC: %li)\n", ( void * )kCFAllocatorSystemDefault, ( long )CFGetTypeID( kCFAllocatorSystemDefault ), ( long )CFGetRetainCount( kCFAllocatorSystemDefault ) );
         
         a = CFAllocatorCreate( NULL, &ctx );
         
-        printf( "Custom allocator:          %p (ID: %li / RC: %li)\n", ( void * )a, ( long )CFGetTypeID( a ), ( long )CFGetRetainCount( a ) );
-        printf( "Custom allocator:          %p (ID: %li / RC: %li)\n", ( void * )a, ( long )CFGetTypeID( a ), ( long )CFGetRetainCount( a ) );
+        fprintf( stderr,  "Custom allocator:          %p (ID: %li / RC: %li)\n", ( void * )a, ( long )CFGetTypeID( a ), ( long )CFGetRetainCount( a ) );
+        fprintf( stderr,  "Custom allocator:          %p (ID: %li / RC: %li)\n", ( void * )a, ( long )CFGetTypeID( a ), ( long )CFGetRetainCount( a ) );
         CFRetain( a );
-        printf( "Custom allocator:          %p (ID: %li / RC: %li)\n", ( void * )a, ( long )CFGetTypeID( a ), ( long )CFGetRetainCount( a ) );
+        fprintf( stderr,  "Custom allocator:          %p (ID: %li / RC: %li)\n", ( void * )a, ( long )CFGetTypeID( a ), ( long )CFGetRetainCount( a ) );
         CFRelease( a );
-        printf( "Custom allocator:          %p (ID: %li / RC: %li)\n", ( void * )a, ( long )CFGetTypeID( a ), ( long )CFGetRetainCount( a ) );
+        fprintf( stderr,  "Custom allocator:          %p (ID: %li / RC: %li)\n", ( void * )a, ( long )CFGetTypeID( a ), ( long )CFGetRetainCount( a ) );
         CFRelease( a );
     }
     
-    printf( "--------------------------------------------------------------------------------\n" );
+    fprintf( stderr,  "--------------------------------------------------------------------------------\n" );
     
     {
         CFStringRef s1;
@@ -60,8 +60,8 @@ int main( void )
         s1 = CFStringCreateWithCString( NULL, "hello, %s", kCFStringEncodingUTF8 );
         s2 = CFStringCreateWithFormat( NULL, NULL, s1, "universe" );
             
-        printf( "%p - %s\n", ( void * )s1, CFStringGetCStringPtr( s1, kCFStringEncodingUTF8 ) );
-        printf( "%p - %s\n", ( void * )s2, CFStringGetCStringPtr( s2, kCFStringEncodingUTF8 ) );
+        fprintf( stderr,  "%p - %s\n", ( void * )s1, CFStringGetCStringPtr( s1, kCFStringEncodingUTF8 ) );
+        fprintf( stderr,  "%p - %s\n", ( void * )s2, CFStringGetCStringPtr( s2, kCFStringEncodingUTF8 ) );
         
         CFShow( NULL );
         CFShow( kCFAllocatorSystemDefault );
@@ -72,23 +72,23 @@ int main( void )
         CFRelease( s2 );
     }
     
-    printf( "--------------------------------------------------------------------------------\n" );
+    fprintf( stderr,  "--------------------------------------------------------------------------------\n" );
     
     {
         CFShow( kCFNull );
     }
     
-    printf( "--------------------------------------------------------------------------------\n" );
+    fprintf( stderr,  "--------------------------------------------------------------------------------\n" );
     
     {
         CFShow( kCFBooleanTrue );
         CFShow( kCFBooleanFalse );
         
-        printf( "kCFBooleanTrue:  %i\n", CFBooleanGetValue( kCFBooleanTrue ) );
-        printf( "kCFBooleanFalse: %i\n", CFBooleanGetValue( kCFBooleanFalse ) );
+        fprintf( stderr,  "kCFBooleanTrue:  %i\n", CFBooleanGetValue( kCFBooleanTrue ) );
+        fprintf( stderr,  "kCFBooleanFalse: %i\n", CFBooleanGetValue( kCFBooleanFalse ) );
     }
     
-    printf( "--------------------------------------------------------------------------------\n" );
+    fprintf( stderr,  "--------------------------------------------------------------------------------\n" );
     
     {
         unsigned int i;
@@ -119,7 +119,52 @@ int main( void )
         CFRelease( d4 );
     }
     
-    printf( "--------------------------------------------------------------------------------\n" );
+    fprintf( stderr,  "--------------------------------------------------------------------------------\n" );
+    
+    {
+        CFDictionaryRef d1;
+        CFDictionaryRef d2;
+        CFStringRef     s1;
+        CFStringRef     s2;
+        CFStringRef     s3;
+        CFStringRef     s4;
+        const void    * k1[ 2 ];
+        const void    * v1[ 2 ];
+        const void    * k2[ 2 ];
+        const void    * v2[ 2 ];
+        
+        k1[ 0 ] = "foo";
+        k1[ 1 ] = "bar";
+        v1[ 0 ] = "hello, world";
+        v1[ 1 ] = "hello, universe";
+        
+        s1 = CFStringCreateWithCString( NULL, k1[ 0 ], kCFStringEncodingUTF8 );
+        s2 = CFStringCreateWithCString( NULL, k1[ 1 ], kCFStringEncodingUTF8 );
+        s3 = CFStringCreateWithCString( NULL, v1[ 0 ], kCFStringEncodingUTF8 );
+        s4 = CFStringCreateWithCString( NULL, v1[ 1 ], kCFStringEncodingUTF8 );
+        
+        k2[ 0 ] = s1;
+        k2[ 1 ] = s2;
+        v2[ 0 ] = s3;
+        v2[ 1 ] = s4;
+        
+        d1 = CFDictionaryCreate( NULL, k1, v1, 2, NULL, NULL );
+        d2 = CFDictionaryCreate( NULL, k2, v2, 2, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks );
+        
+        CFShow( d1 );
+        CFShow( d2 );
+        
+        fprintf( stderr,  "%s: %s\n", k1[ 0 ], CFDictionaryGetValue( d1, k1[ 0 ] ) );
+        fprintf( stderr,  "%s: %s\n", k1[ 1 ], CFDictionaryGetValue( d1, k1[ 1 ] ) );
+        
+        CFShow( CFDictionaryGetValue( d2, k2[ 0 ] ) );
+        CFShow( CFDictionaryGetValue( d2, k2[ 1 ] ) );
+        
+        CFRelease( d1 );
+        CFRelease( d2 );
+    }
+    
+    fprintf( stderr,  "--------------------------------------------------------------------------------\n" );
     
     return 0;
 }

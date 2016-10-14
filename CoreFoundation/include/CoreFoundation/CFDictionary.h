@@ -499,7 +499,7 @@ CF_EXPORT CFIndex CFDictionaryGetCountOfValue( CFDictionaryRef theDict, const vo
  *                          size (that is, a size equal to the count of
  *                          theDict), or NULL if the keys are not required.
  *                          If the keys are Core Foundation objects, ownership
- *                          follows the The Get Rule.
+ *                          follows the Get Rule.
  * @param       values      A C array of pointer-sized values that, on return,
  *                          is filled with values from the theDict. The keys and
  *                          values C arrays are parallel to each other (that is,
@@ -509,7 +509,7 @@ CF_EXPORT CFIndex CFDictionaryGetCountOfValue( CFDictionaryRef theDict, const vo
  *                          size (that is, a size equal to the count of
  *                          theDict), or NULL if the values are not required.
  *                          If the values are Core Foundation objects, ownership
- *                          follows the The Get Rule.
+ *                          follows the Get Rule.
  */
 CF_EXPORT void CFDictionaryGetKeysAndValues( CFDictionaryRef theDict, const void ** keys, const void ** values );
 

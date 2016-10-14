@@ -98,6 +98,11 @@ CFNumberRef CFNumberCreate( CFAllocatorRef allocator, CFNumberType type, const v
     
     o = ( struct CFNumber * )CFRuntimeCreateInstance( allocator, CFNumberTypeID );
     
+    if( o == NULL )
+    {
+        return NULL;
+    }
+    
     if( type == kCFNumberSInt8Type )
     {
         o->_isFloat      = false;

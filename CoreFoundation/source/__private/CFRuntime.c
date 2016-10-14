@@ -312,5 +312,5 @@ void CFRuntimeAbortWithError( const char * error )
 
 void CFRuntimeAbortWithOutOfMemoryError( void )
 {
-    CFRuntimeAbortWithError( "Out of memory" );
+    CFRuntimeAbortWithError( "CFRuntime error: out of memory" );
 }

@@ -151,7 +151,7 @@ CFAllocatorRef CFAllocatorCreate( CFAllocatorRef allocator, CFAllocatorContext *
         o = ( struct CFAllocator * )CFRuntimeCreateInstance( allocator, CFAllocatorTypeID );
     }
     
-    if( context )
+    if( o && context )
     {
         o->_context = *( context );
         
