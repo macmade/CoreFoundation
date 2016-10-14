@@ -51,8 +51,8 @@ CFStringRef CFBooleanCopyDescription( CFBooleanRef boolean )
 {
     if( boolean == kCFBooleanTrue )
     {
-        return CFStringCreateWithCStringNoCopy( NULL, "true", kCFStringEncodingUTF8, kCFAllocatorNull );
+        return CFStringCreateWithCStringNoCopy( NULL, "true", kCFStringEncodingASCII, kCFAllocatorNull );
     }
     
-    return CFStringCreateWithCStringNoCopy( NULL, "false", kCFStringEncodingUTF8, kCFAllocatorNull );
+    return CFStringCreateWithCStringNoCopy( NULL, "false", kCFStringEncodingASCII, kCFAllocatorNull );
 }

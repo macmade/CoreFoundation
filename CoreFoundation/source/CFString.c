@@ -132,8 +132,9 @@ CFStringRef CFStringCreateWithCString( CFAllocatorRef alloc, const char * cStr, 
     
     if( o )
     {
-        o->_deallocator = ( alloc ) ? CFRetain( alloc ) : NULL;
+        o->_allocator   = ( alloc ) ? CFRetain( alloc ) : NULL;
         o->_length      = ( CFIndex )strlen( cStr );
+        o->_capacity    = o->_length;
         o->_encoding    = encoding;
         buf             = CFAllocatorAllocate( alloc, o->_length + 1, 0 );
         
@@ -166,10 +167,11 @@ CFStringRef CFStringCreateWithCStringNoCopy( CFAllocatorRef alloc, const char * 
     
     if( o )
     {
-        o->_cStr        = cStr;
+        o->_cStr        = ( char * )cStr;
         o->_encoding    = encoding;
         o->_length      = ( CFIndex )strlen( cStr );
-        o->_deallocator = ( contentsDeallocator ) ? CFRetain( contentsDeallocator ) : NULL;
+        o->_capacity    = o->_length;
+        o->_allocator   = ( contentsDeallocator ) ? CFRetain( contentsDeallocator ) : NULL;
     }
     
     return ( CFStringRef )o;
@@ -212,7 +214,7 @@ CFStringRef CFStringCreateWithFormatAndArguments( CFAllocatorRef alloc, CFDictio
         return NULL;
     }
     
-    if( CFStringGetCString( format, fmt, CFStringGetLength( format ) + 1, kCFStringEncodingUTF8 ) == false )
+    if( CFStringGetCString( format, fmt, CFStringGetLength( format ) + 1, kCFStringEncodingASCII ) == false )
     {
         CFAllocatorDeallocate( alloc, fmt );
         
@@ -246,7 +248,7 @@ CFStringRef CFStringCreateWithFormatAndArguments( CFAllocatorRef alloc, CFDictio
     va_end( ap );
     CFAllocatorDeallocate( alloc, fmt );
     
-    return CFStringCreateWithCStringNoCopy( alloc, str, kCFStringEncodingUTF8, alloc );
+    return CFStringCreateWithCStringNoCopy( alloc, str, kCFStringEncodingASCII, alloc );
 }
 
 CFStringRef CFStringCreateWithPascalString( CFAllocatorRef alloc, ConstStr255Param pStr, CFStringEncoding encoding )
@@ -469,6 +471,11 @@ const char * CFStringGetCStringPtr( CFStringRef theString, CFStringEncoding enco
         return NULL;
     }
     
+    if( theString->_encoding != encoding )
+    {
+        return NULL;
+    }
+    
     return theString->_cStr;
 }
 
@@ -559,28 +566,28 @@ CFStringEncoding CFStringConvertIANACharSetNameToEncoding( CFStringRef theString
 {
     ( void )theString;
     
-    return kCFStringEncodingUTF8;
+    return kCFStringEncodingASCII;
 }
 
 CFStringEncoding CFStringConvertNSStringEncodingToEncoding( unsigned long encoding )
 {
     ( void )encoding;
     
-    return kCFStringEncodingUTF8;
+    return kCFStringEncodingASCII;
 }
 
 CFStringEncoding CFStringConvertWindowsCodepageToEncoding( UInt32 codepage )
 {
     ( void )codepage;
     
-    return kCFStringEncodingUTF8;
+    return kCFStringEncodingASCII;
 }
 
 CFStringEncoding CFStringGetFastestEncoding( CFStringRef theString )
 {
     ( void )theString;
     
-    return kCFStringEncodingUTF8;
+    return kCFStringEncodingASCII;
 }
 
 const CFStringEncoding * CFStringGetListOfAvailableEncodings( void )
@@ -590,8 +597,10 @@ const CFStringEncoding * CFStringGetListOfAvailableEncodings( void )
 
 CFIndex CFStringGetMaximumSizeForEncoding( CFIndex length, CFStringEncoding encoding )
 {
-    ( void )length;
-    ( void )encoding;
+    if( encoding == kCFStringEncodingASCII )
+    {
+        return length + 1;
+    }
     
     return 0;
 }
@@ -600,7 +609,7 @@ CFStringEncoding CFStringGetMostCompatibleMacStringEncoding( CFStringEncoding en
 {
     ( void )encoding;
     
-    return kCFStringEncodingUTF8;
+    return kCFStringEncodingASCII;
 }
 
 CFStringRef CFStringGetNameOfEncoding( CFStringEncoding encoding )
@@ -614,12 +623,12 @@ CFStringEncoding CFStringGetSmallestEncoding( CFStringRef theString )
 {
     ( void )theString;
     
-    return kCFStringEncodingUTF8;
+    return kCFStringEncodingASCII;
 }
 
 CFStringEncoding CFStringGetSystemEncoding( void )
 {
-    return kCFStringEncodingUTF8;
+    return kCFStringEncodingASCII;
 }
 
 Boolean CFStringIsEncodingAvailable( CFStringEncoding encoding )

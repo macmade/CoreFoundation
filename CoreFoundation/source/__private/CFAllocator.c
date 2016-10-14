@@ -69,7 +69,7 @@ CFStringRef CFAllocatorCopyDescription( CFAllocatorRef allocator )
     (
         NULL,
         NULL,
-        CFStringCreateWithCStringNoCopy( NULL, "{ info = 0x%lu }", kCFStringEncodingUTF8, kCFAllocatorNull ),
+        CFStringCreateWithCStringNoCopy( NULL, "{ info = 0x%lu }", kCFStringEncodingASCII, kCFAllocatorNull ),
         allocator->_context.info
     );
 }

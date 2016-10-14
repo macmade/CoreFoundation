@@ -171,7 +171,7 @@ CFStringRef CFCopyDescription( CFTypeRef obj )
     
     if( obj == NULL )
     {
-        return CFStringCreateWithCString( NULL, "(null)", kCFStringEncodingUTF8 );
+        return CFStringCreateWithCString( NULL, "(null)", kCFStringEncodingASCII );
     }
     
     typeID          = CFGetTypeID( obj );
@@ -188,7 +188,7 @@ CFStringRef CFCopyDescription( CFTypeRef obj )
     if
     (
            buf1 == NULL
-        || CFStringGetCString( type, buf1, CFStringGetLength( type ) + 1, kCFStringEncodingUTF8 ) == false
+        || CFStringGetCString( type, buf1, CFStringGetLength( type ) + 1, kCFStringEncodingASCII ) == false
         || strlen( buf1 ) == 0
     )
     {
@@ -215,18 +215,18 @@ CFStringRef CFCopyDescription( CFTypeRef obj )
             if( buf2 )
             {
                 memset( buf2, 0, CFStringGetLength( description ) + 1 );
-                CFStringGetCString( description, buf2, CFStringGetLength( description ) + 1, kCFStringEncodingUTF8 );
+                CFStringGetCString( description, buf2, CFStringGetLength( description ) + 1, kCFStringEncodingASCII );
             }
         }
     }
     
     if( buf2 && strlen( buf2 ) )
     {
-        ret = CFStringCreateWithFormat( NULL, NULL, CFStringCreateWithCStringNoCopy( NULL, "<%s 0x%lx [ 0x%lx ]> %s", kCFStringEncodingUTF8, kCFAllocatorNull ), buf1, obj, CFGetAllocator( obj ), buf2 );
+        ret = CFStringCreateWithFormat( NULL, NULL, CFStringCreateWithCStringNoCopy( NULL, "<%s 0x%lx [ 0x%lx ]> %s", kCFStringEncodingASCII, kCFAllocatorNull ), buf1, obj, CFGetAllocator( obj ), buf2 );
     }
     else
     {
-        ret = CFStringCreateWithFormat( NULL, NULL, CFStringCreateWithCStringNoCopy( NULL, "<%s 0x%lx [ 0x%lx ]>", kCFStringEncodingUTF8, kCFAllocatorNull ), buf1, obj, CFGetAllocator( obj ) );
+        ret = CFStringCreateWithFormat( NULL, NULL, CFStringCreateWithCStringNoCopy( NULL, "<%s 0x%lx [ 0x%lx ]>", kCFStringEncodingASCII, kCFAllocatorNull ), buf1, obj, CFGetAllocator( obj ) );
     }
     
     if( buf2 )
@@ -256,7 +256,7 @@ CFStringRef CFCopyTypeIDDescription( CFTypeID typeID )
         return NULL;
     }
     
-    return CFStringCreateWithCStringNoCopy( NULL, name, kCFStringEncodingUTF8, kCFAllocatorNull );
+    return CFStringCreateWithCStringNoCopy( NULL, name, kCFStringEncodingASCII, kCFAllocatorNull );
 }
 
 CFTypeID CFGetTypeID( CFTypeRef obj )
@@ -295,7 +295,7 @@ void CFShow( CFTypeRef obj )
         return;
     }
     
-    if( CFStringGetCString( description, buf, CFStringGetLength( description ) + 1, kCFStringEncodingUTF8 ) == false )
+    if( CFStringGetCString( description, buf, CFStringGetLength( description ) + 1, kCFStringEncodingASCII ) == false )
     {
         CFRelease( description );
         

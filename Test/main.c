@@ -58,13 +58,13 @@ int main( void )
         CFStringRef s2;
         CFStringRef s3;
         
-        s1 = CFStringCreateWithCString( NULL, "hello, %s", kCFStringEncodingUTF8 );
+        s1 = CFStringCreateWithCString( NULL, "hello, %s", kCFStringEncodingASCII );
         s2 = CFStringCreateWithFormat( NULL, NULL, s1, "universe" );
         s3 = CFStringCreateCopy( NULL, s2 );
             
-        fprintf( stderr,  "%p - %s\n", ( void * )s1, CFStringGetCStringPtr( s1, kCFStringEncodingUTF8 ) );
-        fprintf( stderr,  "%p - %s\n", ( void * )s2, CFStringGetCStringPtr( s2, kCFStringEncodingUTF8 ) );
-        fprintf( stderr,  "%p - %s\n", ( void * )s3, CFStringGetCStringPtr( s3, kCFStringEncodingUTF8 ) );
+        fprintf( stderr,  "%p - %s\n", ( void * )s1, CFStringGetCStringPtr( s1, kCFStringEncodingASCII ) );
+        fprintf( stderr,  "%p - %s\n", ( void * )s2, CFStringGetCStringPtr( s2, kCFStringEncodingASCII ) );
+        fprintf( stderr,  "%p - %s\n", ( void * )s3, CFStringGetCStringPtr( s3, kCFStringEncodingASCII ) );
         
         CFShow( NULL );
         CFShow( kCFAllocatorSystemDefault );
@@ -76,16 +76,16 @@ int main( void )
         (
             stderr,
             "%s == %s : %i\n",
-            CFStringGetCStringPtr( s1, kCFStringEncodingUTF8 ),
-            CFStringGetCStringPtr( s2, kCFStringEncodingUTF8 ),
+            CFStringGetCStringPtr( s1, kCFStringEncodingASCII ),
+            CFStringGetCStringPtr( s2, kCFStringEncodingASCII ),
             CFEqual( s1, s2 )
         );
         fprintf
         (
             stderr,
             "%s == %s : %i\n",
-            CFStringGetCStringPtr( s2, kCFStringEncodingUTF8 ),
-            CFStringGetCStringPtr( s3, kCFStringEncodingUTF8 ),
+            CFStringGetCStringPtr( s2, kCFStringEncodingASCII ),
+            CFStringGetCStringPtr( s3, kCFStringEncodingASCII ),
             CFEqual( s2, s3 )
         );
         
@@ -165,10 +165,10 @@ int main( void )
         v1[ 0 ] = "hello, world";
         v1[ 1 ] = "hello, universe";
         
-        s1 = CFStringCreateWithCString( NULL, k1[ 0 ], kCFStringEncodingUTF8 );
-        s2 = CFStringCreateWithCString( NULL, k1[ 1 ], kCFStringEncodingUTF8 );
-        s3 = CFStringCreateWithCString( NULL, v1[ 0 ], kCFStringEncodingUTF8 );
-        s4 = CFStringCreateWithCString( NULL, v1[ 1 ], kCFStringEncodingUTF8 );
+        s1 = CFStringCreateWithCString( NULL, k1[ 0 ], kCFStringEncodingASCII );
+        s2 = CFStringCreateWithCString( NULL, k1[ 1 ], kCFStringEncodingASCII );
+        s3 = CFStringCreateWithCString( NULL, v1[ 0 ], kCFStringEncodingASCII );
+        s4 = CFStringCreateWithCString( NULL, v1[ 1 ], kCFStringEncodingASCII );
         
         k2[ 0 ] = s1;
         k2[ 1 ] = s2;
@@ -206,8 +206,8 @@ int main( void )
         CFMutableDictionaryRef d2;
         CFDictionaryRef        d3;
         
-        s1 = CFStringCreateWithCString( NULL, "foo", kCFStringEncodingUTF8 );
-        s2 = CFStringCreateWithCString( NULL, "bar", kCFStringEncodingUTF8 );
+        s1 = CFStringCreateWithCString( NULL, "foo", kCFStringEncodingASCII );
+        s2 = CFStringCreateWithCString( NULL, "bar", kCFStringEncodingASCII );
         s3 = CFStringCreateCopy( NULL, s1 );
         
         d1 = CFDictionaryCreateMutable( NULL, 0, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks );
@@ -236,6 +236,36 @@ int main( void )
         CFRelease( d1 );
         CFRelease( d2 );
         CFRelease( d3 );
+    }
+    
+    fprintf( stderr,  "--------------------------------------------------------------------------------\n" );
+    
+    {
+        CFStringRef        s1;
+        CFMutableStringRef s2;
+        CFMutableStringRef s3;
+        
+        s1 = CFStringCreateWithCString( NULL, "hello", kCFStringEncodingASCII );
+        s2 = CFStringCreateMutable( NULL, 0 );
+        s3 = CFStringCreateMutableCopy( NULL, 0, s1 );
+        
+        CFShow( s1 );
+        CFShow( s2 );
+        CFShow( s3 );
+        
+        CFStringAppendCString( s2, ", world", kCFStringEncodingASCII );
+        CFStringAppendCString( s3, ", world", kCFStringEncodingASCII );
+        CFShow( s2 );
+        CFShow( s3 );
+        
+        CFStringAppend( s2, s1 );
+        CFStringAppend( s3, s1 );
+        CFShow( s2 );
+        CFShow( s3 );
+        
+        CFRelease( s1 );
+        CFRelease( s2 );
+        CFRelease( s3 );
     }
     
     fprintf( stderr,  "--------------------------------------------------------------------------------\n" );

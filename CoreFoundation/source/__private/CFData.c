@@ -134,7 +134,7 @@ CFStringRef CFDataCopyDescription( CFDataRef data )
         (
             NULL,
             NULL,
-            CFStringCreateWithCString( NULL, "{ length = %li, type = %s, bytes = 0x%s ... }", kCFStringEncodingUTF8 ),
+            CFStringCreateWithCString( NULL, "{ length = %li, type = %s, bytes = 0x%s ... }", kCFStringEncodingASCII ),
             ( long )( data->_length ),
             ( data->_mutable ) ? "mutable" : "immutable",
             buf
@@ -145,7 +145,7 @@ CFStringRef CFDataCopyDescription( CFDataRef data )
     (
         NULL,
         NULL,
-        CFStringCreateWithCString( NULL, "{ length = %li, bytes = 0x%s }", kCFStringEncodingUTF8 ),
+        CFStringCreateWithCString( NULL, "{ length = %li, bytes = 0x%s }", kCFStringEncodingASCII ),
         ( long )( data->_length ),
         buf
     );

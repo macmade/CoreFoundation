@@ -46,12 +46,12 @@ void CFStringDestruct( CFStringRef str )
 {
     if( str->_cStr )
     {
-        CFAllocatorDeallocate( str->_deallocator, ( void * )( str->_cStr ) );
+        CFAllocatorDeallocate( str->_allocator, ( void * )( str->_cStr ) );
     }
     
-    if( str->_deallocator )
+    if( str->_allocator )
     {
-        CFRelease( str->_deallocator );
+        CFRelease( str->_allocator );
     }
 }
 
@@ -103,8 +103,23 @@ CFStringRef CFStringCopyDescription( CFStringRef str )
     (
         NULL,
         NULL,
-        CFStringCreateWithCStringNoCopy( NULL, "{ type = %s } %s", kCFStringEncodingUTF8, kCFAllocatorNull ),
+        CFStringCreateWithCStringNoCopy( NULL, "{ length = %lu, capacity = %lu, type = %s } %s", kCFStringEncodingASCII, kCFAllocatorNull ),
+        str->_length,
+        str->_capacity,
         ( str->_mutable ) ? "mutable" : "immutable",
         ( str->_cStr ) ? str->_cStr : "(null)"
     );
+}
+
+void CFStringAssertMutable( CFStringRef str )
+{
+    if( str == NULL )
+    {
+        return;
+    }
+    
+    if( str->_mutable == false )
+    {
+        CFRuntimeAbortWithError( "<CFString 0x%lu> is not mutable", ( unsigned long )str );
+    }
 }

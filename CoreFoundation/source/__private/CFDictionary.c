@@ -170,7 +170,7 @@ CFStringRef CFDictionaryCopyDescription( CFDictionaryRef d )
     (
         NULL,
         NULL,
-        CFStringCreateWithCStringNoCopy( NULL, "{ count = %lu, capacity = %lu, type = %s }", kCFStringEncodingUTF8, kCFAllocatorNull ),
+        CFStringCreateWithCStringNoCopy( NULL, "{ count = %lu, capacity = %lu, type = %s }", kCFStringEncodingASCII, kCFAllocatorNull ),
         d->_count,
         d->_size,
         ( d->_mutable ) ? "mutable" : "immutable"
@@ -393,7 +393,7 @@ void CFDictionarySwap( CFDictionaryRef d1, CFDictionaryRef d2 )
     *( p2 ) = tmp;
 }
 
-CF_EXPORT void CFDictionaryAssertMutable( CFDictionaryRef d )
+void CFDictionaryAssertMutable( CFDictionaryRef d )
 {
     if( d == NULL )
     {

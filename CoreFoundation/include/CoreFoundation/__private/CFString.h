@@ -38,11 +38,12 @@ CF_EXTERN_C_BEGIN
 struct CFString
 {
     CFRuntimeBase    _base;
-    const char     * _cStr;
+    char           * _cStr;
     CFIndex          _length;
+    CFIndex          _capacity;
     CFStringEncoding _encoding;
-    CFAllocatorRef   _deallocator;
-    bool            _mutable;
+    CFAllocatorRef   _allocator;
+    bool             _mutable;
 };
 
 CF_EXPORT void        CFStringDestruct( CFStringRef str );
@@ -50,8 +51,12 @@ CF_EXPORT CFHashCode  CFStringHash( CFStringRef str );
 CF_EXPORT bool        CFStringEquals( CFStringRef s1, CFStringRef s2 );
 CF_EXPORT CFStringRef CFStringCopyDescription( CFStringRef str );
 
+CF_EXPORT void CFStringAssertMutable( CFStringRef str );
+
 CF_EXPORT CFTypeID       CFStringTypeID;
 CF_EXPORT CFRuntimeClass CFStringClass;
+
+#define CF_STRING_DEFAULT_CAPACITY  ( 1024 )
 
 CF_EXTERN_C_END
 

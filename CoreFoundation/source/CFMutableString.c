@@ -28,7 +28,10 @@
  */
 
 #include <CoreFoundation/CoreFoundation.h>
+#include <CoreFoundation/__private/CFString.h>
 #include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
 
 const CFStringRef kCFStringTransformStripCombiningMarks = NULL;
 const CFStringRef kCFStringTransformToLatin             = NULL;
@@ -49,19 +52,62 @@ const CFStringRef kCFStringTransformStripDiacritics     = NULL;
 
 CFMutableStringRef CFStringCreateMutable( CFAllocatorRef alloc, CFIndex maxLength )
 {
-    ( void )alloc;
-    ( void )maxLength;
+    struct CFString * o;
+    CFIndex           capacity;
     
-    return NULL;
+    capacity = ( maxLength ) ? maxLength : CF_STRING_DEFAULT_CAPACITY;
+    o        = ( struct CFString * )CFRuntimeCreateInstance( alloc, CFStringTypeID );
+    
+    if( o == NULL )
+    {
+        return NULL;
+    }
+    
+    o->_cStr = CFAllocatorAllocate( alloc, capacity, 0 );
+    
+    if( o->_cStr == NULL )
+    {
+        CFRelease( o );
+        
+        return NULL;
+    }
+    
+    o->_length      = 0;
+    o->_capacity    = capacity;
+    o->_mutable     = true;
+    o->_allocator   = ( alloc ) ? CFRetain( alloc ) : NULL;
+    o->_encoding    = kCFStringEncodingASCII;
+    
+    memset( o->_cStr, 0, capacity );
+    
+    return o;
 }
 
 CFMutableStringRef CFStringCreateMutableCopy( CFAllocatorRef alloc, CFIndex maxLength, CFStringRef theString )
 {
-    ( void )alloc;
-    ( void )maxLength;
-    ( void )theString;
+    CFMutableStringRef o;
+    CFIndex            capacity;
     
-    return NULL;
+    if( theString == NULL )
+    {
+        return NULL;
+    }
+    
+    capacity = ( maxLength < theString->_length + 1 ) ? theString->_length + 1 : maxLength;
+    
+    o = CFStringCreateMutable( alloc, capacity );
+    
+    if( o == NULL )
+    {
+        return NULL;
+    }
+    
+    o->_length   = theString->_length;
+    o->_encoding = theString->_encoding;
+    
+    memcpy( o->_cStr, theString->_cStr, theString->_length );
+    
+    return o;
 }
 
 CFMutableStringRef CFStringCreateMutableWithExternalCharactersNoCopy( CFAllocatorRef alloc, UniChar * chars, CFIndex numChars, CFIndex capacity, CFAllocatorRef externalCharactersAllocator )
@@ -77,61 +123,186 @@ CFMutableStringRef CFStringCreateMutableWithExternalCharactersNoCopy( CFAllocato
 
 void CFStringAppend( CFMutableStringRef theString, CFStringRef appendedString )
 {
-    ( void )theString;
-    ( void )appendedString;
+    char  * buf;
+    CFIndex size;
+    CFIndex capacity;
+    char  * cStr;
+    
+    if( theString == NULL || appendedString == NULL )
+    {
+        return;
+    }
+    
+    CFStringAssertMutable( theString );
+    
+    size = CFStringGetMaximumSizeForEncoding( appendedString->_length + 1, theString->_encoding );
+    buf  = CFAllocatorAllocate( NULL, size, 0 );
+    
+    if( buf == NULL )
+    {
+        return;
+    }
+    
+    if( CFStringGetCString( appendedString, buf, size, theString->_encoding ) == false )
+    {
+        CFAllocatorDeallocate( NULL, buf );
+        
+        return;
+    }
+    
+    capacity = theString->_length + size;
+    
+    if( capacity > theString->_capacity )
+    {
+        cStr = CFAllocatorReallocate( theString->_allocator, theString->_cStr, capacity, 0 );
+        
+        if( cStr == NULL )
+        {
+            CFAllocatorDeallocate( NULL, buf );
+            
+            return;
+        }
+        
+        theString->_cStr     = cStr;
+        theString->_capacity = capacity;
+    }
+    
+    strcat( theString->_cStr, buf );
+    
+    theString->_length = theString->_length + appendedString->_length;
+    
+    CFAllocatorDeallocate( NULL, buf );
 }
 
 void CFStringAppendCharacters( CFMutableStringRef theString, const UniChar * chars, CFIndex numChars )
 {
-    ( void )theString;
-    ( void )chars;
-    ( void )numChars;
+    CFStringRef s;
+    
+    if( theString == NULL || chars == NULL )
+    {
+        return;
+    }
+    
+    CFStringAssertMutable( theString );
+    
+    s = CFStringCreateWithCharacters( NULL, chars, numChars );
+    
+    if( s )
+    {
+        CFStringAppend( theString, s );
+        CFRelease( s );
+    }
 }
 
 void CFStringAppendCString( CFMutableStringRef theString, const char * cStr, CFStringEncoding encoding )
 {
-    ( void )theString;
-    ( void )cStr;
-    ( void )encoding;
+    CFStringRef s;
+    
+    if( theString == NULL || cStr == NULL )
+    {
+        return;
+    }
+    
+    CFStringAssertMutable( theString );
+    
+    s = CFStringCreateWithCString( NULL, cStr, encoding );
+    
+    if( s )
+    {
+        CFStringAppend( theString, s );
+        CFRelease( s );
+    }
 }
 
 void CFStringAppendFormat( CFMutableStringRef theString, CFDictionaryRef formatOptions, CFStringRef format, ... )
 {
-    ( void )theString;
-    ( void )formatOptions;
-    ( void )format;
+    va_list ap;
+    
+    if( theString == NULL || format == NULL )
+    {
+        return;
+    }
+    
+    CFStringAssertMutable( theString );
+    
+    va_start( ap, format );
+    CFStringAppendFormatAndArguments( theString, formatOptions, format, ap );
+    va_end( ap );
 }
 
 void CFStringAppendFormatAndArguments( CFMutableStringRef theString, CFDictionaryRef formatOptions, CFStringRef format, va_list arguments )
 {
-    ( void )theString;
-    ( void )formatOptions;
-    ( void )format;
-    ( void )arguments;
+    CFStringRef s;
+    
+    if( theString == NULL || format == NULL )
+    {
+        return;
+    }
+    
+    CFStringAssertMutable( theString );
+    
+    s = CFStringCreateWithFormatAndArguments( NULL, formatOptions, format, arguments );
+    
+    if( s )
+    {
+        CFStringAppend( theString, s );
+        CFRelease( s );
+    }
 }
 
 void CFStringAppendPascalString( CFMutableStringRef theString, ConstStr255Param pStr, CFStringEncoding encoding )
 {
-    ( void )theString;
-    ( void )pStr;
-    ( void )encoding;
+    CFStringRef s;
+    
+    if( theString == NULL )
+    {
+        return;
+    }
+    
+    CFStringAssertMutable( theString );
+    
+    s = CFStringCreateWithPascalString( NULL, pStr, encoding );
+    
+    if( s )
+    {
+        CFStringAppend( theString, s );
+        CFRelease( s );
+    }
 }
 
 void CFStringCapitalize( CFMutableStringRef theString, CFLocaleRef locale )
 {
-    ( void )theString;
+    if( theString == NULL )
+    {
+        return;
+    }
+    
+    CFStringAssertMutable( theString );
+    
     ( void )locale;
 }
 
 void CFStringDelete( CFMutableStringRef theString, CFRange range )
 {
-    ( void )theString;
+    if( theString == NULL )
+    {
+        return;
+    }
+    
+    CFStringAssertMutable( theString );
+    
     ( void )range;
 }
 
 CFIndex CFStringFindAndReplace( CFMutableStringRef theString, CFStringRef stringToFind, CFStringRef replacementString, CFRange rangeToSearch, CFStringCompareFlags compareOptions )
 {
-    ( void )theString;
+    if( theString == NULL )
+    {
+        return kCFNotFound;
+    }
+    
+    CFStringAssertMutable( theString );
+    
     ( void )stringToFind;
     ( void )replacementString;
     ( void )rangeToSearch;
@@ -142,33 +313,70 @@ CFIndex CFStringFindAndReplace( CFMutableStringRef theString, CFStringRef string
 
 void CFStringFold( CFMutableStringRef theString, CFStringCompareFlags theFlags, CFLocaleRef theLocale )
 {
-    ( void )theString;
+    if( theString == NULL )
+    {
+        return;
+    }
+    
+    CFStringAssertMutable( theString );
+    
     ( void )theFlags;
     ( void )theLocale;
 }
 
 void CFStringInsert( CFMutableStringRef str, CFIndex idx, CFStringRef insertedStr )
 {
-    ( void )str;
+    if( str == NULL )
+    {
+        return;
+    }
+    
+    CFStringAssertMutable( str );
+    
     ( void )idx;
     ( void )insertedStr;
 }
 
 void CFStringLowercase( CFMutableStringRef theString, CFLocaleRef locale )
 {
-    ( void )theString;
+    CFIndex i;
+    
+    if( theString == NULL )
+    {
+        return;
+    }
+    
+    CFStringAssertMutable( theString );
+    
     ( void )locale;
+    
+    for( i = 0; i < theString->_length; i++ )
+    {
+        theString->_cStr[ i ] = ( char )tolower( theString->_cStr[ i ] );
+    }
 }
 
 void CFStringNormalize( CFMutableStringRef theString, CFStringNormalizationForm theForm )
 {
-    ( void )theString;
+    if( theString == NULL )
+    {
+        return;
+    }
+    
+    CFStringAssertMutable( theString );
+    
     ( void )theForm;
 }
 
 void CFStringPad( CFMutableStringRef theString, CFStringRef padString, CFIndex length, CFIndex indexIntoPad )
 {
-    ( void )theString;
+    if( theString == NULL )
+    {
+        return;
+    }
+    
+    CFStringAssertMutable( theString );
+    
     ( void )padString;
     ( void )length;
     ( void )indexIntoPad;
@@ -176,7 +384,13 @@ void CFStringPad( CFMutableStringRef theString, CFStringRef padString, CFIndex l
 
 void CFStringReplace( CFMutableStringRef theString, CFRange range, CFStringRef replacement )
 {
-    ( void )theString;
+    if( theString == NULL )
+    {
+        return;
+    }
+    
+    CFStringAssertMutable( theString );
+    
     ( void )range;
     ( void )theString;
     ( void )replacement;
@@ -184,13 +398,25 @@ void CFStringReplace( CFMutableStringRef theString, CFRange range, CFStringRef r
 
 void CFStringReplaceAll( CFMutableStringRef theString, CFStringRef replacement )
 {
-    ( void )theString;
+    if( theString == NULL )
+    {
+        return;
+    }
+    
+    CFStringAssertMutable( theString );
+    
     ( void )replacement;
 }
 
 void CFStringSetExternalCharactersNoCopy( CFMutableStringRef theString, UniChar * chars, CFIndex length, CFIndex capacity )
 {
-    ( void )theString;
+    if( theString == NULL )
+    {
+        return;
+    }
+    
+    CFStringAssertMutable( theString );
+    
     ( void )chars;
     ( void )length;
     ( void )capacity;
@@ -198,7 +424,13 @@ void CFStringSetExternalCharactersNoCopy( CFMutableStringRef theString, UniChar 
 
 Boolean CFStringTransform( CFMutableStringRef string, CFRange * range, CFStringRef transform, Boolean reverse )
 {
-    ( void )string;
+    if( string == NULL )
+    {
+        return false;
+    }
+    
+    CFStringAssertMutable( string );
+    
     ( void )range;
     ( void )transform;
     ( void )reverse;
@@ -208,17 +440,41 @@ Boolean CFStringTransform( CFMutableStringRef string, CFRange * range, CFStringR
 
 void CFStringTrim( CFMutableStringRef theString, CFStringRef trimString )
 {
-    ( void )theString;
+    if( theString == NULL )
+    {
+        return;
+    }
+    
+    CFStringAssertMutable( theString );
+    
     ( void )trimString;
 }
 
 void CFStringTrimWhitespace( CFMutableStringRef theString )
 {
-    ( void )theString;
+    if( theString == NULL )
+    {
+        return;
+    }
+    
+    CFStringAssertMutable( theString );
 }
 
 void CFStringUppercase( CFMutableStringRef theString, CFLocaleRef locale )
 {
-    ( void )theString;
+    CFIndex i;
+    
+    if( theString == NULL )
+    {
+        return;
+    }
+    
+    CFStringAssertMutable( theString );
+    
     ( void )locale;
+    
+    for( i = 0; i < theString->_length; i++ )
+    {
+        theString->_cStr[ i ] = ( char )toupper( theString->_cStr[ i ] );
+    }
 }
