@@ -242,30 +242,32 @@ int main( void )
     
     {
         CFStringRef        s1;
-        CFMutableStringRef s2;
+        CFStringRef        s2;
         CFMutableStringRef s3;
+        CFMutableStringRef s4;
         
         s1 = CFStringCreateWithCString( NULL, "hello", kCFStringEncodingASCII );
-        s2 = CFStringCreateMutable( NULL, 0 );
-        s3 = CFStringCreateMutableCopy( NULL, 0, s1 );
+        s2 = CFStringCreateWithCString( NULL, ", world", kCFStringEncodingASCII );
+        s3 = CFStringCreateMutable( NULL, 0 );
+        s4 = CFStringCreateMutableCopy( NULL, 0, s1 );
         
         CFShow( s1 );
         CFShow( s2 );
         CFShow( s3 );
+        CFShow( s4 );
         
-        CFStringAppendCString( s2, ", world", kCFStringEncodingASCII );
-        CFStringAppendCString( s3, ", world", kCFStringEncodingASCII );
-        CFShow( s2 );
+        CFStringAppendCString( s3, "hello", kCFStringEncodingASCII );
         CFShow( s3 );
         
-        CFStringAppend( s2, s1 );
-        CFStringAppend( s3, s1 );
-        CFShow( s2 );
+        CFStringAppend( s3, s2 );
+        CFStringAppend( s4, s2 );
         CFShow( s3 );
+        CFShow( s4 );
         
         CFRelease( s1 );
         CFRelease( s2 );
         CFRelease( s3 );
+        CFRelease( s4 );
     }
     
     fprintf( stderr,  "--------------------------------------------------------------------------------\n" );
