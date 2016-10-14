@@ -85,8 +85,7 @@ CFMutableDictionaryRef CFDictionaryCreateMutableCopy( CFAllocatorRef allocator, 
     
     for( i = 0; i < theDict->_size; i++ )
     {
-        item                 = theDict->_items[ i ];
-        theDict->_items[ i ] = NULL;
+        item = theDict->_items[ i ];
         
         while( item )
         {

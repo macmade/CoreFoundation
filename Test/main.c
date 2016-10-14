@@ -175,27 +175,34 @@ int main( void )
         CFStringRef            s1;
         CFStringRef            s2;
         CFStringRef            s3;
-        CFMutableDictionaryRef d;
+        CFMutableDictionaryRef d1;
+        CFMutableDictionaryRef d2;
         
         s1 = CFStringCreateWithCString( NULL, "foo", kCFStringEncodingUTF8 );
         s2 = CFStringCreateWithCString( NULL, "bar", kCFStringEncodingUTF8 );
         s3 = CFStringCreateCopy( NULL, s1 );
         
-        d = CFDictionaryCreateMutable( NULL, 0, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks );
+        d1 = CFDictionaryCreateMutable( NULL, 0, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks );
         
-        CFDictionaryAddValue( d, s1, s2 );
-        CFDictionaryAddValue( d, s2, s1 );
+        CFDictionaryAddValue( d1, s1, s2 );
+        CFDictionaryAddValue( d1, s2, s1 );
+        CFShow( d1 );
+        CFDictionaryAddValue( d1, s3, s2 );
+        CFShow( d1 );
         
-        CFShow( d );
+        d2 = CFDictionaryCreateMutableCopy( NULL, 0, d1 );
         
-        CFDictionaryAddValue( d, s3, s2 );
-        
-        CFShow( d );
+        CFShow( d2 );
+        fprintf( stderr, "Equals: %i\n", CFEqual( d1, d2 ) );
+        CFDictionarySetValue( d2, s1, s1 );
+        CFShow( d2 );
+        fprintf( stderr, "Equals: %i\n", CFEqual( d1, d2 ) );
         
         CFRelease( s1 );
         CFRelease( s2 );
         CFRelease( s3 );
-        CFRelease( d );
+        CFRelease( d1 );
+        CFRelease( d2 );
     }
     
     fprintf( stderr,  "--------------------------------------------------------------------------------\n" );

@@ -37,7 +37,7 @@ CFRuntimeClass CFDictionaryClass  =
     NULL,
     ( void ( * )( CFTypeRef ) )CFDictionaryDestruct,
     NULL,
-    NULL,
+    ( bool ( * )( CFTypeRef, CFTypeRef ) )CFDictionaryEquals,
     ( CFStringRef ( * )( CFTypeRef ) )CFDictionaryCopyDescription
 };
 
@@ -79,6 +79,89 @@ void CFDictionaryDestruct( CFDictionaryRef d )
     }
     
     CFAllocatorDeallocate( alloc, d->_items );
+}
+
+#include <stdio.h>
+
+bool CFDictionaryEquals( CFDictionaryRef d1, CFDictionaryRef d2 )
+{
+    CFIndex                   i;
+    CFIndex                   j;
+    struct CFDictionaryItem * item1;
+    struct CFDictionaryItem * item2;
+    bool                      found;
+    
+    if( d1->_items == NULL || d2->_items == NULL )
+    {
+        return false;
+    }
+    
+    if( d1->_count != d2->_count )
+    {
+        return false;
+    }
+    
+    for( i = 0; i < d1->_size; i++ )
+    {
+        item1 = d1->_items[ i ];
+        
+        while( item1 )
+        {
+            found = false;
+            
+            for( j = 0; j < d2->_size; j++ )
+            {
+                item2 = d2->_items[ j ];
+                
+                while( item2 )
+                {
+                    if( d1->_keyCallbacks.equal == NULL && item1->key != item2->key )
+                    {
+                        item2 = item2->next;
+                        
+                        continue;
+                    }
+                    else if( item1->key != item2->key && d1->_keyCallbacks.equal( item1->key, item2->key ) == false )
+                    {
+                        item2 = item2->next;
+                        
+                        continue;
+                    }
+                    
+                    if( d1->_valueCallbacks.equal == NULL && item1->value != item2->value )
+                    {
+                        item2 = item2->next;
+                        
+                        continue;
+                    }
+                    else if( item1->value != item2->value && d1->_valueCallbacks.equal( item1->value, item2->value ) == false )
+                    {
+                        item2 = item2->next;
+                        
+                        continue;
+                    }
+                    
+                    found = true;
+                    
+                    break;
+                }
+                
+                if( found )
+                {
+                    break;
+                }
+            }
+            
+            if( found == false )
+            {
+                return false;
+            }
+            
+            item1 = item1->next;
+        }
+    }
+    
+    return true;
 }
 
 CFStringRef CFDictionaryCopyDescription( CFDictionaryRef d )
@@ -268,7 +351,6 @@ void CFDictionaryResize( CFDictionaryRef d, CFIndex size )
     vCallbacks                 = d2->_valueCallbacks;
     d2->_keyCallbacks.retain   = NULL;
     d2->_valueCallbacks.retain = NULL;
-    
     
     for( i = 0; i < d->_size; i++ )
     {

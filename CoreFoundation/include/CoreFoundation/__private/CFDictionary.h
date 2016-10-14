@@ -54,7 +54,8 @@ struct CFDictionary
 };
 
 CF_EXPORT void        CFDictionaryDestruct( CFDictionaryRef d );
-CF_EXPORT CFStringRef CFDictionaryCopyDescription( CFDictionaryRef str );
+CF_EXPORT bool        CFDictionaryEquals( CFDictionaryRef d1, CFDictionaryRef d2 );
+CF_EXPORT CFStringRef CFDictionaryCopyDescription( CFDictionaryRef d );
 
 CF_EXPORT CFTypeID       CFDictionaryTypeID;
 CF_EXPORT CFRuntimeClass CFDictionaryClass;
