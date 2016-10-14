@@ -505,7 +505,7 @@ CFRange CFStringGetRangeOfComposedCharactersAtIndex( CFStringRef theString, CFIn
     ( void )theString;
     ( void )theIndex;
     
-    return CFRangeMake( 0, 0 );
+    return CFRangeMake( kCFNotFound, 0 );
 }
 
 void CFStringInitInlineBuffer( CFStringRef str, CFStringInlineBuffer * buf, CFRange range )

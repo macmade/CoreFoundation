@@ -205,8 +205,6 @@ CF_EXPORT CFRange CFRangeMake( CFIndex location, CFIndex length );
  */
 CF_EXPORT double kCFCoreFoundationVersionNumber;
 
-
-
 CF_EXTERN_C_END
 
 #endif /* CORE_FOUNDATION_CF_BASE_H */
