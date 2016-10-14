@@ -46,6 +46,8 @@ struct CFString
 };
 
 CF_EXPORT void        CFStringDestruct( CFStringRef str );
+CF_EXPORT CFHashCode  CFStringHash( CFStringRef str );
+CF_EXPORT bool        CFStringEquals( CFStringRef s1, CFStringRef s2 );
 CF_EXPORT CFStringRef CFStringCopyDescription( CFStringRef str );
 
 CF_EXPORT CFTypeID       CFStringTypeID;

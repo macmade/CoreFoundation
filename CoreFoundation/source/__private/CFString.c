@@ -28,6 +28,7 @@
  */
 
 #include <CoreFoundation/__private/CFString.h>
+#include <string.h>
 
 CFTypeID       CFStringTypeID = 0;
 CFRuntimeClass CFStringClass  =
@@ -36,8 +37,8 @@ CFRuntimeClass CFStringClass  =
     sizeof( struct CFString ),
     NULL,
     ( void ( * )( CFTypeRef ) )CFStringDestruct,
-    NULL,
-    NULL,
+    ( CFHashCode ( * )( CFTypeRef ) )CFStringHash,
+    ( bool ( * )( CFTypeRef, CFTypeRef ) )CFStringEquals,
     ( CFStringRef ( * )( CFTypeRef ) )CFStringCopyDescription
 };
 
@@ -52,6 +53,48 @@ void CFStringDestruct( CFStringRef str )
     {
         CFRelease( str->_deallocator );
     }
+}
+
+CFHashCode CFStringHash( CFStringRef str )
+{
+    CFHashCode            h;
+    unsigned char         c;
+    const unsigned char * cp;
+    
+    if( str->_cStr == NULL )
+    {
+        return ( CFHashCode )str;
+    }
+    
+    cp = ( const unsigned char * )( str->_cStr );
+    h  = 0;
+    
+    while( ( c = *( cp++ ) ) )
+    {
+        h = h * 31 + c;
+    }
+    
+    return h;
+}
+
+bool CFStringEquals( CFStringRef s1, CFStringRef s2 )
+{
+    if( s1->_cStr == NULL || s2->_cStr == NULL )
+    {
+        return false;
+    }
+    
+    if( s1->_cStr == s2->_cStr )
+    {
+        return true;
+    }
+    
+    if( s1->_length != s2->_length )
+    {
+        return false;
+    }
+    
+    return memcmp( s1->_cStr, s2->_cStr, ( size_t )( s1->_length ) ) == 0;
 }
 
 CFStringRef CFStringCopyDescription( CFStringRef str )

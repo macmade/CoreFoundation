@@ -160,28 +160,42 @@ int main( void )
         CFShow( CFDictionaryGetValue( d2, k2[ 0 ] ) );
         CFShow( CFDictionaryGetValue( d2, k2[ 1 ] ) );
         
-        {
-            CFMutableDictionaryRef md1;
-            CFMutableDictionaryRef md2;
-            
-            md1 = CFDictionaryCreateMutable( NULL, 0, NULL, NULL );
-            md2 = CFDictionaryCreateMutableCopy( NULL, 0, d2 );
-            
-            CFShow( md1 );
-            CFShow( md2 );
-            
-            CFDictionaryAddValue( md1, "foobar", "hello, world" );
-            CFDictionaryRemoveAllValues( md2 );
-            
-            CFShow( md1 );
-            CFShow( md2 );
-            
-            CFRelease( md1 );
-            CFRelease( md2 );
-        }
+        CFRelease( s1 );
+        CFRelease( s2 );
+        CFRelease( s3 );
+        CFRelease( s4 );
         
         CFRelease( d1 );
         CFRelease( d2 );
+    }
+    
+    fprintf( stderr,  "--------------------------------------------------------------------------------\n" );
+    
+    {
+        CFStringRef            s1;
+        CFStringRef            s2;
+        CFStringRef            s3;
+        CFMutableDictionaryRef d;
+        
+        s1 = CFStringCreateWithCString( NULL, "foo", kCFStringEncodingUTF8 );
+        s2 = CFStringCreateWithCString( NULL, "bar", kCFStringEncodingUTF8 );
+        s3 = CFStringCreateCopy( NULL, s1 );
+        
+        d = CFDictionaryCreateMutable( NULL, 0, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks );
+        
+        CFDictionaryAddValue( d, s1, s2 );
+        CFDictionaryAddValue( d, s2, s1 );
+        
+        CFShow( d );
+        
+        CFDictionaryAddValue( d, s3, s2 );
+        
+        CFShow( d );
+        
+        CFRelease( s1 );
+        CFRelease( s2 );
+        CFRelease( s3 );
+        CFRelease( d );
     }
     
     fprintf( stderr,  "--------------------------------------------------------------------------------\n" );
