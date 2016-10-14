@@ -60,7 +60,8 @@ CFStringRef CFStringCopyDescription( CFStringRef str )
     (
         NULL,
         NULL,
-        CFStringCreateWithCStringNoCopy( NULL, "%s", kCFStringEncodingUTF8, kCFAllocatorNull ),
+        CFStringCreateWithCStringNoCopy( NULL, "{ type = %s } %s", kCFStringEncodingUTF8, kCFAllocatorNull ),
+        ( str->_mutable ) ? "mutable" : "immutable",
         ( str->_cStr ) ? str->_cStr : "(null)"
     );
 }

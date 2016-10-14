@@ -42,6 +42,7 @@ struct CFString
     CFIndex          _length;
     CFStringEncoding _encoding;
     CFAllocatorRef   _deallocator;
+    bool            _mutable;
 };
 
 CF_EXPORT void        CFStringDestruct( CFStringRef str );

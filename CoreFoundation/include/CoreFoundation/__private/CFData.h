@@ -41,6 +41,7 @@ struct CFData
     const UInt8   * _bytes;
     CFIndex         _length;
     CFAllocatorRef  _deallocator;
+    bool            _mutable;
 };
 
 CF_EXPORT void        CFDataDestruct( CFDataRef data );
