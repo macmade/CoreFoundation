@@ -66,6 +66,10 @@ int main( void )
         fprintf( stderr,  "%p - %s\n", ( void * )s2, CFStringGetCStringPtr( s2, kCFStringEncodingASCII ) );
         fprintf( stderr,  "%p - %s\n", ( void * )s3, CFStringGetCStringPtr( s3, kCFStringEncodingASCII ) );
         
+        CFShowStr( s1 );
+        CFShowStr( s2 );
+        CFShowStr( s3 );
+        
         CFShow( NULL );
         CFShow( kCFAllocatorSystemDefault );
         CFShow( s1 );

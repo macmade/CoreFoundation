@@ -109,34 +109,28 @@ CFDictionaryRef CFDictionaryCreateCopy( CFAllocatorRef allocator, CFDictionaryRe
         return NULL;
     }
     
+    o->_items = CFAllocatorAllocate( allocator, theDict->_size * ( CFIndex )sizeof( struct CFDictionaryItem * ), 0 );
+    
+    if( o->_items == NULL )
+    {
+        CFRelease( o );
+        
+        return NULL;
+    }
+    
     o->_size            = theDict->_size;
-    o->_count           = theDict->_count;
     o->_keyCallbacks    = theDict->_keyCallbacks;
     o->_valueCallbacks  = theDict->_valueCallbacks;
-    o->_items           = CFAllocatorAllocate( allocator, o->_size * ( CFIndex )sizeof( struct CFDictionaryItem * ), 0 );
     
-    memcpy( o->_items, theDict->_items, ( size_t )( o->_size ) );
-    
-    if( o->_keyCallbacks.retain || o->_valueCallbacks.retain )
+    for( i = 0; i < theDict->_size; i++ )
     {
-        for( i = 0; i < o->_size; i++ )
+        item = theDict->_items[ i ];
+        
+        while( item )
         {
-            item = o->_items[ i ];
+            CFDictionaryInsert( o, item->key, item->value, false );
             
-            while( item )
-            {
-                if( o->_keyCallbacks.retain )
-                {
-                    item->key = o->_keyCallbacks.retain( allocator, item->key );
-                }
-                
-                if( o->_valueCallbacks.retain )
-                {
-                    item->value = o->_keyCallbacks.retain( allocator, item->value );
-                }
-                
-                item = item->next;
-            }
+            item = item->next;
         }
     }
     

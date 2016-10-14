@@ -654,7 +654,24 @@ SInt32 CFStringGetIntValue( CFStringRef str )
 
 void CFShowStr( CFStringRef str )
 {
-    ( void )str;
+    if( str == NULL )
+    {
+        fprintf( stderr, "(null)\n" );
+        
+        return;
+    }
+    
+    fprintf
+    (
+        stderr,
+        "<CFString 0x%lu [ 0x%lu ]> { length = %lu, capacity = %lu, type = %s } %s\n",
+        ( unsigned long )str,
+        ( unsigned long )CFGetAllocator( str ),
+        str->_length,
+        str->_capacity,
+        ( str->_mutable ) ? "mutable" : "immutable",
+        ( str->_cStr ) ? str->_cStr : "(null)"
+    );
 }
 
 CFStringRef CFStringCreateWithFileSystemRepresentation( CFAllocatorRef alloc, const char * buffer )

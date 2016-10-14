@@ -99,16 +99,27 @@ bool CFStringEquals( CFStringRef s1, CFStringRef s2 )
 
 CFStringRef CFStringCopyDescription( CFStringRef str )
 {
-    return CFStringCreateWithFormat
+    CFStringRef format;
+    CFStringRef s;
+    
+    format = CFStringCreateWithCStringNoCopy( NULL, "%s", kCFStringEncodingASCII, kCFAllocatorNull );
+    
+    if( format == NULL )
+    {
+        return NULL;
+    }
+    
+    s = CFStringCreateWithFormat
     (
         NULL,
         NULL,
-        CFStringCreateWithCStringNoCopy( NULL, "{ length = %lu, capacity = %lu, type = %s } %s", kCFStringEncodingASCII, kCFAllocatorNull ),
-        str->_length,
-        str->_capacity,
-        ( str->_mutable ) ? "mutable" : "immutable",
+        format,
         ( str->_cStr ) ? str->_cStr : "(null)"
     );
+    
+    CFRelease( format );
+    
+    return s;
 }
 
 void CFStringAssertMutable( CFStringRef str )

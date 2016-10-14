@@ -166,15 +166,96 @@ bool CFDictionaryEquals( CFDictionaryRef d1, CFDictionaryRef d2 )
 
 CFStringRef CFDictionaryCopyDescription( CFDictionaryRef d )
 {
-    return CFStringCreateWithFormat
+    CFMutableStringRef        s;
+    CFStringRef               format;
+    CFIndex                   i;
+    struct CFDictionaryItem * item;
+    CFStringRef               k;
+    CFStringRef               v;
+    
+    format = CFStringCreateWithCStringNoCopy( NULL, "{ count = %lu, capacity = %lu, type = %s }", kCFStringEncodingASCII, kCFAllocatorNull );
+    
+    if( format == NULL )
+    {
+        return NULL;
+    }
+    
+    s = CFStringCreateMutable( NULL, 0 );
+    
+    if( s == NULL )
+    {
+        CFRelease( format );
+        
+        return NULL;
+    }
+    
+    CFStringAppendFormat
     (
+        s,
         NULL,
-        NULL,
-        CFStringCreateWithCStringNoCopy( NULL, "{ count = %lu, capacity = %lu, type = %s }", kCFStringEncodingASCII, kCFAllocatorNull ),
+        format,
         d->_count,
         d->_size,
         ( d->_mutable ) ? "mutable" : "immutable"
     );
+    
+    CFRelease( format );
+    
+    format = CFStringCreateWithCString( NULL, "0x%lu", kCFStringEncodingASCII );
+    
+    if( d->_count == 0 || format == NULL )
+    {
+        return s;
+    }
+    
+    CFStringAppendCString( s, "\n{\n", kCFStringEncodingASCII );
+    
+    for( i = 0; i < d->_size; i++ )
+    {
+        item = d->_items[ i ];
+        
+        while( item )
+        {
+            k = NULL;
+            v = NULL;
+            
+            if( d->_keyCallbacks.copyDescription )
+            {
+                k = d->_keyCallbacks.copyDescription( item->key );
+            }
+            
+            if( d->_valueCallbacks.copyDescription )
+            {
+                v = d->_valueCallbacks.copyDescription( item->value );
+            }
+            
+            if( k == NULL )
+            {
+                k = CFStringCreateWithFormat( NULL, NULL, format, item->key );
+            }
+            
+            if( v == NULL )
+            {
+                v = CFStringCreateWithFormat( NULL, NULL, format, item->value );
+            }
+            
+            if( v && s )
+            {
+                CFStringAppendCString( s, "    ", kCFStringEncodingASCII );
+                CFStringAppend( s, k );
+                CFStringAppendCString( s, " = ", kCFStringEncodingASCII );
+                CFStringAppend( s, v );
+                CFStringAppendCString( s, "\n", kCFStringEncodingASCII );
+            }
+            
+            item = item->next;
+        }
+    }
+    
+    CFStringAppendCString( s, "}", kCFStringEncodingASCII );
+    CFRelease( format );
+    
+    return s;
 }
 
 const void * CFDictionaryCallbackRetain( CFAllocatorRef allocator, const void * value )
