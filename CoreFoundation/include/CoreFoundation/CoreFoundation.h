@@ -52,6 +52,15 @@
 #include <CoreFoundation/CFLocale.h>
 #include <CoreFoundation/CFMachPort.h>
 #include <CoreFoundation/CFMessagePort.h>
+#include <CoreFoundation/CFMutableArray.h>
+#include <CoreFoundation/CFMutableAttributedString.h>
+#include <CoreFoundation/CFMutableBag.h>
+#include <CoreFoundation/CFMutableBitVector.h>
+#include <CoreFoundation/CFMutableCharacterSet.h>
+#include <CoreFoundation/CFMutableData.h>
+#include <CoreFoundation/CFMutableDictionary.h>
+#include <CoreFoundation/CFMutableSet.h>
+#include <CoreFoundation/CFMutableString.h>
 #include <CoreFoundation/CFNotificationCenter.h>
 #include <CoreFoundation/CFNull.h>
 #include <CoreFoundation/CFNumber.h>
