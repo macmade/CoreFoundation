@@ -159,7 +159,7 @@ CF_EXPORT const CFIndex kCFNotFound;
  * @discussion  If you need to sort the elements in a collection using special
  *              criteria, you can implement a comparator function with the
  *              signature defined by this prototype. You pass a pointer to this
- *              function in one of the “sort” functions, such as CFArray's
+ *              function in one of the "sort" functions, such as CFArray's
  *              CFArraySortValues.
  *              You can also pass pointers to standard Core Foundation
  *              comparator functions such as CFStringCompare and CFDateCompare.

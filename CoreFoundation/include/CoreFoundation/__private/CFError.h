@@ -23,42 +23,26 @@
  ******************************************************************************/
 
 /*!
- * @header      CFNull.h
+ * @header      CFError.h
  * @copyright   (c) 2016, Jean-David Gadina - www.xs-labs.com
- * @discussion  The CFNull opaque type defines a unique object used to represent
- *              null values in collection objects (which don't allow NULL
- *              values). CFNull objects are neither created nor destroyed.
- *              Instead, a single CFNull constant object—kCFNull—is defined and
- *              is used wherever a null value is needed.
  */
 
-#ifndef CORE_FOUNDATION_CF_NULL_H
-#define CORE_FOUNDATION_CF_NULL_H
+#ifndef CORE_FOUNDATION___PRIVATE_CF_ERROR_H
+#define CORE_FOUNDATION___PRIVATE_CF_ERROR_H
 
-#include <CoreFoundation/CFBase.h>
-#include <CoreFoundation/CFType.h>
+#include <CoreFoundation/CoreFoundation.h>
+#include <CoreFoundation/__private/CFRuntime.h>
 
 CF_EXTERN_C_BEGIN
 
-/*!
- * @typedef     CFNullRef
- * @abstract    A reference to a CFNull object.
- */
-typedef const struct CFNull * CFNullRef;
+struct CFError
+{
+    CFRuntimeBase _base;
+};
 
-/*!
- * @constant    kCFNull
- * @abstract    The singleton CFNull object.
- */
-CF_EXPORT const CFNullRef kCFNull;
-
-/*!
- * @function    CFNullGetTypeID
- * @abstract    Returns the type identifier for the CFNull opaque type.
- * @result      The type identifier for the CFNull opaque type.
- */
-CF_EXPORT CFTypeID CFNullGetTypeID( void );
+CF_EXPORT CFTypeID       CFErrorTypeID;
+CF_EXPORT CFRuntimeClass CFErrorClass;
 
 CF_EXTERN_C_END
 
-#endif /* CORE_FOUNDATION_CF_NULL_H */
+#endif /* CORE_FOUNDATION___PRIVATE_CF_ERROR_H */

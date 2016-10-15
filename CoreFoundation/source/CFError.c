@@ -28,5 +28,93 @@
  */
 
 #include <CoreFoundation/CoreFoundation.h>
+#include <CoreFoundation/__private/CFError.h>
+#include <stdlib.h>
 
+const CFErrorDomain kCFErrorDomainPOSIX     = NULL;
+const CFErrorDomain kCFErrorDomainOSStatus  = NULL;
+const CFErrorDomain kCFErrorDomainMach      = NULL;
+const CFErrorDomain kCFErrorDomainCocoa     = NULL;
 
+const CFStringRef kCFErrorLocalizedDescriptionKey         = NULL;
+const CFStringRef kCFErrorLocalizedFailureReasonKey       = NULL;
+const CFStringRef kCFErrorLocalizedRecoverySuggestionKey  = NULL;
+const CFStringRef kCFErrorDescriptionKey                  = NULL;
+const CFStringRef kCFErrorUnderlyingErrorKey              = NULL;
+const CFStringRef kCFErrorURLKey                          = NULL;
+const CFStringRef kCFErrorFilePathKey                     = NULL;
+
+static void init( void ) __attribute__( ( constructor ) );
+static void init( void )
+{
+    CFErrorTypeID = CFRuntimeRegisterClass( &CFErrorClass );
+}
+
+CFTypeID CFErrorGetTypeID( void )
+{
+    return CFErrorTypeID;
+}
+
+CFErrorRef CFErrorCreate( CFAllocatorRef allocator, CFErrorDomain domain, CFIndex code, CFDictionaryRef userInfo )
+{
+    ( void )allocator;
+    ( void )domain;
+    ( void )code;
+    ( void )userInfo;
+    
+    return NULL;
+}
+
+CFErrorRef CFErrorCreateWithUserInfoKeysAndValues( CFAllocatorRef allocator, CFErrorDomain domain, CFIndex code, const void * const * userInfoKeys, const void * const * userInfoValues, CFIndex numUserInfoValues )
+{
+    ( void )allocator;
+    ( void )domain;
+    ( void )code;
+    ( void )userInfoKeys;
+    ( void )userInfoValues;
+    ( void )numUserInfoValues;
+    
+    return NULL;
+}
+
+CFErrorDomain CFErrorGetDomain( CFErrorRef err )
+{
+    ( void )err;
+    
+    return NULL;
+}
+
+CFIndex CFErrorGetCode( CFErrorRef err )
+{
+    ( void )err;
+    
+    return 0;
+}
+
+CFDictionaryRef CFErrorCopyUserInfo( CFErrorRef err )
+{
+    ( void )err;
+    
+    return NULL;
+}
+
+CFStringRef CFErrorCopyDescription( CFErrorRef err )
+{
+    ( void )err;
+    
+    return NULL;
+}
+
+CFStringRef CFErrorCopyFailureReason( CFErrorRef err )
+{
+    ( void )err;
+    
+    return NULL;
+}
+
+CFStringRef CFErrorCopyRecoverySuggestion( CFErrorRef err )
+{
+    ( void )err;
+    
+    return NULL;
+}

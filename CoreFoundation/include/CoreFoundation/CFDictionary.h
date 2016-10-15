@@ -34,7 +34,7 @@
  *              automatically allocates memory as needed.
  *              A key-value pair within a dictionary is called an entry. Each
  *              entry consists of one object that represents the key and a
- *              second object that is that key’s value. Within a dictionary,
+ *              second object that is that key's value. Within a dictionary,
  *              the keys are unique. That is, no two keys in a single dictionary
  *              are equal (as determined by the equal callback). Internally,
  *              a dictionary uses a hash table to organize its storage and to
@@ -139,8 +139,8 @@ typedef CFHashCode ( * CFDictionaryHashCallBack )( const void * value );
 /*!
  * @typedef     CFDictionaryReleaseCallBack
  * @abstract    Prototype of a callback function used to release a key-value
- *              pair before it’s removed from a dictionary.
- * @param       allocator   The dictionary’s allocator.
+ *              pair before it's removed from a dictionary.
+ * @param       allocator   The dictionary's allocator.
  * @param       value       The value being removed from the dictionary.
  */
 typedef void ( * CFDictionaryReleaseCallBack )( CFAllocatorRef allocator, const void * value );
@@ -149,7 +149,7 @@ typedef void ( * CFDictionaryReleaseCallBack )( CFAllocatorRef allocator, const 
  * @typedef     CFDictionaryRetainCallBack
  * @abstract    Prototype of a callback function used to retain a value or key
  *              being added to a dictionary.
- * @param       allocator   The dictionary’s allocator.
+ * @param       allocator   The dictionary's allocator.
  * @param       value       The value being added to the dictionary.
  * @result      The value or key to store in the dictionary, which is usually
  *              the value parameter passed to this callback, but may be a
