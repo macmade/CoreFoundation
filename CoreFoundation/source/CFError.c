@@ -48,6 +48,20 @@ static void init( void ) __attribute__( ( constructor ) );
 static void init( void )
 {
     CFErrorTypeID = CFRuntimeRegisterClass( &CFErrorClass );
+    
+    /*
+    NSPOSIXErrorDomain
+    NSOSStatusErrorDomain
+    NSMachErrorDomain
+    NSCocoaErrorDomain
+    NSLocalizedDescription
+    NSLocalizedFailureReason
+    NSLocalizedRecoverySuggestion
+    NSDescription
+    NSUnderlyingError
+    NSURL
+    NSFilePath
+    */
 }
 
 CFTypeID CFErrorGetTypeID( void )
@@ -57,45 +71,82 @@ CFTypeID CFErrorGetTypeID( void )
 
 CFErrorRef CFErrorCreate( CFAllocatorRef allocator, CFErrorDomain domain, CFIndex code, CFDictionaryRef userInfo )
 {
-    ( void )allocator;
-    ( void )domain;
-    ( void )code;
-    ( void )userInfo;
+    struct CFError * o;
     
-    return NULL;
+    o = ( struct CFError * )CFRuntimeCreateInstance( allocator, CFErrorTypeID );
+    
+    if( o == NULL )
+    {
+        return NULL;
+    }
+    
+    o->_code = code;
+    
+    if( domain )
+    {
+        o->_domain = CFRetain( domain );
+    }
+    
+    if( userInfo )
+    {
+        o->_userInfo = CFDictionaryCreateCopy( allocator, userInfo );
+    }
+    
+    return o;
 }
 
 CFErrorRef CFErrorCreateWithUserInfoKeysAndValues( CFAllocatorRef allocator, CFErrorDomain domain, CFIndex code, const void * const * userInfoKeys, const void * const * userInfoValues, CFIndex numUserInfoValues )
 {
-    ( void )allocator;
-    ( void )domain;
-    ( void )code;
-    ( void )userInfoKeys;
-    ( void )userInfoValues;
-    ( void )numUserInfoValues;
+    CFDictionaryRef d;
     
-    return NULL;
+    if( userInfoKeys && userInfoValues && numUserInfoValues > 0 )
+    {
+        d = CFDictionaryCreate
+        (
+            allocator,
+            ( const void ** )userInfoKeys,
+            ( const void ** )userInfoValues,
+            numUserInfoValues,
+            &kCFCopyStringDictionaryKeyCallBacks,
+            &kCFTypeDictionaryValueCallBacks
+        );
+    }
+    else
+    {
+        d = NULL;
+    }
+    
+    return CFErrorCreate( allocator, domain, code, d );
 }
 
 CFErrorDomain CFErrorGetDomain( CFErrorRef err )
 {
-    ( void )err;
+    if( err == NULL )
+    {
+        return NULL;
+    }
     
-    return NULL;
+    return err->_domain;
 }
 
 CFIndex CFErrorGetCode( CFErrorRef err )
 {
-    ( void )err;
+    if( err == NULL )
+    {
+        return 0;
+    }
     
-    return 0;
+    return err->_code;
 }
 
 CFDictionaryRef CFErrorCopyUserInfo( CFErrorRef err )
 {
-    ( void )err;
+    if( err == NULL )
+    {
+        return NULL;
+    }
     
-    return NULL;
+    return CFDictionaryCreateCopy( NULL, err->_userInfo );
 }
 
 CFStringRef CFErrorCopyDescription( CFErrorRef err )

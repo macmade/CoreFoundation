@@ -23,7 +23,7 @@
  ******************************************************************************/
 
 /*!
- * @file        CFBoolean.c
+ * @file        CFError.c
  * @copyright   (c) 2016, Jean-David Gadina - www.xs-labs.com
  */
 
@@ -35,8 +35,67 @@ CFRuntimeClass CFErrorClass =
     "CFError",
     sizeof( struct CFError ),
     NULL,
+    ( void ( * )( CFTypeRef ) )CFErrorDestruct,
     NULL,
-    NULL,
-    NULL,
-    NULL
+    ( bool ( * )( CFTypeRef, CFTypeRef ) )CFErrorEquals,
+    ( CFStringRef ( * )( CFTypeRef ) )CFErrorCopyDescription
 };
+
+void CFErrorDestruct( CFErrorRef e )
+{
+    if( e->_domain )
+    {
+        CFRelease( e->_domain );
+    }
+    
+    if( e->_userInfo )
+    {
+        CFRelease( e->_userInfo );
+    }
+}
+
+bool CFErrorEquals( CFErrorRef e1,  CFErrorRef e2 )
+{
+    if( e1->_code != e2->_code )
+    {
+        return false;
+    }
+    
+    if( e1->_domain == NULL && e1->_domain != NULL )
+    {
+        return false;
+    }
+    
+    if( e2->_domain == NULL && e1->_domain != NULL )
+    {
+        return false;
+    }
+    
+    if( e1->_domain != NULL && e2->_domain != NULL )
+    {
+        if( CFEqual( e1->_domain, e2->_domain ) == false )
+        {
+            return false;
+        }
+    }
+    
+    if( e1->_userInfo == NULL && e1->_userInfo != NULL )
+    {
+        return false;
+    }
+    
+    if( e2->_userInfo == NULL && e1->_userInfo != NULL )
+    {
+        return false;
+    }
+    
+    if( e1->_userInfo != NULL && e2->_userInfo != NULL )
+    {
+        if( CFEqual( e1->_userInfo, e2->_userInfo ) == false )
+        {
+            return false;
+        }
+    }
+    
+    return true;
+}

@@ -37,11 +37,18 @@ CF_EXTERN_C_BEGIN
 
 struct CFError
 {
-    CFRuntimeBase _base;
+    CFRuntimeBase   _base;
+    CFErrorDomain   _domain;
+    CFIndex         _code;
+    CFDictionaryRef _userInfo;
 };
 
 CF_EXPORT CFTypeID       CFErrorTypeID;
 CF_EXPORT CFRuntimeClass CFErrorClass;
+
+CF_EXPORT void        CFErrorDestruct( CFErrorRef e );
+CF_EXPORT bool        CFErrorEquals( CFErrorRef e1,  CFErrorRef e2 );
+CF_EXPORT CFStringRef CFErrorCopyDescription( CFErrorRef e );
 
 CF_EXTERN_C_END
 
