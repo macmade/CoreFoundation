@@ -64,7 +64,7 @@ CFDataRef CFDataCreate( CFAllocatorRef allocator, const UInt8 * bytes, CFIndex l
             return NULL;
         }
         
-        memcpy( buf, bytes, length );
+        memcpy( buf, bytes, ( size_t )length );
         
         o->_bytes       = buf;
         o->_length      = length;

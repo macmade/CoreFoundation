@@ -224,7 +224,7 @@ void CFAllocatorDebugRegisterAlloc( CFAllocatorRef allocator, const void * ptr, 
         
         a->_registry = realloc( a->_registry, 2 * ( size_t )( a->_registrySize ) * sizeof( void * ) );
         
-        memset( a->_registry + a->_registrySize, 0, a->_registrySize );
+        memset( a->_registry + a->_registrySize, 0, ( size_t )( a->_registrySize ) );
         
         a->_registrySize *= 2;
         

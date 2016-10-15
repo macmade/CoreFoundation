@@ -78,7 +78,7 @@ CFMutableStringRef CFStringCreateMutable( CFAllocatorRef alloc, CFIndex maxLengt
     o->_allocator   = ( alloc ) ? CFRetain( alloc ) : NULL;
     o->_encoding    = kCFStringEncodingASCII;
     
-    memset( o->_cStr, 0, capacity );
+    memset( o->_cStr, 0, ( size_t )capacity );
     
     return o;
 }
@@ -105,7 +105,7 @@ CFMutableStringRef CFStringCreateMutableCopy( CFAllocatorRef alloc, CFIndex maxL
     o->_length   = theString->_length;
     o->_encoding = theString->_encoding;
     
-    memcpy( o->_cStr, theString->_cStr, theString->_length );
+    memcpy( o->_cStr, theString->_cStr, ( size_t )( theString->_length ) );
     
     return o;
 }

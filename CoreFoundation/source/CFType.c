@@ -216,7 +216,7 @@ CFStringRef CFCopyDescription( CFTypeRef obj )
             
             if( buf2 )
             {
-                memset( buf2, 0, CFStringGetLength( description ) + 1 );
+                memset( buf2, 0, ( size_t )( CFStringGetLength( description ) + 1 ) );
                 CFStringGetCString( description, buf2, CFStringGetLength( description ) + 1, kCFStringEncodingASCII );
             }
         }

@@ -111,7 +111,7 @@ CF_EXPORT CFStringRef CFStringMakeConstantString( const char * cp )
             return NULL;
         }
         
-        memset( ( void * )( CFStringConstantStrings + CFStringConstantStringsCapacity ), 0, CFStringConstantStringsCapacity );
+        memset( ( void * )( CFStringConstantStrings + CFStringConstantStringsCapacity ), 0, ( size_t )CFStringConstantStringsCapacity );
         
         CFStringConstantStringsCapacity *= 2;
         
@@ -225,7 +225,7 @@ CFStringRef CFStringCreateWithCString( CFAllocatorRef alloc, const char * cStr, 
             return NULL;
         }
         
-        memcpy( buf, cStr, o->_length + 1 );
+        memcpy( buf, cStr, ( size_t )( o->_length + 1 ) );
         
         o->_cStr = buf;
     }
@@ -538,7 +538,7 @@ Boolean CFStringGetCString( CFStringRef theString, char * buffer, CFIndex buffer
         return false;
     }
     
-    memcpy( buffer, theString->_cStr, theString->_length + 1 );
+    memcpy( buffer, theString->_cStr, ( size_t )( theString->_length + 1 ) );
     
     return true;
 }
