@@ -136,6 +136,7 @@
 		054F449C1DB10EBA000B5C2A /* CFMutableDictionary.c in Sources */ = {isa = PBXBuildFile; fileRef = 054F44931DB10EBA000B5C2A /* CFMutableDictionary.c */; };
 		054F449D1DB10EBA000B5C2A /* CFMutableSet.c in Sources */ = {isa = PBXBuildFile; fileRef = 054F44941DB10EBA000B5C2A /* CFMutableSet.c */; };
 		054F449E1DB10EBA000B5C2A /* CFMutableString.c in Sources */ = {isa = PBXBuildFile; fileRef = 054F44951DB10EBA000B5C2A /* CFMutableString.c */; };
+		054F45521DB1AA0C000B5C2A /* CFSpinLock.c in Sources */ = {isa = PBXBuildFile; fileRef = 054F45511DB1AA0C000B5C2A /* CFSpinLock.c */; };
 		058C88361DAD73D500D92556 /* MacTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 058C88351DAD726100D92556 /* MacTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		05D151D11DAC278300841529 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 05D151D01DAC278300841529 /* main.c */; };
 		05D151D51DAC27CE00841529 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 053291B81DA64C4B00E46312 /* CoreFoundation.framework */; };
@@ -294,6 +295,7 @@
 		054F44931DB10EBA000B5C2A /* CFMutableDictionary.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CFMutableDictionary.c; sourceTree = "<group>"; };
 		054F44941DB10EBA000B5C2A /* CFMutableSet.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CFMutableSet.c; sourceTree = "<group>"; };
 		054F44951DB10EBA000B5C2A /* CFMutableString.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CFMutableString.c; sourceTree = "<group>"; };
+		054F45511DB1AA0C000B5C2A /* CFSpinLock.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CFSpinLock.c; sourceTree = "<group>"; };
 		058C88351DAD726100D92556 /* MacTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MacTypes.h; sourceTree = "<group>"; };
 		05D151CE1DAC278300841529 /* Test */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Test; sourceTree = BUILT_PRODUCTS_DIR; };
 		05D151D01DAC278300841529 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
@@ -527,6 +529,7 @@
 				054F446F1DB103A4000B5C2A /* CFNull.c */,
 				054F44741DB10412000B5C2A /* CFNumber.c */,
 				053292CB1DA91B1900E46312 /* CFRuntime.c */,
+				054F45511DB1AA0C000B5C2A /* CFSpinLock.c */,
 				054F44751DB10412000B5C2A /* CFString.c */,
 				05D151D71DAC2A4100841529 /* CFThreading.c */,
 			);
@@ -766,6 +769,7 @@
 				054F447A1DB10412000B5C2A /* CFString.c in Sources */,
 				053292141DA6513700E46312 /* CFNumber.c in Sources */,
 				0532921F1DA6513700E46312 /* CFSet.c in Sources */,
+				054F45521DB1AA0C000B5C2A /* CFSpinLock.c in Sources */,
 				054F44961DB10EBA000B5C2A /* CFMutableArray.c in Sources */,
 				053292081DA6513700E46312 /* CFCharacterSet.c in Sources */,
 				0532922C1DA6513700E46312 /* CFXMLNode.c in Sources */,
