@@ -21,6 +21,15 @@ Note that this implementation is **NOT** binary compatible with Apple's own impl
 
 While the public interface is strictly identical, the private runtime functions and data structures are completely different, so don't expect them to be compatible with libraries using Apple's version of CoreFoundation.
 
+### Building CoreFoundation
+
+ - **macOS**
+   Use the provided xCode project, or use the provided makefile.
+ - **Linux**
+   Use the provided makefile.
+ - **Windows**
+   Use the provided VisualStudio project.
+
 ### Improvements
 
 #### 1 - NULL checking:
