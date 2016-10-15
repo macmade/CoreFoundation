@@ -35,7 +35,15 @@
 
 CF_EXTERN_C_BEGIN
 
+/*!
+ * @typedef     
+ */
+typedef const struct CFTree * CFTreeRef;
 
+/*!
+ * @function    
+ */
+CF_EXPORT CFTypeID CFTreeGetTypeID( void );
 
 CF_EXTERN_C_END
 

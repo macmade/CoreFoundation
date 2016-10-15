@@ -36,7 +36,10 @@
 
 CF_EXTERN_C_BEGIN
 
-
+/*!
+ * @typedef     
+ */
+typedef struct CFBitVector * CFMutableBitVectorRef;
 
 CF_EXTERN_C_END
 

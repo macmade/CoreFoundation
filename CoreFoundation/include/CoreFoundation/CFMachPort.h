@@ -35,7 +35,15 @@
 
 CF_EXTERN_C_BEGIN
 
+/*!
+ * @typedef     
+ */
+typedef const struct CFMachPort * CFMachPortRef;
 
+/*!
+ * @function    
+ */
+CF_EXPORT CFTypeID CFMachPortGetTypeID( void );
 
 CF_EXTERN_C_END
 

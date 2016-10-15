@@ -28,5 +28,15 @@
  */
 
 #include <CoreFoundation/CoreFoundation.h>
+#include <CoreFoundation/__private/CFWriteStream.h>
 
+static void init( void ) __attribute__( ( constructor ) );
+static void init( void )
+{
+    CFWriteStreamTypeID = CFRuntimeRegisterClass( &CFWriteStreamClass );
+}
 
+CFTypeID CFWriteStreamGetTypeID( void )
+{
+    return CFWriteStreamTypeID;
+}

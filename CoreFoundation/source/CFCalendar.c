@@ -28,5 +28,15 @@
  */
 
 #include <CoreFoundation/CoreFoundation.h>
+#include <CoreFoundation/__private/CFCalendar.h>
 
+static void init( void ) __attribute__( ( constructor ) );
+static void init( void )
+{
+    CFCalendarTypeID = CFRuntimeRegisterClass( &CFCalendarClass );
+}
 
+CFTypeID CFCalendarGetTypeID( void )
+{
+    return CFCalendarTypeID;
+}

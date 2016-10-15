@@ -28,5 +28,15 @@
  */
 
 #include <CoreFoundation/CoreFoundation.h>
+#include <CoreFoundation/__private/CFNumberFormatter.h>
 
+static void init( void ) __attribute__( ( constructor ) );
+static void init( void )
+{
+    CFNumberFormatterTypeID = CFRuntimeRegisterClass( &CFNumberFormatterClass );
+}
 
+CFTypeID CFNumberFormatterGetTypeID( void )
+{
+    return CFNumberFormatterTypeID;
+}

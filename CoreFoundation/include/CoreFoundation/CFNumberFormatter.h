@@ -35,7 +35,15 @@
 
 CF_EXTERN_C_BEGIN
 
+/*!
+ * @typedef     
+ */
+typedef const struct CFNumberFormatter * CFNumberFormatterRef;
 
+/*!
+ * @function    
+ */
+CF_EXPORT CFTypeID CFNumberFormatterGetTypeID( void );
 
 CF_EXTERN_C_END
 

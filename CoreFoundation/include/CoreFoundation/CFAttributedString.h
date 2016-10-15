@@ -35,7 +35,15 @@
 
 CF_EXTERN_C_BEGIN
 
+/*!
+ * @typedef     
+ */
+typedef const struct CFAttributedString * CFAttributedStringRef;
 
+/*!
+ * @function    
+ */
+CF_EXPORT CFTypeID CFAttributedStringGetTypeID( void );
 
 CF_EXTERN_C_END
 

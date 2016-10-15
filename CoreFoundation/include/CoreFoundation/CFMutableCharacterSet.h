@@ -36,7 +36,10 @@
 
 CF_EXTERN_C_BEGIN
 
-
+/*!
+ * @typedef     
+ */
+typedef struct CFCharacterSet * CFMutableCharacterSetRef;
 
 CF_EXTERN_C_END
 

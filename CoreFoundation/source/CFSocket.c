@@ -28,5 +28,15 @@
  */
 
 #include <CoreFoundation/CoreFoundation.h>
+#include <CoreFoundation/__private/CFSocket.h>
 
+static void init( void ) __attribute__( ( constructor ) );
+static void init( void )
+{
+    CFSocketTypeID = CFRuntimeRegisterClass( &CFSocketClass );
+}
 
+CFTypeID CFSocketGetTypeID( void )
+{
+    return CFSocketTypeID;
+}

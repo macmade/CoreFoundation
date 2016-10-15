@@ -23,7 +23,7 @@
  ******************************************************************************/
 
 /*!
- * @header      CFMutableArray.h
+ * @header      CFMutableMutableArray.h
  * @copyright   (c) 2016, Jean-David Gadina - www.xs-labs.com
  */
 
@@ -32,11 +32,14 @@
 
 #include <CoreFoundation/CFBase.h>
 #include <CoreFoundation/CFType.h>
-#include <CoreFoundation/CFArray.h>
+#include <CoreFoundation/CFMutableArray.h>
 
 CF_EXTERN_C_BEGIN
 
-
+/*!
+ * @typedef     
+ */
+typedef struct CFArray * CFMutableArrayRef;
 
 CF_EXTERN_C_END
 

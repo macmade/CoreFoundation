@@ -28,5 +28,15 @@
  */
 
 #include <CoreFoundation/CoreFoundation.h>
+#include <CoreFoundation/__private/CFPlugInInstance.h>
 
+static void init( void ) __attribute__( ( constructor ) );
+static void init( void )
+{
+    CFPlugInInstanceTypeID = CFRuntimeRegisterClass( &CFPlugInInstanceClass );
+}
 
+CFTypeID CFPlugInInstanceGetTypeID( void )
+{
+    return CFPlugInInstanceTypeID;
+}

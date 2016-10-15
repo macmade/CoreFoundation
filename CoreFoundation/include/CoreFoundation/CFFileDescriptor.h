@@ -35,7 +35,15 @@
 
 CF_EXTERN_C_BEGIN
 
+/*!
+ * @typedef     
+ */
+typedef const struct CFFileDescriptor * CFFileDescriptorRef;
 
+/*!
+ * @function    
+ */
+CF_EXPORT CFTypeID CFFileDescriptorGetTypeID( void );
 
 CF_EXTERN_C_END
 

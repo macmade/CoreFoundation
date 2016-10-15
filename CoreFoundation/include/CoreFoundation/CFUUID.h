@@ -35,7 +35,15 @@
 
 CF_EXTERN_C_BEGIN
 
+/*!
+ * @typedef     
+ */
+typedef const struct CFUUID * CFUUIDRef;
 
+/*!
+ * @function    
+ */
+CF_EXPORT CFTypeID CFUUIDGetTypeID( void );
 
 CF_EXTERN_C_END
 

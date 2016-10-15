@@ -35,7 +35,15 @@
 
 CF_EXTERN_C_BEGIN
 
+/*!
+ * @typedef     
+ */
+typedef const struct CFPropertyList * CFPropertyListRef;
 
+/*!
+ * @function    
+ */
+CF_EXPORT CFTypeID CFPropertyListGetTypeID( void );
 
 CF_EXTERN_C_END
 

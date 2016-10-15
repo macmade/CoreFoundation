@@ -28,5 +28,15 @@
  */
 
 #include <CoreFoundation/CoreFoundation.h>
+#include <CoreFoundation/__private/CFMessagePort.h>
 
+static void init( void ) __attribute__( ( constructor ) );
+static void init( void )
+{
+    CFMessagePortTypeID = CFRuntimeRegisterClass( &CFMessagePortClass );
+}
 
+CFTypeID CFMessagePortGetTypeID( void )
+{
+    return CFMessagePortTypeID;
+}

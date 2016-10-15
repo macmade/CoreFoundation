@@ -28,5 +28,15 @@
  */
 
 #include <CoreFoundation/CoreFoundation.h>
+#include <CoreFoundation/__private/CFBinaryHeap.h>
 
+static void init( void ) __attribute__( ( constructor ) );
+static void init( void )
+{
+    CFBinaryHeapTypeID = CFRuntimeRegisterClass( &CFBinaryHeapClass );
+}
 
+CFTypeID CFBinaryHeapGetTypeID( void )
+{
+    return CFBinaryHeapTypeID;
+}

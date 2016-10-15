@@ -35,7 +35,15 @@
 
 CF_EXTERN_C_BEGIN
 
+/*!
+ * @typedef     
+ */
+typedef const struct CFBag * CFBagRef;
 
+/*!
+ * @function    
+ */
+CF_EXPORT CFTypeID CFBagGetTypeID( void );
 
 CF_EXTERN_C_END
 

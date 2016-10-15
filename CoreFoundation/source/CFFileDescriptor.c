@@ -28,5 +28,15 @@
  */
 
 #include <CoreFoundation/CoreFoundation.h>
+#include <CoreFoundation/__private/CFFileDescriptor.h>
 
+static void init( void ) __attribute__( ( constructor ) );
+static void init( void )
+{
+    CFFileDescriptorTypeID = CFRuntimeRegisterClass( &CFFileDescriptorClass );
+}
 
+CFTypeID CFFileDescriptorGetTypeID( void )
+{
+    return CFFileDescriptorTypeID;
+}

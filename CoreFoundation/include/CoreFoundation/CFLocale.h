@@ -35,7 +35,15 @@
 
 CF_EXTERN_C_BEGIN
 
+/*!
+ * @typedef     
+ */
 typedef const struct CFLocale * CFLocaleRef;
+
+/*!
+ * @function    
+ */
+CF_EXPORT CFTypeID CFLocaleGetTypeID( void );
 
 CF_EXTERN_C_END
 

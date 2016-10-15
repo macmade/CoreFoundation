@@ -35,7 +35,15 @@
 
 CF_EXTERN_C_BEGIN
 
+/*!
+ * @typedef     
+ */
+typedef const struct CFBitVector * CFBitVectorRef;
 
+/*!
+ * @function    
+ */
+CF_EXPORT CFTypeID CFBitVectorGetTypeID( void );
 
 CF_EXTERN_C_END
 

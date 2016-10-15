@@ -28,5 +28,15 @@
  */
 
 #include <CoreFoundation/CoreFoundation.h>
+#include <CoreFoundation/__private/CFUserNotification.h>
 
+static void init( void ) __attribute__( ( constructor ) );
+static void init( void )
+{
+    CFUserNotificationTypeID = CFRuntimeRegisterClass( &CFUserNotificationClass );
+}
 
+CFTypeID CFUserNotificationGetTypeID( void )
+{
+    return CFUserNotificationTypeID;
+}

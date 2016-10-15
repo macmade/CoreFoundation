@@ -35,7 +35,15 @@
 
 CF_EXTERN_C_BEGIN
 
+/*!
+ * @typedef     
+ */
+typedef const struct CFTimeZone * CFTimeZoneRef;
 
+/*!
+ * @function    
+ */
+CF_EXPORT CFTypeID CFTimeZoneGetTypeID( void );
 
 CF_EXTERN_C_END
 

@@ -35,7 +35,15 @@
 
 CF_EXTERN_C_BEGIN
 
+/*!
+ * @typedef     
+ */
+typedef const struct CFRunLoopTimer * CFRunLoopTimerRef;
 
+/*!
+ * @function    
+ */
+CF_EXPORT CFTypeID CFRunLoopTimerGetTypeID( void );
 
 CF_EXTERN_C_END
 

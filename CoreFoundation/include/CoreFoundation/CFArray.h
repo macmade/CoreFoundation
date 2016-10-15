@@ -35,7 +35,15 @@
 
 CF_EXTERN_C_BEGIN
 
+/*!
+ * @typedef     
+ */
 typedef const struct CFArray * CFArrayRef;
+
+/*!
+ * @function    
+ */
+CF_EXPORT CFTypeID CFArrayGetTypeID( void );
 
 CF_EXTERN_C_END
 

@@ -35,7 +35,15 @@
 
 CF_EXTERN_C_BEGIN
 
+/*!
+ * @typedef     
+ */
+typedef const struct CFSet * CFSetRef;
 
+/*!
+ * @function    
+ */
+CF_EXPORT CFTypeID CFSetGetTypeID( void );
 
 CF_EXTERN_C_END
 

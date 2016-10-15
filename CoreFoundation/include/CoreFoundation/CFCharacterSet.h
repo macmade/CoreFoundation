@@ -35,7 +35,15 @@
 
 CF_EXTERN_C_BEGIN
 
+/*!
+ * @typedef     
+ */
 typedef const struct CFCharacterSet * CFCharacterSetRef;
+
+/*!
+ * @function    
+ */
+CF_EXPORT CFTypeID CFCharacterSetGetTypeID( void );
 
 CF_EXTERN_C_END
 

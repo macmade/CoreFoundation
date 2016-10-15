@@ -35,7 +35,15 @@
 
 CF_EXTERN_C_BEGIN
 
+/*!
+ * @typedef     
+ */
+typedef const struct CFBinaryHeap * CFBinaryHeapRef;
 
+/*!
+ * @function    
+ */
+CF_EXPORT CFTypeID CFBinaryHeapGetTypeID( void );
 
 CF_EXTERN_C_END
 

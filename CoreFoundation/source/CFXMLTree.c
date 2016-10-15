@@ -28,5 +28,15 @@
  */
 
 #include <CoreFoundation/CoreFoundation.h>
+#include <CoreFoundation/__private/CFXMLTree.h>
 
+static void init( void ) __attribute__( ( constructor ) );
+static void init( void )
+{
+    CFXMLTreeTypeID = CFRuntimeRegisterClass( &CFXMLTreeClass );
+}
 
+CFTypeID CFXMLTreeGetTypeID( void )
+{
+    return CFXMLTreeTypeID;
+}

@@ -28,5 +28,15 @@
  */
 
 #include <CoreFoundation/CoreFoundation.h>
+#include <CoreFoundation/__private/CFMachPort.h>
 
+static void init( void ) __attribute__( ( constructor ) );
+static void init( void )
+{
+    CFMachPortTypeID = CFRuntimeRegisterClass( &CFMachPortClass );
+}
 
+CFTypeID CFMachPortGetTypeID( void )
+{
+    return CFMachPortTypeID;
+}

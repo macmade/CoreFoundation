@@ -35,7 +35,15 @@
 
 CF_EXTERN_C_BEGIN
 
+/*!
+ * @typedef     
+ */
+typedef const struct CFStringTokenizer * CFStringTokenizerRef;
 
+/*!
+ * @function    
+ */
+CF_EXPORT CFTypeID CFStringTokenizerGetTypeID( void );
 
 CF_EXTERN_C_END
 

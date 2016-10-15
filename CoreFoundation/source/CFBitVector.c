@@ -28,5 +28,15 @@
  */
 
 #include <CoreFoundation/CoreFoundation.h>
+#include <CoreFoundation/__private/CFBitVector.h>
 
+static void init( void ) __attribute__( ( constructor ) );
+static void init( void )
+{
+    CFBitVectorTypeID = CFRuntimeRegisterClass( &CFBitVectorClass );
+}
 
+CFTypeID CFBitVectorGetTypeID( void )
+{
+    return CFBitVectorTypeID;
+}

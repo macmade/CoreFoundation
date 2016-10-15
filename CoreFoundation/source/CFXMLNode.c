@@ -28,5 +28,15 @@
  */
 
 #include <CoreFoundation/CoreFoundation.h>
+#include <CoreFoundation/__private/CFXMLNode.h>
 
+static void init( void ) __attribute__( ( constructor ) );
+static void init( void )
+{
+    CFXMLNodeTypeID = CFRuntimeRegisterClass( &CFXMLNodeClass );
+}
 
+CFTypeID CFXMLNodeGetTypeID( void )
+{
+    return CFXMLNodeTypeID;
+}

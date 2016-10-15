@@ -35,7 +35,15 @@
 
 CF_EXTERN_C_BEGIN
 
+/*!
+ * @typedef     
+ */
+typedef const struct CFURL * CFURLRef;
 
+/*!
+ * @function    
+ */
+CF_EXPORT CFTypeID CFURLGetTypeID( void );
 
 CF_EXTERN_C_END
 

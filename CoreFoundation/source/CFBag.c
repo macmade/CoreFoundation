@@ -28,5 +28,15 @@
  */
 
 #include <CoreFoundation/CoreFoundation.h>
+#include <CoreFoundation/__private/CFBag.h>
 
+static void init( void ) __attribute__( ( constructor ) );
+static void init( void )
+{
+    CFBagTypeID = CFRuntimeRegisterClass( &CFBagClass );
+}
 
+CFTypeID CFBagGetTypeID( void )
+{
+    return CFBagTypeID;
+}

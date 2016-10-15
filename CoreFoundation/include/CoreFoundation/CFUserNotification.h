@@ -35,7 +35,15 @@
 
 CF_EXTERN_C_BEGIN
 
+/*!
+ * @typedef     
+ */
+typedef const struct CFUserNotification * CFUserNotificationRef;
 
+/*!
+ * @function    
+ */
+CF_EXPORT CFTypeID CFUserNotificationGetTypeID( void );
 
 CF_EXTERN_C_END
 

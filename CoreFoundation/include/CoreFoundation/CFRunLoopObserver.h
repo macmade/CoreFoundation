@@ -35,7 +35,15 @@
 
 CF_EXTERN_C_BEGIN
 
+/*!
+ * @typedef     
+ */
+typedef const struct CFRunLoopObserver * CFRunLoopObserverRef;
 
+/*!
+ * @function    
+ */
+CF_EXPORT CFTypeID CFRunLoopObserverGetTypeID( void );
 
 CF_EXTERN_C_END
 

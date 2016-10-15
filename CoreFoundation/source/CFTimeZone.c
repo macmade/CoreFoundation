@@ -28,5 +28,15 @@
  */
 
 #include <CoreFoundation/CoreFoundation.h>
+#include <CoreFoundation/__private/CFTimeZone.h>
 
+static void init( void ) __attribute__( ( constructor ) );
+static void init( void )
+{
+    CFTimeZoneTypeID = CFRuntimeRegisterClass( &CFTimeZoneClass );
+}
 
+CFTypeID CFTimeZoneGetTypeID( void )
+{
+    return CFTimeZoneTypeID;
+}

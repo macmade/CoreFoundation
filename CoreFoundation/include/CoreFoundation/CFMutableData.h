@@ -36,7 +36,10 @@
 
 CF_EXTERN_C_BEGIN
 
-
+/*!
+ * @typedef     
+ */
+typedef struct CFData * CFMutableDataRef;
 
 CF_EXTERN_C_END
 

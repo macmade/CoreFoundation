@@ -35,7 +35,15 @@
 
 CF_EXTERN_C_BEGIN
 
+/*!
+ * @typedef     
+ */
+typedef const struct CFDate * CFDateRef;
 
+/*!
+ * @function    
+ */
+CF_EXPORT CFTypeID CFDateGetTypeID( void );
 
 CF_EXTERN_C_END
 

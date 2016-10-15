@@ -35,7 +35,15 @@
 
 CF_EXTERN_C_BEGIN
 
+/*!
+ * @typedef     
+ */
+typedef const struct CFBundle * CFBundleRef;
 
+/*!
+ * @function    
+ */
+CF_EXPORT CFTypeID CFBundleGetTypeID( void );
 
 CF_EXTERN_C_END
 

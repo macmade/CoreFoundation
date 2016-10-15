@@ -28,5 +28,15 @@
  */
 
 #include <CoreFoundation/CoreFoundation.h>
+#include <CoreFoundation/__private/CFUUID.h>
 
+static void init( void ) __attribute__( ( constructor ) );
+static void init( void )
+{
+    CFUUIDTypeID = CFRuntimeRegisterClass( &CFUUIDClass );
+}
 
+CFTypeID CFUUIDGetTypeID( void )
+{
+    return CFUUIDTypeID;
+}

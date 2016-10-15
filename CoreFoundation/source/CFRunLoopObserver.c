@@ -28,5 +28,15 @@
  */
 
 #include <CoreFoundation/CoreFoundation.h>
+#include <CoreFoundation/__private/CFRunLoopObserver.h>
 
+static void init( void ) __attribute__( ( constructor ) );
+static void init( void )
+{
+    CFRunLoopObserverTypeID = CFRuntimeRegisterClass( &CFRunLoopObserverClass );
+}
 
+CFTypeID CFRunLoopObserverGetTypeID( void )
+{
+    return CFRunLoopObserverTypeID;
+}

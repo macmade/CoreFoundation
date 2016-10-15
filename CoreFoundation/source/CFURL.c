@@ -28,5 +28,15 @@
  */
 
 #include <CoreFoundation/CoreFoundation.h>
+#include <CoreFoundation/__private/CFURL.h>
 
+static void init( void ) __attribute__( ( constructor ) );
+static void init( void )
+{
+    CFURLTypeID = CFRuntimeRegisterClass( &CFURLClass );
+}
 
+CFTypeID CFURLGetTypeID( void )
+{
+    return CFURLTypeID;
+}

@@ -35,7 +35,15 @@
 
 CF_EXTERN_C_BEGIN
 
+/*!
+ * @typedef     
+ */
+typedef const struct CFPlugInInstance * CFPlugInInstanceRef;
 
+/*!
+ * @function    
+ */
+CF_EXPORT CFTypeID CFPlugInInstanceGetTypeID( void );
 
 CF_EXTERN_C_END
 

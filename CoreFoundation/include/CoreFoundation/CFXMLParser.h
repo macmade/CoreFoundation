@@ -35,7 +35,15 @@
 
 CF_EXTERN_C_BEGIN
 
+/*!
+ * @typedef     
+ */
+typedef const struct CFXMLParser * CFXMLParserRef;
 
+/*!
+ * @function    
+ */
+CF_EXPORT CFTypeID CFXMLParserGetTypeID( void );
 
 CF_EXTERN_C_END
 

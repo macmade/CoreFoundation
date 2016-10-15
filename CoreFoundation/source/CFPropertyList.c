@@ -28,5 +28,15 @@
  */
 
 #include <CoreFoundation/CoreFoundation.h>
+#include <CoreFoundation/__private/CFPropertyList.h>
 
+static void init( void ) __attribute__( ( constructor ) );
+static void init( void )
+{
+    CFPropertyListTypeID = CFRuntimeRegisterClass( &CFPropertyListClass );
+}
 
+CFTypeID CFPropertyListGetTypeID( void )
+{
+    return CFPropertyListTypeID;
+}

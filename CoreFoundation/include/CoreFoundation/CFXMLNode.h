@@ -35,7 +35,15 @@
 
 CF_EXTERN_C_BEGIN
 
+/*!
+ * @typedef     
+ */
+typedef const struct CFXMLNode * CFXMLNodeRef;
 
+/*!
+ * @function    
+ */
+CF_EXPORT CFTypeID CFXMLNodeGetTypeID( void );
 
 CF_EXTERN_C_END
 

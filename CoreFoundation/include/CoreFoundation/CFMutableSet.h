@@ -36,7 +36,10 @@
 
 CF_EXTERN_C_BEGIN
 
-
+/*!
+ * @typedef     
+ */
+typedef struct CFSet * CFMutableSetRef;
 
 CF_EXTERN_C_END
 

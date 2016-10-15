@@ -35,7 +35,15 @@
 
 CF_EXTERN_C_BEGIN
 
+/*!
+ * @typedef     
+ */
+typedef const struct CFXMLTree * CFXMLTreeRef;
 
+/*!
+ * @function    
+ */
+CF_EXPORT CFTypeID CFXMLTreeGetTypeID( void );
 
 CF_EXTERN_C_END
 

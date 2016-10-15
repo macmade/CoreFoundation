@@ -28,5 +28,15 @@
  */
 
 #include <CoreFoundation/CoreFoundation.h>
+#include <CoreFoundation/__private/CFPreferences.h>
 
+static void init( void ) __attribute__( ( constructor ) );
+static void init( void )
+{
+    CFPreferencesTypeID = CFRuntimeRegisterClass( &CFPreferencesClass );
+}
 
+CFTypeID CFPreferencesGetTypeID( void )
+{
+    return CFPreferencesTypeID;
+}

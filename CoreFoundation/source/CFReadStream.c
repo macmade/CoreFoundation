@@ -28,5 +28,15 @@
  */
 
 #include <CoreFoundation/CoreFoundation.h>
+#include <CoreFoundation/__private/CFReadStream.h>
 
+static void init( void ) __attribute__( ( constructor ) );
+static void init( void )
+{
+    CFReadStreamTypeID = CFRuntimeRegisterClass( &CFReadStreamClass );
+}
 
+CFTypeID CFReadStreamGetTypeID( void )
+{
+    return CFReadStreamTypeID;
+}

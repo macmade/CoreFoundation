@@ -35,7 +35,15 @@
 
 CF_EXTERN_C_BEGIN
 
+/*!
+ * @typedef     
+ */
+typedef const struct CFWriteStream * CFWriteStreamRef;
 
+/*!
+ * @function    
+ */
+CF_EXPORT CFTypeID CFWriteStreamGetTypeID( void );
 
 CF_EXTERN_C_END
 
