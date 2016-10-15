@@ -282,13 +282,6 @@ int main( void )
     }
     
     fprintf( stderr,  "--------------------------------------------------------------------------------\n" );
-
-    {
-        CFShow( kCFErrorDomainPOSIX );
-        CFShow( kCFErrorDescriptionKey );
-    }
-    
-    fprintf( stderr,  "--------------------------------------------------------------------------------\n" );
     
     {
         CFStringRef  leak;
@@ -297,11 +290,53 @@ int main( void )
         i    = 0;
         leak = CFStringCreateWithCString( NULL, "hello, world", kCFStringEncodingASCII );
         
+        fprintf( stderr, "This should be reported as a memory leak:\n" );
+        CFShow( leak );
+        
         if( i )
         {
             CFRelease( leak );
         }
     }
+    
+    fprintf( stderr,  "--------------------------------------------------------------------------------\n" );
+    
+    {
+        CFShow( kCFErrorDomainPOSIX );
+        CFShow( kCFErrorDescriptionKey );
+    }
+    
+    fprintf( stderr,  "--------------------------------------------------------------------------------\n" );
+    
+    {
+        CFMutableDictionaryRef info;
+        CFErrorRef             e1;
+        CFErrorRef             e2;
+        CFErrorRef             e3;
+        
+        info = CFDictionaryCreateMutable( NULL, 0, &kCFCopyStringDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks );
+        
+        e1 = CFErrorCreate( NULL, kCFErrorDomainPOSIX, 42, NULL );
+        
+        CFDictionaryAddValue( info, kCFErrorLocalizedFailureReasonKey, CFSTR( "Unknown error" ) );
+        
+        e2 = CFErrorCreate( NULL, kCFErrorDomainOSStatus, -1, info );
+        
+        CFDictionaryAddValue( info, kCFErrorLocalizedDescriptionKey, CFSTR( "An error occured" ) );
+        
+        e3 = CFErrorCreate( NULL, kCFErrorDomainOSStatus, -1, info );
+        
+        CFShow( e1 );
+        CFShow( e2 );
+        CFShow( e3 );
+        
+        CFRelease( info );
+        CFRelease( e1 );
+        CFRelease( e2 );
+        CFRelease( e3 );
+    }
+    
+    fprintf( stderr,  "--------------------------------------------------------------------------------\n" );
     
     return 0;
 }

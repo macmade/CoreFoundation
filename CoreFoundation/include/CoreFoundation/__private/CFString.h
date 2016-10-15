@@ -74,7 +74,7 @@ CF_EXPORT CFStringRef * CFStringConstantStrings;
         _cp_,                                   \
         sizeof( _cp_ ) - 1,                     \
         sizeof( _cp_ ),                         \
-        0,                                      \
+        kCFStringEncodingASCII,                 \
         NULL,                                   \
         false                                   \
     };                                          \

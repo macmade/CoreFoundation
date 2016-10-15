@@ -138,21 +138,82 @@ CFDictionaryRef CFErrorCopyUserInfo( CFErrorRef err )
 
 CFStringRef CFErrorCopyDescription( CFErrorRef err )
 {
-    ( void )err;
+    CFStringRef        s;
+    CFMutableStringRef m;
     
-    return NULL;
+    if( err == NULL )
+    {
+        return CFSTR( "Unknown/Invalid error" );
+    }
+    
+    s = CFDictionaryGetValue( err->_userInfo, kCFErrorLocalizedDescriptionKey );
+    
+    if( s != NULL )
+    {
+        return CFStringCreateCopy( NULL, s );
+    }
+    
+    m = CFStringCreateMutable( NULL, 0 );
+    s = CFDictionaryGetValue( err->_userInfo, kCFErrorLocalizedFailureReasonKey );
+    
+    CFStringAppend( m, CFSTR( "Operation could not be completed: " ) );
+    
+    if( s != NULL )
+    {
+        CFStringAppend( m , s );
+    }
+    else
+    {
+        CFStringAppendFormat( m, NULL, CFSTR( "code %li" ), err->_code );
+        
+        if( err->_domain )
+        {
+            CFStringAppend( m, CFSTR( " / " ) );
+            CFStringAppend( m, err->_domain );
+        }
+    }
+    
+    s = CFStringCreateCopy( NULL, m );
+    
+    CFRelease( m );
+    
+    return s;
 }
 
 CFStringRef CFErrorCopyFailureReason( CFErrorRef err )
 {
-    ( void )err;
+    CFStringRef s;
     
-    return NULL;
+    if( err == NULL || err->_userInfo == NULL )
+    {
+        return NULL;
+    }
+    
+    s = CFDictionaryGetValue( err->_userInfo, kCFErrorLocalizedFailureReasonKey );
+    
+    if( s == NULL )
+    {
+        return NULL;
+    }
+    
+    return CFStringCreateCopy( NULL, s );
 }
 
 CFStringRef CFErrorCopyRecoverySuggestion( CFErrorRef err )
 {
-    ( void )err;
+    CFStringRef s;
     
-    return NULL;
+    if( err == NULL || err->_userInfo == NULL )
+    {
+        return NULL;
+    }
+    
+    s = CFDictionaryGetValue( err->_userInfo, kCFErrorLocalizedRecoverySuggestionKey );
+    
+    if( s == NULL )
+    {
+        return NULL;
+    }
+    
+    return CFStringCreateCopy( NULL, s );
 }
