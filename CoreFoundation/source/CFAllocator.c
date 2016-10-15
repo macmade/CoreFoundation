@@ -62,6 +62,8 @@ static void init( void )
     CFAllocatorNull._context.deallocate     = CFAllocatorNullDeallocateCallBack;
     CFAllocatorNull._context.preferredSize  = CFAllocatorNullPreferredSizeCallBack;
     CFAllocatorNull._context.reallocate     = CFAllocatorNullReallocateCallBack;
+    
+    atexit( CFAllocatorExit );
 }
 
 CFTypeID CFAllocatorGetTypeID( void )
@@ -104,6 +106,8 @@ CFAllocatorRef CFAllocatorCreate( CFAllocatorRef allocator, CFAllocatorContext *
 
 void * CFAllocatorAllocate( CFAllocatorRef allocator, CFIndex size, CFOptionFlags hint )
 {
+    void * p;
+    
     if( allocator == NULL )
     {
         allocator = CFAllocatorGetDefault();
@@ -111,7 +115,11 @@ void * CFAllocatorAllocate( CFAllocatorRef allocator, CFIndex size, CFOptionFlag
     
     if( allocator != NULL && allocator->_context.allocate != NULL )
     {
-        return allocator->_context.allocate( size, hint, allocator->_context.info );
+        p = allocator->_context.allocate( size, hint, allocator->_context.info );
+        
+        CFAllocatorDebugRegisterAlloc( allocator, p, hint );
+        
+        return p;
     }
     
     return NULL;
@@ -126,6 +134,8 @@ void CFAllocatorDeallocate( CFAllocatorRef allocator, void * ptr )
     
     if( allocator != NULL && allocator->_context.deallocate != NULL )
     {
+        CFAllocatorDebugRegisterFree( allocator, ptr );
+        
         allocator->_context.deallocate( ptr, allocator->_context.info );
     }
 }
@@ -147,6 +157,8 @@ CFIndex CFAllocatorGetPreferredSizeForSize( CFAllocatorRef allocator, CFIndex si
 
 void * CFAllocatorReallocate( CFAllocatorRef allocator, void * ptr, CFIndex newsize, CFOptionFlags hint )
 {
+    void * p;
+    
     if( allocator == NULL )
     {
         allocator = CFAllocatorGetDefault();
@@ -166,7 +178,11 @@ void * CFAllocatorReallocate( CFAllocatorRef allocator, void * ptr, CFIndex news
     
     if( allocator != NULL && allocator->_context.reallocate != NULL )
     {
-        return allocator->_context.reallocate( ptr, newsize, hint, allocator->_context.info );
+        p = allocator->_context.reallocate( ptr, newsize, hint, allocator->_context.info );
+        
+        CFAllocatorDebugRegisterRealloc( allocator, ptr, p );
+        
+        return p;
     }
     
     return NULL;

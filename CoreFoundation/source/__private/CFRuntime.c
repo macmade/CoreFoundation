@@ -117,7 +117,7 @@ CFTypeRef CFRuntimeCreateInstance( CFAllocatorRef allocator, CFTypeID typeID )
         allocator = CFAllocatorGetDefault();
     }
     
-    obj = CFAllocatorAllocate( allocator, CFRuntimeGetInstanceSize( typeID ), 0 );
+    obj = CFAllocatorAllocate( allocator, CFRuntimeGetInstanceSize( typeID ), 1 );
     
     CFRuntimeInitInstance( obj, typeID, allocator );
     

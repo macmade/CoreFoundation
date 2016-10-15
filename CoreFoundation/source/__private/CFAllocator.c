@@ -28,13 +28,15 @@
  */
 
 #include <CoreFoundation/__private/CFAllocator.h>
+#include <string.h>
+#include <stdio.h>
 
 CFTypeID       CFAllocatorTypeID = 0;
 CFRuntimeClass CFAllocatorClass  =
 {
     "CFAllocator",
     sizeof( struct CFAllocator ),
-    NULL,
+    ( void ( * )( CFTypeRef ) )CFAllocatorConstruct,
     ( void ( * )( CFTypeRef ) )CFAllocatorDestruct,
     NULL,
     NULL,
@@ -55,8 +57,65 @@ const CFAllocatorRef kCFAllocatorUseContext     = ( const CFAllocatorRef )( -1 )
 
 CFThreadingKey CFAllocatorDefaultKey;
 
+void CFAllocatorConstruct( CFAllocatorRef allocator )
+{
+    #if defined( CF_ALLOCATOR_DEBUG ) && CF_ALLOCATOR_DEBUG == 1
+    
+    struct CFAllocator * a;
+    
+    a = ( struct CFAllocator * )allocator;
+    
+    a->_registry     = calloc( sizeof( CFAllocatorRegistry ), 1024 );
+    a->_registrySize = 1024;
+    
+    #else
+    
+    ( void )allocator;
+    
+    #endif
+}
+
 void CFAllocatorDestruct( CFAllocatorRef allocator )
 {
+    CFAllocatorRegistry * registry;
+    CFIndex               registrySize;
+    struct CFAllocator  * a;
+    CFIndex               i;
+    CFIndex               n;
+    
+    a = ( struct CFAllocator * )allocator;
+    
+    if( a->_registry == NULL )
+    {
+        return;
+    }
+    
+    CFSpinLockLock( &( a->_registryLock ) );
+    
+    registry         = a->_registry;
+    registrySize     = a->_registrySize;
+    a->_registry     = NULL;
+    a->_registrySize = 0;
+    
+    CFSpinLockUnlock( &( a->_registryLock ) );
+    
+    n = 0;
+    
+    for( i = 0; i < registrySize; i++ )
+    {
+        if( registry[ i ].ptr )
+        {
+            n++;
+        }
+    }
+    
+    if( n )
+    {
+        CFAllocatorDebugReportLeaks( allocator, registry, registrySize );
+    }
+    
+    free( a->_registry );
+    
     if( allocator->_context.release )
     {
         allocator->_context.release( allocator->_context.info );
@@ -65,13 +124,263 @@ void CFAllocatorDestruct( CFAllocatorRef allocator )
 
 CFStringRef CFAllocatorCopyDescription( CFAllocatorRef allocator )
 {
+    const char * name;
+    
+    if( allocator == kCFAllocatorSystemDefault )
+    {
+        name = " kCFAllocatorSystemDefault";
+    }
+    else if( allocator == kCFAllocatorMalloc )
+    {
+        name = " kCFAllocatorMalloc";
+    }
+    else if( allocator == kCFAllocatorMallocZone )
+    {
+        name = " kCFAllocatorMallocZone";
+    }
+    else if( allocator == kCFAllocatorNull )
+    {
+        name = " kCFAllocatorNull";
+    }
+    else
+    {
+        name = "";
+    }
+    
     return CFStringCreateWithFormat
     (
         NULL,
         NULL,
-        CFStringCreateWithCStringNoCopy( NULL, "{ info = 0x%lu }", kCFStringEncodingASCII, kCFAllocatorNull ),
-        allocator->_context.info
+        CFStringCreateWithCStringNoCopy( NULL, "{ info = 0x%lu }%s", kCFStringEncodingASCII, kCFAllocatorNull ),
+        allocator->_context.info,
+        name
     );
+}
+
+void CFAllocatorDebugRegisterAlloc( CFAllocatorRef allocator, const void * ptr, CFOptionFlags hint )
+{
+    struct CFAllocator * a;
+    CFIndex              i;
+    
+    a = ( struct CFAllocator * )allocator;
+    
+    if( a->_registry == NULL || ptr == NULL )
+    {
+        return;
+    }
+    
+    CFSpinLockLock( &( a->_registryLock ) );
+    
+    add:
+        
+        for( i = 0; i < a->_registrySize; i++ )
+        {
+            if( a->_registry[ i ].ptr == NULL )
+            {
+                a->_registry[ i ].ptr  = ptr;
+                a->_registry[ i ].hint = hint;
+                
+                CFSpinLockUnlock( &( a->_registryLock ) );
+                
+                return;
+            }
+        }
+        
+        a->_registry = realloc( a->_registry, 2 * ( size_t )( a->_registrySize ) * sizeof( void * ) );
+        
+        memset( a->_registry + a->_registrySize, 0, a->_registrySize );
+        
+        a->_registrySize *= 2;
+        
+        if( a->_registry == NULL )
+        {
+            CFSpinLockUnlock( &( a->_registryLock ) );
+            
+            return;
+        }
+        
+        goto add;
+}
+
+void CFAllocatorDebugRegisterRealloc( CFAllocatorRef allocator, const void * oldPtr, const void * newPtr )
+{
+    struct CFAllocator * a;
+    CFIndex              i;
+    
+    a = ( struct CFAllocator * )allocator;
+    
+    if( a->_registry == NULL || oldPtr == NULL || newPtr == NULL )
+    {
+        return;
+    }
+    
+    CFSpinLockLock( &( a->_registryLock ) );
+    
+    for( i = 0; i < a->_registrySize; i++ )
+    {
+        if( a->_registry[ i ].ptr == oldPtr )
+        {
+            a->_registry[ i ].ptr = newPtr;
+            
+            break;
+        }
+    }
+    
+    CFSpinLockUnlock( &( a->_registryLock ) );
+}
+
+void CFAllocatorDebugRegisterFree( CFAllocatorRef allocator, const void * ptr )
+{
+    struct CFAllocator * a;
+    CFIndex              i;
+    
+    a = ( struct CFAllocator * )allocator;
+    
+    if( a->_registry == NULL || ptr == NULL )
+    {
+        return;
+    }
+    
+    CFSpinLockLock( &( a->_registryLock ) );
+    
+    for( i = 0; i < a->_registrySize; i++ )
+    {
+        if( a->_registry[ i ].ptr == ptr )
+        {
+            a->_registry[ i ].ptr  = NULL;
+            a->_registry[ i ].hint = 0;
+            
+            break;
+        }
+    }
+    
+    CFSpinLockUnlock( &( a->_registryLock ) );
+}
+
+void CFAllocatorDebugReportLeaks( CFAllocatorRef allocator, CFAllocatorRegistry * registry, CFIndex registrySize )
+{
+    struct CFAllocator * a;
+    CFIndex              n;
+    CFIndex              i;
+    CFStringRef          description;
+    char               * buf;
+    
+    a = ( struct CFAllocator * )allocator;
+    
+    if( registry == NULL || registrySize == 0 )
+    {
+        return;
+    }
+    
+    description = CFCopyDescription( allocator );
+    
+    if( description == NULL )
+    {
+        return;
+    }
+    
+    buf = calloc( ( size_t )CFStringGetLength( description ) + 1, 1 );
+    
+    if( buf == NULL || CFStringGetCString( description, buf , CFStringGetLength( description ) + 1, kCFStringEncodingASCII ) == false )
+    {
+        CFRelease( description );
+        free( buf );
+        
+        return;
+    }
+    
+    n = 0;
+    
+    for( i = 0; i < registrySize; i++ )
+    {
+        if( registry[ i ].ptr != NULL )
+        {
+            n++;
+        }
+    }
+    
+    fprintf
+    (
+        stderr,
+        "\n"
+        "#-------------------------------------------------------------------------------\n"
+        "# CFAllocator - Debug\n"
+        "#-------------------------------------------------------------------------------\n"
+        "# \n"
+        "# Warning:\n"
+        "# \n"
+        "# Deleting an instance of CFAllocator while allocations are still active.\n"
+        "# Leaking memory.\n"
+        "# \n"
+        "# Allocator:       %s\n"
+        "# Active records:  %li\n"
+        "#-------------------------------------------------------------------------------\n"
+        "\n",
+        buf,
+        n
+    );
+    
+    CFRelease( description );
+    free( buf );
+    
+    description = NULL;
+    buf         = NULL;
+    
+    fprintf( stderr, "Records:\n\n{\n" );
+    
+    n = 0;
+    
+    for( i = 0; i < registrySize; i++ )
+    {
+        if( registry[ i ].ptr == NULL )
+        {
+            continue;
+        }
+        
+        if( registry[ i ].hint == 1 )
+        {
+            description = CFCopyDescription( registry[ i ].ptr );
+            
+            if( description != NULL )
+            {
+                buf = calloc( ( size_t )CFStringGetLength( description ) + 1, 1 );
+            }
+            
+            if( buf == NULL || CFStringGetCString( description, buf, CFStringGetLength( description ) + 1, kCFStringEncodingASCII ) == false )
+            {
+                CFRelease( description );
+                free( buf );
+                
+                description = NULL;
+                buf         = NULL;
+            }
+        }
+        
+        if( buf )
+        {
+            fprintf( stderr, "    %li. %s\n", ++n, buf );
+            
+            CFRelease( description );
+            free( buf );
+            
+            description = NULL;
+            buf         = NULL;
+        }
+        else
+        {
+            fprintf( stderr, "    %li. 0x%lx\n", ++n, ( unsigned long )( registry[ i ].ptr ) );
+        }
+    }
+    
+    fprintf( stderr, "}\n\n" );
+}
+
+void CFAllocatorExit( void )
+{
+    CFAllocatorDestruct( &CFAllocatorSystemDefault );
+    CFAllocatorDestruct( &CFAllocatorMalloc );
+    CFAllocatorDestruct( &CFAllocatorMallocZone );
+    CFAllocatorDestruct( &CFAllocatorNull );
 }
 
 void * CFAllocatorSystemDefaultAllocateCallBack( CFIndex allocSize, CFOptionFlags hint, void * info )

@@ -33,26 +33,27 @@
 #include <CoreFoundation/CoreFoundation.h>
 #include <CoreFoundation/__private/CFRuntime.h>
 #include <CoreFoundation/__private/CFThreading.h>
+#include <CoreFoundation/__private/CFSpinLock.h>
 
 CF_EXTERN_C_BEGIN
 
+#define CF_ALLOCATOR_DEBUG  1
+
+typedef struct
+{
+    const void  * ptr;
+    CFOptionFlags hint;
+}
+CFAllocatorRegistry;
+
 struct CFAllocator
 {
-    CFRuntimeBase       _base;
-    CFAllocatorContext  _context;
+    CFRuntimeBase         _base;
+    CFAllocatorContext    _context;
+    CFSpinLock            _registryLock;
+    CFAllocatorRegistry * _registry;
+    CFIndex               _registrySize;
 };
-
-CF_EXPORT void  * CFAllocatorSystemDefaultAllocateCallBack( CFIndex allocSize, CFOptionFlags hint, void * info );
-CF_EXPORT void  * CFAllocatorSystemDefaultReallocateCallBack( void * ptr, CFIndex newsize, CFOptionFlags hint, void * info );
-CF_EXPORT void    CFAllocatorSystemDefaultDeallocateCallBack( void * ptr, void * info );
-
-CF_EXPORT void  * CFAllocatorNullAllocateCallBack( CFIndex allocSize, CFOptionFlags hint, void * info );
-CF_EXPORT void  * CFAllocatorNullReallocateCallBack( void * ptr, CFIndex newsize, CFOptionFlags hint, void * info );
-CF_EXPORT void    CFAllocatorNullDeallocateCallBack( void * ptr, void * info );
-CF_EXPORT CFIndex CFAllocatorNullPreferredSizeCallBack( CFIndex size, CFOptionFlags hint, void * info );
-
-CF_EXPORT void        CFAllocatorDestruct( CFAllocatorRef allocator );
-CF_EXPORT CFStringRef CFAllocatorCopyDescription( CFAllocatorRef allocator );
 
 CF_EXPORT CFTypeID       CFAllocatorTypeID;
 CF_EXPORT CFRuntimeClass CFAllocatorClass;
@@ -63,6 +64,25 @@ CF_EXPORT struct CFAllocator CFAllocatorMallocZone;
 CF_EXPORT struct CFAllocator CFAllocatorNull;
 
 CF_EXPORT CFThreadingKey CFAllocatorDefaultKey;
+
+CF_EXPORT void        CFAllocatorConstruct( CFAllocatorRef allocator );
+CF_EXPORT void        CFAllocatorDestruct( CFAllocatorRef allocator );
+CF_EXPORT CFStringRef CFAllocatorCopyDescription( CFAllocatorRef allocator );
+
+CF_EXPORT void CFAllocatorDebugRegisterAlloc( CFAllocatorRef allocator, const void * ptr, CFOptionFlags hint );
+CF_EXPORT void CFAllocatorDebugRegisterRealloc( CFAllocatorRef allocator, const void * oldPtr, const void * newPtr );
+CF_EXPORT void CFAllocatorDebugRegisterFree( CFAllocatorRef allocator, const void * ptr );
+CF_EXPORT void CFAllocatorDebugReportLeaks( CFAllocatorRef allocator, CFAllocatorRegistry * registry, CFIndex registrySize );
+CF_EXPORT void CFAllocatorExit( void );
+
+CF_EXPORT void  * CFAllocatorSystemDefaultAllocateCallBack( CFIndex allocSize, CFOptionFlags hint, void * info );
+CF_EXPORT void  * CFAllocatorSystemDefaultReallocateCallBack( void * ptr, CFIndex newsize, CFOptionFlags hint, void * info );
+CF_EXPORT void    CFAllocatorSystemDefaultDeallocateCallBack( void * ptr, void * info );
+
+CF_EXPORT void  * CFAllocatorNullAllocateCallBack( CFIndex allocSize, CFOptionFlags hint, void * info );
+CF_EXPORT void  * CFAllocatorNullReallocateCallBack( void * ptr, CFIndex newsize, CFOptionFlags hint, void * info );
+CF_EXPORT void    CFAllocatorNullDeallocateCallBack( void * ptr, void * info );
+CF_EXPORT CFIndex CFAllocatorNullPreferredSizeCallBack( CFIndex size, CFOptionFlags hint, void * info );
 
 CF_EXTERN_C_END
 
