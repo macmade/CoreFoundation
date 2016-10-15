@@ -94,7 +94,7 @@ CF_EXPORT CFStringRef CFStringMakeConstantString( const char * cp )
     CFRuntimeSetObjectAsConstant( s );
     
     add:
-    
+        
         for( i = 0; i < CFStringConstantStringsCapacity; i++ )
         {
             if( CFStringConstantStrings[ i ] == NULL )
@@ -107,21 +107,21 @@ CF_EXPORT CFStringRef CFStringMakeConstantString( const char * cp )
             }
         }
         
-    CFStringConstantStrings = realloc( CFStringConstantStrings, 2 * ( size_t )CFStringConstantStringsCapacity * sizeof( CFStringRef ) );
-    
-    if( CFStringConstantStrings == NULL )
-    {
-        CFSpinLockUnlock( &CFStringConstantStringsLock );
-        CFRuntimeAbortWithOutOfMemoryError();
+        CFStringConstantStrings = realloc( CFStringConstantStrings, 2 * ( size_t )CFStringConstantStringsCapacity * sizeof( CFStringRef ) );
         
-        return NULL;
-    }
-    
-    memset( CFStringConstantStrings + CFStringConstantStringsCapacity, 0, CFStringConstantStringsCapacity );
-    
-    CFStringConstantStringsCapacity *= 2;
-    
-    goto add;
+        if( CFStringConstantStrings == NULL )
+        {
+            CFSpinLockUnlock( &CFStringConstantStringsLock );
+            CFRuntimeAbortWithOutOfMemoryError();
+            
+            return NULL;
+        }
+        
+        memset( CFStringConstantStrings + CFStringConstantStringsCapacity, 0, CFStringConstantStringsCapacity );
+        
+        CFStringConstantStringsCapacity *= 2;
+        
+        goto add;
 }
 
 CFArrayRef CFStringCreateArrayBySeparatingStrings( CFAllocatorRef alloc, CFStringRef theString, CFStringRef separatorString )
