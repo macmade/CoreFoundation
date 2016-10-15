@@ -28,8 +28,8 @@
  */
 
 #include <CoreFoundation/CoreFoundation.h>
-#include <CoreFoundation/__private/CFError.h>
-#include <CoreFoundation/__private/CFString.h>
+#include <CoreFoundation/__private/__CFError.h>
+#include <CoreFoundation/__private/__CFString.h>
 #include <stdlib.h>
 
 CF_STRING_CONST_DECL( kCFErrorDomainPOSIX,      "NSPOSIXErrorDomain" );

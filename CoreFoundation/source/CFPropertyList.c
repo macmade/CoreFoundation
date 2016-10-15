@@ -28,7 +28,7 @@
  */
 
 #include <CoreFoundation/CoreFoundation.h>
-#include <CoreFoundation/__private/CFPropertyList.h>
+#include <CoreFoundation/__private/__CFPropertyList.h>
 
 CFTypeID CFPropertyListGetTypeID( void )
 {

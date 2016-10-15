@@ -28,8 +28,8 @@
  */
 
 #include <CoreFoundation/CoreFoundation.h>
-#include <CoreFoundation/__private/CFDictionary.h>
-#include <CoreFoundation/__private/CFRuntime.h>
+#include <CoreFoundation/__private/__CFDictionary.h>
+#include <CoreFoundation/__private/__CFRuntime.h>
 #include <string.h>
 
 CFTypeID CFDictionaryGetTypeID( void )

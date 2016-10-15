@@ -28,7 +28,7 @@
  */
 
 #include <CoreFoundation/CoreFoundation.h>
-#include <CoreFoundation/__private/CFRunLoop.h>
+#include <CoreFoundation/__private/__CFRunLoop.h>
 
 CFTypeID CFRunLoopGetTypeID( void )
 {

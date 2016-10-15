@@ -28,7 +28,7 @@
  */
 
 #include <CoreFoundation/CoreFoundation.h>
-#include <CoreFoundation/__private/CFUUID.h>
+#include <CoreFoundation/__private/__CFUUID.h>
 
 CFTypeID CFUUIDGetTypeID( void )
 {

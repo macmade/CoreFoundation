@@ -28,7 +28,7 @@
  */
 
 #include <CoreFoundation/CoreFoundation.h>
-#include <CoreFoundation/__private/CFSet.h>
+#include <CoreFoundation/__private/__CFSet.h>
 
 CFTypeID CFSetGetTypeID( void )
 {

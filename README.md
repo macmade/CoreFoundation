@@ -113,7 +113,7 @@ And here's the implementation:
 `Foo.c`
 
     #include "Foo.h"
-    #include <CoreFoundation/__private/CFRuntime.h>
+    #include <CoreFoundation/__private/__CFRuntime.h>
     
     // Member fields
     struct Foo

@@ -28,7 +28,7 @@
  */
 
 #include <CoreFoundation/CoreFoundation.h>
-#include <CoreFoundation/__private/CFWriteStream.h>
+#include <CoreFoundation/__private/__CFWriteStream.h>
 
 CFTypeID CFWriteStreamGetTypeID( void )
 {

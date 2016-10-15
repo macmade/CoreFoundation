@@ -28,7 +28,7 @@
  */
 
 #include <CoreFoundation/CoreFoundation.h>
-#include <CoreFoundation/__private/CFBitVector.h>
+#include <CoreFoundation/__private/__CFBitVector.h>
 
 CFTypeID CFBitVectorGetTypeID( void )
 {

@@ -28,7 +28,7 @@
  */
 
 #include <CoreFoundation/CoreFoundation.h>
-#include <CoreFoundation/__private/CFMachPort.h>
+#include <CoreFoundation/__private/__CFMachPort.h>
 
 CFTypeID CFMachPortGetTypeID( void )
 {

@@ -28,7 +28,7 @@
  */
 
 #include <CoreFoundation/CoreFoundation.h>
-#include <CoreFoundation/__private/CFString.h>
+#include <CoreFoundation/__private/__CFString.h>
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>

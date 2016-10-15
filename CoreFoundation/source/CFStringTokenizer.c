@@ -28,7 +28,7 @@
  */
 
 #include <CoreFoundation/CoreFoundation.h>
-#include <CoreFoundation/__private/CFStringTokenizer.h>
+#include <CoreFoundation/__private/__CFStringTokenizer.h>
 
 CFTypeID CFStringTokenizerGetTypeID( void )
 {

@@ -28,7 +28,7 @@
  */
 
 #include <CoreFoundation/CoreFoundation.h>
-#include <CoreFoundation/__private/CFPreferences.h>
+#include <CoreFoundation/__private/__CFPreferences.h>
 
 CFTypeID CFPreferencesGetTypeID( void )
 {

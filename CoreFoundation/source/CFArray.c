@@ -28,7 +28,7 @@
  */
 
 #include <CoreFoundation/CoreFoundation.h>
-#include <CoreFoundation/__private/CFArray.h>
+#include <CoreFoundation/__private/__CFArray.h>
 
 CFTypeID CFArrayGetTypeID( void )
 {

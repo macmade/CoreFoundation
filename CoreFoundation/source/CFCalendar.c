@@ -28,7 +28,7 @@
  */
 
 #include <CoreFoundation/CoreFoundation.h>
-#include <CoreFoundation/__private/CFCalendar.h>
+#include <CoreFoundation/__private/__CFCalendar.h>
 
 CFTypeID CFCalendarGetTypeID( void )
 {

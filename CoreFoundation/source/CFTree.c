@@ -28,7 +28,7 @@
  */
 
 #include <CoreFoundation/CoreFoundation.h>
-#include <CoreFoundation/__private/CFTree.h>
+#include <CoreFoundation/__private/__CFTree.h>
 
 CFTypeID CFTreeGetTypeID( void )
 {

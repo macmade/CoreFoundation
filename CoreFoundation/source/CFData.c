@@ -28,8 +28,8 @@
  */
 
 #include <CoreFoundation/CoreFoundation.h>
-#include <CoreFoundation/__private/CFData.h>
-#include <CoreFoundation/__private/CFRuntime.h>
+#include <CoreFoundation/__private/__CFData.h>
+#include <CoreFoundation/__private/__CFRuntime.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>

@@ -28,7 +28,7 @@
  */
 
 #include <CoreFoundation/CoreFoundation.h>
-#include <CoreFoundation/__private/CFAttributedString.h>
+#include <CoreFoundation/__private/__CFAttributedString.h>
 
 CFTypeID CFAttributedStringGetTypeID( void )
 {

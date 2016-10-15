@@ -28,7 +28,7 @@
  */
 
 #include <CoreFoundation/CoreFoundation.h>
-#include <CoreFoundation/__private/CFBinaryHeap.h>
+#include <CoreFoundation/__private/__CFBinaryHeap.h>
 
 CFTypeID CFBinaryHeapGetTypeID( void )
 {

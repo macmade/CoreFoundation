@@ -28,8 +28,8 @@
  */
 
 #include <CoreFoundation/CoreFoundation.h>
-#include <CoreFoundation/__private/CFBoolean.h>
-#include <CoreFoundation/__private/CFRuntime.h>
+#include <CoreFoundation/__private/__CFBoolean.h>
+#include <CoreFoundation/__private/__CFRuntime.h>
 
 CFTypeID CFBooleanGetTypeID( void )
 {

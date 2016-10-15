@@ -28,7 +28,7 @@
  */
 
 #include <CoreFoundation/CoreFoundation.h>
-#include <CoreFoundation/__private/CFFileDescriptor.h>
+#include <CoreFoundation/__private/__CFFileDescriptor.h>
 
 CFTypeID CFFileDescriptorGetTypeID( void )
 {

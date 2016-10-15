@@ -28,7 +28,7 @@
  */
 
 #include <CoreFoundation/CoreFoundation.h>
-#include <CoreFoundation/__private/CFTimeZone.h>
+#include <CoreFoundation/__private/__CFTimeZone.h>
 
 CFTypeID CFTimeZoneGetTypeID( void )
 {

@@ -28,7 +28,7 @@
  */
 
 #include <CoreFoundation/CoreFoundation.h>
-#include <CoreFoundation/__private/CFPlugIn.h>
+#include <CoreFoundation/__private/__CFPlugIn.h>
 
 CFTypeID CFPlugInGetTypeID( void )
 {

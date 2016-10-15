@@ -28,8 +28,8 @@
  */
 
 #include <CoreFoundation/CoreFoundation.h>
-#include <CoreFoundation/__private/CFNumber.h>
-#include <CoreFoundation/__private/CFRuntime.h>
+#include <CoreFoundation/__private/__CFNumber.h>
+#include <CoreFoundation/__private/__CFRuntime.h>
 #include <stdlib.h>
 #include <stdbool.h>
 #include <math.h>

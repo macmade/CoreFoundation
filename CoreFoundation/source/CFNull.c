@@ -28,8 +28,8 @@
  */
 
 #include <CoreFoundation/CoreFoundation.h>
-#include <CoreFoundation/__private/CFNull.h>
-#include <CoreFoundation/__private/CFRuntime.h>
+#include <CoreFoundation/__private/__CFNull.h>
+#include <CoreFoundation/__private/__CFRuntime.h>
 
 CFTypeID CFNullGetTypeID( void )
 {

@@ -28,7 +28,7 @@
  */
 
 #include <CoreFoundation/CoreFoundation.h>
-#include <CoreFoundation/__private/CFXMLParser.h>
+#include <CoreFoundation/__private/__CFXMLParser.h>
 
 CFTypeID CFXMLParserGetTypeID( void )
 {

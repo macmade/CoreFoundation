@@ -28,7 +28,7 @@
  */
 
 #include <CoreFoundation/CoreFoundation.h>
-#include <CoreFoundation/__private/CFBundle.h>
+#include <CoreFoundation/__private/__CFBundle.h>
 
 CFTypeID CFBundleGetTypeID( void )
 {

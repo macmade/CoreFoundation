@@ -28,7 +28,7 @@
  */
 
 #include <CoreFoundation/CoreFoundation.h>
-#include <CoreFoundation/__private/CFLocale.h>
+#include <CoreFoundation/__private/__CFLocale.h>
 
 CFTypeID CFLocaleGetTypeID( void )
 {

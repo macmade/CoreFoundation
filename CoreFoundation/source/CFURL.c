@@ -28,7 +28,7 @@
  */
 
 #include <CoreFoundation/CoreFoundation.h>
-#include <CoreFoundation/__private/CFURL.h>
+#include <CoreFoundation/__private/__CFURL.h>
 
 CFTypeID CFURLGetTypeID( void )
 {

@@ -28,9 +28,9 @@
  */
 
 #include <CoreFoundation/CoreFoundation.h>
-#include <CoreFoundation/__private/CFAllocator.h>
-#include <CoreFoundation/__private/CFRuntime.h>
-#include <CoreFoundation/__private/CFThreading.h>
+#include <CoreFoundation/__private/__CFAllocator.h>
+#include <CoreFoundation/__private/__CFRuntime.h>
+#include <CoreFoundation/__private/__CFThreading.h>
 #include <stdlib.h>
 #include <string.h>
 

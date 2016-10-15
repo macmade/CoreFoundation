@@ -28,7 +28,7 @@
  */
 
 #include <CoreFoundation/CoreFoundation.h>
-#include <CoreFoundation/__private/CFMessagePort.h>
+#include <CoreFoundation/__private/__CFMessagePort.h>
 
 CFTypeID CFMessagePortGetTypeID( void )
 {

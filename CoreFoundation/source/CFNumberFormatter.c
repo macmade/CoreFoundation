@@ -28,7 +28,7 @@
  */
 
 #include <CoreFoundation/CoreFoundation.h>
-#include <CoreFoundation/__private/CFNumberFormatter.h>
+#include <CoreFoundation/__private/__CFNumberFormatter.h>
 
 CFTypeID CFNumberFormatterGetTypeID( void )
 {

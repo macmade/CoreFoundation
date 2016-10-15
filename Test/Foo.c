@@ -28,7 +28,7 @@
  */
 
 #include "Foo.h"
-#include <CoreFoundation/__private/CFRuntime.h>
+#include <CoreFoundation/__private/__CFRuntime.h>
 
 struct Foo
 {

@@ -28,7 +28,7 @@
  */
 
 #include <CoreFoundation/CoreFoundation.h>
-#include <CoreFoundation/__private/CFUserNotification.h>
+#include <CoreFoundation/__private/__CFUserNotification.h>
 
 CFTypeID CFUserNotificationGetTypeID( void )
 {

@@ -28,7 +28,7 @@
  */
 
 #include <CoreFoundation/CoreFoundation.h>
-#include <CoreFoundation/__private/CFReadStream.h>
+#include <CoreFoundation/__private/__CFReadStream.h>
 
 CFTypeID CFReadStreamGetTypeID( void )
 {

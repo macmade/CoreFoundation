@@ -28,7 +28,7 @@
  */
 
 #include <CoreFoundation/CoreFoundation.h>
-#include <CoreFoundation/__private/CFRunLoopTimer.h>
+#include <CoreFoundation/__private/__CFRunLoopTimer.h>
 
 CFTypeID CFRunLoopTimerGetTypeID( void )
 {

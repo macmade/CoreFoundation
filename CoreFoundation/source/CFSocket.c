@@ -28,7 +28,7 @@
  */
 
 #include <CoreFoundation/CoreFoundation.h>
-#include <CoreFoundation/__private/CFSocket.h>
+#include <CoreFoundation/__private/__CFSocket.h>
 
 CFTypeID CFSocketGetTypeID( void )
 {

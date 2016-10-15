@@ -28,7 +28,7 @@
  */
 
 #include <CoreFoundation/CoreFoundation.h>
-#include <CoreFoundation/__private/CFDateFormatter.h>
+#include <CoreFoundation/__private/__CFDateFormatter.h>
 
 CFTypeID CFDateFormatterGetTypeID( void )
 {

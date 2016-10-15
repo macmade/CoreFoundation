@@ -28,7 +28,7 @@
  */
 
 #include <CoreFoundation/CoreFoundation.h>
-#include <CoreFoundation/__private/CFXMLTree.h>
+#include <CoreFoundation/__private/__CFXMLTree.h>
 
 CFTypeID CFXMLTreeGetTypeID( void )
 {

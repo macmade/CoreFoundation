@@ -28,7 +28,7 @@
  */
 
 #include <CoreFoundation/CoreFoundation.h>
-#include <CoreFoundation/__private/CFBag.h>
+#include <CoreFoundation/__private/__CFBag.h>
 
 CFTypeID CFBagGetTypeID( void )
 {

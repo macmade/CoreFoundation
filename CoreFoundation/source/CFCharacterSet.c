@@ -28,7 +28,7 @@
  */
 
 #include <CoreFoundation/CoreFoundation.h>
-#include <CoreFoundation/__private/CFCharacterSet.h>
+#include <CoreFoundation/__private/__CFCharacterSet.h>
 
 CFTypeID CFCharacterSetGetTypeID( void )
 {
