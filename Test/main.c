@@ -281,5 +281,18 @@ int main( void )
         CFShow( CFSTR( "hello, universe" ) );
     }
     
+    {
+        CFStringRef  leak;
+        volatile int i;
+        
+        i    = 0;
+        leak = CFStringCreateWithCString( NULL, "hello, world", kCFStringEncodingASCII );
+        
+        if( i )
+        {
+            CFRelease( leak );
+        }
+    }
+    
     return 0;
 }

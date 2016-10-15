@@ -225,13 +225,23 @@ CFStringRef CFDictionaryCopyDescription( CFDictionaryRef d )
                 v = CFStringCreateWithFormat( NULL, NULL, CFSTR( "0x%lu" ), item->value );
             }
             
-            if( v && s )
+            if( k && v )
             {
                 CFStringAppendCString( s, "    ", kCFStringEncodingASCII );
                 CFStringAppend( s, k );
                 CFStringAppendCString( s, " = ", kCFStringEncodingASCII );
                 CFStringAppend( s, v );
                 CFStringAppendCString( s, "\n", kCFStringEncodingASCII );
+            }
+            
+            if( k )
+            {
+                CFRelease( k );
+            }
+            
+            if( v )
+            {
+                CFRelease( v );
             }
             
             item = item->next;
