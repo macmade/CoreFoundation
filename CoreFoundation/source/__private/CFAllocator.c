@@ -313,19 +313,14 @@ void CFAllocatorDebugReportLeaks( CFAllocatorRef allocator, CFAllocatorRegistry 
     (
         stderr,
         "\n"
-        "#-------------------------------------------------------------------------------\n"
-        "# CFAllocator - Debug\n"
-        "#-------------------------------------------------------------------------------\n"
-        "# \n"
-        "# Warning:\n"
-        "# \n"
-        "# Deleting an instance of CFAllocator while allocations are still active.\n"
-        "# Leaking memory.\n"
-        "# \n"
-        "# Allocator:       %s\n"
-        "# Active records:  %li\n"
-        "#-------------------------------------------------------------------------------\n"
-        "\n",
+        "*** CoreFoundation - WARNING\n"
+        "*** Deleting an instance of CFAllocator while allocations are still active.\n"
+        "*** Leaking memory.\n"
+        "\n"
+        "- Allocator:       %s\n"
+        "- Active records:  %li\n"
+        "- Records:\n"
+        "{\n",
         buf,
         n
     );
@@ -335,8 +330,6 @@ void CFAllocatorDebugReportLeaks( CFAllocatorRef allocator, CFAllocatorRegistry 
     
     description = NULL;
     buf         = NULL;
-    
-    fprintf( stderr, "Records:\n\n{\n" );
     
     n = 0;
     

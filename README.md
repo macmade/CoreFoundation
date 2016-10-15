@@ -57,8 +57,10 @@ As an example, the following program:
         
 Will report the following:
 
-    # Warning: deleting an instance of CFAllocator while allocations are still active.
-    # Leaking memory.
+    *** [ CoreFoundation - WARNING ]
+    *** Deleting an instance of CFAllocator while allocations are still active.
+    *** Leaking memory.
+    
     - Allocator:       <CFAllocator 0x1000ac748 [ 0x0 ]> { info = 0x0 } kCFAllocatorSystemDefault
     - Active records:  2    
     - Records:
