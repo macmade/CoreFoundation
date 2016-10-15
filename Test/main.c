@@ -282,6 +282,13 @@ int main( void )
     }
     
     fprintf( stderr,  "--------------------------------------------------------------------------------\n" );
+
+    {
+        CFShow( kCFErrorDomainPOSIX );
+        CFShow( kCFErrorDescriptionKey );
+    }
+    
+    fprintf( stderr,  "--------------------------------------------------------------------------------\n" );
     
     {
         CFStringRef  leak;

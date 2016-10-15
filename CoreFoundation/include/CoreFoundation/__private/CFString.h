@@ -63,6 +63,23 @@ CF_EXPORT CFSpinLock    CFStringConstantStringsLock;
 CF_EXPORT CFIndex       CFStringConstantStringsCapacity;
 CF_EXPORT CFStringRef * CFStringConstantStrings;
 
+#define CF_STRING_CONST_DECL( _name_, _cp_ )    \
+    const struct CFString _name_ ## _S =        \
+    {                                           \
+        {                                       \
+            ( uintptr_t )&CFStringClass,        \
+            -1,                                 \
+            NULL                                \
+        },                                      \
+        _cp_,                                   \
+        sizeof( _cp_ ) - 1,                     \
+        sizeof( _cp_ ),                         \
+        0,                                      \
+        NULL,                                   \
+        false                                   \
+    };                                          \
+    const CFStringRef _name_ = &_name_ ## _S
+
 CF_EXTERN_C_END
 
 #endif /* CORE_FOUNDATION___PRIVATE_CF_STRING_H */

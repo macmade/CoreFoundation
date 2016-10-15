@@ -300,16 +300,7 @@ CFStringRef CFCopyTypeIDDescription( CFTypeID typeID )
 
 CFTypeID CFGetTypeID( CFTypeRef obj )
 {
-    CFRuntimeBase * base;
-    
-    if( obj == NULL )
-    {
-        return 0;
-    }
-    
-    base = ( CFRuntimeBase * )obj;
-    
-    return base->isa;
+    return CFRuntimeGetTypeID( obj );
 }
 
 void CFShow( CFTypeRef obj )

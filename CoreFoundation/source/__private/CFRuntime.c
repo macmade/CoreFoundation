@@ -35,7 +35,7 @@
 
 struct CFRuntimeClassList
 {
-    CFRuntimeClass                       cls;
+    const CFRuntimeClass               * cls;
     CFTypeID                             typeID;
     struct CFRuntimeClassList * volatile next;
 };
@@ -64,7 +64,7 @@ CFTypeID CFRuntimeRegisterClass( const CFRuntimeClass * cls )
     }
     
     typeID      = ( CFTypeID )CFAtomicIncrement( &CFRuntimeClassCount );
-    new->cls    = *( cls );
+    new->cls    = cls;
     new->typeID = typeID;
     
     if( CFAtomicCompareAndSwapPointer( NULL, new, ( void * volatile * )&CFRuntimeClasses ) )
@@ -79,6 +79,37 @@ CFTypeID CFRuntimeRegisterClass( const CFRuntimeClass * cls )
         if( CFAtomicCompareAndSwapPointer( NULL, new, ( void * volatile * )&( list->next ) ) )
         {
             return typeID;
+        }
+        
+        list = list->next;
+    }
+    
+    return 0;
+}
+
+CFTypeID CFRuntimeGetTypeID( CFTypeRef obj )
+{
+    struct CFRuntimeClassList * list;
+    CFRuntimeBase             * base;
+    
+    if( obj == NULL )
+    {
+        return 0;
+    }
+    
+    base = ( CFRuntimeBase * )obj;
+    list = CFRuntimeClasses;
+    
+    if( base->isa == 0 )
+    {
+        return 0;
+    }
+    
+    while( list )
+    {
+        if( ( const CFRuntimeClass * )( base->isa ) == list->cls )
+        {
+            return list->typeID;
         }
         
         list = list->next;
@@ -102,7 +133,7 @@ const char * CFRuntimeGetTypeIDName( CFTypeID typeID )
             continue;
         }
         
-        return list->cls.name;
+        return list->cls->name;
     }
     
     return NULL;
@@ -139,7 +170,7 @@ CFIndex CFRuntimeGetInstanceSize( CFTypeID typeID )
             continue;
         }
         
-        return ( CFIndex )( list->cls.size );
+        return ( CFIndex )( list->cls->size );
     }
     
     return 0;
@@ -160,7 +191,7 @@ CFRuntimeHashCallback CFRuntimeGetHashCallback( CFTypeID typeID )
             continue;
         }
         
-        return list->cls.hash;
+        return list->cls->hash;
     }
     
     return NULL;
@@ -181,7 +212,7 @@ CFRuntimeEqualsCallback CFRuntimeGetEqualsCallback( CFTypeID typeID )
             continue;
         }
         
-        return list->cls.equals;
+        return list->cls->equals;
     }
     
     return NULL;
@@ -202,7 +233,7 @@ CFRuntimeCopyDescriptionCallback CFRuntimeGetCopyDescriptionCallback( CFTypeID t
             continue;
         }
         
-        return list->cls.copyDescription;
+        return list->cls->copyDescription;
     }
     
     return NULL;
@@ -229,16 +260,16 @@ void CFRuntimeInitInstance( void * memory, CFTypeID typeID, CFAllocatorRef alloc
             continue;
         }
         
-        memset( memory, 0, list->cls.size );
+        memset( memory, 0, list->cls->size );
         
         base            = ( CFRuntimeBase * )memory;
-        base->isa       = typeID;
+        base->isa       = ( uintptr_t )( list->cls );
         base->rc        = 1;
         base->allocator = ( allocator ) ? CFRetain( allocator ) : NULL;
         
-        if( list->cls.constructor )
+        if( list->cls->constructor )
         {
-            list->cls.constructor( memory );
+            list->cls->constructor( memory );
         }
         
         break;
@@ -275,18 +306,23 @@ void CFRuntimeDeleteInstance( CFTypeRef obj )
         return;
     }
     
+    if( base->isa == 0 )
+    {
+        return;
+    }
+    
     while( list )
     {
-        if( list->typeID != base->isa )
+        if( ( const CFRuntimeClass * )( base->isa ) != list->cls )
         {
             list = list->next;
             
             continue;
         }
         
-        if( list->cls.destructor )
+        if( list->cls->destructor )
         {
-            list->cls.destructor( obj );
+            list->cls->destructor( obj );
         }
         
         allocator = CFGetAllocator( obj );

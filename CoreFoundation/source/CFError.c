@@ -29,39 +29,26 @@
 
 #include <CoreFoundation/CoreFoundation.h>
 #include <CoreFoundation/__private/CFError.h>
+#include <CoreFoundation/__private/CFString.h>
 #include <stdlib.h>
 
-const CFErrorDomain kCFErrorDomainPOSIX     = NULL;
-const CFErrorDomain kCFErrorDomainOSStatus  = NULL;
-const CFErrorDomain kCFErrorDomainMach      = NULL;
-const CFErrorDomain kCFErrorDomainCocoa     = NULL;
+CF_STRING_CONST_DECL( kCFErrorDomainPOSIX,      "NSPOSIXErrorDomain" );
+CF_STRING_CONST_DECL( kCFErrorDomainOSStatus,   "NSOSStatusErrorDomain" );
+CF_STRING_CONST_DECL( kCFErrorDomainMach,       "NSMachErrorDomain" );
+CF_STRING_CONST_DECL( kCFErrorDomainCocoa,      "NSCocoaErrorDomain" );
 
-const CFStringRef kCFErrorLocalizedDescriptionKey         = NULL;
-const CFStringRef kCFErrorLocalizedFailureReasonKey       = NULL;
-const CFStringRef kCFErrorLocalizedRecoverySuggestionKey  = NULL;
-const CFStringRef kCFErrorDescriptionKey                  = NULL;
-const CFStringRef kCFErrorUnderlyingErrorKey              = NULL;
-const CFStringRef kCFErrorURLKey                          = NULL;
-const CFStringRef kCFErrorFilePathKey                     = NULL;
+CF_STRING_CONST_DECL( kCFErrorLocalizedDescriptionKey,          "NSLocalizedDescription" );
+CF_STRING_CONST_DECL( kCFErrorLocalizedFailureReasonKey,        "NSLocalizedFailureReason" );
+CF_STRING_CONST_DECL( kCFErrorLocalizedRecoverySuggestionKey,   "NSLocalizedRecoverySuggestion" );
+CF_STRING_CONST_DECL( kCFErrorDescriptionKey,                   "NSDescription" );
+CF_STRING_CONST_DECL( kCFErrorUnderlyingErrorKey,               "NSUnderlyingError" );
+CF_STRING_CONST_DECL( kCFErrorURLKey,                           "NSURL" );
+CF_STRING_CONST_DECL( kCFErrorFilePathKey,                      "NSFilePath" );
 
 static void init( void ) __attribute__( ( constructor ) );
 static void init( void )
 {
     CFErrorTypeID = CFRuntimeRegisterClass( &CFErrorClass );
-    
-    /*
-    NSPOSIXErrorDomain
-    NSOSStatusErrorDomain
-    NSMachErrorDomain
-    NSCocoaErrorDomain
-    NSLocalizedDescription
-    NSLocalizedFailureReason
-    NSLocalizedRecoverySuggestion
-    NSDescription
-    NSUnderlyingError
-    NSURL
-    NSFilePath
-    */
 }
 
 CFTypeID CFErrorGetTypeID( void )

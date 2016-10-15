@@ -50,7 +50,7 @@ CF_EXTERN_C_BEGIN
  */
 typedef struct
 {
-    CFTypeID         isa;
+    uintptr_t        isa;
     volatile CFIndex rc;
     CFAllocatorRef   allocator;
 }
@@ -125,6 +125,18 @@ CFRuntimeClass;
  * @result      The ID of the registered class
  */
 CF_EXPORT CFTypeID CFRuntimeRegisterClass( const CFRuntimeClass * cls );
+
+/*!
+ * @function    CFRuntimeGetTypeID
+ * @abstract    Returns the unique identifier of an opaque type to which a Core
+ *              Foundation object belongs.
+ * @param       obj     The CFType object to examine.
+ * @result      A value of type CFTypeID that identifies the opaque type of
+ *              obj.
+ * @discussion  This function is for internal use only. Use CFGetTypeID instead.
+ * @see         CFGetTypeID
+ */
+CF_EXPORT CFTypeID CFRuntimeGetTypeID( CFTypeRef obj );
 
 /*!
  * @function    CFRuntimeGetTypeIDName
