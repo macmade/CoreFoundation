@@ -103,25 +103,15 @@ bool CFStringEquals( CFStringRef s1, CFStringRef s2 )
 
 CFStringRef CFStringCopyDescription( CFStringRef str )
 {
-    CFStringRef format;
     CFStringRef s;
-    
-    format = CFStringCreateWithCStringNoCopy( NULL, "%s", kCFStringEncodingASCII, kCFAllocatorNull );
-    
-    if( format == NULL )
-    {
-        return NULL;
-    }
     
     s = CFStringCreateWithFormat
     (
         NULL,
         NULL,
-        format,
+        CFSTR( "%s" ),
         ( str->_cStr ) ? str->_cStr : "(null)"
     );
-    
-    CFRelease( format );
     
     return s;
 }

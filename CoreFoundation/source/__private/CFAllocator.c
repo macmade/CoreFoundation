@@ -156,7 +156,7 @@ CFStringRef CFAllocatorCopyDescription( CFAllocatorRef allocator )
     (
         NULL,
         NULL,
-        CFStringCreateWithCStringNoCopy( NULL, "{ info = 0x%lu }%s", kCFStringEncodingASCII, kCFAllocatorNull ),
+        CFSTR( "{ info = 0x%lu }%s" ),
         allocator->_context.info,
         name
     );

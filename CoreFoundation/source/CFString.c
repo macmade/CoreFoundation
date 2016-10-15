@@ -81,7 +81,7 @@ CF_EXPORT CFStringRef CFStringMakeConstantString( const char * cp )
         }
     }
     
-    s = CFStringCreateWithCStringNoCopy( NULL, cp, kCFStringEncodingUTF8, kCFAllocatorNull );
+    s = CFStringCreateWithCStringNoCopy( NULL, cp, kCFStringEncodingASCII, kCFAllocatorNull );
     
     if( s == NULL )
     {

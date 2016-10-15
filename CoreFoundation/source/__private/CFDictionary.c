@@ -167,25 +167,15 @@ bool CFDictionaryEquals( CFDictionaryRef d1, CFDictionaryRef d2 )
 CFStringRef CFDictionaryCopyDescription( CFDictionaryRef d )
 {
     CFMutableStringRef        s;
-    CFStringRef               format;
     CFIndex                   i;
     struct CFDictionaryItem * item;
     CFStringRef               k;
     CFStringRef               v;
     
-    format = CFStringCreateWithCStringNoCopy( NULL, "{ count = %lu, capacity = %lu, type = %s }", kCFStringEncodingASCII, kCFAllocatorNull );
-    
-    if( format == NULL )
-    {
-        return NULL;
-    }
-    
     s = CFStringCreateMutable( NULL, 0 );
     
     if( s == NULL )
     {
-        CFRelease( format );
-        
         return NULL;
     }
     
@@ -193,17 +183,13 @@ CFStringRef CFDictionaryCopyDescription( CFDictionaryRef d )
     (
         s,
         NULL,
-        format,
+        CFSTR( "{ count = %lu, capacity = %lu, type = %s }" ),
         d->_count,
         d->_size,
         ( d->_mutable ) ? "mutable" : "immutable"
     );
     
-    CFRelease( format );
-    
-    format = CFStringCreateWithCString( NULL, "0x%lu", kCFStringEncodingASCII );
-    
-    if( d->_count == 0 || format == NULL )
+    if( d->_count == 0 )
     {
         return s;
     }
@@ -231,12 +217,12 @@ CFStringRef CFDictionaryCopyDescription( CFDictionaryRef d )
             
             if( k == NULL )
             {
-                k = CFStringCreateWithFormat( NULL, NULL, format, item->key );
+                k = CFStringCreateWithFormat( NULL, NULL, CFSTR( "0x%lu" ), item->key );
             }
             
             if( v == NULL )
             {
-                v = CFStringCreateWithFormat( NULL, NULL, format, item->value );
+                v = CFStringCreateWithFormat( NULL, NULL, CFSTR( "0x%lu" ), item->value );
             }
             
             if( v && s )
@@ -253,7 +239,6 @@ CFStringRef CFDictionaryCopyDescription( CFDictionaryRef d )
     }
     
     CFStringAppendCString( s, "}", kCFStringEncodingASCII );
-    CFRelease( format );
     
     return s;
 }

@@ -222,11 +222,11 @@ CFStringRef CFCopyDescription( CFTypeRef obj )
     
     if( buf2 && strlen( buf2 ) )
     {
-        ret = CFStringCreateWithFormat( NULL, NULL, CFStringCreateWithCStringNoCopy( NULL, "<%s 0x%lx [ 0x%lx ]> %s", kCFStringEncodingASCII, kCFAllocatorNull ), buf1, obj, CFGetAllocator( obj ), buf2 );
+        ret = CFStringCreateWithFormat( NULL, NULL, CFSTR( "<%s 0x%lx [ 0x%lx ]> %s" ), buf1, obj, CFGetAllocator( obj ), buf2 );
     }
     else
     {
-        ret = CFStringCreateWithFormat( NULL, NULL, CFStringCreateWithCStringNoCopy( NULL, "<%s 0x%lx [ 0x%lx ]>", kCFStringEncodingASCII, kCFAllocatorNull ), buf1, obj, CFGetAllocator( obj ) );
+        ret = CFStringCreateWithFormat( NULL, NULL, CFSTR( "<%s 0x%lx [ 0x%lx ]>" ), buf1, obj, CFGetAllocator( obj ) );
     }
     
     if( buf2 )
