@@ -30,6 +30,7 @@
 #include <CoreFoundation/CoreFoundation.h>
 #include <stdio.h>
 #include <string.h>
+#include "Foo.h"
 
 int main( void )
 {
@@ -334,6 +335,18 @@ int main( void )
         CFRelease( e1 );
         CFRelease( e2 );
         CFRelease( e3 );
+    }
+    
+    fprintf( stderr,  "--------------------------------------------------------------------------------\n" );
+    
+    {
+        FooRef foo;
+        
+        foo = FooCreate( CFSTR( "hello, world" ) );
+        
+        CFShow( foo );
+        CFShow( FooGetString( foo ) );
+        CFRelease( foo );
     }
     
     fprintf( stderr,  "--------------------------------------------------------------------------------\n" );

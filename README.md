@@ -86,6 +86,101 @@ Will report the following:
 - [ ] **CFMutableString** (no encoding support)
 - [ ] **CFNumber** (work in progress)
 
+### Creating custom CoreFoundation classes
+
+This implementation obviously supports custom classes, meaning you can use it as a base for a complete project, if you need object-oriented programming style in C with reference-counted objects.
+
+Here's an example for the public declaration of a custom CoreFoundation class:
+
+`Foo.h`
+
+    #include <CoreFoundation/CoreFoundation.h>
+    
+    #ifndef FOO_H
+    #define FOO_H
+    
+    typedef struct Foo * FooRef; // Opaque type for your class
+    
+    CF_EXPORT CFTypeID    FooGetTypeID( void );         // Returns the type ID of your class
+    CF_EXPORT FooRef      FooCreate( CFStringRef str ); // Creates an instance of your class
+    CF_EXPORT CFStringRef FooGetString( FooRef foo );   // Member method
+    
+    #endif
+    
+And here's the implementation:
+
+`Foo.c`
+
+    #include "Foo.h"
+    #include <CoreFoundation/__private/CFRuntime.h>
+    
+    // Member fields
+    struct Foo
+    {
+        CFRuntimeBase _base; // Mandatory first field
+        CFStringRef   _str;
+    };
+    
+    // Type ID for your class
+    static CFTypeID FooTypeID = 0;
+    
+    // Class destructor
+    static void FooDestruct( FooRef foo );
+    
+    // Your class
+    CFRuntimeClass FooClass  =
+    {
+        "Foo",                                  // Class name
+        sizeof( struct Foo ),                   // Instance size
+        NULL,                                   // Constructor
+        ( void ( * )( CFTypeRef ) )FooDestruct, // Destructor
+        NULL,                                   // Hash
+        NULL,                                   // Equality
+        NULL                                    // Copy description
+    };
+    
+    static void init( void ) __attribute__( ( constructor ) );
+    static void init( void )
+    {
+        // Registers the custom class
+        FooTypeID = CFRuntimeRegisterClass( &FooClass );
+    }
+    
+    // Class destructor
+    static void FooDestruct( FooRef foo )
+    {
+        CFRelease( foo->_str );
+    }
+    
+    // Returns the type ID of your class
+    CFTypeID FooGetTypeID( void )
+    {
+        return FooTypeID;
+    }
+    
+    // Creates an instance of your class
+    FooRef FooCreate( CFStringRef str )
+    {
+        struct Foo * foo;
+        
+        // Creates an instance, using the type ID
+        foo = ( struct Foo * )CFRuntimeCreateInstance( NULL, FooTypeID );
+        
+        // Member initialization
+        if( foo )
+        {
+            foo->_str = CFRetain( str );
+        }
+        
+        return foo;
+    }
+    
+    // Member method
+    CFStringRef FooGetString( FooRef foo )
+    {
+        return ( foo ) ? foo->_str : NULL;
+    }
+    
 License
 -------
 
