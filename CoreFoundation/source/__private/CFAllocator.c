@@ -105,6 +105,11 @@ void CFAllocatorDestruct( CFAllocatorRef allocator )
     {
         if( registry[ i ].ptr )
         {
+            if( registry[ i ].hint == 1 && CFRuntimeIsConstantObject( registry[ i ].ptr ) )
+            {
+                continue;
+            }
+            
             n++;
         }
     }
@@ -295,6 +300,11 @@ void CFAllocatorDebugReportLeaks( CFAllocatorRef allocator, CFAllocatorRegistry 
     {
         if( registry[ i ].ptr != NULL )
         {
+            if( registry[ i ].hint == 1 && CFRuntimeIsConstantObject( registry[ i ].ptr ) )
+            {
+                continue;
+            }
+            
             n++;
         }
     }
@@ -333,6 +343,11 @@ void CFAllocatorDebugReportLeaks( CFAllocatorRef allocator, CFAllocatorRegistry 
     for( i = 0; i < registrySize; i++ )
     {
         if( registry[ i ].ptr == NULL )
+        {
+            continue;
+        }
+        
+        if( registry[ i ].hint == 1 && CFRuntimeIsConstantObject( registry[ i ].ptr ) )
         {
             continue;
         }
