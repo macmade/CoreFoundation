@@ -247,17 +247,13 @@ void CFRuntimeInitInstance( void * memory, CFTypeID typeID, CFAllocatorRef alloc
 
 void CFRuntimeInitStaticInstance( void * memory, CFTypeID typeID )
 {
-    CFRuntimeBase * base;
-    
     if( memory == NULL )
     {
         return;
     }
     
     CFRuntimeInitInstance( memory, typeID, NULL );
-    
-    base     = ( CFRuntimeBase * )memory;
-    base->rc = -1;
+    CFRuntimeSetObjectAsConstant( memory );
 }
 
 void CFRuntimeDeleteInstance( CFTypeRef obj )
@@ -273,6 +269,11 @@ void CFRuntimeDeleteInstance( CFTypeRef obj )
     
     base = ( CFRuntimeBase * )obj;
     list = CFRuntimeClasses;
+    
+    if( CFRuntimeIsConstantObject( obj ) )
+    {
+        return;
+    }
     
     while( list )
     {
