@@ -300,6 +300,34 @@ void CFRuntimeDeleteInstance( CFTypeRef obj )
     }
 }
 
+void CFRuntimeSetObjectAsConstant( CFTypeRef obj )
+{
+    CFRuntimeBase * base;
+    
+    if( obj == NULL )
+    {
+        return;
+    }
+    
+    base = ( CFRuntimeBase * )obj;
+    
+    base->rc = -1;
+}
+
+bool CFRuntimeIsConstantObject( CFTypeRef obj )
+{
+    CFRuntimeBase * base;
+    
+    if( obj == NULL )
+    {
+        return false;
+    }
+    
+    base = ( CFRuntimeBase * )obj;
+    
+    return base->rc == -1;
+}
+
 void CFRuntimeAbortWithError( const char * error, ... )
 {
     va_list ap;

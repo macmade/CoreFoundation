@@ -42,6 +42,10 @@ CFRuntimeClass CFStringClass  =
     ( CFStringRef ( * )( CFTypeRef ) )CFStringCopyDescription
 };
 
+CFSpinLock    CFStringConstantStringsLock     = 0;
+CFIndex       CFStringConstantStringsCapacity = 0;
+CFStringRef * CFStringConstantStrings         = NULL;
+
 void CFStringDestruct( CFStringRef str )
 {
     if( str->_cStr )

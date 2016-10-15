@@ -44,6 +44,86 @@ CFTypeID CFStringGetTypeID( void )
     return CFStringTypeID;
 }
 
+CF_EXPORT CFStringRef CFStringMakeConstantString( const char * cp )
+{
+    CFIndex     i;
+    CFStringRef s;
+    
+    if( cp == NULL )
+    {
+        return NULL;
+    }
+    
+    CFSpinLockLock( &CFStringConstantStringsLock );
+    
+    if( CFStringConstantStrings == NULL )
+    {
+        CFStringConstantStrings = calloc( sizeof( CFStringRef ), 1024 );
+        
+        if( CFStringConstantStrings == NULL )
+        {
+            CFSpinLockUnlock( &CFStringConstantStringsLock );
+            CFRuntimeAbortWithOutOfMemoryError();
+            
+            return NULL;
+        }
+        
+        CFStringConstantStringsCapacity = 1024;
+    }
+    
+    for( i = 0; i < CFStringConstantStringsCapacity; i++ )
+    {
+        if( CFStringConstantStrings[ i ] != NULL && CFStringConstantStrings[ i ]->_cStr == cp )
+        {
+            CFSpinLockUnlock( &CFStringConstantStringsLock );
+            
+            return CFStringConstantStrings[ i ];
+        }
+    }
+    
+    s = CFStringCreateWithCStringNoCopy( NULL, cp, kCFStringEncodingUTF8, kCFAllocatorNull );
+    
+    if( s == NULL )
+    {
+        CFSpinLockUnlock( &CFStringConstantStringsLock );
+        CFRuntimeAbortWithOutOfMemoryError();
+        
+        return NULL;
+    }
+    
+    CFRuntimeSetObjectAsConstant( s );
+    
+    add:
+    
+        for( i = 0; i < CFStringConstantStringsCapacity; i++ )
+        {
+            if( CFStringConstantStrings[ i ] == NULL )
+            {
+                CFStringConstantStrings[ i ] = s;
+                
+                CFSpinLockUnlock( &CFStringConstantStringsLock );
+                
+                return s;
+            }
+        }
+        
+    CFStringConstantStrings = realloc( CFStringConstantStrings, 2 * ( size_t )CFStringConstantStringsCapacity * sizeof( CFStringRef ) );
+    
+    if( CFStringConstantStrings == NULL )
+    {
+        CFSpinLockUnlock( &CFStringConstantStringsLock );
+        CFRuntimeAbortWithOutOfMemoryError();
+        
+        return NULL;
+    }
+    
+    memset( CFStringConstantStrings + CFStringConstantStringsCapacity, 0, CFStringConstantStringsCapacity );
+    
+    CFStringConstantStringsCapacity *= 2;
+    
+    goto add;
+}
+
 CFArrayRef CFStringCreateArrayBySeparatingStrings( CFAllocatorRef alloc, CFStringRef theString, CFStringRef separatorString )
 {
     ( void )alloc;

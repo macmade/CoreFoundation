@@ -32,6 +32,7 @@
 
 #include <CoreFoundation/CoreFoundation.h>
 #include <CoreFoundation/__private/CFRuntime.h>
+#include <CoreFoundation/__private/CFSpinLock.h>
 
 CF_EXTERN_C_BEGIN
 
@@ -57,6 +58,10 @@ CF_EXPORT CFTypeID       CFStringTypeID;
 CF_EXPORT CFRuntimeClass CFStringClass;
 
 #define CF_STRING_DEFAULT_CAPACITY  ( 1024 )
+
+CF_EXPORT CFSpinLock    CFStringConstantStringsLock;
+CF_EXPORT CFIndex       CFStringConstantStringsCapacity;
+CF_EXPORT CFStringRef * CFStringConstantStrings;
 
 CF_EXTERN_C_END
 

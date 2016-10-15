@@ -197,6 +197,24 @@ CF_EXPORT void CFRuntimeInitStaticInstance( void * memory, CFTypeID typeID );
 CF_EXPORT void CFRuntimeDeleteInstance( CFTypeRef obj );
 
 /*!
+ * @function    CFRuntimeSetObjectAsConstant
+ * @abstract    Marks a CoreFoundation object as constant
+ * @param       obj     The object to mark as constant
+ * @discussion  Making an object constant will prevent its deallocation.
+ *              Using CFRetain and CFRelease on such an object will have
+ *              no effect.
+ */
+CF_EXPORT void CFRuntimeSetObjectAsConstant( CFTypeRef obj );
+
+/*!
+ * @function    CFRuntimeIsConstantObject
+ * @abstract    Checks if a CoreFoundation object is constant.
+ * @param       obj     The object inspect
+ * @see         CFRuntimeSetObjectAsConstant
+ */
+CF_EXPORT bool CFRuntimeIsConstantObject( CFTypeRef obj );
+
+/*!
  * @function    CFRuntimeAbortWithError
  * @abstract    Prints an error message and aborts the program's execution.
  * @param       error       The error message

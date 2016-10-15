@@ -117,7 +117,7 @@ typedef const struct CFString * CFStringRef;
  *              Note: When using this macro as an initializer, you must build
  *              using the -fconstant-cfstrings compiler flag.
  */
-#define CFSTR( _s_ )    
+#define CFSTR( _s_ )    CFStringMakeConstantString( _s_ )
 
 /*!
  * @typedef     
@@ -328,6 +328,21 @@ CFStringEncodings;
  *              CFString objects.
  */
 CF_EXPORT CFTypeID CFStringGetTypeID( void );
+
+/*!
+ * @define      CFStringMakeConstantString
+ * @abstract    Creates an immutable string from a constant compile-time string.
+ * @param       cp      A constant C string (that is, text enclosed in
+ *                      double-quotation marks) from which the string is to be
+ *                      created.
+ * @result      An immutable string, or NULL if there was a problem creating the
+ *              object. The returned object is a constant. You may retain and
+ *              release it, similar to other immutable CFString objects, but are
+ *              not required to do so—it will remain valid until the program
+ *              terminates.
+ * @see         CFSTR
+ */
+CF_EXPORT CFStringRef CFStringMakeConstantString( const char * cp );
 
 /*!
  * @function    

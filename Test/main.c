@@ -276,5 +276,10 @@ int main( void )
     
     fprintf( stderr,  "--------------------------------------------------------------------------------\n" );
     
+    {
+        CFShow( CFSTR( "hello, world" ) );
+        CFShow( CFSTR( "hello, universe" ) );
+    }
+    
     return 0;
 }
