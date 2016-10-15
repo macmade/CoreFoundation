@@ -84,6 +84,7 @@ Will report the following:
 
 - [ ] **CFString** (no encoding support)
 - [ ] **CFMutableString** (no encoding support)
+- [ ] **CFNotificationCenter** (work in progress)
 - [ ] **CFNumber** (work in progress)
 
 ### Creating custom CoreFoundation classes

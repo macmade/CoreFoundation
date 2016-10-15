@@ -112,6 +112,7 @@
 		053292C61DA900C100E46312 /* __private in Headers */ = {isa = PBXBuildFile; fileRef = 053292C41DA900B700E46312 /* __private */; settings = {ATTRIBUTES = (Public, ); }; };
 		053292CC1DA91B1900E46312 /* CFRuntime.c in Sources */ = {isa = PBXBuildFile; fileRef = 053292CB1DA91B1900E46312 /* CFRuntime.c */; };
 		05350FC71DB2AEFE00C783DA /* Foo.c in Sources */ = {isa = PBXBuildFile; fileRef = 05350FC51DB2AEFE00C783DA /* Foo.c */; };
+		05350FCB1DB2B98400C783DA /* CFNotificationCenter.c in Sources */ = {isa = PBXBuildFile; fileRef = 05350FCA1DB2B98400C783DA /* CFNotificationCenter.c */; };
 		054F446E1DB10226000B5C2A /* CFDictionary.c in Sources */ = {isa = PBXBuildFile; fileRef = 054F446D1DB10226000B5C2A /* CFDictionary.c */; };
 		054F44701DB103A4000B5C2A /* CFNull.c in Sources */ = {isa = PBXBuildFile; fileRef = 054F446F1DB103A4000B5C2A /* CFNull.c */; };
 		054F44761DB10412000B5C2A /* CFAllocator.c in Sources */ = {isa = PBXBuildFile; fileRef = 054F44711DB10412000B5C2A /* CFAllocator.c */; };
@@ -274,6 +275,7 @@
 		053292CB1DA91B1900E46312 /* CFRuntime.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CFRuntime.c; sourceTree = "<group>"; };
 		05350FC51DB2AEFE00C783DA /* Foo.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Foo.c; sourceTree = "<group>"; };
 		05350FC61DB2AEFE00C783DA /* Foo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Foo.h; sourceTree = "<group>"; };
+		05350FCA1DB2B98400C783DA /* CFNotificationCenter.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CFNotificationCenter.c; sourceTree = "<group>"; };
 		054F446D1DB10226000B5C2A /* CFDictionary.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CFDictionary.c; sourceTree = "<group>"; };
 		054F446F1DB103A4000B5C2A /* CFNull.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CFNull.c; sourceTree = "<group>"; };
 		054F44711DB10412000B5C2A /* CFAllocator.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CFAllocator.c; sourceTree = "<group>"; };
@@ -532,6 +534,7 @@
 				054F44731DB10412000B5C2A /* CFData.c */,
 				054F446D1DB10226000B5C2A /* CFDictionary.c */,
 				0594FCB41DB28792007700D4 /* CFError.c */,
+				05350FCA1DB2B98400C783DA /* CFNotificationCenter.c */,
 				054F446F1DB103A4000B5C2A /* CFNull.c */,
 				054F44741DB10412000B5C2A /* CFNumber.c */,
 				053292CB1DA91B1900E46312 /* CFRuntime.c */,
@@ -780,6 +783,7 @@
 				0532921F1DA6513700E46312 /* CFSet.c in Sources */,
 				054F45521DB1AA0C000B5C2A /* CFSpinLock.c in Sources */,
 				054F44961DB10EBA000B5C2A /* CFMutableArray.c in Sources */,
+				05350FCB1DB2B98400C783DA /* CFNotificationCenter.c in Sources */,
 				053292081DA6513700E46312 /* CFCharacterSet.c in Sources */,
 				0532922C1DA6513700E46312 /* CFXMLNode.c in Sources */,
 				053292201DA6513700E46312 /* CFSocket.c in Sources */,

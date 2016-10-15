@@ -28,5 +28,73 @@
  */
 
 #include <CoreFoundation/CoreFoundation.h>
+#include <CoreFoundation/__private/CFNotificationCenter.h>
+#include <stdlib.h>
 
+static void init( void ) __attribute__( ( constructor ) );
+static void init( void )
+{
+    CFNotificationCenterTypeID = CFRuntimeRegisterClass( &CFNotificationCenterClass );
+}
 
+CFTypeID CFNotificationCenterGetTypeID( void )
+{
+    return CFNotificationCenterTypeID;
+}
+
+CFNotificationCenterRef CFNotificationCenterGetDarwinNotifyCenter( void )
+{
+    return NULL;
+}
+
+CFNotificationCenterRef CFNotificationCenterGetDistributedCenter( void )
+{
+    return NULL;
+}
+
+CFNotificationCenterRef CFNotificationCenterGetLocalCenter( void )
+{
+    return NULL;
+}
+
+void CFNotificationCenterPostNotification( CFNotificationCenterRef center, CFNotificationName name, const void * object, CFDictionaryRef userInfo, Boolean deliverImmediately )
+{
+    ( void )center;
+    ( void )name;
+    ( void )object;
+    ( void )userInfo;
+    ( void )deliverImmediately;
+}
+
+void CFNotificationCenterPostNotificationWithOptions( CFNotificationCenterRef center, CFNotificationName name, const void * object, CFDictionaryRef userInfo, CFOptionFlags options )
+{
+    ( void )center;
+    ( void )name;
+    ( void )object;
+    ( void )userInfo;
+    ( void )options;
+}
+
+void CFNotificationCenterAddObserver( CFNotificationCenterRef center, const void * observer, CFNotificationCallback callBack, CFStringRef name, const void * object, CFNotificationSuspensionBehavior suspensionBehavior )
+{
+    ( void )center;
+    ( void )observer;
+    ( void )callBack;
+    ( void )name;
+    ( void )object;
+    ( void )suspensionBehavior;
+}
+
+void CFNotificationCenterRemoveEveryObserver( CFNotificationCenterRef center, const void * observer )
+{
+    ( void )center;
+    ( void )observer;
+}
+
+void CFNotificationCenterRemoveObserver( CFNotificationCenterRef center, const void * observer, CFNotificationName name, const void * object )
+{
+    ( void )center;
+    ( void )observer;
+    ( void )name;
+    ( void )object;
+}
