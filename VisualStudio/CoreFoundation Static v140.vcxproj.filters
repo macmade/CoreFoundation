@@ -1,0 +1,684 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\__private">
+      <UniqueIdentifier>{44751a38-86c3-430e-bbdb-b6d71c5b81d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\__private">
+      <UniqueIdentifier>{d0b8ae74-38d0-4ae4-b48a-97e9cc4ff561}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\__private\__CFAllocator.h">
+      <Filter>Header Files\__private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\__private\__CFArray.h">
+      <Filter>Header Files\__private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\__private\__CFAtomic.h">
+      <Filter>Header Files\__private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\__private\__CFAttributedString.h">
+      <Filter>Header Files\__private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\__private\__CFBag.h">
+      <Filter>Header Files\__private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\__private\__CFBinaryHeap.h">
+      <Filter>Header Files\__private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\__private\__CFBitVector.h">
+      <Filter>Header Files\__private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\__private\__CFBoolean.h">
+      <Filter>Header Files\__private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\__private\__CFBundle.h">
+      <Filter>Header Files\__private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\__private\__CFCalendar.h">
+      <Filter>Header Files\__private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\__private\__CFCharacterSet.h">
+      <Filter>Header Files\__private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\__private\__CFData.h">
+      <Filter>Header Files\__private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\__private\__CFDate.h">
+      <Filter>Header Files\__private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\__private\__CFDateFormatter.h">
+      <Filter>Header Files\__private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\__private\__CFDictionary.h">
+      <Filter>Header Files\__private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\__private\__CFError.h">
+      <Filter>Header Files\__private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\__private\__CFFileDescriptor.h">
+      <Filter>Header Files\__private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\__private\__CFLocale.h">
+      <Filter>Header Files\__private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\__private\__CFMachPort.h">
+      <Filter>Header Files\__private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\__private\__CFMessagePort.h">
+      <Filter>Header Files\__private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\__private\__CFNotificationCenter.h">
+      <Filter>Header Files\__private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\__private\__CFNull.h">
+      <Filter>Header Files\__private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\__private\__CFNumber.h">
+      <Filter>Header Files\__private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\__private\__CFNumberFormatter.h">
+      <Filter>Header Files\__private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\__private\__CFPlugIn.h">
+      <Filter>Header Files\__private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\__private\__CFPlugInInstance.h">
+      <Filter>Header Files\__private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\__private\__CFPreferences.h">
+      <Filter>Header Files\__private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\__private\__CFPropertyList.h">
+      <Filter>Header Files\__private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\__private\__CFReadStream.h">
+      <Filter>Header Files\__private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\__private\__CFRunLoop.h">
+      <Filter>Header Files\__private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\__private\__CFRunLoopObserver.h">
+      <Filter>Header Files\__private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\__private\__CFRunLoopSource.h">
+      <Filter>Header Files\__private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\__private\__CFRunLoopTimer.h">
+      <Filter>Header Files\__private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\__private\__CFRuntime.h">
+      <Filter>Header Files\__private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\__private\__CFSet.h">
+      <Filter>Header Files\__private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\__private\__CFSocket.h">
+      <Filter>Header Files\__private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\__private\__CFSpinLock.h">
+      <Filter>Header Files\__private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\__private\__CFString.h">
+      <Filter>Header Files\__private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\__private\__CFStringTokenizer.h">
+      <Filter>Header Files\__private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\__private\__CFThreading.h">
+      <Filter>Header Files\__private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\__private\__CFTimeZone.h">
+      <Filter>Header Files\__private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\__private\__CFTree.h">
+      <Filter>Header Files\__private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\__private\__CFURL.h">
+      <Filter>Header Files\__private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\__private\__CFUserNotification.h">
+      <Filter>Header Files\__private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\__private\__CFUUID.h">
+      <Filter>Header Files\__private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\__private\__CFWriteStream.h">
+      <Filter>Header Files\__private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\__private\__CFXMLNode.h">
+      <Filter>Header Files\__private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\__private\__CFXMLParser.h">
+      <Filter>Header Files\__private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\__private\__CFXMLTree.h">
+      <Filter>Header Files\__private</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\CFAllocator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\CFArray.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\CFAttributedString.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\CFBag.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\CFBase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\CFBinaryHeap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\CFBitVector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\CFBoolean.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\CFBundle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\CFByteOrder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\CFCalendar.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\CFCharacterSet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\CFData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\CFDate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\CFDateFormatter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\CFDictionary.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\CFError.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\CFFileDescriptor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\CFLocale.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\CFMachPort.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\CFMessagePort.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\CFMutableArray.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\CFMutableAttributedString.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\CFMutableBag.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\CFMutableBitVector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\CFMutableCharacterSet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\CFMutableData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\CFMutableDictionary.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\CFMutableSet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\CFMutableString.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\CFNotificationCenter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\CFNull.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\CFNumber.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\CFNumberFormatter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\CFPlugIn.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\CFPlugInInstance.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\CFPreferences.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\CFPropertyList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\CFReadStream.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\CFRunLoop.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\CFRunLoopObserver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\CFRunLoopSource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\CFRunLoopTimer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\CFSet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\CFSocket.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\CFStream.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\CFString.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\CFStringTokenizer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\CFTimeZone.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\CFTree.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\CFType.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\CFURL.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\CFUserNotification.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\CFUtilities.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\CFUUID.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\CFWriteStream.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\CFXMLNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\CFXMLParser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\CFXMLTree.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\CoreFoundation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CoreFoundation\include\CoreFoundation\MacTypes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFAllocator.c">
+      <Filter>Source Files\__private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFArray.c">
+      <Filter>Source Files\__private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFAtomic.c">
+      <Filter>Source Files\__private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFAttributedString.c">
+      <Filter>Source Files\__private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFBag.c">
+      <Filter>Source Files\__private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFBinaryHeap.c">
+      <Filter>Source Files\__private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFBitVector.c">
+      <Filter>Source Files\__private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFBoolean.c">
+      <Filter>Source Files\__private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFBundle.c">
+      <Filter>Source Files\__private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFCalendar.c">
+      <Filter>Source Files\__private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFCharacterSet.c">
+      <Filter>Source Files\__private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFData.c">
+      <Filter>Source Files\__private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFDate.c">
+      <Filter>Source Files\__private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFDateFormatter.c">
+      <Filter>Source Files\__private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFDictionary.c">
+      <Filter>Source Files\__private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFError.c">
+      <Filter>Source Files\__private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFFileDescriptor.c">
+      <Filter>Source Files\__private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFInit.c">
+      <Filter>Source Files\__private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFLocale.c">
+      <Filter>Source Files\__private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFMachPort.c">
+      <Filter>Source Files\__private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFMessagePort.c">
+      <Filter>Source Files\__private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFNotificationCenter.c">
+      <Filter>Source Files\__private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFNull.c">
+      <Filter>Source Files\__private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFNumber.c">
+      <Filter>Source Files\__private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFNumberFormatter.c">
+      <Filter>Source Files\__private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFPlugIn.c">
+      <Filter>Source Files\__private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFPlugInInstance.c">
+      <Filter>Source Files\__private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFPreferences.c">
+      <Filter>Source Files\__private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFPropertyList.c">
+      <Filter>Source Files\__private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFReadStream.c">
+      <Filter>Source Files\__private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFRunLoop.c">
+      <Filter>Source Files\__private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFRunLoopObserver.c">
+      <Filter>Source Files\__private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFRunLoopSource.c">
+      <Filter>Source Files\__private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFRunLoopTimer.c">
+      <Filter>Source Files\__private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFRuntime.c">
+      <Filter>Source Files\__private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFSet.c">
+      <Filter>Source Files\__private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFSocket.c">
+      <Filter>Source Files\__private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFSpinLock.c">
+      <Filter>Source Files\__private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFString.c">
+      <Filter>Source Files\__private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFStringTokenizer.c">
+      <Filter>Source Files\__private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFThreading.c">
+      <Filter>Source Files\__private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFTimeZone.c">
+      <Filter>Source Files\__private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFTree.c">
+      <Filter>Source Files\__private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFURL.c">
+      <Filter>Source Files\__private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFUserNotfication.c">
+      <Filter>Source Files\__private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFUUID.c">
+      <Filter>Source Files\__private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFWriteStream.c">
+      <Filter>Source Files\__private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFXMLNode.c">
+      <Filter>Source Files\__private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFXMLParser.c">
+      <Filter>Source Files\__private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFXMLTree.c">
+      <Filter>Source Files\__private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\CFArray.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\CFAttributedString.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\CFBag.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\CFBase.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\CFBinaryHeap.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\CFBitVector.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\CFBoolean.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\CFBundle.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\CFByteOrder.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\CFCalendar.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\CFCharacterSet.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\CFData.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\CFDate.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\CFDateFormatter.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\CFDictionary.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\CFError.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\CFFileDescriptor.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\CFLocale.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\CFMachPort.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\CFMessagePort.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\CFMutableArray.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\CFMutableAttributedString.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\CFMutableBag.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\CFMutableBitVector.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\CFMutableCharacterSet.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\CFMutableData.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\CFMutableDictionary.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\CFMutableSet.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\CFMutableString.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\CFNotificationCenter.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\CFNull.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\CFNumber.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\CFNumberFormatter.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\CFPlugIn.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\CFPlugInInstance.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\CFPreferences.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\CFPropertyList.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\CFReadStream.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\CFRunLoop.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\CFRunLoopObserver.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\CFRunLoopSource.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\CFRunLoopTimer.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\CFSet.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\CFSocket.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\CFStream.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\CFString.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\CFStringTokenizer.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\CFTimeZone.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\CFTree.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\CFType.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\CFURL.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\CFUserNotification.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\CFUtilities.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\CFUUID.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\CFWriteStream.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\CFXMLNode.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\CFXMLParser.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\CFXMLTree.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CoreFoundation\source\CFAllocator.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

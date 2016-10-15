@@ -51,8 +51,21 @@ CFRuntimeClass FooClass  =
     NULL
 };
 
+#ifdef _WIN32
+
+#pragma section( ".CRT$XCU", read )
+
+static void __cdecl init( void );
+__declspec( allocate( ".CRT$XCU" ) ) void( __cdecl * init_ )( void ) = init;
+static void __cdecl init( void )
+
+#else
+
 static void init( void ) __attribute__( ( constructor ) );
 static void init( void )
+
+#endif
+
 {
     FooTypeID = CFRuntimeRegisterClass( &FooClass );
 }

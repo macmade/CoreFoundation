@@ -32,6 +32,7 @@
 
 #include <CoreFoundation/CFBase.h>
 #include <CoreFoundation/MacTypes.h>
+#include <stdint.h>
 
 CF_EXTERN_C_BEGIN
 
@@ -50,21 +51,13 @@ CF_EXTERN_C_BEGIN
  *              IDs nor should it hard-code any observed properties of a type ID
  *              (such as, for example, it being a small integer).
  */
-#ifdef __LLP64__
-typedef unsigned long long CFTypeID;
-#else
-typedef unsigned long CFTypeID;
-#endif
+typedef uint64_t CFTypeID;
 
 /*!
  * @typedef     CFHashCode
  * @abstract    A type for hash codes returned by the CFHash function.
  */
-#ifdef __LLP64__
-typedef unsigned long long CFHashCode;
-#else
-typedef unsigned long CFHashCode;
-#endif
+typedef uint64_t CFHashCode;
 
 /*!
  * @typedef     CFTypeRef

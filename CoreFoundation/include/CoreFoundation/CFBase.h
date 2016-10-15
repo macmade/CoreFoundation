@@ -30,6 +30,8 @@
 #ifndef CORE_FOUNDATION_CF_BASE_H
 #define CORE_FOUNDATION_CF_BASE_H
 
+#include <stdint.h>
+
 /*!
  * @define      CF_EXTERN_C_BEGIN
  * @abstract    Extern "C" start / C++ compatibility
@@ -58,9 +60,9 @@ CF_EXTERN_C_BEGIN
  * @define      CF_EXPORT
  * @abstract    Definition for exported symbols
  */
-#if defined( CF_BUILDING_CF ) && defined( __cplusplus )
+#if defined( CORE_FOUNDATION_DLL_BUILD ) && defined( __cplusplus )
 #define CF_EXPORT   extern "C" __declspec( dllexport )
-#elif defined(CF_BUILDING_CF) && !defined( __cplusplus )
+#elif defined( CORE_FOUNDATION_DLL_BUILD ) && !defined( __cplusplus )
 #define CF_EXPORT   extern __declspec( dllexport )
 #elif defined( __cplusplus )
 #define CF_EXPORT   extern "C" __declspec( dllimport )
@@ -92,11 +94,7 @@ CF_EXTERN_C_BEGIN
  *              Foundation as CFIndex, your code will have a higher degree of
  *              source compatibility in the future.
  */
-#ifdef __LLP64__
-typedef signed long long CFIndex;
-#else
-typedef signed long CFIndex;
-#endif
+typedef int64_t CFIndex;
 
 /*!
  * @typedef     CFOptionFlags
@@ -105,11 +103,7 @@ typedef signed long CFIndex;
  * @discussion  The flag bits are specific to particular opaque types and
  *              functions in Core Foundation.
  */
-#ifdef __LLP64__
-typedef unsigned long long CFOptionFlags;
-#else
-typedef unsigned long CFOptionFlags;
-#endif
+typedef uint64_t CFOptionFlags;
 
 /*!
  * @typedef     CFComparisonResult

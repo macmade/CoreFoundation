@@ -101,7 +101,7 @@ CF_EXPORT CFStringRef CFStringMakeConstantString( const char * cp )
             }
         }
         
-        CFStringConstantStrings = realloc( CFStringConstantStrings, 2 * ( size_t )CFStringConstantStringsCapacity * sizeof( CFStringRef ) );
+        CFStringConstantStrings = realloc( ( void * )CFStringConstantStrings, 2 * ( size_t )CFStringConstantStringsCapacity * sizeof( CFStringRef ) );
         
         if( CFStringConstantStrings == NULL )
         {
@@ -111,7 +111,7 @@ CF_EXPORT CFStringRef CFStringMakeConstantString( const char * cp )
             return NULL;
         }
         
-        memset( CFStringConstantStrings + CFStringConstantStringsCapacity, 0, CFStringConstantStringsCapacity );
+        memset( ( void * )( CFStringConstantStrings + CFStringConstantStringsCapacity ), 0, CFStringConstantStringsCapacity );
         
         CFStringConstantStringsCapacity *= 2;
         
@@ -138,6 +138,11 @@ CFStringRef CFStringCreateByCombiningStrings( CFAllocatorRef alloc, CFArrayRef t
 
 CFStringRef CFStringCreateCopy( CFAllocatorRef alloc, CFStringRef theString )
 {
+    if( theString == NULL )
+    {
+        return NULL;
+    }
+
     return CFStringCreateWithCString( alloc, theString->_cStr, theString->_encoding );
 }
 
@@ -766,8 +771,8 @@ void CFShowStr( CFStringRef str )
         fprintf
         (
             stderr,
-            "<CFString 0x%lu [ %s ]> { length = %lu, capacity = %lu, type = %s } %s\n",
-            ( unsigned long )str,
+            "<CFString 0x%llu [ %s ]> { length = %lli, capacity = %lli, type = %s } %s\n",
+            ( unsigned long long )str,
             allocatorName,
             str->_length,
             str->_capacity,
@@ -780,9 +785,9 @@ void CFShowStr( CFStringRef str )
         fprintf
         (
             stderr,
-            "<CFString 0x%lu [ 0x%lu ]> { length = %lu, capacity = %lu, type = %s } %s\n",
-            ( unsigned long )str,
-            ( unsigned long )allocator,
+            "<CFString 0x%llu [ 0x%llu ]> { length = %lli, capacity = %lli, type = %s } %s\n",
+            ( unsigned long long )str,
+            ( unsigned long long )allocator,
             str->_length,
             str->_capacity,
             ( str->_mutable ) ? "mutable" : "immutable",

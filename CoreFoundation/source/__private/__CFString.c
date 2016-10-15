@@ -130,6 +130,6 @@ void CFStringAssertMutable( CFStringRef str )
     
     if( str->_mutable == false )
     {
-        CFRuntimeAbortWithError( "<CFString 0x%lu> is not mutable", ( unsigned long )str );
+        CFRuntimeAbortWithError( "<CFString 0x%llu> is not mutable", ( unsigned long long )str );
     }
 }

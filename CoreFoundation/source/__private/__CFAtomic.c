@@ -33,7 +33,8 @@
 #include <stdlib.h>
 
 #if defined( _WIN32 )
-#include <Winnt.h>
+#include <SDKDDKVer.h>
+#include <Windows.h>
 #elif defined( __APPLE__ )
 #include <libkern/OSAtomic.h>
 #endif
@@ -58,7 +59,7 @@ int32_t CFAtomicIncrement32( volatile int32_t * value )
 {
     #if defined( _WIN32 )
     
-    return InterlockedIncrement( reinterpret_cast< volatile LONG * >( value  ) );
+    return InterlockedIncrement( ( volatile LONG * )value );
     
     #elif defined( __APPLE__ )
     
@@ -82,7 +83,7 @@ int64_t CFAtomicIncrement64( volatile int64_t * value )
 {
     #if defined( _WIN32 )
     
-    return InterlockedIncrement64( reinterpret_cast< volatile LONGLONG * >( value ) );
+    return InterlockedIncrement64( ( volatile LONGLONG * )value );
     
     #elif defined( __APPLE__ )
     
@@ -122,7 +123,7 @@ int32_t CFAtomicDecrement32( volatile int32_t * value )
 {
     #if defined( _WIN32 )
     
-    return InterlockedDecrement( reinterpret_cast< volatile LONG * >( value ) );
+    return InterlockedDecrement( ( volatile LONG * )value );
     
     #elif defined( __APPLE__ )
     
@@ -146,7 +147,7 @@ int64_t CFAtomicDecrement64( volatile int64_t * value )
 {
     #if defined( _WIN32 )
     
-    return InterlockedDecrement64( reinterpret_cast< volatile LONGLONG * >( value ) );
+    return InterlockedDecrement64( ( volatile LONGLONG * )value );
     
     #elif defined( __APPLE__ )
     
@@ -187,7 +188,7 @@ bool CFAtomicCompareAndSwap32( int32_t oldValue, int32_t newValue, volatile int3
 {
     #if defined( _WIN32 )
     
-    return ( InterlockedCompareExchange( reinterpret_cast< volatile LONG * >( value ), newValue, oldValue ) == oldValue ) ? true : false;
+    return ( InterlockedCompareExchange( ( volatile LONG * )value, newValue, oldValue ) == oldValue ) ? true : false;
     
     #elif defined( __APPLE__ )
     
@@ -211,7 +212,7 @@ bool CFAtomicCompareAndSwap64( int64_t oldValue, int64_t newValue, volatile int6
 {
     #if defined( _WIN32 )
     
-    return ( InterlockedCompareExchange64( reinterpret_cast< volatile LONGLONG * >( value ), newValue, oldValue ) == oldValue ) ? true : false;
+    return ( InterlockedCompareExchange64( ( volatile LONGLONG * )value, newValue, oldValue ) == oldValue ) ? true : false;
     
     #elif defined( __APPLE__ )
     

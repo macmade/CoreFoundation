@@ -186,8 +186,8 @@ int main( void )
         CFShow( d1 );
         CFShow( d2 );
         
-        fprintf( stderr,  "%s: %s\n", k1[ 0 ], CFDictionaryGetValue( d1, k1[ 0 ] ) );
-        fprintf( stderr,  "%s: %s\n", k1[ 1 ], CFDictionaryGetValue( d1, k1[ 1 ] ) );
+        fprintf( stderr,  "%s: %s\n", ( char * )k1[ 0 ], ( char * )CFDictionaryGetValue( d1, k1[ 0 ] ) );
+        fprintf( stderr,  "%s: %s\n", ( char * )k1[ 1 ], ( char * )CFDictionaryGetValue( d1, k1[ 1 ] ) );
         
         CFShow( CFDictionaryGetValue( d2, k2[ 0 ] ) );
         CFShow( CFDictionaryGetValue( d2, k2[ 1 ] ) );

@@ -118,7 +118,7 @@ CFNumberRef CFNumberCreate( CFAllocatorRef allocator, CFNumberType type, const v
     else if( type == kCFNumberDoubleType )
     {
         o->_isFloat      = true;
-        o->_doubleValue  = ( SInt64 )*( ( const double * )valuePtr );
+        o->_doubleValue  = ( double )*( ( const double * )valuePtr );
     }
     else if( type == kCFNumberCFIndexType )
     {

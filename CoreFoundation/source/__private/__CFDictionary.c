@@ -483,7 +483,7 @@ void CFDictionaryAssertMutable( CFDictionaryRef d )
     
     if( d->_mutable == false )
     {
-        CFRuntimeAbortWithError( "<CFDictionary 0x%lu> is not mutable", ( unsigned long )d );
+        CFRuntimeAbortWithError( "<CFDictionary 0x%llu> is not mutable", ( unsigned long long )d );
     }
 }
 

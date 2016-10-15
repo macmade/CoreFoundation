@@ -65,7 +65,7 @@ bool CFThreadingSetSpecific( CFThreadingKey key, const void * value )
 {
     #ifdef _WIN32
     
-    return TlsGetValue( key, value );
+    return TlsSetValue( key, ( void * )value );
     
     #else
     

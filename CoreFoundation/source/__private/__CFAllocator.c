@@ -349,7 +349,7 @@ void CFAllocatorDebugReportLeaks( CFAllocatorRef allocator, CFAllocatorRegistry 
         "*** Leaking memory.\n"
         "\n"
         "- Allocator:       %s\n"
-        "- Active records:  %li\n"
+        "- Active records:  %lli\n"
         "- Records:\n"
         "{\n",
         buf,
@@ -397,7 +397,7 @@ void CFAllocatorDebugReportLeaks( CFAllocatorRef allocator, CFAllocatorRegistry 
         
         if( buf )
         {
-            fprintf( stderr, "    %li. %s\n", ++n, buf );
+            fprintf( stderr, "    %lli. %s\n", ++n, buf );
             
             CFRelease( description );
             free( buf );
@@ -407,7 +407,7 @@ void CFAllocatorDebugReportLeaks( CFAllocatorRef allocator, CFAllocatorRegistry 
         }
         else
         {
-            fprintf( stderr, "    %li. 0x%lx\n", ++n, ( unsigned long )( registry[ i ].ptr ) );
+            fprintf( stderr, "    %lli. 0x%llx\n", ++n, ( unsigned long long )( registry[ i ].ptr ) );
         }
     }
     
