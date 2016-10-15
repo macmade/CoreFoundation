@@ -734,6 +734,9 @@ SInt32 CFStringGetIntValue( CFStringRef str )
 
 void CFShowStr( CFStringRef str )
 {
+    CFAllocatorRef allocator;
+    const char   * allocatorName;
+    
     if( str == NULL )
     {
         fprintf( stderr, "(null)\n" );
@@ -741,17 +744,57 @@ void CFShowStr( CFStringRef str )
         return;
     }
     
-    fprintf
-    (
-        stderr,
-        "<CFString 0x%lu [ 0x%lu ]> { length = %lu, capacity = %lu, type = %s } %s\n",
-        ( unsigned long )str,
-        ( unsigned long )CFGetAllocator( str ),
-        str->_length,
-        str->_capacity,
-        ( str->_mutable ) ? "mutable" : "immutable",
-        ( str->_cStr ) ? str->_cStr : "(null)"
-    );
+    allocator = CFGetAllocator( str );
+    
+    if( allocator == kCFAllocatorSystemDefault )
+    {
+        allocatorName = "kCFAllocatorSystemDefault";
+    }
+    else if( allocator == kCFAllocatorMalloc )
+    {
+        allocatorName = "kCFAllocatorMalloc";
+    }
+    else if( allocator == kCFAllocatorMallocZone )
+    {
+        allocatorName = "kCFAllocatorMallocZone";
+    }
+    else if( allocator == kCFAllocatorNull )
+    {
+        allocatorName = "kCFAllocatorNull";
+    }
+    else
+    {
+        allocatorName = NULL;
+    }
+    
+    if( allocatorName )
+    {
+        fprintf
+        (
+            stderr,
+            "<CFString 0x%lu [ %s ]> { length = %lu, capacity = %lu, type = %s } %s\n",
+            ( unsigned long )str,
+            allocatorName,
+            str->_length,
+            str->_capacity,
+            ( str->_mutable ) ? "mutable" : "immutable",
+            ( str->_cStr ) ? str->_cStr : "(null)"
+        );
+    }
+    else
+    {
+        fprintf
+        (
+            stderr,
+            "<CFString 0x%lu [ 0x%lu ]> { length = %lu, capacity = %lu, type = %s } %s\n",
+            ( unsigned long )str,
+            ( unsigned long )allocator,
+            str->_length,
+            str->_capacity,
+            ( str->_mutable ) ? "mutable" : "immutable",
+            ( str->_cStr ) ? str->_cStr : "(null)"
+        );
+    }
 }
 
 CFStringRef CFStringCreateWithFileSystemRepresentation( CFAllocatorRef alloc, const char * buffer )

@@ -281,6 +281,8 @@ int main( void )
         CFShow( CFSTR( "hello, universe" ) );
     }
     
+    fprintf( stderr,  "--------------------------------------------------------------------------------\n" );
+    
     {
         CFStringRef  leak;
         volatile int i;

@@ -168,6 +168,8 @@ CFStringRef CFCopyDescription( CFTypeRef obj )
     char                           * buf1;
     char                           * buf2;
     CFTypeRef                        ret;
+    CFAllocatorRef                   allocator;
+    const char                     * allocatorName;
     
     if( obj == NULL )
     {
@@ -220,13 +222,50 @@ CFStringRef CFCopyDescription( CFTypeRef obj )
         }
     }
     
-    if( buf2 && strlen( buf2 ) )
+    allocator = CFGetAllocator( obj );
+    
+    if( allocator == kCFAllocatorSystemDefault )
     {
-        ret = CFStringCreateWithFormat( NULL, NULL, CFSTR( "<%s 0x%lx [ 0x%lx ]> %s" ), buf1, obj, CFGetAllocator( obj ), buf2 );
+        allocatorName = "kCFAllocatorSystemDefault";
+    }
+    else if( allocator == kCFAllocatorMalloc )
+    {
+        allocatorName = "kCFAllocatorMalloc";
+    }
+    else if( allocator == kCFAllocatorMallocZone )
+    {
+        allocatorName = "kCFAllocatorMallocZone";
+    }
+    else if( allocator == kCFAllocatorNull )
+    {
+        allocatorName = "kCFAllocatorNull";
     }
     else
     {
-        ret = CFStringCreateWithFormat( NULL, NULL, CFSTR( "<%s 0x%lx [ 0x%lx ]>" ), buf1, obj, CFGetAllocator( obj ) );
+        allocatorName = NULL;
+    }
+    
+    if( buf2 && strlen( buf2 ) )
+    {
+        if( allocatorName )
+        {
+            ret = CFStringCreateWithFormat( NULL, NULL, CFSTR( "<%s 0x%lx [ %s ]> %s" ), buf1, obj, allocatorName, buf2 );
+        }
+        else
+        {
+            ret = CFStringCreateWithFormat( NULL, NULL, CFSTR( "<%s 0x%lx [ 0x%lx ]> %s" ), buf1, obj, allocator, buf2 );
+        }
+    }
+    else
+    {
+        if( allocatorName )
+        {
+            ret = CFStringCreateWithFormat( NULL, NULL, CFSTR( "<%s 0x%lx [ %s ]>" ), buf1, obj, allocatorName );
+        }
+        else
+        {
+            ret = CFStringCreateWithFormat( NULL, NULL, CFSTR( "<%s 0x%lx [ 0x%lx ]>" ), buf1, obj, allocator );
+        }
     }
     
     if( buf2 )
