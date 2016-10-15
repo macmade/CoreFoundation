@@ -774,8 +774,8 @@ void CFShowStr( CFStringRef str )
             "<CFString 0x%llu [ %s ]> { length = %lli, capacity = %lli, type = %s } %s\n",
             ( unsigned long long )str,
             allocatorName,
-            str->_length,
-            str->_capacity,
+            ( long long )( str->_length ),
+            ( long long )( str->_capacity ),
             ( str->_mutable ) ? "mutable" : "immutable",
             ( str->_cStr ) ? str->_cStr : "(null)"
         );
@@ -788,8 +788,8 @@ void CFShowStr( CFStringRef str )
             "<CFString 0x%llu [ 0x%llu ]> { length = %lli, capacity = %lli, type = %s } %s\n",
             ( unsigned long long )str,
             ( unsigned long long )allocator,
-            str->_length,
-            str->_capacity,
+            ( long long )( str->_length ),
+            ( long long )( str->_capacity ),
             ( str->_mutable ) ? "mutable" : "immutable",
             ( str->_cStr ) ? str->_cStr : "(null)"
         );

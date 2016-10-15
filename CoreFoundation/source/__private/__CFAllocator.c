@@ -353,7 +353,7 @@ void CFAllocatorDebugReportLeaks( CFAllocatorRef allocator, CFAllocatorRegistry 
         "- Records:\n"
         "{\n",
         buf,
-        n
+        ( long long )n
     );
     
     CFRelease( description );
@@ -397,7 +397,7 @@ void CFAllocatorDebugReportLeaks( CFAllocatorRef allocator, CFAllocatorRegistry 
         
         if( buf )
         {
-            fprintf( stderr, "    %lli. %s\n", ++n, buf );
+            fprintf( stderr, "    %lli. %s\n", ( long long )( ++n ), buf );
             
             CFRelease( description );
             free( buf );
@@ -407,7 +407,7 @@ void CFAllocatorDebugReportLeaks( CFAllocatorRef allocator, CFAllocatorRegistry 
         }
         else
         {
-            fprintf( stderr, "    %lli. 0x%llx\n", ++n, ( unsigned long long )( registry[ i ].ptr ) );
+            fprintf( stderr, "    %lli. 0x%llx\n", ( long long )( ++n ), ( unsigned long long )( registry[ i ].ptr ) );
         }
     }
     
