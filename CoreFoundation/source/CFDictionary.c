@@ -32,12 +32,6 @@
 #include <CoreFoundation/__private/CFRuntime.h>
 #include <string.h>
 
-static void init( void ) __attribute__( ( constructor ) );
-static void init( void )
-{
-    CFDictionaryTypeID = CFRuntimeRegisterClass( &CFDictionaryClass );
-}
-
 CFTypeID CFDictionaryGetTypeID( void )
 {
     return CFDictionaryTypeID;

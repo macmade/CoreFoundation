@@ -40,6 +40,8 @@ struct CFReadStream
     CFRuntimeBase _base;
 };
 
+CF_EXPORT void CFReadStreamInitialize( void );
+
 CF_EXPORT CFTypeID       CFReadStreamTypeID;
 CF_EXPORT CFRuntimeClass CFReadStreamClass;
 

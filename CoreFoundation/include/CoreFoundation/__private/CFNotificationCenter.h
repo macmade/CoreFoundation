@@ -40,6 +40,8 @@ struct CFNotificationCenter
     CFRuntimeBase _base;
 };
 
+CF_EXPORT void CFNotificationCenterInitialize( void );
+
 CF_EXPORT CFTypeID       CFNotificationCenterTypeID;
 CF_EXPORT CFRuntimeClass CFNotificationCenterClass;
 

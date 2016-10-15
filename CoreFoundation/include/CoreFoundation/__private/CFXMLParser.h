@@ -40,6 +40,8 @@ struct CFXMLParser
     CFRuntimeBase _base;
 };
 
+CF_EXPORT void CFXMLParserInitialize( void );
+
 CF_EXPORT CFTypeID       CFXMLParserTypeID;
 CF_EXPORT CFRuntimeClass CFXMLParserClass;
 

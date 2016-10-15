@@ -40,6 +40,8 @@ struct CFMessagePort
     CFRuntimeBase _base;
 };
 
+CF_EXPORT void CFMessagePortInitialize( void );
+
 CF_EXPORT CFTypeID       CFMessagePortTypeID;
 CF_EXPORT CFRuntimeClass CFMessagePortClass;
 

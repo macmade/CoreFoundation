@@ -40,3 +40,8 @@ CFRuntimeClass CFXMLTreeClass  =
     NULL,
     NULL
 };
+
+void CFXMLTreeInitialize( void )
+{
+    CFXMLTreeTypeID = CFRuntimeRegisterClass( &CFXMLTreeClass );
+}

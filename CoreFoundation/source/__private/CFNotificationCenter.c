@@ -40,3 +40,8 @@ CFRuntimeClass CFNotificationCenterClass  =
     NULL,
     NULL
 };
+
+void CFNotificationCenterInitialize( void )
+{
+    CFNotificationCenterTypeID = CFRuntimeRegisterClass( &CFNotificationCenterClass );
+}

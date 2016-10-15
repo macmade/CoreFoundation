@@ -40,6 +40,8 @@ struct CFRunLoopObserver
     CFRuntimeBase _base;
 };
 
+CF_EXPORT void CFRunLoopObserverInitialize( void );
+
 CF_EXPORT CFTypeID       CFRunLoopObserverTypeID;
 CF_EXPORT CFRuntimeClass CFRunLoopObserverClass;
 

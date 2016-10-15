@@ -40,6 +40,8 @@ struct CFCharacterSet
     CFRuntimeBase _base;
 };
 
+CF_EXPORT void CFCharacterSetInitialize( void );
+
 CF_EXPORT CFTypeID       CFCharacterSetTypeID;
 CF_EXPORT CFRuntimeClass CFCharacterSetClass;
 

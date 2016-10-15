@@ -34,24 +34,6 @@
 #include <stdbool.h>
 #include <math.h>
 
-static void init( void ) __attribute__( ( constructor ) );
-static void init( void )
-{
-    CFNumberTypeID = CFRuntimeRegisterClass( &CFNumberClass );
-    
-    CFRuntimeInitStaticInstance( &CFNumberNaN,              CFNumberTypeID );
-    CFRuntimeInitStaticInstance( &CFNumberNegativeInfinity, CFNumberTypeID );
-    CFRuntimeInitStaticInstance( &CFNumberPositiveInfinity, CFNumberTypeID );
-    
-    CFNumberNaN._isFloat              = true;
-    CFNumberNegativeInfinity._isFloat = true;
-    CFNumberPositiveInfinity._isFloat = true;
-    
-    CFNumberNaN._nan               = true;
-    CFNumberNegativeInfinity._pinf = true;
-    CFNumberPositiveInfinity._ninf = true;
-}
-
 CFTypeID CFNumberGetTypeID( void )
 {
     return CFNumberTypeID;

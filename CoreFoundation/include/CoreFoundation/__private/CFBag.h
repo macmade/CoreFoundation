@@ -40,6 +40,8 @@ struct CFBag
     CFRuntimeBase _base;
 };
 
+CF_EXPORT void CFBagInitialize( void );
+
 CF_EXPORT CFTypeID       CFBagTypeID;
 CF_EXPORT CFRuntimeClass CFBagClass;
 

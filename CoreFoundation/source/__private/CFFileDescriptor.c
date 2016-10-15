@@ -40,3 +40,8 @@ CFRuntimeClass CFFileDescriptorClass  =
     NULL,
     NULL
 };
+
+void CFFileDescriptorInitialize( void )
+{
+    CFFileDescriptorTypeID = CFRuntimeRegisterClass( &CFFileDescriptorClass );
+}

@@ -30,12 +30,6 @@
 #include <CoreFoundation/CoreFoundation.h>
 #include <CoreFoundation/__private/CFLocale.h>
 
-static void init( void ) __attribute__( ( constructor ) );
-static void init( void )
-{
-    CFLocaleTypeID = CFRuntimeRegisterClass( &CFLocaleClass );
-}
-
 CFTypeID CFLocaleGetTypeID( void )
 {
     return CFLocaleTypeID;

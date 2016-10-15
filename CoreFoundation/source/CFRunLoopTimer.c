@@ -30,12 +30,6 @@
 #include <CoreFoundation/CoreFoundation.h>
 #include <CoreFoundation/__private/CFRunLoopTimer.h>
 
-static void init( void ) __attribute__( ( constructor ) );
-static void init( void )
-{
-    CFRunLoopTimerTypeID = CFRuntimeRegisterClass( &CFRunLoopTimerClass );
-}
-
 CFTypeID CFRunLoopTimerGetTypeID( void )
 {
     return CFRunLoopTimerTypeID;

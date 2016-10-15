@@ -40,6 +40,8 @@ struct CFBundle
     CFRuntimeBase _base;
 };
 
+CF_EXPORT void CFBundleInitialize( void );
+
 CF_EXPORT CFTypeID       CFBundleTypeID;
 CF_EXPORT CFRuntimeClass CFBundleClass;
 

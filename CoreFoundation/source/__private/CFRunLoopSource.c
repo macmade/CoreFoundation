@@ -40,3 +40,8 @@ CFRuntimeClass CFRunLoopSourceClass  =
     NULL,
     NULL
 };
+
+void CFRunLoopSourceInitialize( void )
+{
+    CFRunLoopSourceTypeID = CFRuntimeRegisterClass( &CFRunLoopSourceClass );
+}

@@ -40,6 +40,8 @@ struct CFRunLoopSource
     CFRuntimeBase _base;
 };
 
+CF_EXPORT void CFRunLoopSourceInitialize( void );
+
 CF_EXPORT CFTypeID       CFRunLoopSourceTypeID;
 CF_EXPORT CFRuntimeClass CFRunLoopSourceClass;
 

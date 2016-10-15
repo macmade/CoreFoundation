@@ -40,3 +40,8 @@ CFRuntimeClass CFPlugInInstanceClass  =
     NULL,
     NULL
 };
+
+void CFPlugInInstanceInitialize( void )
+{
+    CFPlugInInstanceTypeID = CFRuntimeRegisterClass( &CFPlugInInstanceClass );
+}

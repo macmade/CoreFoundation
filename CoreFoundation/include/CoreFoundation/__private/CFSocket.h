@@ -40,6 +40,8 @@ struct CFSocket
     CFRuntimeBase _base;
 };
 
+CF_EXPORT void CFSocketInitialize( void );
+
 CF_EXPORT CFTypeID       CFSocketTypeID;
 CF_EXPORT CFRuntimeClass CFSocketClass;
 

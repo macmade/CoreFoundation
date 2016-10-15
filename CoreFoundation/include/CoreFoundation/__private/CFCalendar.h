@@ -40,6 +40,8 @@ struct CFCalendar
     CFRuntimeBase _base;
 };
 
+CF_EXPORT void CFCalendarInitialize( void );
+
 CF_EXPORT CFTypeID       CFCalendarTypeID;
 CF_EXPORT CFRuntimeClass CFCalendarClass;
 

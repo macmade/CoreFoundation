@@ -40,6 +40,8 @@ struct CFPlugInInstance
     CFRuntimeBase _base;
 };
 
+CF_EXPORT void CFPlugInInstanceInitialize( void );
+
 CF_EXPORT CFTypeID       CFPlugInInstanceTypeID;
 CF_EXPORT CFRuntimeClass CFPlugInInstanceClass;
 

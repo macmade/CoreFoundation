@@ -40,3 +40,8 @@ CFRuntimeClass CFCharacterSetClass  =
     NULL,
     NULL
 };
+
+void CFCharacterSetInitialize( void )
+{
+    CFCharacterSetTypeID = CFRuntimeRegisterClass( &CFCharacterSetClass );
+}

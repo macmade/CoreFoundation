@@ -40,6 +40,8 @@ struct CFBinaryHeap
     CFRuntimeBase _base;
 };
 
+CF_EXPORT void CFBinaryHeapInitialize( void );
+
 CF_EXPORT CFTypeID       CFBinaryHeapTypeID;
 CF_EXPORT CFRuntimeClass CFBinaryHeapClass;
 

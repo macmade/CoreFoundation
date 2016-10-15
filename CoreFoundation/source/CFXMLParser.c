@@ -30,12 +30,6 @@
 #include <CoreFoundation/CoreFoundation.h>
 #include <CoreFoundation/__private/CFXMLParser.h>
 
-static void init( void ) __attribute__( ( constructor ) );
-static void init( void )
-{
-    CFXMLParserTypeID = CFRuntimeRegisterClass( &CFXMLParserClass );
-}
-
 CFTypeID CFXMLParserGetTypeID( void )
 {
     return CFXMLParserTypeID;

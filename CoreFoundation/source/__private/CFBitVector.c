@@ -40,3 +40,8 @@ CFRuntimeClass CFBitVectorClass  =
     NULL,
     NULL
 };
+
+void CFBitVectorInitialize( void )
+{
+    CFBitVectorTypeID = CFRuntimeRegisterClass( &CFBitVectorClass );
+}

@@ -30,12 +30,6 @@
 #include <CoreFoundation/CoreFoundation.h>
 #include <CoreFoundation/__private/CFRunLoopSource.h>
 
-static void init( void ) __attribute__( ( constructor ) );
-static void init( void )
-{
-    CFRunLoopSourceTypeID = CFRuntimeRegisterClass( &CFRunLoopSourceClass );
-}
-
 CFTypeID CFRunLoopSourceGetTypeID( void )
 {
     return CFRunLoopSourceTypeID;

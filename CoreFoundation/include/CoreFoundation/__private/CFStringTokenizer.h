@@ -40,6 +40,8 @@ struct CFStringTokenizer
     CFRuntimeBase _base;
 };
 
+CF_EXPORT void CFStringTokenizerInitialize( void );
+
 CF_EXPORT CFTypeID       CFStringTokenizerTypeID;
 CF_EXPORT CFRuntimeClass CFStringTokenizerClass;
 

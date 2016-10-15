@@ -40,6 +40,8 @@ struct CFFileDescriptor
     CFRuntimeBase _base;
 };
 
+CF_EXPORT void CFFileDescriptorInitialize( void );
+
 CF_EXPORT CFTypeID       CFFileDescriptorTypeID;
 CF_EXPORT CFRuntimeClass CFFileDescriptorClass;
 

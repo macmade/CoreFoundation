@@ -40,6 +40,8 @@ struct CFLocale
     CFRuntimeBase _base;
 };
 
+CF_EXPORT void CFLocaleInitialize( void );
+
 CF_EXPORT CFTypeID       CFLocaleTypeID;
 CF_EXPORT CFRuntimeClass CFLocaleClass;
 

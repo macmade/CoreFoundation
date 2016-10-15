@@ -40,3 +40,8 @@ CFRuntimeClass CFDateClass  =
     NULL,
     NULL
 };
+
+void CFDateInitialize( void )
+{
+    CFDateTypeID = CFRuntimeRegisterClass( &CFDateClass );
+}

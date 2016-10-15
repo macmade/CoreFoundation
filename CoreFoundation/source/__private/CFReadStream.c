@@ -40,3 +40,8 @@ CFRuntimeClass CFReadStreamClass  =
     NULL,
     NULL
 };
+
+void CFReadStreamInitialize( void )
+{
+    CFReadStreamTypeID = CFRuntimeRegisterClass( &CFReadStreamClass );
+}

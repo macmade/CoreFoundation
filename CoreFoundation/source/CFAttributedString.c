@@ -30,12 +30,6 @@
 #include <CoreFoundation/CoreFoundation.h>
 #include <CoreFoundation/__private/CFAttributedString.h>
 
-static void init( void ) __attribute__( ( constructor ) );
-static void init( void )
-{
-    CFAttributedStringTypeID = CFRuntimeRegisterClass( &CFAttributedStringClass );
-}
-
 CFTypeID CFAttributedStringGetTypeID( void )
 {
     return CFAttributedStringTypeID;

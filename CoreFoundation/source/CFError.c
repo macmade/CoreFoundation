@@ -45,12 +45,6 @@ CF_STRING_CONST_DECL( kCFErrorUnderlyingErrorKey,               "NSUnderlyingErr
 CF_STRING_CONST_DECL( kCFErrorURLKey,                           "NSURL" );
 CF_STRING_CONST_DECL( kCFErrorFilePathKey,                      "NSFilePath" );
 
-static void init( void ) __attribute__( ( constructor ) );
-static void init( void )
-{
-    CFErrorTypeID = CFRuntimeRegisterClass( &CFErrorClass );
-}
-
 CFTypeID CFErrorGetTypeID( void )
 {
     return CFErrorTypeID;

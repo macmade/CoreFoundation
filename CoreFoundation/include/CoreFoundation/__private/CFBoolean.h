@@ -42,6 +42,8 @@ struct CFBoolean
 
 CF_EXPORT CFStringRef CFBooleanCopyDescription( CFBooleanRef boolean );
 
+CF_EXPORT void CFBooleanInitialize( void );
+
 CF_EXPORT CFTypeID       CFBooleanTypeID;
 CF_EXPORT CFRuntimeClass CFBooleanClass;
 

@@ -46,6 +46,8 @@ struct CFNumber
     bool          _ninf;
 };
 
+CF_EXPORT void CFNumberInitialize( void );
+
 CF_EXPORT CFTypeID       CFNumberTypeID;
 CF_EXPORT CFRuntimeClass CFNumberClass;
 

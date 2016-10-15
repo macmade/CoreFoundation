@@ -31,12 +31,6 @@
 #include <CoreFoundation/__private/CFNotificationCenter.h>
 #include <stdlib.h>
 
-static void init( void ) __attribute__( ( constructor ) );
-static void init( void )
-{
-    CFNotificationCenterTypeID = CFRuntimeRegisterClass( &CFNotificationCenterClass );
-}
-
 CFTypeID CFNotificationCenterGetTypeID( void )
 {
     return CFNotificationCenterTypeID;

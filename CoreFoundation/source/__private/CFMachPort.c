@@ -40,3 +40,8 @@ CFRuntimeClass CFMachPortClass  =
     NULL,
     NULL
 };
+
+void CFMachPortInitialize( void )
+{
+    CFMachPortTypeID = CFRuntimeRegisterClass( &CFMachPortClass );
+}

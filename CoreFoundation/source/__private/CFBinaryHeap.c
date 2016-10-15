@@ -40,3 +40,8 @@ CFRuntimeClass CFBinaryHeapClass  =
     NULL,
     NULL
 };
+
+void CFBinaryHeapInitialize( void )
+{
+    CFBinaryHeapTypeID = CFRuntimeRegisterClass( &CFBinaryHeapClass );
+}

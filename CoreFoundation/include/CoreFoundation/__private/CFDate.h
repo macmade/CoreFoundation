@@ -40,6 +40,8 @@ struct CFDate
     CFRuntimeBase _base;
 };
 
+CF_EXPORT void CFDateInitialize( void );
+
 CF_EXPORT CFTypeID       CFDateTypeID;
 CF_EXPORT CFRuntimeClass CFDateClass;
 

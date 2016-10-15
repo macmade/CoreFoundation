@@ -149,6 +149,7 @@
 		053510131DB2C7B400C783DA /* CFXMLNode.c in Sources */ = {isa = PBXBuildFile; fileRef = 05350FEE1DB2C7B400C783DA /* CFXMLNode.c */; };
 		053510141DB2C7B400C783DA /* CFXMLParser.c in Sources */ = {isa = PBXBuildFile; fileRef = 05350FEF1DB2C7B400C783DA /* CFXMLParser.c */; };
 		053510151DB2C7B400C783DA /* CFXMLTree.c in Sources */ = {isa = PBXBuildFile; fileRef = 05350FF01DB2C7B400C783DA /* CFXMLTree.c */; };
+		053510171DB2D62500C783DA /* CFInit.c in Sources */ = {isa = PBXBuildFile; fileRef = 053510161DB2D62500C783DA /* CFInit.c */; };
 		054F446E1DB10226000B5C2A /* CFDictionary.c in Sources */ = {isa = PBXBuildFile; fileRef = 054F446D1DB10226000B5C2A /* CFDictionary.c */; };
 		054F44701DB103A4000B5C2A /* CFNull.c in Sources */ = {isa = PBXBuildFile; fileRef = 054F446F1DB103A4000B5C2A /* CFNull.c */; };
 		054F44761DB10412000B5C2A /* CFAllocator.c in Sources */ = {isa = PBXBuildFile; fileRef = 054F44711DB10412000B5C2A /* CFAllocator.c */; };
@@ -348,6 +349,7 @@
 		05350FEE1DB2C7B400C783DA /* CFXMLNode.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CFXMLNode.c; sourceTree = "<group>"; };
 		05350FEF1DB2C7B400C783DA /* CFXMLParser.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CFXMLParser.c; sourceTree = "<group>"; };
 		05350FF01DB2C7B400C783DA /* CFXMLTree.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CFXMLTree.c; sourceTree = "<group>"; };
+		053510161DB2D62500C783DA /* CFInit.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CFInit.c; sourceTree = "<group>"; };
 		054F446D1DB10226000B5C2A /* CFDictionary.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CFDictionary.c; sourceTree = "<group>"; };
 		054F446F1DB103A4000B5C2A /* CFNull.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CFNull.c; sourceTree = "<group>"; };
 		054F44711DB10412000B5C2A /* CFAllocator.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CFAllocator.c; sourceTree = "<group>"; };
@@ -617,6 +619,7 @@
 				054F446D1DB10226000B5C2A /* CFDictionary.c */,
 				0594FCB41DB28792007700D4 /* CFError.c */,
 				05350FD61DB2C7B400C783DA /* CFFileDescriptor.c */,
+				053510161DB2D62500C783DA /* CFInit.c */,
 				05350FD71DB2C7B400C783DA /* CFLocale.c */,
 				05350FD81DB2C7B400C783DA /* CFMachPort.c */,
 				05350FD91DB2C7B400C783DA /* CFMessagePort.c */,
@@ -642,9 +645,9 @@
 				05D151D71DAC2A4100841529 /* CFThreading.c */,
 				05350FE81DB2C7B400C783DA /* CFTimeZone.c */,
 				05350FE91DB2C7B400C783DA /* CFTree.c */,
-				05350FEA1DB2C7B400C783DA /* CFUUID.c */,
 				05350FEB1DB2C7B400C783DA /* CFURL.c */,
 				05350FEC1DB2C7B400C783DA /* CFUserNotfication.c */,
+				05350FEA1DB2C7B400C783DA /* CFUUID.c */,
 				05350FED1DB2C7B400C783DA /* CFWriteStream.c */,
 				05350FEE1DB2C7B400C783DA /* CFXMLNode.c */,
 				05350FEF1DB2C7B400C783DA /* CFXMLParser.c */,
@@ -924,6 +927,7 @@
 				05350FF11DB2C7B400C783DA /* CFArray.c in Sources */,
 				05350FCB1DB2B98400C783DA /* CFNotificationCenter.c in Sources */,
 				053292081DA6513700E46312 /* CFCharacterSet.c in Sources */,
+				053510171DB2D62500C783DA /* CFInit.c in Sources */,
 				053510121DB2C7B400C783DA /* CFWriteStream.c in Sources */,
 				053510041DB2C7B400C783DA /* CFReadStream.c in Sources */,
 				0532922C1DA6513700E46312 /* CFXMLNode.c in Sources */,

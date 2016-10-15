@@ -31,15 +31,6 @@
 #include <CoreFoundation/__private/CFBoolean.h>
 #include <CoreFoundation/__private/CFRuntime.h>
 
-static void init( void ) __attribute__( ( constructor ) );
-static void init( void )
-{
-    CFBooleanTypeID = CFRuntimeRegisterClass( &CFBooleanClass );
-    
-    CFRuntimeInitStaticInstance( &CFBooleanTrue, CFBooleanTypeID );
-    CFRuntimeInitStaticInstance( &CFBooleanFalse, CFBooleanTypeID );
-}
-
 CFTypeID CFBooleanGetTypeID( void )
 {
     return CFBooleanTypeID;

@@ -40,6 +40,8 @@ struct CFNumberFormatter
     CFRuntimeBase _base;
 };
 
+CF_EXPORT void CFNumberFormatterInitialize( void );
+
 CF_EXPORT CFTypeID       CFNumberFormatterTypeID;
 CF_EXPORT CFRuntimeClass CFNumberFormatterClass;
 

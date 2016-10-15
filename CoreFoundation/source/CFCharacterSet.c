@@ -30,12 +30,6 @@
 #include <CoreFoundation/CoreFoundation.h>
 #include <CoreFoundation/__private/CFCharacterSet.h>
 
-static void init( void ) __attribute__( ( constructor ) );
-static void init( void )
-{
-    CFCharacterSetTypeID = CFRuntimeRegisterClass( &CFCharacterSetClass );
-}
-
 CFTypeID CFCharacterSetGetTypeID( void )
 {
     return CFCharacterSetTypeID;

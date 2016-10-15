@@ -40,3 +40,8 @@ CFRuntimeClass CFLocaleClass  =
     NULL,
     NULL
 };
+
+void CFLocaleInitialize( void )
+{
+    CFLocaleTypeID = CFRuntimeRegisterClass( &CFLocaleClass );
+}

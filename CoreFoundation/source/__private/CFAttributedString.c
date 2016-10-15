@@ -40,3 +40,8 @@ CFRuntimeClass CFAttributedStringClass  =
     NULL,
     NULL
 };
+
+void CFAttributedStringInitialize( void )
+{
+    CFAttributedStringTypeID = CFRuntimeRegisterClass( &CFAttributedStringClass );
+}

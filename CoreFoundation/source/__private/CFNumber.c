@@ -48,3 +48,20 @@ struct CFNumber CFNumberPositiveInfinity;
 const CFNumberRef kCFNumberNaN              = ( const CFNumberRef )( &CFNumberNaN );
 const CFNumberRef kCFNumberNegativeInfinity = ( const CFNumberRef )( &CFNumberNegativeInfinity );
 const CFNumberRef kCFNumberPositiveInfinity = ( const CFNumberRef )( &CFNumberPositiveInfinity );
+
+void CFNumberInitialize( void )
+{
+    CFNumberTypeID = CFRuntimeRegisterClass( &CFNumberClass );
+    
+    CFRuntimeInitStaticInstance( &CFNumberNaN,              CFNumberTypeID );
+    CFRuntimeInitStaticInstance( &CFNumberNegativeInfinity, CFNumberTypeID );
+    CFRuntimeInitStaticInstance( &CFNumberPositiveInfinity, CFNumberTypeID );
+    
+    CFNumberNaN._isFloat              = true;
+    CFNumberNegativeInfinity._isFloat = true;
+    CFNumberPositiveInfinity._isFloat = true;
+    
+    CFNumberNaN._nan               = true;
+    CFNumberNegativeInfinity._pinf = true;
+    CFNumberPositiveInfinity._ninf = true;
+}

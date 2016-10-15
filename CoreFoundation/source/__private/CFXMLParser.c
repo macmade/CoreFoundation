@@ -40,3 +40,8 @@ CFRuntimeClass CFXMLParserClass  =
     NULL,
     NULL
 };
+
+void CFXMLParserInitialize( void )
+{
+    CFXMLParserTypeID = CFRuntimeRegisterClass( &CFXMLParserClass );
+}

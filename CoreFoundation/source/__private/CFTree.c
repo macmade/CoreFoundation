@@ -40,3 +40,8 @@ CFRuntimeClass CFTreeClass  =
     NULL,
     NULL
 };
+
+void CFTreeInitialize( void )
+{
+    CFTreeTypeID = CFRuntimeRegisterClass( &CFTreeClass );
+}

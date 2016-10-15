@@ -44,3 +44,10 @@ CFRuntimeClass CFNullClass  =
 struct CFNull CFNullInstance;
 
 const CFNullRef kCFNull = ( const CFNullRef )( &CFNullInstance );
+
+void CFNullInitialize( void )
+{
+    CFNullTypeID = CFRuntimeRegisterClass( &CFNullClass );
+    
+    CFRuntimeInitStaticInstance( &CFNullInstance, CFNullTypeID );
+}

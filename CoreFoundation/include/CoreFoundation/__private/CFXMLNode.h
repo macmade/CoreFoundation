@@ -40,6 +40,8 @@ struct CFXMLNode
     CFRuntimeBase _base;
 };
 
+CF_EXPORT void CFXMLNodeInitialize( void );
+
 CF_EXPORT CFTypeID       CFXMLNodeTypeID;
 CF_EXPORT CFRuntimeClass CFXMLNodeClass;
 

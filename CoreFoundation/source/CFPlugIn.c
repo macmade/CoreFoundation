@@ -30,12 +30,6 @@
 #include <CoreFoundation/CoreFoundation.h>
 #include <CoreFoundation/__private/CFPlugIn.h>
 
-static void init( void ) __attribute__( ( constructor ) );
-static void init( void )
-{
-    CFPlugInTypeID = CFRuntimeRegisterClass( &CFPlugInClass );
-}
-
 CFTypeID CFPlugInGetTypeID( void )
 {
     return CFPlugInTypeID;

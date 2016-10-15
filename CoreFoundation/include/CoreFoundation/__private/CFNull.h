@@ -40,6 +40,8 @@ struct CFNull
     CFRuntimeBase _base;
 };
 
+CF_EXPORT void CFNullInitialize( void );
+
 CF_EXPORT CFTypeID       CFNullTypeID;
 CF_EXPORT CFRuntimeClass CFNullClass;
 CF_EXPORT struct CFNull  CFNullInstance;

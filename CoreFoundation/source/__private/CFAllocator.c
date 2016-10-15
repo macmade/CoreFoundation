@@ -57,6 +57,37 @@ const CFAllocatorRef kCFAllocatorUseContext     = ( const CFAllocatorRef )( -1 )
 
 CFThreadingKey CFAllocatorDefaultKey;
 
+void CFAllocatorInitialize( void )
+{
+    CFThreadingKeyCreate( &CFAllocatorDefaultKey );
+    
+    CFAllocatorTypeID = CFRuntimeRegisterClass( &CFAllocatorClass );
+    
+    CFRuntimeInitStaticInstance( &CFAllocatorSystemDefault, CFAllocatorTypeID );
+    CFRuntimeInitStaticInstance( &CFAllocatorMalloc,        CFAllocatorTypeID );
+    CFRuntimeInitStaticInstance( &CFAllocatorMallocZone,    CFAllocatorTypeID );
+    CFRuntimeInitStaticInstance( &CFAllocatorNull,          CFAllocatorTypeID );
+    
+    CFAllocatorSystemDefault._context.allocate      = CFAllocatorSystemDefaultAllocateCallBack;
+    CFAllocatorSystemDefault._context.deallocate    = CFAllocatorSystemDefaultDeallocateCallBack;
+    CFAllocatorSystemDefault._context.reallocate    = CFAllocatorSystemDefaultReallocateCallBack;
+    
+    CFAllocatorMalloc._context.allocate     = CFAllocatorSystemDefaultAllocateCallBack;
+    CFAllocatorMalloc._context.deallocate   = CFAllocatorSystemDefaultDeallocateCallBack;
+    CFAllocatorMalloc._context.reallocate   = CFAllocatorSystemDefaultReallocateCallBack;
+    
+    CFAllocatorMallocZone._context.allocate     = CFAllocatorSystemDefaultAllocateCallBack;
+    CFAllocatorMallocZone._context.deallocate   = CFAllocatorSystemDefaultDeallocateCallBack;
+    CFAllocatorMallocZone._context.reallocate   = CFAllocatorSystemDefaultReallocateCallBack;
+    
+    CFAllocatorNull._context.allocate       = CFAllocatorNullAllocateCallBack;
+    CFAllocatorNull._context.deallocate     = CFAllocatorNullDeallocateCallBack;
+    CFAllocatorNull._context.preferredSize  = CFAllocatorNullPreferredSizeCallBack;
+    CFAllocatorNull._context.reallocate     = CFAllocatorNullReallocateCallBack;
+    
+    atexit( CFAllocatorExit );
+}
+
 void CFAllocatorConstruct( CFAllocatorRef allocator )
 {
     #if defined( CF_ALLOCATOR_DEBUG ) && CF_ALLOCATOR_DEBUG == 1

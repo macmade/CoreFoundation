@@ -47,6 +47,14 @@ struct CFBoolean CFBooleanFalse;
 const CFBooleanRef kCFBooleanTrue  = ( const CFBooleanRef )( &CFBooleanTrue );
 const CFBooleanRef kCFBooleanFalse = ( const CFBooleanRef )( &CFBooleanFalse );
 
+void CFBooleanInitialize( void )
+{
+    CFBooleanTypeID = CFRuntimeRegisterClass( &CFBooleanClass );
+    
+    CFRuntimeInitStaticInstance( &CFBooleanTrue, CFBooleanTypeID );
+    CFRuntimeInitStaticInstance( &CFBooleanFalse, CFBooleanTypeID );
+}
+
 CFStringRef CFBooleanCopyDescription( CFBooleanRef boolean )
 {
     if( boolean == kCFBooleanTrue )

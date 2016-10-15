@@ -30,12 +30,6 @@
 #include <CoreFoundation/CoreFoundation.h>
 #include <CoreFoundation/__private/CFBundle.h>
 
-static void init( void ) __attribute__( ( constructor ) );
-static void init( void )
-{
-    CFBundleTypeID = CFRuntimeRegisterClass( &CFBundleClass );
-}
-
 CFTypeID CFBundleGetTypeID( void )
 {
     return CFBundleTypeID;

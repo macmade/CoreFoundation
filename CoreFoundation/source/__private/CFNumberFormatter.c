@@ -40,3 +40,8 @@ CFRuntimeClass CFNumberFormatterClass  =
     NULL,
     NULL
 };
+
+void CFNumberFormatterInitialize( void )
+{
+    CFNumberFormatterTypeID = CFRuntimeRegisterClass( &CFNumberFormatterClass );
+}

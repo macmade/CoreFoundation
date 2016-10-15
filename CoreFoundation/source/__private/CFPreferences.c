@@ -40,3 +40,8 @@ CFRuntimeClass CFPreferencesClass  =
     NULL,
     NULL
 };
+
+void CFPreferencesInitialize( void )
+{
+    CFPreferencesTypeID = CFRuntimeRegisterClass( &CFPreferencesClass );
+}

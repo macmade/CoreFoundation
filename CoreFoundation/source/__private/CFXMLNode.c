@@ -40,3 +40,8 @@ CFRuntimeClass CFXMLNodeClass  =
     NULL,
     NULL
 };
+
+void CFXMLNodeInitialize( void )
+{
+    CFXMLNodeTypeID = CFRuntimeRegisterClass( &CFXMLNodeClass );
+}

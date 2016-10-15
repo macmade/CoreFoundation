@@ -41,6 +41,11 @@ CFRuntimeClass CFErrorClass =
     ( CFStringRef ( * )( CFTypeRef ) )CFErrorCopyDescription
 };
 
+void CFErrorInitialize( void )
+{
+    CFErrorTypeID = CFRuntimeRegisterClass( &CFErrorClass );
+}
+
 void CFErrorDestruct( CFErrorRef e )
 {
     if( e->_domain )

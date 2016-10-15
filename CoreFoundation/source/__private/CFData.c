@@ -43,6 +43,11 @@ CFRuntimeClass CFDataClass  =
     ( CFStringRef ( * )( CFTypeRef ) )CFDataCopyDescription
 };
 
+void CFDataInitialize( void )
+{
+    CFDataTypeID = CFRuntimeRegisterClass( &CFDataClass );
+}
+
 void CFDataDestruct( CFDataRef data )
 {
     if( data->_bytes )

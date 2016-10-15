@@ -31,14 +31,6 @@
 #include <CoreFoundation/__private/CFNull.h>
 #include <CoreFoundation/__private/CFRuntime.h>
 
-static void init( void ) __attribute__( ( constructor ) );
-static void init( void )
-{
-    CFNullTypeID = CFRuntimeRegisterClass( &CFNullClass );
-    
-    CFRuntimeInitStaticInstance( &CFNullInstance, CFNullTypeID );
-}
-
 CFTypeID CFNullGetTypeID( void )
 {
     return CFNullTypeID;

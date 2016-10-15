@@ -40,3 +40,8 @@ CFRuntimeClass CFCalendarClass  =
     NULL,
     NULL
 };
+
+void CFCalendarInitialize( void )
+{
+    CFCalendarTypeID = CFRuntimeRegisterClass( &CFCalendarClass );
+}

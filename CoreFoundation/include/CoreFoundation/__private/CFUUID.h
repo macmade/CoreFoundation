@@ -40,6 +40,8 @@ struct CFUUID
     CFRuntimeBase _base;
 };
 
+CF_EXPORT void CFUUIDInitialize( void );
+
 CF_EXPORT CFTypeID       CFUUIDTypeID;
 CF_EXPORT CFRuntimeClass CFUUIDClass;
 

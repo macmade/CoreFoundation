@@ -40,6 +40,8 @@ struct CFUserNotification
     CFRuntimeBase _base;
 };
 
+CF_EXPORT void CFUserNotificationInitialize( void );
+
 CF_EXPORT CFTypeID       CFUserNotificationTypeID;
 CF_EXPORT CFRuntimeClass CFUserNotificationClass;
 

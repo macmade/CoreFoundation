@@ -40,3 +40,8 @@ CFRuntimeClass CFSetClass  =
     NULL,
     NULL
 };
+
+void CFSetInitialize( void )
+{
+    CFSetTypeID = CFRuntimeRegisterClass( &CFSetClass );
+}

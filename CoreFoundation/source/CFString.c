@@ -33,12 +33,6 @@
 #include <string.h>
 #include <stdio.h>
 
-static void init( void ) __attribute__( ( constructor ) );
-static void init( void )
-{
-    CFStringTypeID = CFRuntimeRegisterClass( &CFStringClass );
-}
-
 CFTypeID CFStringGetTypeID( void )
 {
     return CFStringTypeID;

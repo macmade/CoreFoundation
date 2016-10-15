@@ -40,6 +40,8 @@ struct CFPropertyList
     CFRuntimeBase _base;
 };
 
+CF_EXPORT void CFPropertyListInitialize( void );
+
 CF_EXPORT CFTypeID       CFPropertyListTypeID;
 CF_EXPORT CFRuntimeClass CFPropertyListClass;
 

@@ -40,6 +40,8 @@ struct CFURL
     CFRuntimeBase _base;
 };
 
+CF_EXPORT void CFURLInitialize( void );
+
 CF_EXPORT CFTypeID       CFURLTypeID;
 CF_EXPORT CFRuntimeClass CFURLClass;
 

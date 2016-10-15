@@ -40,3 +40,8 @@ CFRuntimeClass CFSocketClass  =
     NULL,
     NULL
 };
+
+void CFSocketInitialize( void )
+{
+    CFSocketTypeID = CFRuntimeRegisterClass( &CFSocketClass );
+}

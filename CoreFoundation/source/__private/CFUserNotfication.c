@@ -40,3 +40,8 @@ CFRuntimeClass CFUserNotificationClass  =
     NULL,
     NULL
 };
+
+void CFUserNotificationInitialize( void )
+{
+    CFUserNotificationTypeID = CFRuntimeRegisterClass( &CFUserNotificationClass );
+}

@@ -40,3 +40,8 @@ CFRuntimeClass CFURLClass  =
     NULL,
     NULL
 };
+
+void CFURLInitialize( void )
+{
+    CFURLTypeID = CFRuntimeRegisterClass( &CFURLClass );
+}

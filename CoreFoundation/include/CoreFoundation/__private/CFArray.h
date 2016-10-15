@@ -40,6 +40,8 @@ struct CFArray
     CFRuntimeBase _base;
 };
 
+CF_EXPORT void CFArrayInitialize( void );
+
 CF_EXPORT CFTypeID       CFArrayTypeID;
 CF_EXPORT CFRuntimeClass CFArrayClass;
 

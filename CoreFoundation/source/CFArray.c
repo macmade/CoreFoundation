@@ -30,12 +30,6 @@
 #include <CoreFoundation/CoreFoundation.h>
 #include <CoreFoundation/__private/CFArray.h>
 
-static void init( void ) __attribute__( ( constructor ) );
-static void init( void )
-{
-    CFArrayTypeID = CFRuntimeRegisterClass( &CFArrayClass );
-}
-
 CFTypeID CFArrayGetTypeID( void )
 {
     return CFArrayTypeID;

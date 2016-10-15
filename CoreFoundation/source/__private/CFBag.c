@@ -40,3 +40,8 @@ CFRuntimeClass CFBagClass  =
     NULL,
     NULL
 };
+
+void CFBagInitialize( void )
+{
+    CFBagTypeID = CFRuntimeRegisterClass( &CFBagClass );
+}

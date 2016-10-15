@@ -40,6 +40,8 @@ struct CFPreferences
     CFRuntimeBase _base;
 };
 
+CF_EXPORT void CFPreferencesInitialize( void );
+
 CF_EXPORT CFTypeID       CFPreferencesTypeID;
 CF_EXPORT CFRuntimeClass CFPreferencesClass;
 

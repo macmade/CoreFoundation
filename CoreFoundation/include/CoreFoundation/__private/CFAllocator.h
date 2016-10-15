@@ -55,6 +55,8 @@ struct CFAllocator
     CFIndex               _registrySize;
 };
 
+CF_EXPORT void CFAllocatorInitialize( void );
+
 CF_EXPORT CFTypeID       CFAllocatorTypeID;
 CF_EXPORT CFRuntimeClass CFAllocatorClass;
 

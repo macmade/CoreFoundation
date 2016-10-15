@@ -40,3 +40,8 @@ CFRuntimeClass CFArrayClass  =
     NULL,
     NULL
 };
+
+void CFArrayInitialize( void )
+{
+    CFArrayTypeID = CFRuntimeRegisterClass( &CFArrayClass );
+}

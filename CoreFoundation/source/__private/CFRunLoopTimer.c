@@ -40,3 +40,8 @@ CFRuntimeClass CFRunLoopTimerClass  =
     NULL,
     NULL
 };
+
+void CFRunLoopTimerInitialize( void )
+{
+    CFRunLoopTimerTypeID = CFRuntimeRegisterClass( &CFRunLoopTimerClass );
+}

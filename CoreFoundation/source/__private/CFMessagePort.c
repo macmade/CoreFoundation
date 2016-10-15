@@ -40,3 +40,8 @@ CFRuntimeClass CFMessagePortClass  =
     NULL,
     NULL
 };
+
+void CFMessagePortInitialize( void )
+{
+    CFMessagePortTypeID = CFRuntimeRegisterClass( &CFMessagePortClass );
+}

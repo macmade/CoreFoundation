@@ -40,3 +40,8 @@ CFRuntimeClass CFTimeZoneClass  =
     NULL,
     NULL
 };
+
+void CFTimeZoneInitialize( void )
+{
+    CFTimeZoneTypeID = CFRuntimeRegisterClass( &CFTimeZoneClass );
+}

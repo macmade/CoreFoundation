@@ -40,3 +40,8 @@ CFRuntimeClass CFBundleClass  =
     NULL,
     NULL
 };
+
+void CFBundleInitialize( void )
+{
+    CFBundleTypeID = CFRuntimeRegisterClass( &CFBundleClass );
+}

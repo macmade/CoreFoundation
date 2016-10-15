@@ -40,3 +40,8 @@ CFRuntimeClass CFStringTokenizerClass  =
     NULL,
     NULL
 };
+
+void CFStringTokenizerInitialize( void )
+{
+    CFStringTokenizerTypeID = CFRuntimeRegisterClass( &CFStringTokenizerClass );
+}

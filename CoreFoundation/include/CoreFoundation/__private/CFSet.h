@@ -40,6 +40,8 @@ struct CFSet
     CFRuntimeBase _base;
 };
 
+CF_EXPORT void CFSetInitialize( void );
+
 CF_EXPORT CFTypeID       CFSetTypeID;
 CF_EXPORT CFRuntimeClass CFSetClass;
 

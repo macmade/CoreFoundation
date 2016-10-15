@@ -40,6 +40,8 @@ struct CFAttributedString
     CFRuntimeBase _base;
 };
 
+CF_EXPORT void CFAttributedStringInitialize( void );
+
 CF_EXPORT CFTypeID       CFAttributedStringTypeID;
 CF_EXPORT CFRuntimeClass CFAttributedStringClass;
 

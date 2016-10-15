@@ -30,12 +30,6 @@
 #include <CoreFoundation/CoreFoundation.h>
 #include <CoreFoundation/__private/CFDate.h>
 
-static void init( void ) __attribute__( ( constructor ) );
-static void init( void )
-{
-    CFDateTypeID = CFRuntimeRegisterClass( &CFDateClass );
-}
-
 CFTypeID CFDateGetTypeID( void )
 {
     return CFDateTypeID;

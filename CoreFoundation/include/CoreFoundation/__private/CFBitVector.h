@@ -40,6 +40,8 @@ struct CFBitVector
     CFRuntimeBase _base;
 };
 
+CF_EXPORT void CFBitVectorInitialize( void );
+
 CF_EXPORT CFTypeID       CFBitVectorTypeID;
 CF_EXPORT CFRuntimeClass CFBitVectorClass;
 

@@ -40,6 +40,8 @@ struct CFMachPort
     CFRuntimeBase _base;
 };
 
+CF_EXPORT void CFMachPortInitialize( void );
+
 CF_EXPORT CFTypeID       CFMachPortTypeID;
 CF_EXPORT CFRuntimeClass CFMachPortClass;
 

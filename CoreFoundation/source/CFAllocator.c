@@ -34,38 +34,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-static void init( void ) __attribute__( ( constructor ) );
-static void init( void )
-{
-    CFThreadingKeyCreate( &CFAllocatorDefaultKey );
-    
-    CFAllocatorTypeID = CFRuntimeRegisterClass( &CFAllocatorClass );
-    
-    CFRuntimeInitStaticInstance( &CFAllocatorSystemDefault, CFAllocatorTypeID );
-    CFRuntimeInitStaticInstance( &CFAllocatorMalloc,        CFAllocatorTypeID );
-    CFRuntimeInitStaticInstance( &CFAllocatorMallocZone,    CFAllocatorTypeID );
-    CFRuntimeInitStaticInstance( &CFAllocatorNull,          CFAllocatorTypeID );
-    
-    CFAllocatorSystemDefault._context.allocate      = CFAllocatorSystemDefaultAllocateCallBack;
-    CFAllocatorSystemDefault._context.deallocate    = CFAllocatorSystemDefaultDeallocateCallBack;
-    CFAllocatorSystemDefault._context.reallocate    = CFAllocatorSystemDefaultReallocateCallBack;
-    
-    CFAllocatorMalloc._context.allocate     = CFAllocatorSystemDefaultAllocateCallBack;
-    CFAllocatorMalloc._context.deallocate   = CFAllocatorSystemDefaultDeallocateCallBack;
-    CFAllocatorMalloc._context.reallocate   = CFAllocatorSystemDefaultReallocateCallBack;
-    
-    CFAllocatorMallocZone._context.allocate     = CFAllocatorSystemDefaultAllocateCallBack;
-    CFAllocatorMallocZone._context.deallocate   = CFAllocatorSystemDefaultDeallocateCallBack;
-    CFAllocatorMallocZone._context.reallocate   = CFAllocatorSystemDefaultReallocateCallBack;
-    
-    CFAllocatorNull._context.allocate       = CFAllocatorNullAllocateCallBack;
-    CFAllocatorNull._context.deallocate     = CFAllocatorNullDeallocateCallBack;
-    CFAllocatorNull._context.preferredSize  = CFAllocatorNullPreferredSizeCallBack;
-    CFAllocatorNull._context.reallocate     = CFAllocatorNullReallocateCallBack;
-    
-    atexit( CFAllocatorExit );
-}
-
 CFTypeID CFAllocatorGetTypeID( void )
 {
     return CFAllocatorTypeID;

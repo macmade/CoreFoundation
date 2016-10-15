@@ -54,6 +54,8 @@ CF_EXPORT CFStringRef CFStringCopyDescription( CFStringRef str );
 
 CF_EXPORT void CFStringAssertMutable( CFStringRef str );
 
+CF_EXPORT void CFStringInitialize( void );
+
 CF_EXPORT CFTypeID       CFStringTypeID;
 CF_EXPORT CFRuntimeClass CFStringClass;
 

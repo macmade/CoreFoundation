@@ -40,3 +40,8 @@ CFRuntimeClass CFWriteStreamClass  =
     NULL,
     NULL
 };
+
+void CFWriteStreamInitialize( void )
+{
+    CFWriteStreamTypeID = CFRuntimeRegisterClass( &CFWriteStreamClass );
+}

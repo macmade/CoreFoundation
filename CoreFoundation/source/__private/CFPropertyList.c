@@ -40,3 +40,8 @@ CFRuntimeClass CFPropertyListClass  =
     NULL,
     NULL
 };
+
+void CFPropertyListInitialize( void )
+{
+    CFPropertyListTypeID = CFRuntimeRegisterClass( &CFPropertyListClass );
+}

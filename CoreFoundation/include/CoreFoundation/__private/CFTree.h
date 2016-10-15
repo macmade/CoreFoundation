@@ -40,6 +40,8 @@ struct CFTree
     CFRuntimeBase _base;
 };
 
+CF_EXPORT void CFTreeInitialize( void );
+
 CF_EXPORT CFTypeID       CFTreeTypeID;
 CF_EXPORT CFRuntimeClass CFTreeClass;
 

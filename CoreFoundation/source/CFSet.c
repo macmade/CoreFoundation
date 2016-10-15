@@ -30,12 +30,6 @@
 #include <CoreFoundation/CoreFoundation.h>
 #include <CoreFoundation/__private/CFSet.h>
 
-static void init( void ) __attribute__( ( constructor ) );
-static void init( void )
-{
-    CFSetTypeID = CFRuntimeRegisterClass( &CFSetClass );
-}
-
 CFTypeID CFSetGetTypeID( void )
 {
     return CFSetTypeID;

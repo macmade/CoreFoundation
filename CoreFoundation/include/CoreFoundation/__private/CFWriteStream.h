@@ -40,6 +40,8 @@ struct CFWriteStream
     CFRuntimeBase _base;
 };
 
+CF_EXPORT void CFWriteStreamInitialize( void );
+
 CF_EXPORT CFTypeID       CFWriteStreamTypeID;
 CF_EXPORT CFRuntimeClass CFWriteStreamClass;
 

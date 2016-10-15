@@ -40,6 +40,8 @@ struct CFTimeZone
     CFRuntimeBase _base;
 };
 
+CF_EXPORT void CFTimeZoneInitialize( void );
+
 CF_EXPORT CFTypeID       CFTimeZoneTypeID;
 CF_EXPORT CFRuntimeClass CFTimeZoneClass;
 

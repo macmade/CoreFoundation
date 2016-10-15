@@ -43,6 +43,8 @@ struct CFError
     CFDictionaryRef _userInfo;
 };
 
+CF_EXPORT void CFErrorInitialize( void );
+
 CF_EXPORT CFTypeID       CFErrorTypeID;
 CF_EXPORT CFRuntimeClass CFErrorClass;
 

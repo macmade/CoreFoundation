@@ -41,6 +41,11 @@ CFRuntimeClass CFDictionaryClass  =
     ( CFStringRef ( * )( CFTypeRef ) )CFDictionaryCopyDescription
 };
 
+void CFDictionaryInitialize( void )
+{
+    CFDictionaryTypeID = CFRuntimeRegisterClass( &CFDictionaryClass );
+}
+
 void CFDictionaryDestruct( CFDictionaryRef d )
 {
     CFAllocatorRef            alloc;
