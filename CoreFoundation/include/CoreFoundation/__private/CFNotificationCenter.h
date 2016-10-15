@@ -32,6 +32,7 @@
 
 #include <CoreFoundation/CoreFoundation.h>
 #include <CoreFoundation/__private/CFRuntime.h>
+#include <CoreFoundation/__private/CFSpinLock.h>
 
 CF_EXTERN_C_BEGIN
 
@@ -44,6 +45,17 @@ CF_EXPORT void CFNotificationCenterInitialize( void );
 
 CF_EXPORT CFTypeID       CFNotificationCenterTypeID;
 CF_EXPORT CFRuntimeClass CFNotificationCenterClass;
+
+CF_EXPORT CFSpinLock CFNotificationCenterLocalLock;
+CF_EXPORT CFSpinLock CFNotificationCenterDarwinLock;
+CF_EXPORT CFSpinLock CFNotificationCenterDistributedLock;
+
+CF_EXPORT CFNotificationCenterRef CFNotificationCenterLocal;
+CF_EXPORT CFNotificationCenterRef CFNotificationCenterDarwin;
+CF_EXPORT CFNotificationCenterRef CFNotificationCenterDistributed;
+
+CF_EXPORT CFNotificationCenterRef CFNotificationCenterCreate( CFAllocatorRef alloc );
+CF_EXPORT CFStringRef             CFNotificationCenterCopyDescription( CFNotificationCenterRef center );
 
 CF_EXTERN_C_END
 

@@ -38,17 +38,59 @@ CFTypeID CFNotificationCenterGetTypeID( void )
 
 CFNotificationCenterRef CFNotificationCenterGetDarwinNotifyCenter( void )
 {
-    return NULL;
+    CFSpinLockLock( &CFNotificationCenterDarwinLock );
+    
+    if( CFNotificationCenterDarwin == NULL )
+    {
+        CFNotificationCenterDarwin = CFNotificationCenterCreate( NULL );
+        
+        if( CFNotificationCenterDarwin )
+        {
+            CFRuntimeSetObjectAsConstant( CFNotificationCenterDarwin );
+        }
+    }
+    
+    CFSpinLockUnlock( &CFNotificationCenterDarwinLock );
+    
+    return CFNotificationCenterDarwin;
 }
 
 CFNotificationCenterRef CFNotificationCenterGetDistributedCenter( void )
 {
-    return NULL;
+    CFSpinLockLock( &CFNotificationCenterDistributedLock );
+    
+    if( CFNotificationCenterDistributed == NULL )
+    {
+        CFNotificationCenterDistributed = CFNotificationCenterCreate( NULL );
+        
+        if( CFNotificationCenterDistributed )
+        {
+            CFRuntimeSetObjectAsConstant( CFNotificationCenterDistributed );
+        }
+    }
+    
+    CFSpinLockUnlock( &CFNotificationCenterDistributedLock );
+    
+    return CFNotificationCenterDistributed;
 }
 
 CFNotificationCenterRef CFNotificationCenterGetLocalCenter( void )
 {
-    return NULL;
+    CFSpinLockLock( &CFNotificationCenterLocalLock );
+    
+    if( CFNotificationCenterLocal == NULL )
+    {
+        CFNotificationCenterLocal = CFNotificationCenterCreate( NULL );
+        
+        if( CFNotificationCenterLocal )
+        {
+            CFRuntimeSetObjectAsConstant( CFNotificationCenterLocal );
+        }
+    }
+    
+    CFSpinLockUnlock( &CFNotificationCenterLocalLock );
+    
+    return CFNotificationCenterLocal;
 }
 
 void CFNotificationCenterPostNotification( CFNotificationCenterRef center, CFNotificationName name, const void * object, CFDictionaryRef userInfo, Boolean deliverImmediately )

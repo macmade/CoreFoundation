@@ -38,10 +38,52 @@ CFRuntimeClass CFNotificationCenterClass  =
     NULL,
     NULL,
     NULL,
-    NULL
+    ( CFStringRef ( * )( CFTypeRef ) )CFNotificationCenterCopyDescription
 };
+
+CFSpinLock CFNotificationCenterLocalLock       = 0;
+CFSpinLock CFNotificationCenterDarwinLock      = 0;
+CFSpinLock CFNotificationCenterDistributedLock = 0;
+
+CFNotificationCenterRef CFNotificationCenterLocal       = NULL;
+CFNotificationCenterRef CFNotificationCenterDarwin      = NULL;
+CFNotificationCenterRef CFNotificationCenterDistributed = NULL;
 
 void CFNotificationCenterInitialize( void )
 {
     CFNotificationCenterTypeID = CFRuntimeRegisterClass( &CFNotificationCenterClass );
+}
+
+CFNotificationCenterRef CFNotificationCenterCreate( CFAllocatorRef alloc )
+{
+    struct CFNotificationCenter * o;
+    
+    o = ( struct CFNotificationCenter * )CFRuntimeCreateInstance( alloc, CFNotificationCenterTypeID );
+    
+    return o;
+}
+
+CFStringRef CFNotificationCenterCopyDescription( CFNotificationCenterRef center )
+{
+    if( center == NULL )
+    {
+        return NULL;
+    }
+    
+    if( center == CFNotificationCenterDarwin )
+    {
+        return CFSTR( "Darwin" );
+    }
+    
+    if( center == CFNotificationCenterDistributed )
+    {
+        return CFSTR( "Distributed" );
+    }
+    
+    if( center == CFNotificationCenterLocal )
+    {
+        return CFSTR( "Local" );
+    }
+    
+    return NULL;
 }

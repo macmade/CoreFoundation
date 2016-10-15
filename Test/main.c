@@ -351,5 +351,21 @@ int main( void )
     
     fprintf( stderr,  "--------------------------------------------------------------------------------\n" );
     
+    {
+        CFNotificationCenterRef local;
+        CFNotificationCenterRef darwin;
+        CFNotificationCenterRef distributed;
+        
+        local       = CFNotificationCenterGetLocalCenter();
+        darwin      = CFNotificationCenterGetDarwinNotifyCenter();
+        distributed = CFNotificationCenterGetDistributedCenter();
+        
+        CFShow( local );
+        CFShow( darwin );
+        CFShow( distributed );
+    }
+    
+    fprintf( stderr,  "--------------------------------------------------------------------------------\n" );
+    
     return 0;
 }
