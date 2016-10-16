@@ -48,7 +48,7 @@ void CFSpinLockLock( CFSpinLock * lock )
     {
         #ifdef _WIN32
         
-        Sleep( 1000 ):
+        Sleep( 0 );
         
         #else
         

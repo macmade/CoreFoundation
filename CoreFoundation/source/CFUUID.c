@@ -30,6 +30,7 @@
 #include <CoreFoundation/CoreFoundation.h>
 #include <CoreFoundation/__private/__CFUUID.h>
 #include <string.h>
+#include <stdio.h>
 
 #ifdef _WIN32
 #include <Rpc.h>
@@ -44,41 +45,45 @@ CFTypeID CFUUIDGetTypeID( void )
 
 CFUUIDRef CFUUIDCreate( CFAllocatorRef alloc )
 {
-    CFUUIDRef o;
-    
     #ifdef _WIN32
     
     UUID        u;
     char      * str;
     CFStringRef s;
-    
+    CFUUIDRef   o;
+
     memset( &u, 0, sizeof( UUID ) );
     
     if( UuidCreate( &u ) != RPC_S_OK )
     {
         return NULL;
     }
-    
-    if( UuidToStringA( &uuid, ( RPC_CSTR * )&str ) != RPC_S_OK );
+
+    if( UuidToStringA( &u, &str ) != RPC_S_OK )
     {
         return NULL;
     }
     
-    s = CFStringCreateWithCString( NULL, str, kCFStringEncodingASCII, kCFAllocatorNull );
+    s = CFStringCreateWithCString( NULL, str, kCFStringEncodingASCII );
     
-    RpcStringFreeA( ( RPC_CSTR * )&str );
+    RpcStringFreeA( &str );
     
     if( s == NULL )
     {
         return NULL;
     }
     
-    return CFUUIDCreateFromString( NULL, s );
+    o = CFUUIDCreateFromString( NULL, s );
     
+    CFRelease( s );
+
+    return o;
+
     #else
     
-    uuid_t u;
-    
+    uuid_t    u;
+    CFUUIDRef o;
+
     memset( u, 0, sizeof( uuid_t ) );
     uuid_generate( u );
     
@@ -102,10 +107,10 @@ CFUUIDRef CFUUIDCreate( CFAllocatorRef alloc )
         u[ 14 ],
         u[ 15 ]
     );
-    
-    #endif
-    
+
     return ( o ) ? CFRetain( o ) : NULL;
+
+    #endif
 }
 
 CFUUIDRef CFUUIDCreateFromString( CFAllocatorRef alloc, CFStringRef uuidStr )
