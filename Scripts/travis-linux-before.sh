@@ -19,3 +19,4 @@ sudo apt-get -y install libc6
 sudo apt-get -y install libc6-dev
 sudo apt-get -y install libc++1
 sudo apt-get -y install libc++-dev
+sudo apt-get -y install uuid-dev
