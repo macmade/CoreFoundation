@@ -38,12 +38,15 @@ CF_EXTERN_C_BEGIN
 struct CFUUID
 {
     CFRuntimeBase _base;
+    CFUUIDBytes   _bytes;
 };
 
 CF_EXPORT void CFUUIDInitialize( void );
 
 CF_EXPORT CFTypeID       CFUUIDTypeID;
 CF_EXPORT CFRuntimeClass CFUUIDClass;
+
+CF_EXPORT CFUUIDBytes CFUUIDNullBytes;
 
 CF_EXTERN_C_END
 

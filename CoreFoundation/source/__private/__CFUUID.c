@@ -41,6 +41,8 @@ CFRuntimeClass CFUUIDClass  =
     NULL
 };
 
+CFUUIDBytes CFUUIDNullBytes = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+
 void CFUUIDInitialize( void )
 {
     CFUUIDTypeID = CFRuntimeRegisterClass( &CFUUIDClass );

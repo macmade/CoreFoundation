@@ -31,6 +31,12 @@
 #include <CoreFoundation/__private/__CFAtomic.h>
 #include <stdlib.h>
 
+#ifdef _WIN32
+#include <Windows.h>
+#else
+#include <unistd.h>
+#endif
+
 void CFSpinLockLock( CFSpinLock * lock )
 {
     if( lock == NULL )
@@ -38,7 +44,18 @@ void CFSpinLockLock( CFSpinLock * lock )
         return;
     }
     
-    while( CFAtomicCompareAndSwap( 0, 1, lock ) );
+    while( CFAtomicCompareAndSwap( 0, 1, lock ) )
+    {
+        #ifdef _WIN32
+        
+        Sleep( 1000 ):
+        
+        #else
+        
+        sleep( 0 );
+        
+        #endif
+    }
 }
 
 void CFSpinLockUnlock( CFSpinLock * lock )
