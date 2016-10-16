@@ -23,11 +23,11 @@ While the public interface is strictly identical, the private runtime functions 
 
 ### Building CoreFoundation
 
- - **macOS**
+ - **macOS**  
    Use the provided xCode project, or use the provided makefile.
- - **Linux**
+ - **Linux**  
    Use the provided makefile.
- - **Windows**
+ - **Windows**  
    Use the provided VisualStudio project.
 
 ### Improvements
