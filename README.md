@@ -111,9 +111,9 @@ Here's an example for the public declaration of a custom CoreFoundation class:
     
     typedef struct Foo * FooRef; // Opaque type for your class
     
-    CF_EXPORT CFTypeID    FooGetTypeID( void );         // Returns the type ID of your class
-    CF_EXPORT FooRef      FooCreate( CFStringRef str ); // Creates an instance of your class
-    CF_EXPORT CFStringRef FooGetString( FooRef foo );   // Member method
+    CFTypeID    FooGetTypeID( void );         // Returns the type ID of your class
+    FooRef      FooCreate( CFStringRef str ); // Creates an instance of your class
+    CFStringRef FooGetString( FooRef foo );   // Member method
     
     #endif
     
