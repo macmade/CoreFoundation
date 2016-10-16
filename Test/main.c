@@ -342,7 +342,7 @@ int main( void )
     {
         FooRef foo;
         
-        foo = FooCreate( CFSTR( "hello, world" ) );
+        foo = FooCreate( NULL, CFSTR( "hello, world" ) );
         
         CFShow( foo );
         CFShow( FooGetString( foo ) );
