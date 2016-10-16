@@ -32,6 +32,7 @@
 
 #include <CoreFoundation/CoreFoundation.h>
 #include <CoreFoundation/__private/__CFRuntime.h>
+#include <CoreFoundation/__private/__CFSpinLock.h>
 
 CF_EXTERN_C_BEGIN
 
@@ -41,17 +42,27 @@ struct CFUUID
     CFUUIDBytes   _bytes;
 };
 
+struct CFUUIDList
+{
+    struct CFUUIDList * next;
+    CFUUIDRef           uuid;
+};
+
 CF_EXPORT void CFUUIDInitialize( void );
 
 CF_EXPORT CFTypeID       CFUUIDTypeID;
 CF_EXPORT CFRuntimeClass CFUUIDClass;
 
-CF_EXPORT CFUUIDBytes CFUUIDNullBytes;
+CF_EXPORT CFSpinLock          CFUUIDsLock;
+CF_EXPORT struct CFUUIDList * CFUUIDs;
+CF_EXPORT CFUUIDBytes         CFUUIDNullBytes;
 
+CF_EXPORT void        CFUUIDDestruct( CFUUIDRef u );
 CF_EXPORT CFHashCode  CFUUIDHash( CFUUIDRef u );
 CF_EXPORT bool        CFUUIDEquals( CFUUIDRef u1, CFUUIDRef u2 );
 CF_EXPORT CFStringRef CFUUIDCopyDescription( CFUUIDRef u );
 CF_EXPORT UInt8       CFUUIDByteFromHexChar( char * s );
+CF_EXPORT CFUUIDRef   CFUUIDGetOrCreate( CFAllocatorRef alloc, CFUUIDBytes bytes, bool returnRetainedIfExist );
 
 CF_EXTERN_C_END
 

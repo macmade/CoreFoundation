@@ -35,17 +35,59 @@ CFRuntimeClass CFUUIDClass  =
     "CFUUID",
     sizeof( struct CFUUID ),
     NULL,
-    NULL,
+    ( void ( * )( CFTypeRef ) )CFUUIDDestruct,
     ( CFHashCode ( * )( CFTypeRef ) )CFUUIDHash,
     ( bool ( * )( CFTypeRef, CFTypeRef ) )CFUUIDEquals,
     ( CFStringRef ( * )( CFTypeRef ) )CFUUIDCopyDescription
 };
 
-CFUUIDBytes CFUUIDNullBytes = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+CFSpinLock          CFUUIDsLock     = 0;
+struct CFUUIDList * CFUUIDs         = NULL;
+CFUUIDBytes         CFUUIDNullBytes = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
 void CFUUIDInitialize( void )
 {
     CFUUIDTypeID = CFRuntimeRegisterClass( &CFUUIDClass );
+}
+
+void CFUUIDDestruct( CFUUIDRef u )
+{
+    struct CFUUIDList * list;
+    struct CFUUIDList * prev;
+    
+    CFSpinLockLock( &CFUUIDsLock );
+    
+    if( CFUUIDs == NULL )
+    {
+        return;
+    }
+    
+    list = CFUUIDs;
+    prev = NULL;
+    
+    while( list )
+    {
+        if( u == list->uuid )
+        {
+            if( prev == NULL )
+            {
+                CFUUIDs = list->next;
+            }
+            else
+            {
+                prev->next = list->next;
+            }
+            
+            free( list );
+            
+            break;
+        }
+        
+        prev = list;
+        list = list->next;
+    }
+    
+    CFSpinLockUnlock( &CFUUIDsLock );
 }
 
 CF_EXPORT CFHashCode CFUUIDHash( CFUUIDRef u )
@@ -123,4 +165,66 @@ UInt8 CFUUIDByteFromHexChar( char * s )
     x[ 2 ] = 0;
     
     return ( UInt8 )strtoul( x, NULL, 16 );
+}
+
+CFUUIDRef CFUUIDGetOrCreate( CFAllocatorRef alloc, CFUUIDBytes bytes, bool returnRetainedIfExist )
+{
+    struct CFUUIDList * item;
+    struct CFUUIDList * list;
+    struct CFUUID     * o;
+    
+    o = ( struct CFUUID * )CFRuntimeCreateInstance( alloc, CFUUIDTypeID );
+    
+    if( o == NULL )
+    {
+        return NULL;
+    }
+    
+    o->_bytes = bytes;
+    item      = calloc( sizeof( struct CFUUIDList ), 1 );
+    
+    if( item == NULL )
+    {
+        CFRelease( o );
+        
+        return NULL;
+    }
+    
+    item->uuid = o;
+    
+    CFSpinLockLock( &CFUUIDsLock );
+    
+    if( CFUUIDs == NULL )
+    {
+        CFUUIDs = item;
+        
+        CFSpinLockUnlock( &CFUUIDsLock );
+        
+        return o;
+    }
+    
+    list = CFUUIDs;
+    
+    while( list )
+    {
+        if( CFEqual( o, list->uuid ) )
+        {
+            CFRelease( o );
+            free( item );
+            CFSpinLockUnlock( &CFUUIDsLock );
+            
+            CFShow( list->uuid );
+            
+            return ( returnRetainedIfExist ) ? CFRetain( list->uuid ) : list->uuid;
+        }
+        
+        list = list->next;
+    }
+    
+    item->next = CFUUIDs;
+    CFUUIDs    = item;
+    
+    CFSpinLockUnlock( &CFUUIDsLock );
+    
+    return o;
 }

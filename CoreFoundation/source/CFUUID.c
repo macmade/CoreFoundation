@@ -82,12 +82,11 @@ CFUUIDRef CFUUIDCreate( CFAllocatorRef alloc )
     #else
     
     uuid_t    u;
-    CFUUIDRef o;
 
     memset( u, 0, sizeof( uuid_t ) );
     uuid_generate( u );
     
-    o = CFUUIDGetConstantUUIDWithBytes
+    return CFUUIDCreateWithBytes
     (
         alloc,
         u[  0 ],
@@ -108,15 +107,12 @@ CFUUIDRef CFUUIDCreate( CFAllocatorRef alloc )
         u[ 15 ]
     );
 
-    return ( o ) ? CFRetain( o ) : NULL;
-
     #endif
 }
 
 CFUUIDRef CFUUIDCreateFromString( CFAllocatorRef alloc, CFStringRef uuidStr )
 {
-    char      buf[ 37 ];
-    CFUUIDRef o;
+    char buf[ 37 ];
     
     if( uuidStr == NULL || CFStringGetLength( uuidStr ) != 36 )
     {
@@ -139,7 +135,7 @@ CFUUIDRef CFUUIDCreateFromString( CFAllocatorRef alloc, CFStringRef uuidStr )
         return NULL;
     }
     
-    o = CFUUIDGetConstantUUIDWithBytes
+    return CFUUIDCreateWithBytes
     (
         alloc,
         CFUUIDByteFromHexChar( &( buf[  0 ] ) ),
@@ -159,64 +155,35 @@ CFUUIDRef CFUUIDCreateFromString( CFAllocatorRef alloc, CFStringRef uuidStr )
         CFUUIDByteFromHexChar( &( buf[ 32 ] ) ),
         CFUUIDByteFromHexChar( &( buf[ 34 ] ) )
     );
-    
-    return ( o ) ? CFRetain( o ) : NULL;
 }
 
 CFUUIDRef CFUUIDCreateFromUUIDBytes( CFAllocatorRef alloc, CFUUIDBytes bytes )
 {
-    CFUUIDRef o;
-    
-    o = CFUUIDGetConstantUUIDWithBytes
-    (
-        alloc,
-        bytes.byte0,
-        bytes.byte1,
-        bytes.byte2,
-        bytes.byte3,
-        bytes.byte4,
-        bytes.byte5,
-        bytes.byte6,
-        bytes.byte7,
-        bytes.byte8,
-        bytes.byte9,
-        bytes.byte10,
-        bytes.byte11,
-        bytes.byte12,
-        bytes.byte13,
-        bytes.byte14,
-        bytes.byte15
-    );
-    
-    return ( o ) ? CFRetain( o ) : NULL;
+    return CFUUIDGetOrCreate( alloc, bytes, true );
 }
 
 CFUUIDRef CFUUIDCreateWithBytes( CFAllocatorRef alloc, UInt8 byte0, UInt8 byte1, UInt8 byte2, UInt8 byte3, UInt8 byte4, UInt8 byte5, UInt8 byte6, UInt8 byte7, UInt8 byte8, UInt8 byte9, UInt8 byte10, UInt8 byte11, UInt8 byte12, UInt8 byte13, UInt8 byte14, UInt8 byte15 )
 {
-    CFUUIDRef o;
+    CFUUIDBytes bytes;
     
-    o = CFUUIDGetConstantUUIDWithBytes
-    (
-        alloc,
-        byte0,
-        byte1,
-        byte2,
-        byte3,
-        byte4,
-        byte5,
-        byte6,
-        byte7,
-        byte8,
-        byte9,
-        byte10,
-        byte11,
-        byte12,
-        byte13,
-        byte14,
-        byte15
-    );
+    bytes.byte0  = byte0;
+    bytes.byte1  = byte1;
+    bytes.byte2  = byte2;
+    bytes.byte3  = byte3;
+    bytes.byte4  = byte4;
+    bytes.byte5  = byte5;
+    bytes.byte6  = byte6;
+    bytes.byte7  = byte7;
+    bytes.byte8  = byte8;
+    bytes.byte8  = byte9;
+    bytes.byte10 = byte10;
+    bytes.byte11 = byte11;
+    bytes.byte12 = byte12;
+    bytes.byte13 = byte13;
+    bytes.byte14 = byte14;
+    bytes.byte15 = byte15;
     
-    return ( o ) ? CFRetain( o ) : NULL;
+    return CFUUIDCreateFromUUIDBytes( alloc, bytes );
 }
 
 CFStringRef CFUUIDCreateString( CFAllocatorRef alloc, CFUUIDRef uuid )
@@ -252,33 +219,26 @@ CFStringRef CFUUIDCreateString( CFAllocatorRef alloc, CFUUIDRef uuid )
 
 CFUUIDRef CFUUIDGetConstantUUIDWithBytes( CFAllocatorRef alloc, UInt8 byte0, UInt8 byte1, UInt8 byte2, UInt8 byte3, UInt8 byte4, UInt8 byte5, UInt8 byte6, UInt8 byte7, UInt8 byte8, UInt8 byte9, UInt8 byte10, UInt8 byte11, UInt8 byte12, UInt8 byte13, UInt8 byte14, UInt8 byte15 )
 {
-    struct CFUUID * o;
+    CFUUIDBytes bytes;
     
-    o = ( struct CFUUID * )CFRuntimeCreateInstance( alloc, CFUUIDTypeID );
+    bytes.byte0  = byte0;
+    bytes.byte1  = byte1;
+    bytes.byte2  = byte2;
+    bytes.byte3  = byte3;
+    bytes.byte4  = byte4;
+    bytes.byte5  = byte5;
+    bytes.byte6  = byte6;
+    bytes.byte7  = byte7;
+    bytes.byte8  = byte8;
+    bytes.byte8  = byte9;
+    bytes.byte10 = byte10;
+    bytes.byte11 = byte11;
+    bytes.byte12 = byte12;
+    bytes.byte13 = byte13;
+    bytes.byte14 = byte14;
+    bytes.byte15 = byte15;
     
-    if( o == NULL )
-    {
-        return NULL;
-    }
-    
-    o->_bytes.byte0  = byte0;
-    o->_bytes.byte1  = byte1;
-    o->_bytes.byte2  = byte2;
-    o->_bytes.byte3  = byte3;
-    o->_bytes.byte4  = byte4;
-    o->_bytes.byte5  = byte5;
-    o->_bytes.byte6  = byte6;
-    o->_bytes.byte7  = byte7;
-    o->_bytes.byte8  = byte8;
-    o->_bytes.byte8  = byte9;
-    o->_bytes.byte10 = byte10;
-    o->_bytes.byte11 = byte11;
-    o->_bytes.byte12 = byte12;
-    o->_bytes.byte13 = byte13;
-    o->_bytes.byte14 = byte14;
-    o->_bytes.byte15 = byte15;
-    
-    return o;
+    return CFUUIDGetOrCreate( alloc, bytes, false );
 }
 
 CFUUIDBytes CFUUIDGetUUIDBytes( CFUUIDRef uuid )

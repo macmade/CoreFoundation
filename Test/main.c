@@ -370,18 +370,27 @@ int main( void )
     {
         CFUUIDRef   u1;
         CFUUIDRef   u2;
+        CFUUIDRef   u3;
         CFStringRef s;
         
         s  = CFSTR( "68753A44-4D6F-1226-9C60-0050E4C00067" );
         u1 = CFUUIDCreate( NULL );
         u2 = CFUUIDCreateFromString( NULL, s );
+        u3 = CFUUIDCreateFromString( NULL, s );
         
         CFShow( u1 );
-        CFShow( s );
         CFShow( u2 );
+        CFShow( u3 );
+        CFShow( s );
         
         CFRelease( u1 );
         CFRelease( u2 );
+        CFRelease( u3 );
+        
+        u1 = CFUUIDCreateFromString( NULL, s );
+        
+        CFShow( u1 );
+        CFRelease( u1 );
     }
     
     fprintf( stderr,  "--------------------------------------------------------------------------------\n" );
