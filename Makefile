@@ -65,9 +65,9 @@ include Submodules/makelib/Targets.mk
 example: all
 	
 	@echo -e $(call PRINT,Demo,universal,Compiling the example program)
-	$(CC) $(FLAGS_WARN) -I$(DIR_INC) -o $(DIR_BUILD_PRODUCTS)$(HOST_ARCH)/test $(call GET_C_FILES, Test/) $(DIR_BUILD_PRODUCTS)$(HOST_ARCH)/$(PRODUCT_LIB).a
+	@$(CC) $(FLAGS_WARN) -I$(DIR_INC) -o $(DIR_BUILD_PRODUCTS)$(HOST_ARCH)/test $(call GET_C_FILES, Test/) $(DIR_BUILD_PRODUCTS)$(HOST_ARCH)/$(PRODUCT_LIB).a $(LIBS)
 	@echo -e $(call PRINT,Demo,universal,Runing the example program)
-	$(DIR_BUILD_PRODUCTS)$(HOST_ARCH)/test
+	@$(DIR_BUILD_PRODUCTS)$(HOST_ARCH)/test
 	
 doc:
 	
