@@ -34,8 +34,8 @@
 
 typedef struct Foo * FooRef;
 
-CF_EXPORT CFTypeID    FooGetTypeID( void );
-CF_EXPORT FooRef      FooCreate( CFStringRef str );
-CF_EXPORT CFStringRef FooGetString( FooRef foo );
+CFTypeID    FooGetTypeID( void );
+FooRef      FooCreate( CFStringRef str );
+CFStringRef FooGetString( FooRef foo );
 
 #endif /* FOO_H */

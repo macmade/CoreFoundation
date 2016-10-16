@@ -54,7 +54,7 @@
 
 CF_EXTERN_C_BEGIN
 
-#if defined( TARGET_OS_WIN32 ) && TARGET_OS_WIN32
+#if defined( _WIN32 )
 
 /*!
  * @define      CF_EXPORT

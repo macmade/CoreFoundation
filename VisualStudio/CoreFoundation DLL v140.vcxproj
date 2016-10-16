@@ -19,6 +19,119 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\CoreFoundation\source\CFAllocator.c" />
+    <ClCompile Include="..\CoreFoundation\source\CFArray.c" />
+    <ClCompile Include="..\CoreFoundation\source\CFAttributedString.c" />
+    <ClCompile Include="..\CoreFoundation\source\CFBag.c" />
+    <ClCompile Include="..\CoreFoundation\source\CFBase.c" />
+    <ClCompile Include="..\CoreFoundation\source\CFBinaryHeap.c" />
+    <ClCompile Include="..\CoreFoundation\source\CFBitVector.c" />
+    <ClCompile Include="..\CoreFoundation\source\CFBoolean.c" />
+    <ClCompile Include="..\CoreFoundation\source\CFBundle.c" />
+    <ClCompile Include="..\CoreFoundation\source\CFByteOrder.c" />
+    <ClCompile Include="..\CoreFoundation\source\CFCalendar.c" />
+    <ClCompile Include="..\CoreFoundation\source\CFCharacterSet.c" />
+    <ClCompile Include="..\CoreFoundation\source\CFData.c" />
+    <ClCompile Include="..\CoreFoundation\source\CFDate.c" />
+    <ClCompile Include="..\CoreFoundation\source\CFDateFormatter.c" />
+    <ClCompile Include="..\CoreFoundation\source\CFDictionary.c" />
+    <ClCompile Include="..\CoreFoundation\source\CFError.c" />
+    <ClCompile Include="..\CoreFoundation\source\CFFileDescriptor.c" />
+    <ClCompile Include="..\CoreFoundation\source\CFLocale.c" />
+    <ClCompile Include="..\CoreFoundation\source\CFMachPort.c" />
+    <ClCompile Include="..\CoreFoundation\source\CFMessagePort.c" />
+    <ClCompile Include="..\CoreFoundation\source\CFMutableArray.c" />
+    <ClCompile Include="..\CoreFoundation\source\CFMutableAttributedString.c" />
+    <ClCompile Include="..\CoreFoundation\source\CFMutableBag.c" />
+    <ClCompile Include="..\CoreFoundation\source\CFMutableBitVector.c" />
+    <ClCompile Include="..\CoreFoundation\source\CFMutableCharacterSet.c" />
+    <ClCompile Include="..\CoreFoundation\source\CFMutableData.c" />
+    <ClCompile Include="..\CoreFoundation\source\CFMutableDictionary.c" />
+    <ClCompile Include="..\CoreFoundation\source\CFMutableSet.c" />
+    <ClCompile Include="..\CoreFoundation\source\CFMutableString.c" />
+    <ClCompile Include="..\CoreFoundation\source\CFNotificationCenter.c" />
+    <ClCompile Include="..\CoreFoundation\source\CFNull.c" />
+    <ClCompile Include="..\CoreFoundation\source\CFNumber.c" />
+    <ClCompile Include="..\CoreFoundation\source\CFNumberFormatter.c" />
+    <ClCompile Include="..\CoreFoundation\source\CFPlugIn.c" />
+    <ClCompile Include="..\CoreFoundation\source\CFPlugInInstance.c" />
+    <ClCompile Include="..\CoreFoundation\source\CFPreferences.c" />
+    <ClCompile Include="..\CoreFoundation\source\CFPropertyList.c" />
+    <ClCompile Include="..\CoreFoundation\source\CFReadStream.c" />
+    <ClCompile Include="..\CoreFoundation\source\CFRunLoop.c" />
+    <ClCompile Include="..\CoreFoundation\source\CFRunLoopObserver.c" />
+    <ClCompile Include="..\CoreFoundation\source\CFRunLoopSource.c" />
+    <ClCompile Include="..\CoreFoundation\source\CFRunLoopTimer.c" />
+    <ClCompile Include="..\CoreFoundation\source\CFSet.c" />
+    <ClCompile Include="..\CoreFoundation\source\CFSocket.c" />
+    <ClCompile Include="..\CoreFoundation\source\CFStream.c" />
+    <ClCompile Include="..\CoreFoundation\source\CFString.c" />
+    <ClCompile Include="..\CoreFoundation\source\CFStringTokenizer.c" />
+    <ClCompile Include="..\CoreFoundation\source\CFTimeZone.c" />
+    <ClCompile Include="..\CoreFoundation\source\CFTree.c" />
+    <ClCompile Include="..\CoreFoundation\source\CFType.c" />
+    <ClCompile Include="..\CoreFoundation\source\CFURL.c" />
+    <ClCompile Include="..\CoreFoundation\source\CFUserNotification.c" />
+    <ClCompile Include="..\CoreFoundation\source\CFUtilities.c" />
+    <ClCompile Include="..\CoreFoundation\source\CFUUID.c" />
+    <ClCompile Include="..\CoreFoundation\source\CFWriteStream.c" />
+    <ClCompile Include="..\CoreFoundation\source\CFXMLNode.c" />
+    <ClCompile Include="..\CoreFoundation\source\CFXMLParser.c" />
+    <ClCompile Include="..\CoreFoundation\source\CFXMLTree.c" />
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFAllocator.c" />
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFArray.c" />
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFAtomic.c" />
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFAttributedString.c" />
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFBag.c" />
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFBinaryHeap.c" />
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFBitVector.c" />
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFBoolean.c" />
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFBundle.c" />
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFCalendar.c" />
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFCharacterSet.c" />
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFData.c" />
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFDate.c" />
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFDateFormatter.c" />
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFDictionary.c" />
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFError.c" />
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFFileDescriptor.c" />
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFInit.c" />
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFLocale.c" />
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFMachPort.c" />
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFMessagePort.c" />
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFNotificationCenter.c" />
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFNull.c" />
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFNumber.c" />
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFNumberFormatter.c" />
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFPlugIn.c" />
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFPlugInInstance.c" />
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFPreferences.c" />
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFPropertyList.c" />
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFReadStream.c" />
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFRunLoop.c" />
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFRunLoopObserver.c" />
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFRunLoopSource.c" />
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFRunLoopTimer.c" />
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFRuntime.c" />
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFSet.c" />
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFSocket.c" />
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFSpinLock.c" />
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFString.c" />
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFStringTokenizer.c" />
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFThreading.c" />
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFTimeZone.c" />
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFTree.c" />
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFURL.c" />
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFUserNotfication.c" />
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFUUID.c" />
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFWriteStream.c" />
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFXMLNode.c" />
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFXMLParser.c" />
+    <ClCompile Include="..\CoreFoundation\source\__private\__CFXMLTree.c" />
+    <ClCompile Include="source\dllmain.cpp" />
+    <ClCompile Include="source\stdafx.cpp" />
+  </ItemGroup>
+  <ItemGroup>
     <ClInclude Include="..\CoreFoundation\include\CoreFoundation\CFAllocator.h" />
     <ClInclude Include="..\CoreFoundation\include\CoreFoundation\CFArray.h" />
     <ClInclude Include="..\CoreFoundation\include\CoreFoundation\CFAttributedString.h" />
@@ -129,146 +242,37 @@
     <ClInclude Include="..\CoreFoundation\include\CoreFoundation\__private\__CFXMLNode.h" />
     <ClInclude Include="..\CoreFoundation\include\CoreFoundation\__private\__CFXMLParser.h" />
     <ClInclude Include="..\CoreFoundation\include\CoreFoundation\__private\__CFXMLTree.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\CoreFoundation\source\CFAllocator.c" />
-    <ClCompile Include="..\CoreFoundation\source\CFArray.c" />
-    <ClCompile Include="..\CoreFoundation\source\CFAttributedString.c" />
-    <ClCompile Include="..\CoreFoundation\source\CFBag.c" />
-    <ClCompile Include="..\CoreFoundation\source\CFBase.c" />
-    <ClCompile Include="..\CoreFoundation\source\CFBinaryHeap.c" />
-    <ClCompile Include="..\CoreFoundation\source\CFBitVector.c" />
-    <ClCompile Include="..\CoreFoundation\source\CFBoolean.c" />
-    <ClCompile Include="..\CoreFoundation\source\CFBundle.c" />
-    <ClCompile Include="..\CoreFoundation\source\CFByteOrder.c" />
-    <ClCompile Include="..\CoreFoundation\source\CFCalendar.c" />
-    <ClCompile Include="..\CoreFoundation\source\CFCharacterSet.c" />
-    <ClCompile Include="..\CoreFoundation\source\CFData.c" />
-    <ClCompile Include="..\CoreFoundation\source\CFDate.c" />
-    <ClCompile Include="..\CoreFoundation\source\CFDateFormatter.c" />
-    <ClCompile Include="..\CoreFoundation\source\CFDictionary.c" />
-    <ClCompile Include="..\CoreFoundation\source\CFError.c" />
-    <ClCompile Include="..\CoreFoundation\source\CFFileDescriptor.c" />
-    <ClCompile Include="..\CoreFoundation\source\CFLocale.c" />
-    <ClCompile Include="..\CoreFoundation\source\CFMachPort.c" />
-    <ClCompile Include="..\CoreFoundation\source\CFMessagePort.c" />
-    <ClCompile Include="..\CoreFoundation\source\CFMutableArray.c" />
-    <ClCompile Include="..\CoreFoundation\source\CFMutableAttributedString.c" />
-    <ClCompile Include="..\CoreFoundation\source\CFMutableBag.c" />
-    <ClCompile Include="..\CoreFoundation\source\CFMutableBitVector.c" />
-    <ClCompile Include="..\CoreFoundation\source\CFMutableCharacterSet.c" />
-    <ClCompile Include="..\CoreFoundation\source\CFMutableData.c" />
-    <ClCompile Include="..\CoreFoundation\source\CFMutableDictionary.c" />
-    <ClCompile Include="..\CoreFoundation\source\CFMutableSet.c" />
-    <ClCompile Include="..\CoreFoundation\source\CFMutableString.c" />
-    <ClCompile Include="..\CoreFoundation\source\CFNotificationCenter.c" />
-    <ClCompile Include="..\CoreFoundation\source\CFNull.c" />
-    <ClCompile Include="..\CoreFoundation\source\CFNumber.c" />
-    <ClCompile Include="..\CoreFoundation\source\CFNumberFormatter.c" />
-    <ClCompile Include="..\CoreFoundation\source\CFPlugIn.c" />
-    <ClCompile Include="..\CoreFoundation\source\CFPlugInInstance.c" />
-    <ClCompile Include="..\CoreFoundation\source\CFPreferences.c" />
-    <ClCompile Include="..\CoreFoundation\source\CFPropertyList.c" />
-    <ClCompile Include="..\CoreFoundation\source\CFReadStream.c" />
-    <ClCompile Include="..\CoreFoundation\source\CFRunLoop.c" />
-    <ClCompile Include="..\CoreFoundation\source\CFRunLoopObserver.c" />
-    <ClCompile Include="..\CoreFoundation\source\CFRunLoopSource.c" />
-    <ClCompile Include="..\CoreFoundation\source\CFRunLoopTimer.c" />
-    <ClCompile Include="..\CoreFoundation\source\CFSet.c" />
-    <ClCompile Include="..\CoreFoundation\source\CFSocket.c" />
-    <ClCompile Include="..\CoreFoundation\source\CFStream.c" />
-    <ClCompile Include="..\CoreFoundation\source\CFString.c" />
-    <ClCompile Include="..\CoreFoundation\source\CFStringTokenizer.c" />
-    <ClCompile Include="..\CoreFoundation\source\CFTimeZone.c" />
-    <ClCompile Include="..\CoreFoundation\source\CFTree.c" />
-    <ClCompile Include="..\CoreFoundation\source\CFType.c" />
-    <ClCompile Include="..\CoreFoundation\source\CFURL.c" />
-    <ClCompile Include="..\CoreFoundation\source\CFUserNotification.c" />
-    <ClCompile Include="..\CoreFoundation\source\CFUtilities.c" />
-    <ClCompile Include="..\CoreFoundation\source\CFUUID.c" />
-    <ClCompile Include="..\CoreFoundation\source\CFWriteStream.c" />
-    <ClCompile Include="..\CoreFoundation\source\CFXMLNode.c" />
-    <ClCompile Include="..\CoreFoundation\source\CFXMLParser.c" />
-    <ClCompile Include="..\CoreFoundation\source\CFXMLTree.c" />
-    <ClCompile Include="..\CoreFoundation\source\__private\__CFAllocator.c" />
-    <ClCompile Include="..\CoreFoundation\source\__private\__CFArray.c" />
-    <ClCompile Include="..\CoreFoundation\source\__private\__CFAtomic.c" />
-    <ClCompile Include="..\CoreFoundation\source\__private\__CFAttributedString.c" />
-    <ClCompile Include="..\CoreFoundation\source\__private\__CFBag.c" />
-    <ClCompile Include="..\CoreFoundation\source\__private\__CFBinaryHeap.c" />
-    <ClCompile Include="..\CoreFoundation\source\__private\__CFBitVector.c" />
-    <ClCompile Include="..\CoreFoundation\source\__private\__CFBoolean.c" />
-    <ClCompile Include="..\CoreFoundation\source\__private\__CFBundle.c" />
-    <ClCompile Include="..\CoreFoundation\source\__private\__CFCalendar.c" />
-    <ClCompile Include="..\CoreFoundation\source\__private\__CFCharacterSet.c" />
-    <ClCompile Include="..\CoreFoundation\source\__private\__CFData.c" />
-    <ClCompile Include="..\CoreFoundation\source\__private\__CFDate.c" />
-    <ClCompile Include="..\CoreFoundation\source\__private\__CFDateFormatter.c" />
-    <ClCompile Include="..\CoreFoundation\source\__private\__CFDictionary.c" />
-    <ClCompile Include="..\CoreFoundation\source\__private\__CFError.c" />
-    <ClCompile Include="..\CoreFoundation\source\__private\__CFFileDescriptor.c" />
-    <ClCompile Include="..\CoreFoundation\source\__private\__CFInit.c" />
-    <ClCompile Include="..\CoreFoundation\source\__private\__CFLocale.c" />
-    <ClCompile Include="..\CoreFoundation\source\__private\__CFMachPort.c" />
-    <ClCompile Include="..\CoreFoundation\source\__private\__CFMessagePort.c" />
-    <ClCompile Include="..\CoreFoundation\source\__private\__CFNotificationCenter.c" />
-    <ClCompile Include="..\CoreFoundation\source\__private\__CFNull.c" />
-    <ClCompile Include="..\CoreFoundation\source\__private\__CFNumber.c" />
-    <ClCompile Include="..\CoreFoundation\source\__private\__CFNumberFormatter.c" />
-    <ClCompile Include="..\CoreFoundation\source\__private\__CFPlugIn.c" />
-    <ClCompile Include="..\CoreFoundation\source\__private\__CFPlugInInstance.c" />
-    <ClCompile Include="..\CoreFoundation\source\__private\__CFPreferences.c" />
-    <ClCompile Include="..\CoreFoundation\source\__private\__CFPropertyList.c" />
-    <ClCompile Include="..\CoreFoundation\source\__private\__CFReadStream.c" />
-    <ClCompile Include="..\CoreFoundation\source\__private\__CFRunLoop.c" />
-    <ClCompile Include="..\CoreFoundation\source\__private\__CFRunLoopObserver.c" />
-    <ClCompile Include="..\CoreFoundation\source\__private\__CFRunLoopSource.c" />
-    <ClCompile Include="..\CoreFoundation\source\__private\__CFRunLoopTimer.c" />
-    <ClCompile Include="..\CoreFoundation\source\__private\__CFRuntime.c" />
-    <ClCompile Include="..\CoreFoundation\source\__private\__CFSet.c" />
-    <ClCompile Include="..\CoreFoundation\source\__private\__CFSocket.c" />
-    <ClCompile Include="..\CoreFoundation\source\__private\__CFSpinLock.c" />
-    <ClCompile Include="..\CoreFoundation\source\__private\__CFString.c" />
-    <ClCompile Include="..\CoreFoundation\source\__private\__CFStringTokenizer.c" />
-    <ClCompile Include="..\CoreFoundation\source\__private\__CFThreading.c" />
-    <ClCompile Include="..\CoreFoundation\source\__private\__CFTimeZone.c" />
-    <ClCompile Include="..\CoreFoundation\source\__private\__CFTree.c" />
-    <ClCompile Include="..\CoreFoundation\source\__private\__CFURL.c" />
-    <ClCompile Include="..\CoreFoundation\source\__private\__CFUserNotfication.c" />
-    <ClCompile Include="..\CoreFoundation\source\__private\__CFUUID.c" />
-    <ClCompile Include="..\CoreFoundation\source\__private\__CFWriteStream.c" />
-    <ClCompile Include="..\CoreFoundation\source\__private\__CFXMLNode.c" />
-    <ClCompile Include="..\CoreFoundation\source\__private\__CFXMLParser.c" />
-    <ClCompile Include="..\CoreFoundation\source\__private\__CFXMLTree.c" />
+    <ClInclude Include="source\stdafx.h" />
+    <ClInclude Include="source\targetver.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{B66FEF68-D751-4450-B9CF-0E0D02BAFA28}</ProjectGuid>
+    <ProjectGuid>{84C87576-B752-429F-BF2F-F2CAF35144FA}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>CoreFoundationStaticv140</RootNamespace>
+    <RootNamespace>CoreFoundationDLLv140</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -293,24 +297,28 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)Build\$(Configuration)\Products\win32\</OutDir>
     <IntDir>$(SolutionDir)Build\$(Configuration)\Intermediates\win32\$(ProjectName)\</IntDir>
-    <TargetName>CoreFoundation_Static_v140</TargetName>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>$(SolutionDir)Build\$(Configuration)\Products\win32\</OutDir>
-    <IntDir>$(SolutionDir)Build\$(Configuration)\Intermediates\win32\$(ProjectName)\</IntDir>
-    <TargetName>CoreFoundation_Static_v140</TargetName>
+    <TargetName>CoreFoundation_DLL_v140</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)Build\$(Configuration)\Products\win64\</OutDir>
     <IntDir>$(SolutionDir)Build\$(Configuration)\Intermediates\win64\$(ProjectName)\</IntDir>
-    <TargetName>CoreFoundation_Static_v140</TargetName>
+    <TargetName>CoreFoundation_DLL_v140</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(SolutionDir)Build\$(Configuration)\Products\win32\</OutDir>
+    <IntDir>$(SolutionDir)Build\$(Configuration)\Intermediates\win32\$(ProjectName)\</IntDir>
+    <TargetName>CoreFoundation_DLL_v140</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)Build\$(Configuration)\Products\win64\</OutDir>
     <IntDir>$(SolutionDir)Build\$(Configuration)\Intermediates\win64\$(ProjectName)\</IntDir>
-    <TargetName>CoreFoundation_Static_v140</TargetName>
+    <TargetName>CoreFoundation_DLL_v140</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -318,11 +326,12 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>CORE_FOUNDATION_DLL_BUILD;_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;_WINDOWS;_USRDLL;COREFOUNDATIONDLLV140_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>..\CoreFoundation\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -331,11 +340,12 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>CORE_FOUNDATION_DLL_BUILD;_CRT_SECURE_NO_WARNINGS;_DEBUG;_WINDOWS;_USRDLL;COREFOUNDATIONDLLV140_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>..\CoreFoundation\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -346,13 +356,14 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>CORE_FOUNDATION_DLL_BUILD;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;_WINDOWS;_USRDLL;COREFOUNDATIONDLLV140_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>..\CoreFoundation\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -363,13 +374,14 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>CORE_FOUNDATION_DLL_BUILD;_CRT_SECURE_NO_WARNINGS;NDEBUG;_WINDOWS;_USRDLL;COREFOUNDATIONDLLV140_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>..\CoreFoundation\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
