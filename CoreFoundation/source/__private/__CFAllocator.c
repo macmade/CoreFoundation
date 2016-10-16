@@ -31,6 +31,10 @@
 #include <string.h>
 #include <stdio.h>
 
+#ifdef _WIN32
+#include <Windows.h>
+#endif
+
 CFTypeID       CFAllocatorTypeID = 0;
 CFRuntimeClass CFAllocatorClass  =
 {
@@ -412,6 +416,33 @@ void CFAllocatorDebugReportLeaks( CFAllocatorRef allocator, CFAllocatorRegistry 
     }
     
     fprintf( stderr, "}\n\n" );
+
+    #ifdef _WIN32
+
+    /* Windows - Detects if we run in console... */
+    {
+        SHFILEINFOA fi;
+        char        proc[ MAX_PATH ];
+        DWORD_PTR   hr;
+
+        memset( proc, 0, MAX_PATH );
+        GetModuleFileNameA( NULL, proc, MAX_PATH );
+
+        if( strlen( proc ) == 0 )
+        {
+            return;
+        }
+
+        hr = SHGetFileInfoA( proc, 0, &fi, 0, SHGFI_EXETYPE );
+
+        if( ( hr & 0xFFFF ) == IMAGE_NT_SIGNATURE && ( ( hr >> 16 ) & 0xFFFF ) == 0 )
+        {
+            fprintf( stderr, "Press any key to continue...\n" );
+            getchar();
+        }
+    }
+
+    #endif
 }
 
 void CFAllocatorExit( void )
