@@ -80,11 +80,11 @@ CFTypeID FooGetTypeID( void )
     return FooTypeID;
 }
 
-FooRef FooCreate( CFStringRef str )
+FooRef FooCreate( CFAllocatorRef alloc, CFStringRef str )
 {
     struct Foo * foo;
     
-    foo = ( struct Foo * )CFRuntimeCreateInstance( NULL, FooTypeID );
+    foo = ( struct Foo * )CFRuntimeCreateInstance( alloc, FooTypeID );
     
     if( foo )
     {

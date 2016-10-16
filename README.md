@@ -112,9 +112,9 @@ Here's an example for the public declaration of a custom CoreFoundation class:
     
     typedef struct Foo * FooRef; // Opaque type for your class
     
-    CFTypeID    FooGetTypeID( void );         // Returns the type ID of your class
-    FooRef      FooCreate( CFStringRef str ); // Creates an instance of your class
-    CFStringRef FooGetString( FooRef foo );   // Member method
+    CFTypeID    FooGetTypeID( void );                               // Returns the type ID of your class
+    FooRef      FooCreate( CFAllocatorRef alloc, CFStringRef str ); // Creates an instance of your class
+    CFStringRef FooGetString( FooRef foo );                         // Member method
     
     #endif
     
@@ -170,12 +170,12 @@ And here's the implementation:
     }
     
     // Creates an instance of your class
-    FooRef FooCreate( CFStringRef str )
+    FooRef FooCreate( CFAllocatorRef alloc, CFStringRef str )
     {
         struct Foo * foo;
         
         // Creates an instance, using the type ID
-        foo = ( struct Foo * )CFRuntimeCreateInstance( NULL, FooTypeID );
+        foo = ( struct Foo * )CFRuntimeCreateInstance( alloc, FooTypeID );
         
         // Member initialization
         if( foo )

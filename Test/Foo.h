@@ -35,7 +35,7 @@
 typedef struct Foo * FooRef;
 
 CFTypeID    FooGetTypeID( void );
-FooRef      FooCreate( CFStringRef str );
+FooRef      FooCreate( CFAllocatorRef alloc, CFStringRef str );
 CFStringRef FooGetString( FooRef foo );
 
 #endif /* FOO_H */
