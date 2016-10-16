@@ -41,13 +41,18 @@ DIR_TESTS           := Unit-Tests/
 EXT_C               := .c
 EXT_H               := .h
 CC                  := clang
-LIBS                := -lpthread
 FLAGS_OPTIM         := Os
 FLAGS_WARN          := -Werror -Wall
 FLAGS_STD           := c99
 FLAGS_OTHER         := -fno-strict-aliasing
 XCODE_PROJECT       := CoreFoundation.xcodeproj
 XCODE_TEST_SCHEME   := CoreFoundation
+
+ifeq ($(BUILD_TYPE),linux)
+LIBS                := -lpthread -luuid
+else
+LIBS                := -lpthread
+endif
 
 FILES_C             := $(call GET_C_FILES, $(DIR_SRC))              \
                        $(call GET_C_FILES, $(DIR_SRC)__private/)
