@@ -48,6 +48,11 @@ CF_EXPORT CFRuntimeClass CFUUIDClass;
 
 CF_EXPORT CFUUIDBytes CFUUIDNullBytes;
 
+CF_EXPORT CFHashCode  CFUUIDHash( CFUUIDRef u );
+CF_EXPORT bool        CFUUIDEquals( CFUUIDRef u1, CFUUIDRef u2 );
+CF_EXPORT CFStringRef CFUUIDCopyDescription( CFUUIDRef u );
+CF_EXPORT UInt8       CFUUIDByteFromHexChar( char * s );
+
 CF_EXTERN_C_END
 
 #endif /* CORE_FOUNDATION___PRIVATE_CF_UUID_H */

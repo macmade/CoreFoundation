@@ -88,6 +88,7 @@ Will report the following:
 - [x] **CFMutableDictionary**
 - [x] **CFNull**
 - [x] **CFType** (generic type methods)
+- [x] **CFUUID**
 
 ### Partially available classes
 

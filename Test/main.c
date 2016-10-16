@@ -366,6 +366,25 @@ int main( void )
     }
     
     fprintf( stderr,  "--------------------------------------------------------------------------------\n" );
-
+    
+    {
+        CFUUIDRef   u1;
+        CFUUIDRef   u2;
+        CFStringRef s;
+        
+        s  = CFSTR( "68753A44-4D6F-1226-9C60-0050E4C00067" );
+        u1 = CFUUIDCreate( NULL );
+        u2 = CFUUIDCreateFromString( NULL, s );
+        
+        CFShow( u1 );
+        CFShow( s );
+        CFShow( u2 );
+        
+        CFRelease( u1 );
+        CFRelease( u2 );
+    }
+    
+    fprintf( stderr,  "--------------------------------------------------------------------------------\n" );
+    
     return 0;
 }
