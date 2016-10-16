@@ -1,6 +1,6 @@
 language: cpp
 compiler: clang
-script: make
+script: make && make example
 sudo: required
 before_install:
 - if [ "$TRAVIS_OS_NAME" == "osx" ];   then bash Scripts/travis-osx-before.sh;   fi
