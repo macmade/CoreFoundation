@@ -154,6 +154,25 @@ CFNumberRef CFNumberCreate( CFAllocatorRef allocator, CFNumberType type, const v
         #endif
     }
     
+    if( o->_isFloat )
+    {
+        if( isnan( o->_doubleValue ) )
+        {
+            o->_nan = true;
+        }
+        else if( isinf( o->_doubleValue ) )
+        {
+            if( o->_doubleValue > 0 )
+            {
+                o->_pinf = true;
+            }
+            else
+            {
+                o->_ninf = true;
+            }
+        }
+    }
+    
     return o;
 }
 
