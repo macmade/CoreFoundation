@@ -302,7 +302,7 @@ CFStringRef CFStringCreateWithFormatAndArguments( CFAllocatorRef alloc, CFDictio
     
     va_copy( ap, arguments );
     
-    length = vsnprintf( NULL, 0, fmt, arguments );
+    length = vsnprintf( NULL, 0, fmt, ap );
     
     if( length <= 0 )
     {
