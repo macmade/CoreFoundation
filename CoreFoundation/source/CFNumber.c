@@ -198,7 +198,7 @@ CFNumberType CFNumberGetType( CFNumberRef number )
 
 Boolean CFNumberGetValue( CFNumberRef number, CFNumberType type, void * valuePtr )
 {
-    if( valuePtr == NULL )
+    if( number == NULL || valuePtr == NULL )
     {
         return false;
     }
