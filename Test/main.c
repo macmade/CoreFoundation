@@ -411,7 +411,7 @@ int main( void )
         CFNumberRef   n6;
         
         i    = 42;
-        l    = 43;
+        l    = -42;
         d    = 44.0;
         pinf = INFINITY;
         ninf = -INFINITY;
@@ -430,6 +430,19 @@ int main( void )
         CFShow( n4 );
         CFShow( n5 );
         CFShow( n6 );
+        
+        fprintf( stderr, "Compare  42   / -42:   %i\n", CFNumberCompare( n1, n2, NULL ) );
+        fprintf( stderr, "Compare  42   /  42:   %i\n", CFNumberCompare( n1, n1, NULL ) );
+        fprintf( stderr, "Compare -42   /  42:   %i\n", CFNumberCompare( n2, n1, NULL ) );
+        fprintf( stderr, "Compare  44.0 / -42:   %i\n", CFNumberCompare( n3, n2, NULL ) );
+        fprintf( stderr, "Compare  44.0 /  44.0: %i\n", CFNumberCompare( n3, n3, NULL ) );
+        fprintf( stderr, "Compare +inf  / +inf:  %i\n", CFNumberCompare( n4, n4, NULL ) );
+        fprintf( stderr, "Compare +inf  /  42:   %i\n", CFNumberCompare( n4, n1, NULL ) );
+        fprintf( stderr, "Compare -inf  / -inf:  %i\n", CFNumberCompare( n5, n5, NULL ) );
+        fprintf( stderr, "Compare -inf  / -42:   %i\n", CFNumberCompare( n5, n3, NULL ) );
+        fprintf( stderr, "Compare  nan  /  nan:  %i\n", CFNumberCompare( n6, n6, NULL ) );
+        fprintf( stderr, "Compare  nan  /  42:   %i\n", CFNumberCompare( n6, n1, NULL ) );
+        fprintf( stderr, "Compare  nan  / -42:   %i\n", CFNumberCompare( n6, n2, NULL ) );
         
         CFRelease( n1 );
         CFRelease( n2 );

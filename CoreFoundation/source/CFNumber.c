@@ -33,6 +33,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <math.h>
+#include <float.h>
 
 CFTypeID CFNumberGetTypeID( void )
 {
@@ -232,9 +233,115 @@ Boolean CFNumberIsFloatType( CFNumberRef number )
 
 CFComparisonResult CFNumberCompare( CFNumberRef number, CFNumberRef otherNumber, void * context )
 {
-    ( void )number;
-    ( void )otherNumber;
     ( void )context;
     
-    return kCFCompareEqualTo;
+    if( number == NULL && otherNumber == NULL )
+    {
+        return kCFCompareEqualTo;
+    }
+    
+    if( number == NULL )
+    {
+        {
+            SInt64 i;
+            
+            i = CFNumberGetSInt64Value( otherNumber );
+            
+            if( i == 0 )
+            {
+                return kCFCompareEqualTo;
+            }
+            
+            return ( i < 0 ) ? kCFCompareGreaterThan : kCFCompareLessThan;
+        }
+    }
+    
+    if( otherNumber == NULL )
+    {
+        {
+            SInt64 i;
+            
+            i = CFNumberGetSInt64Value( number );
+            
+            if( i == 0 )
+            {
+                return kCFCompareEqualTo;
+            }
+            
+            return ( i < 0 ) ? kCFCompareLessThan : kCFCompareGreaterThan;
+        }
+    }
+    
+    if( CFNumberIsPositiveInfinity( number ) )
+    {
+        return ( CFNumberIsPositiveInfinity( otherNumber ) ) ? kCFCompareEqualTo : kCFCompareGreaterThan;
+    }
+    
+    if( CFNumberIsPositiveInfinity( otherNumber ) )
+    {
+        return ( CFNumberIsPositiveInfinity( number ) ) ? kCFCompareEqualTo : kCFCompareLessThan;
+    }
+    
+    if( CFNumberIsNegativeInfinity( number ) )
+    {
+        return ( CFNumberIsNegativeInfinity( otherNumber ) ) ? kCFCompareEqualTo : kCFCompareLessThan;
+    }
+    
+    if( CFNumberIsNegativeInfinity( otherNumber ) )
+    {
+        return ( CFNumberIsNegativeInfinity( number ) ) ? kCFCompareEqualTo : kCFCompareGreaterThan;
+    }
+    
+    if( CFNumberIsNAN( number ) )
+    {
+        if( CFNumberIsNAN( otherNumber ) )
+        {
+            return kCFCompareEqualTo;
+        }
+        
+        return ( CFNumberGetSInt64Value( otherNumber ) < 0 ) ? kCFCompareGreaterThan : kCFCompareLessThan;
+    }
+    
+    if( CFNumberIsNAN( otherNumber ) )
+    {
+        if( CFNumberIsNAN( number ) )
+        {
+            return kCFCompareEqualTo;
+        }
+        
+        return ( CFNumberGetSInt64Value( number ) < 0 ) ? kCFCompareLessThan : kCFCompareGreaterThan;
+    }
+    
+    if( CFNumberIsFloatType( number ) || CFNumberIsFloatType( otherNumber ) )
+    {
+        {
+            Float64 f1;
+            Float64 f2;
+            
+            f1 = CFNumberGetFloat64Value( number );
+            f2 = CFNumberGetFloat64Value( otherNumber );
+            
+            if( fabs( f1 - f2 ) < DBL_EPSILON )
+            {
+                return kCFCompareEqualTo;
+            }
+            
+            return ( f1 < f2 ) ? kCFCompareLessThan : kCFCompareGreaterThan;
+        }
+    }
+    
+    {
+        SInt64 i1;
+        SInt64 i2;
+        
+        i1 = CFNumberGetSInt64Value( number );
+        i2 = CFNumberGetSInt64Value( otherNumber );
+        
+        if( i1 == i2 )
+        {
+            return kCFCompareEqualTo;
+        }
+        
+        return ( i1 < i2 ) ? kCFCompareLessThan : kCFCompareGreaterThan;
+    }
 }

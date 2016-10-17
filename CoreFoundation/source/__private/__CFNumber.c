@@ -62,9 +62,7 @@ void CFNumberInitialize( void )
 
 CFHashCode CFNumberHash( CFNumberRef n )
 {
-    ( void )n;
-    
-    return 0;
+    return ( CFHashCode )CFNumberGetSInt64Value( n );
 }
 
 bool CFNumberEquals( CFNumberRef n1, CFNumberRef n2 )
@@ -95,46 +93,25 @@ CFStringRef CFNumberCopyDescription( CFNumberRef n )
         default:                        type = "unknown";                break;
     }
     
-    if( CFNumberIsFloatType( n ) )
+    if( CFNumberIsPositiveInfinity( n ) )
     {
-        {
-            double d;
-            
-            CFNumberGetValue( n, kCFNumberDoubleType, &d );
-            
-            if( isinf( d ) && d > 0 )
-            {
-                return CFStringCreateWithFormat( NULL, NULL, CFSTR( "{ value = +infinity, type = %s }" ), type );
-            }
-            else if( isinf( d ) && d < 0 )
-            {
-                return CFStringCreateWithFormat( NULL, NULL, CFSTR( "{ value = -infinity, type = %s }" ), type );
-            }
-            else if( isnan( d ) )
-            {
-                return CFStringCreateWithFormat( NULL, NULL, CFSTR( "{ value = nan, type = %s }" ), type );
-            }
-        }
+        return CFStringCreateWithFormat( NULL, NULL, CFSTR( "{ value = +infinity, type = %s }" ), type );
+    }
+    else if( CFNumberIsNegativeInfinity( n ) )
+    {
+        return CFStringCreateWithFormat( NULL, NULL, CFSTR( "{ value = -infinity, type = %s }" ), type );
+    }
+    else if( CFNumberIsNAN( n ) )
+    {
+        return CFStringCreateWithFormat( NULL, NULL, CFSTR( "{ value = nan, type = %s }" ), type );
     }
     
-    switch( n->_type )
+    if( CFNumberIsFloatType( n ) )
     {
-        case kCFNumberSInt8Type:        return CFStringCreateWithFormat( NULL, NULL, CFSTR( "{ value = %lli, type = %s }" ), ( long long )( n->_value.int8    ), type );
-        case kCFNumberSInt16Type:       return CFStringCreateWithFormat( NULL, NULL, CFSTR( "{ value = %lli, type = %s }" ), ( long long )( n->_value.int16   ), type );
-        case kCFNumberSInt32Type:       return CFStringCreateWithFormat( NULL, NULL, CFSTR( "{ value = %lli, type = %s }" ), ( long long )( n->_value.int32   ), type );
-        case kCFNumberSInt64Type:       return CFStringCreateWithFormat( NULL, NULL, CFSTR( "{ value = %lli, type = %s }" ), ( long long )( n->_value.int64   ), type );
-        case kCFNumberFloat32Type:      return CFStringCreateWithFormat( NULL, NULL, CFSTR( "{ value = %f, type = %s }"   ), ( double    )( n->_value.float32 ), type );
-        case kCFNumberFloat64Type:      return CFStringCreateWithFormat( NULL, NULL, CFSTR( "{ value = %f, type = %s }"   ), ( double    )( n->_value.float64 ), type );
-        case kCFNumberCharType:         return CFStringCreateWithFormat( NULL, NULL, CFSTR( "{ value = %lli, type = %s }" ), ( long long )( n->_value.c       ), type );
-        case kCFNumberShortType:        return CFStringCreateWithFormat( NULL, NULL, CFSTR( "{ value = %lli, type = %s }" ), ( long long )( n->_value.s       ), type );
-        case kCFNumberIntType:          return CFStringCreateWithFormat( NULL, NULL, CFSTR( "{ value = %lli, type = %s }" ), ( long long )( n->_value.i       ), type );
-        case kCFNumberLongType:         return CFStringCreateWithFormat( NULL, NULL, CFSTR( "{ value = %lli, type = %s }" ), ( long long )( n->_value.l       ), type );
-        case kCFNumberLongLongType:     return CFStringCreateWithFormat( NULL, NULL, CFSTR( "{ value = %lli, type = %s }" ), ( long long )( n->_value.ll      ), type );
-        case kCFNumberFloatType:        return CFStringCreateWithFormat( NULL, NULL, CFSTR( "{ value = %f, type = %s }"   ), ( double     )( n->_value.f      ), type );
-        case kCFNumberDoubleType:       return CFStringCreateWithFormat( NULL, NULL, CFSTR( "{ value = %f, type = %s }"   ), ( double     )( n->_value.d      ), type );
-        case kCFNumberCFIndexType:      return CFStringCreateWithFormat( NULL, NULL, CFSTR( "{ value = %lli, type = %s }" ), ( long long )( n->_value.x       ), type );
-        default:                        return NULL;
+        return CFStringCreateWithFormat( NULL, NULL, CFSTR( "{ value = %f, type = %s }" ), CFNumberGetFloat64Value( n ), type );
     }
+    
+    return CFStringCreateWithFormat( NULL, NULL, CFSTR( "{ value = %lli, type = %s }" ), CFNumberGetSInt64Value( n ), type );
 }
 
 SInt64 CFNumberGetSInt64Value( CFNumberRef n )
@@ -144,26 +121,14 @@ SInt64 CFNumberGetSInt64Value( CFNumberRef n )
         return 0;
     }
     
-    if( CFNumberIsFloatType( n ) )
+    if
+    (
+           CFNumberIsPositiveInfinity( n )
+        || CFNumberIsNegativeInfinity( n )
+        || CFNumberIsNAN( n )
+    )
     {
-        {
-            double d;
-            
-            CFNumberGetValue( n, kCFNumberDoubleType, &d );
-            
-            if( isinf( d ) && d > 0 )
-            {
-                return INT64_MAX;
-            }
-            else if( isinf( d ) && d < 0 )
-            {
-                return INT64_MAX;
-            }
-            else if( isnan( d ) )
-            {
-                return INT64_MAX;
-            }
-        }
+        return INT64_MAX;
     }
     
     switch( n->_type )
@@ -211,4 +176,76 @@ Float64 CFNumberGetFloat64Value( CFNumberRef n )
         case kCFNumberCFIndexType:      return ( Float64 )( n->_value.x );
         default:                        return 0.0;
     }
+}
+
+bool CFNumberIsPositiveInfinity( CFNumberRef n )
+{
+    double d;
+    
+    if( n == NULL )
+    {
+        return false;
+    }
+    
+    if( CFNumberIsFloatType( n ) == false )
+    {
+        return false;
+    }
+            
+    CFNumberGetValue( n, kCFNumberDoubleType, &d );
+            
+    if( isinf( d ) && d > 0 )
+    {
+        return true;
+    }
+    
+    return false;
+}
+
+bool CFNumberIsNegativeInfinity( CFNumberRef n )
+{
+    double d;
+    
+    if( n == NULL )
+    {
+        return false;
+    }
+    
+    if( CFNumberIsFloatType( n ) == false )
+    {
+        return false;
+    }
+            
+    CFNumberGetValue( n, kCFNumberDoubleType, &d );
+            
+    if( isinf( d ) && d < 0 )
+    {
+        return true;
+    }
+    
+    return false;
+}
+
+bool CFNumberIsNAN( CFNumberRef n )
+{
+    double d;
+    
+    if( n == NULL )
+    {
+        return false;
+    }
+    
+    if( CFNumberIsFloatType( n ) == false )
+    {
+        return false;
+    }
+            
+    CFNumberGetValue( n, kCFNumberDoubleType, &d );
+            
+    if( isnan( d ) )
+    {
+        return true;
+    }
+    
+    return false;
 }

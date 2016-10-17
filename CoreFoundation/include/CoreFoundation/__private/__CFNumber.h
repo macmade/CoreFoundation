@@ -74,6 +74,9 @@ CF_EXPORT bool        CFNumberEquals( CFNumberRef n1, CFNumberRef n2 );
 CF_EXPORT CFStringRef CFNumberCopyDescription( CFNumberRef n );
 CF_EXPORT SInt64      CFNumberGetSInt64Value( CFNumberRef n );
 CF_EXPORT Float64     CFNumberGetFloat64Value( CFNumberRef n );
+CF_EXPORT bool        CFNumberIsPositiveInfinity( CFNumberRef n );
+CF_EXPORT bool        CFNumberIsNegativeInfinity( CFNumberRef n );
+CF_EXPORT bool        CFNumberIsNAN( CFNumberRef n );
 
 CF_EXTERN_C_END
 
