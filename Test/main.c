@@ -398,7 +398,7 @@ int main( void )
     
     {
         int           i;
-        unsigned long ul;
+        long          l;
         double        d;
         double        pinf;
         double        ninf;
@@ -411,18 +411,18 @@ int main( void )
         CFNumberRef   n6;
         
         i    = 42;
-        ul   = 43;
+        l    = 43;
         d    = 44.0;
         pinf = INFINITY;
         ninf = -INFINITY;
         nan  = NAN;
         
-        n1 = CFNumberCreate( NULL, kCFNumberIntType, &i );
-        n2 = CFNumberCreate( NULL, kCFNumberIntType, &ul );
-        n3 = CFNumberCreate( NULL, kCFNumberIntType, &d );
-        n4 = CFNumberCreate( NULL, kCFNumberIntType, &pinf );
-        n5 = CFNumberCreate( NULL, kCFNumberIntType, &ninf );
-        n6 = CFNumberCreate( NULL, kCFNumberIntType, &nan );
+        n1 = CFNumberCreate( NULL, kCFNumberIntType,    &i );
+        n2 = CFNumberCreate( NULL, kCFNumberLongType,   &l );
+        n3 = CFNumberCreate( NULL, kCFNumberDoubleType, &d );
+        n4 = CFNumberCreate( NULL, kCFNumberDoubleType, &pinf );
+        n5 = CFNumberCreate( NULL, kCFNumberDoubleType, &ninf );
+        n6 = CFNumberCreate( NULL, kCFNumberDoubleType, &nan );
         
         CFShow( n1 );
         CFShow( n2 );

@@ -28,6 +28,8 @@
  */
 
 #include <CoreFoundation/__private/__CFNumber.h>
+#include <math.h>
+#include <stdint.h>
 
 CFTypeID        CFNumberTypeID = 0;
 CFRuntimeClass CFNumberClass   =
@@ -67,15 +69,146 @@ CFHashCode CFNumberHash( CFNumberRef n )
 
 bool CFNumberEquals( CFNumberRef n1, CFNumberRef n2 )
 {
-    ( void )n1;
-    ( void )n2;
-    
-    return false;
+    return CFNumberCompare( n1, n2, NULL ) == kCFCompareEqualTo;
 }
 
 CFStringRef CFNumberCopyDescription( CFNumberRef n )
 {
-    ( void )n;
+    const char * type;
     
-    return NULL;
+    switch( n->_type )
+    {
+        case kCFNumberSInt8Type:        type = "kCFNumberSInt8Type";     break;
+        case kCFNumberSInt16Type:       type = "kCFNumberSInt16Type";    break;
+        case kCFNumberSInt32Type:       type = "kCFNumberSInt32Type";    break;
+        case kCFNumberSInt64Type:       type = "kCFNumberSInt64Type";    break;
+        case kCFNumberFloat32Type:      type = "kCFNumberFloat32Type";   break;
+        case kCFNumberFloat64Type:      type = "kCFNumberFloat64Type";   break;
+        case kCFNumberCharType:         type = "kCFNumberCharType";      break;
+        case kCFNumberShortType:        type = "kCFNumberShortType";     break;
+        case kCFNumberIntType:          type = "kCFNumberIntType";       break;
+        case kCFNumberLongType:         type = "kCFNumberLongType";      break;
+        case kCFNumberLongLongType:     type = "kCFNumberLongLongType";  break;
+        case kCFNumberFloatType:        type = "kCFNumberFloatType";     break;
+        case kCFNumberDoubleType:       type = "kCFNumberDoubleType";    break;
+        case kCFNumberCFIndexType:      type = "kCFNumberCFIndexType";   break;
+        default:                        type = "unknown";                break;
+    }
+    
+    if( CFNumberIsFloatType( n ) )
+    {
+        {
+            double d;
+            
+            CFNumberGetValue( n, kCFNumberDoubleType, &d );
+            
+            if( isinf( d ) && d > 0 )
+            {
+                return CFStringCreateWithFormat( NULL, NULL, CFSTR( "{ value = +infinity, type = %s }" ), type );
+            }
+            else if( isinf( d ) && d < 0 )
+            {
+                return CFStringCreateWithFormat( NULL, NULL, CFSTR( "{ value = -infinity, type = %s }" ), type );
+            }
+            else if( isnan( d ) )
+            {
+                return CFStringCreateWithFormat( NULL, NULL, CFSTR( "{ value = nan, type = %s }" ), type );
+            }
+        }
+    }
+    
+    switch( n->_type )
+    {
+        case kCFNumberSInt8Type:        return CFStringCreateWithFormat( NULL, NULL, CFSTR( "{ value = %lli, type = %s }" ), ( long long )( n->_value.int8    ), type );
+        case kCFNumberSInt16Type:       return CFStringCreateWithFormat( NULL, NULL, CFSTR( "{ value = %lli, type = %s }" ), ( long long )( n->_value.int16   ), type );
+        case kCFNumberSInt32Type:       return CFStringCreateWithFormat( NULL, NULL, CFSTR( "{ value = %lli, type = %s }" ), ( long long )( n->_value.int32   ), type );
+        case kCFNumberSInt64Type:       return CFStringCreateWithFormat( NULL, NULL, CFSTR( "{ value = %lli, type = %s }" ), ( long long )( n->_value.int64   ), type );
+        case kCFNumberFloat32Type:      return CFStringCreateWithFormat( NULL, NULL, CFSTR( "{ value = %f, type = %s }"   ), ( double    )( n->_value.float32 ), type );
+        case kCFNumberFloat64Type:      return CFStringCreateWithFormat( NULL, NULL, CFSTR( "{ value = %f, type = %s }"   ), ( double    )( n->_value.float64 ), type );
+        case kCFNumberCharType:         return CFStringCreateWithFormat( NULL, NULL, CFSTR( "{ value = %lli, type = %s }" ), ( long long )( n->_value.c       ), type );
+        case kCFNumberShortType:        return CFStringCreateWithFormat( NULL, NULL, CFSTR( "{ value = %lli, type = %s }" ), ( long long )( n->_value.s       ), type );
+        case kCFNumberIntType:          return CFStringCreateWithFormat( NULL, NULL, CFSTR( "{ value = %lli, type = %s }" ), ( long long )( n->_value.i       ), type );
+        case kCFNumberLongType:         return CFStringCreateWithFormat( NULL, NULL, CFSTR( "{ value = %lli, type = %s }" ), ( long long )( n->_value.l       ), type );
+        case kCFNumberLongLongType:     return CFStringCreateWithFormat( NULL, NULL, CFSTR( "{ value = %lli, type = %s }" ), ( long long )( n->_value.ll      ), type );
+        case kCFNumberFloatType:        return CFStringCreateWithFormat( NULL, NULL, CFSTR( "{ value = %f, type = %s }"   ), ( double     )( n->_value.f      ), type );
+        case kCFNumberDoubleType:       return CFStringCreateWithFormat( NULL, NULL, CFSTR( "{ value = %f, type = %s }"   ), ( double     )( n->_value.d      ), type );
+        case kCFNumberCFIndexType:      return CFStringCreateWithFormat( NULL, NULL, CFSTR( "{ value = %lli, type = %s }" ), ( long long )( n->_value.x       ), type );
+        default:                        return NULL;
+    }
+}
+
+SInt64 CFNumberGetSInt64Value( CFNumberRef n )
+{
+    if( n == NULL )
+    {
+        return 0;
+    }
+    
+    if( CFNumberIsFloatType( n ) )
+    {
+        {
+            double d;
+            
+            CFNumberGetValue( n, kCFNumberDoubleType, &d );
+            
+            if( isinf( d ) && d > 0 )
+            {
+                return INT64_MAX;
+            }
+            else if( isinf( d ) && d < 0 )
+            {
+                return INT64_MAX;
+            }
+            else if( isnan( d ) )
+            {
+                return INT64_MAX;
+            }
+        }
+    }
+    
+    switch( n->_type )
+    {
+        case kCFNumberSInt8Type:        return ( SInt64 )( n->_value.int8 );
+        case kCFNumberSInt16Type:       return ( SInt64 )( n->_value.int16 );
+        case kCFNumberSInt32Type:       return ( SInt64 )( n->_value.int32 );
+        case kCFNumberSInt64Type:       return ( SInt64 )( n->_value.int64 );
+        case kCFNumberFloat32Type:      return ( SInt64 )( n->_value.float32 );
+        case kCFNumberFloat64Type:      return ( SInt64 )( n->_value.float64 );
+        case kCFNumberCharType:         return ( SInt64 )( n->_value.c );
+        case kCFNumberShortType:        return ( SInt64 )( n->_value.s );
+        case kCFNumberIntType:          return ( SInt64 )( n->_value.i );
+        case kCFNumberLongType:         return ( SInt64 )( n->_value.l );
+        case kCFNumberLongLongType:     return ( SInt64 )( n->_value.ll );
+        case kCFNumberFloatType:        return ( SInt64 )( n->_value.f );
+        case kCFNumberDoubleType:       return ( SInt64 )( n->_value.d );
+        case kCFNumberCFIndexType:      return ( SInt64 )( n->_value.x );
+        default:                        return 0;
+    }
+}
+
+Float64 CFNumberGetFloat64Value( CFNumberRef n )
+{
+    if( n == NULL )
+    {
+        return 0.0;
+    }
+    
+    switch( n->_type )
+    {
+        case kCFNumberSInt8Type:        return ( Float64 )( n->_value.int8 );
+        case kCFNumberSInt16Type:       return ( Float64 )( n->_value.int16 );
+        case kCFNumberSInt32Type:       return ( Float64 )( n->_value.int32 );
+        case kCFNumberSInt64Type:       return ( Float64 )( n->_value.int64 );
+        case kCFNumberFloat32Type:      return ( Float64 )( n->_value.float32 );
+        case kCFNumberFloat64Type:      return ( Float64 )( n->_value.float64 );
+        case kCFNumberCharType:         return ( Float64 )( n->_value.c );
+        case kCFNumberShortType:        return ( Float64 )( n->_value.s );
+        case kCFNumberIntType:          return ( Float64 )( n->_value.i );
+        case kCFNumberLongType:         return ( Float64 )( n->_value.l );
+        case kCFNumberLongLongType:     return ( Float64 )( n->_value.ll );
+        case kCFNumberFloatType:        return ( Float64 )( n->_value.f );
+        case kCFNumberDoubleType:       return ( Float64 )( n->_value.d );
+        case kCFNumberCFIndexType:      return ( Float64 )( n->_value.x );
+        default:                        return 0.0;
+    }
 }
