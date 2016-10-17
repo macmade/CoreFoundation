@@ -36,9 +36,9 @@ CFRuntimeClass CFNumberClass   =
     sizeof( struct CFNumber ),
     NULL,
     NULL,
-    NULL,
-    NULL,
-    NULL
+    ( CFHashCode ( * )( CFTypeRef ) )CFNumberHash,
+    ( bool ( * )( CFTypeRef, CFTypeRef ) )CFNumberEquals,
+    ( CFStringRef ( * )( CFTypeRef ) )CFNumberCopyDescription
 };
 
 struct CFNumber CFNumberNaN;
@@ -56,12 +56,26 @@ void CFNumberInitialize( void )
     CFRuntimeInitStaticInstance( &CFNumberNaN,              CFNumberTypeID );
     CFRuntimeInitStaticInstance( &CFNumberNegativeInfinity, CFNumberTypeID );
     CFRuntimeInitStaticInstance( &CFNumberPositiveInfinity, CFNumberTypeID );
+}
+
+CFHashCode CFNumberHash( CFNumberRef n )
+{
+    ( void )n;
     
-    CFNumberNaN._isFloat              = true;
-    CFNumberNegativeInfinity._isFloat = true;
-    CFNumberPositiveInfinity._isFloat = true;
+    return 0;
+}
+
+bool CFNumberEquals( CFNumberRef n1, CFNumberRef n2 )
+{
+    ( void )n1;
+    ( void )n2;
     
-    CFNumberNaN._nan               = true;
-    CFNumberNegativeInfinity._pinf = true;
-    CFNumberPositiveInfinity._ninf = true;
+    return false;
+}
+
+CFStringRef CFNumberCopyDescription( CFNumberRef n )
+{
+    ( void )n;
+    
+    return NULL;
 }

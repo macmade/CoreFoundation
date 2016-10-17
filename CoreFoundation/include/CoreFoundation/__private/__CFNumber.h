@@ -38,12 +38,6 @@ CF_EXTERN_C_BEGIN
 struct CFNumber
 {
     CFRuntimeBase _base;
-    bool          _isFloat;
-    Float64       _doubleValue;
-    SInt64        _integerValue;
-    bool          _nan;
-    bool          _pinf;
-    bool          _ninf;
 };
 
 CF_EXPORT void CFNumberInitialize( void );
@@ -54,6 +48,10 @@ CF_EXPORT CFRuntimeClass CFNumberClass;
 CF_EXPORT struct CFNumber CFNumberNaN;
 CF_EXPORT struct CFNumber CFNumberNegativeInfinity;
 CF_EXPORT struct CFNumber CFNumberPositiveInfinity;
+
+CF_EXPORT CFHashCode  CFNumberHash( CFNumberRef n );
+CF_EXPORT bool        CFNumberEquals( CFNumberRef n1, CFNumberRef n2 );
+CF_EXPORT CFStringRef CFNumberCopyDescription( CFNumberRef n );
 
 CF_EXTERN_C_END
 

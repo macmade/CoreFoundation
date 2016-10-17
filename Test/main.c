@@ -30,6 +30,7 @@
 #include <CoreFoundation/CoreFoundation.h>
 #include <stdio.h>
 #include <string.h>
+#include <math.h>
 #include "Foo.h"
 
 int main( void )
@@ -391,6 +392,52 @@ int main( void )
         
         CFShow( u1 );
         CFRelease( u1 );
+    }
+    
+    fprintf( stderr,  "--------------------------------------------------------------------------------\n" );
+    
+    {
+        int           i;
+        unsigned long ul;
+        double        d;
+        double        pinf;
+        double        ninf;
+        double        nan;
+        CFNumberRef   n1;
+        CFNumberRef   n2;
+        CFNumberRef   n3;
+        CFNumberRef   n4;
+        CFNumberRef   n5;
+        CFNumberRef   n6;
+        
+        i    = 42;
+        ul   = 43;
+        d    = 44.0;
+        pinf = INFINITY;
+        ninf = -INFINITY;
+        nan  = NAN;
+        
+        n1 = CFNumberCreate( NULL, kCFNumberIntType, &i );
+        n2 = CFNumberCreate( NULL, kCFNumberIntType, &ul );
+        n3 = CFNumberCreate( NULL, kCFNumberIntType, &d );
+        n4 = CFNumberCreate( NULL, kCFNumberIntType, &pinf );
+        n5 = CFNumberCreate( NULL, kCFNumberIntType, &ninf );
+        n6 = CFNumberCreate( NULL, kCFNumberIntType, &nan );
+        
+        CFShow( n1 );
+        CFShow( n2 );
+        CFShow( n3 );
+        CFShow( n4 );
+        CFShow( n5 );
+        CFShow( n6 );
+        
+        CFRelease( n1 );
+        CFRelease( n2 );
+        CFRelease( n3 );
+        CFRelease( n4 );
+        CFRelease( n5 );
+        CFRelease( n6 );
+        
     }
     
     fprintf( stderr,  "--------------------------------------------------------------------------------\n" );
