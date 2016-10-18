@@ -28,5 +28,61 @@
  */
 
 #include <CoreFoundation/CoreFoundation.h>
+#include <stdlib.h>
 
+CFMutableDataRef CFDataCreateMutable( CFAllocatorRef allocator, CFIndex capacity )
+{
+    ( void )allocator;
+    ( void )capacity;
+    
+    return NULL;
+}
 
+CFMutableDataRef CFDataCreateMutableCopy( CFAllocatorRef allocator, CFIndex capacity, CFDataRef theData )
+{
+    ( void )allocator;
+    ( void )capacity;
+    ( void )theData;
+    
+    return NULL;
+}
+
+UInt8 * CFDataGetMutableBytePtr( CFMutableDataRef theData )
+{
+    ( void )theData;
+    
+    return NULL;
+}
+
+void CFDataAppendBytes( CFMutableDataRef theData, const UInt8 * bytes, CFIndex length )
+{
+    ( void )theData;
+    ( void )bytes;
+    ( void )length;
+}
+
+void CFDataDeleteBytes( CFMutableDataRef theData, CFRange range )
+{
+    ( void )theData;
+    ( void )range;
+}
+
+void CFDataReplaceBytes( CFMutableDataRef theData, CFRange range, const UInt8 * newBytes, CFIndex newLength )
+{
+    ( void )theData;
+    ( void )range;
+    ( void )newBytes;
+    ( void )newLength;
+}
+
+void CFDataIncreaseLength( CFMutableDataRef theData, CFIndex extraLength )
+{
+    ( void )theData;
+    ( void )extraLength;
+}
+
+void CFDataSetLength( CFMutableDataRef theData, CFIndex length )
+{
+    ( void )theData;
+    ( void )length;
+}
