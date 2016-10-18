@@ -117,10 +117,30 @@ const UInt8 * CFDataGetBytePtr( CFDataRef theData )
 
 void CFDataGetBytes( CFDataRef theData, CFRange range, UInt8 * buffer )
 {
+    const UInt8 * bytes;
+    CFIndex       remaining;
+    
     if( theData == NULL || buffer == NULL || range.length == 0 )
     {
         return;
     }
+    
+    memset( buffer, 0, range.length );
+    
+    if( range.location >= theData->_length )
+    {
+        return;
+    }
+    
+    bytes     = theData->_bytes  + range.location;
+    remaining = theData->_length - range.location;
+    
+    if( remaining <= 0 )
+    {
+        return;
+    }
+    
+    memcpy( buffer, bytes, ( range.length < remaining ) ? range.length : remaining );
 }
 
 CFIndex CFDataGetLength( CFDataRef theData )

@@ -120,19 +120,20 @@ int main( void )
     
     {
         unsigned int i;
-        UInt8        buf[ 256 ];
+        UInt8        buf1[ 256 ];
+        UInt8        buf2[ 10 ];
         CFDataRef    d1;
         CFDataRef    d2;
         CFDataRef    d3;
         CFDataRef    d4;
         
-        for( i = 0; i < sizeof( buf ); i++ )
+        for( i = 0; i < sizeof( buf1 ); i++ )
         {
-            buf[ i ] = ( UInt8 )i;
+            buf1[ i ] = ( UInt8 )i;
         }
         
-        d1 = CFDataCreate( NULL, buf, sizeof( buf ) );
-        d2 = CFDataCreateWithBytesNoCopy( NULL, buf, sizeof( buf ), kCFAllocatorNull );
+        d1 = CFDataCreate( NULL, buf1, sizeof( buf1 ) );
+        d2 = CFDataCreateWithBytesNoCopy( NULL, buf1, sizeof( buf1 ), kCFAllocatorNull );
         d3 = CFDataCreateCopy( NULL, d1 );
         d4 = CFDataCreateCopy( NULL, d2 );
         
@@ -141,10 +142,40 @@ int main( void )
         CFShow( d3 );
         CFShow( d4 );
         
-        buf[ 42 ] = 0;
+        buf1[ 42 ] = 0;
         
         fprintf( stderr, "Equals: %i\n", CFEqual( d1, d2 ) );
         fprintf( stderr, "Equals: %i\n", CFEqual( d1, d3 ) );
+        
+        fprintf( stderr, "Equals: %lu\n", sizeof( buf2 ) );
+        memset( buf2, 0, sizeof( buf2 ) );
+        
+        CFDataGetBytes( d1, CFRangeMake( 0, 10 ), buf2 );
+        
+        for( i = 0; i < sizeof( buf2 ); i++ )
+        {
+            fprintf( stderr, "%02X", ( int )( buf2[ i ] ) );
+        }
+        
+        fprintf( stderr, "\n" );
+        
+        CFDataGetBytes( d1, CFRangeMake( 250, 10 ), buf2 );
+        
+        for( i = 0; i < sizeof( buf2 ); i++ )
+        {
+            fprintf( stderr, "%02X", ( int )( buf2[ i ] ) );
+        }
+        
+        fprintf( stderr, "\n" );
+        
+        CFDataGetBytes( d1, CFRangeMake( 200, 10 ), buf2 );
+        
+        for( i = 0; i < sizeof( buf2 ); i++ )
+        {
+            fprintf( stderr, "%02X", ( int )( buf2[ i ] ) );
+        }
+        
+        fprintf( stderr, "\n" );
         
         CFRelease( d1 );
         CFRelease( d2 );
