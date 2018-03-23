@@ -16,7 +16,7 @@ About
 
 This project is a custom implementation of Apple's CoreFoundation framework intended to be used in the [XEOS operating system](http://www.xs-labs.com/en/projects/xeos/) as a base for its Objective-C library.
 
-Actually, the project targets macOS, Linux and Windows, and should compile fine on these platforms.
+Actually, the project targets macOS, Linux, FreeBSD and Windows, and should compile fine on these platforms.
 
 ### Binary compatibility
 
@@ -29,6 +29,8 @@ While the public interface is strictly identical, the private runtime functions 
  - **macOS**  
    Use the provided xCode project, or use the provided makefile.
  - **Linux**  
+   Use the provided makefile.
+ - **FreeBSD**  
    Use the provided makefile.
  - **Windows**  
    Use the provided VisualStudio project.
